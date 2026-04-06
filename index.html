@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROOM Jūrmala — Telpas Taviem mirkļiem Jūrmalā</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="shortcut icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brown:      #5C3D2E;
+      --brown-dark: #3D2518;
+      --brown-mid:  #7B4F3A;
+      --cream:      #F5EFE6;
+      --cream-dark: #EDE0D4;
+      --cream-mid:  #D4B896;
+      --teal:       #4A9B9B;
+      --teal-dark:  #357575;
+      --gold:       #C9A84C;
+      --text-dark:  #2D1B0E;
+      --text-mid:   #6B4F3A;
+      --white:      #FFFFFF;
+      --radius-lg:  24px;
+      --radius-md:  16px;
+      --radius-sm:  12px;
+      --radius-pill:50px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* ─── Nav ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(61, 37, 24, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); letter-spacing: 0.04em; }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--cream-dark); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-mobile-left {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(245,239,230,0.22);
+      background: rgba(245,239,230,0.08);
+      border-radius: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .nav-toggle:hover {
+      background: rgba(245,239,230,0.14);
+      border-color: rgba(245,239,230,0.3);
+    }
+    .nav-toggle span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--cream);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(245,239,230,0.18);
+      background: rgba(245,239,230,0.08);
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--cream-dark);
+      border-radius: var(--radius-pill);
+      padding: 8px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn:hover { color: var(--gold); }
+    .lang-btn.active {
+      background: var(--teal);
+      color: var(--white);
+    }
+    .nav-cta {
+      background: var(--teal); color: var(--white);
+      border: none; border-radius: var(--radius-pill);
+      padding: 10px 22px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--teal-dark); }
+    .mobile-menu-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 10, 6, 0.42);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 110;
+    }
+    .mobile-menu-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(300px, 84vw);
+      padding: 96px 24px 28px;
+      background: rgba(61, 37, 24, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 16px 0 40px rgba(0,0,0,0.28);
+      transform: translateX(-100%);
+      transition: transform 0.28s ease;
+      z-index: 120;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(245,239,230,0.18);
+      border-radius: 50%;
+      background: rgba(245,239,230,0.08);
+      color: var(--cream);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .mobile-menu .lang-switcher {
+      margin-bottom: 24px;
+      display: inline-flex;
+    }
+    .mobile-menu-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 12px 4px;
+      border-bottom: 1px solid rgba(245,239,230,0.12);
+    }
+    body.menu-open { overflow: hidden; }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        160deg,
+        rgba(61,37,24,0.78) 0%,
+        rgba(92,61,46,0.65) 50%,
+        rgba(74,155,155,0.25) 100%
+      );
+    }
+    .hero-content { position: relative; z-index: 2; padding: 40px 20px; }
+
+    /* SVG Logo */
+    .hero-logo { margin-bottom: 28px; display: flex; justify-content: center; }
+    .hero-logo svg { width: 100px; height: 100px; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4)); }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(74,155,155,0.25);
+      border: 1px solid rgba(74,155,155,0.5);
+      color: var(--teal);
+      border-radius: var(--radius-pill);
+      padding: 6px 18px; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      color: var(--cream);
+      line-height: 1.1;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(245,239,230,0.82);
+      font-weight: 300; letter-spacing: 0.04em;
+      margin-bottom: 40px; max-width: 460px; margin-left: auto; margin-right: auto;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--teal); color: var(--white);
+      border: none; border-radius: var(--radius-pill);
+      padding: 14px 32px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(245,239,230,0.5);
+      color: var(--cream); border-radius: var(--radius-pill);
+      padding: 14px 32px; font-size: 0.95rem; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Stats bar */
+    .hero-stats {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: rgba(245,239,230,0.1);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; justify-content: center; gap: 0;
+    }
+    .stat-item {
+      padding: 20px 48px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); }
+    .stat-label { font-size: 0.75rem; color: rgba(245,239,230,0.7); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ─── Section base ──────────────────────────────────── */
+    section { padding: 90px 40px; }
+    .section-tag {
+      display: inline-block;
+      background: var(--teal); color: var(--white);
+      border-radius: var(--radius-pill);
+      padding: 5px 16px; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 14px;
+    }
+    .section-tag.gold { background: var(--gold); }
+    .section-tag.brown { background: var(--brown); }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--brown-dark);
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-title em { color: var(--teal); font-style: italic; }
+    .section-sub {
+      font-size: 1rem; color: var(--text-mid);
+      max-width: 520px; line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ─── Categories ────────────────────────────────────── */
+    #categories { background: var(--brown-dark); }
+    .cat-header { text-align: center; margin-bottom: 54px; }
+    .cat-header .section-title { color: var(--cream); }
+    .cat-header .section-sub { color: var(--cream-dark); margin: 0 auto 0; }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .cat-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      min-height: 320px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .cat-card:hover { transform: translateY(-6px); }
+    .cat-card-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .cat-card-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .cat-bg-1 { background: linear-gradient(135deg, #8B6355, #5C3D2E); }
+    .cat-bg-2 { background: linear-gradient(135deg, #5B8A8A, #3D6B6B); }
+    .cat-bg-3 { background: linear-gradient(135deg, #8A7355, #6B5A3A); }
+    .cat-bg-4 { background: linear-gradient(135deg, #7B5C8A, #5C3D6B); }
+
+    .cat-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(0deg, rgba(30,15,5,0.85) 0%, rgba(0,0,0,0.1) 60%);
+    }
+    .cat-content {
+      position: relative; z-index: 2;
+      padding: 28px; height: 100%;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .cat-icon {
+      font-size: 2.2rem; margin-bottom: 10px; display: block;
+    }
+    .cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .cat-desc {
+      font-size: 0.82rem; color: rgba(245,239,230,0.7);
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .cat-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-pill);
+      color: var(--cream); font-size: 0.78rem;
+      padding: 6px 14px; width: fit-content;
+      transition: background 0.2s;
+    }
+    .cat-pill:hover { background: var(--teal); }
+
+    /* ─── Features ──────────────────────────────────────── */
+    #features { background: var(--cream); }
+    .feat-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .feat-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      height: 500px;
+    }
+    .feat-video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .feat-badge-overlay {
+      position: absolute; bottom: 24px; left: 24px;
+      background: var(--brown-dark);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+    }
+    .feat-badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); }
+    .feat-badge-txt { font-size: 0.8rem; color: var(--cream-dark); }
+    .feat-list { list-style: none; margin-top: 32px; }
+    .feat-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .feat-list li:last-child { border-bottom: none; }
+    .feat-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--teal); display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .feat-icon.gold-bg { background: var(--gold); }
+    .feat-icon.brown-bg { background: var(--brown-mid); }
+    .feat-txt h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: var(--brown-dark); }
+    .feat-txt p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+
+    /* ─── Gallery (Video wall) ──────────────────────────── */
+    #gallery { background: var(--cream-dark); padding: 90px 40px; }
+    .gallery-header { text-align: center; margin-bottom: 48px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 280px 280px;
+      gap: 16px;
+    }
+    .gallery-cell {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-cell:first-child {
+      grid-column: 1 / 2; grid-row: 1 / 3;
+    }
+    .gallery-cell video,
+    .gallery-cell .gallery-bg {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .gallery-bg {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gb-1 { background: linear-gradient(135deg, #8B6355 0%, #C4956A 100%); }
+    .gb-2 { background: linear-gradient(135deg, #6B8E6B 0%, #A8C5A8 100%); }
+    .gb-3 { background: linear-gradient(135deg, #4A9B9B 0%, #7DC4C4 100%); }
+    .gb-4 { background: linear-gradient(135deg, #8A7A5A 0%, #C4B07A 100%); }
+    .gb-5 { background: linear-gradient(135deg, #6B5A8A 0%, #A08AC4 100%); }
+    .gallery-label {
+      position: absolute; bottom: 16px; left: 16px;
+      background: rgba(45,27,14,0.8);
+      border-radius: var(--radius-pill);
+      color: var(--cream); font-size: 0.78rem; font-weight: 500;
+      padding: 6px 14px;
+    }
+    .gallery-cell:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(74,155,155,0.3);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-overlay span { font-size: 2rem; }
+
+    /* ─── Pricing ───────────────────────────────────────── */
+    #pricing { background: var(--brown-dark); }
+    .pricing-header { text-align: center; margin-bottom: 54px; }
+    .pricing-header .section-title { color: var(--cream); }
+    .pricing-header .section-sub { color: var(--cream-dark); margin: 0 auto; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .price-card {
+      background: rgba(245,239,230,0.06);
+      border: 1px solid rgba(245,239,230,0.12);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      transition: transform 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .price-card:hover { transform: translateY(-4px); background: rgba(245,239,230,0.1); }
+    .price-card.featured {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+    .price-card.featured:hover { background: var(--teal-dark); }
+    .price-popular {
+      position: absolute; top: 20px; right: 20px;
+      background: var(--gold); color: var(--brown-dark);
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem; font-weight: 700;
+      padding: 4px 12px; text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .price-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
+    .price-type {
+      font-size: 0.78rem; color: rgba(245,239,230,0.6);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 8px; font-weight: 600;
+    }
+    .price-card.featured .price-type { color: rgba(255,255,255,0.75); }
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem; color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .price-amount sup { font-size: 1.2rem; vertical-align: top; margin-top: 12px; display: inline-block; }
+    .price-period { font-size: 0.82rem; color: rgba(245,239,230,0.55); margin-bottom: 24px; }
+    .price-card.featured .price-period { color: rgba(255,255,255,0.7); }
+    .price-divider { border: none; border-top: 1px solid rgba(245,239,230,0.12); margin-bottom: 22px; }
+    .price-features { list-style: none; }
+    .price-features li {
+      font-size: 0.87rem; color: rgba(245,239,230,0.8);
+      padding: 7px 0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .price-features li::before { content: '✓'; color: var(--teal); font-weight: 700; }
+    .price-card.featured .price-features li::before { color: var(--white); }
+    .price-card.featured .price-features li { color: rgba(255,255,255,0.9); }
+    .price-cta {
+      display: block; width: 100%;
+      margin-top: 28px; padding: 13px 0;
+      border-radius: var(--radius-pill);
+      text-align: center; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .price-cta.outline {
+      border: 2px solid rgba(245,239,230,0.25);
+      color: var(--cream);
+      background: transparent;
+    }
+    .price-cta.outline:hover { border-color: var(--teal); color: var(--teal); }
+    .price-cta.solid {
+      background: var(--white); color: var(--teal-dark);
+      border: 2px solid transparent;
+    }
+    .price-cta.solid:hover { background: var(--cream); }
+
+    /* ─── Calendar ──────────────────────────────────────── */
+    #calendar { background: var(--cream); }
+    .calendar-layout {
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: 48px; align-items: start;
+    }
+    .cal-widget {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 4px 40px rgba(92,61,46,0.08);
+    }
+    .cal-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .cal-month {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--brown-dark);
+    }
+    .cal-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--cream); border: none;
+      font-size: 1rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: background 0.2s; color: var(--brown-dark);
+    }
+    .cal-arrow:hover { background: var(--teal); color: var(--white); }
+    .cal-days-header {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 4px; margin-bottom: 8px;
+    }
+    .cal-day-name {
+      text-align: center; font-size: 0.72rem;
+      font-weight: 600; color: var(--text-mid);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 6px 0;
+    }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-cell {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.15s;
+      font-weight: 500; position: relative;
+    }
+    .cal-cell:hover:not(.busy):not(.empty) { background: var(--teal); color: var(--white); }
+    .cal-cell.empty { cursor: default; }
+    .cal-cell.today {
+      border: 2px solid var(--teal);
+      color: var(--teal); font-weight: 700;
+    }
+    .cal-cell.busy {
+      background: rgba(92,61,46,0.12);
+      color: var(--brown-mid);
+      cursor: not-allowed;
+    }
+    .cal-cell.busy::after {
+      content: '';
+      position: absolute; bottom: 5px; left: 50%;
+      transform: translateX(-50%);
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--brown-mid);
+    }
+    .cal-cell.free-sel {
+      background: var(--teal); color: var(--white);
+    }
+    .cal-legend {
+      display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .leg-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-mid); }
+    .leg-dot {
+      width: 12px; height: 12px; border-radius: 3px;
+    }
+    .leg-dot.free { background: var(--teal); }
+    .leg-dot.busy { background: rgba(92,61,46,0.2); border: 2px solid var(--brown-mid); }
+    .leg-dot.today { background: transparent; border: 2px solid var(--teal); }
+
+    /* Booking sidebar */
+    .booking-card {
+      background: var(--brown-dark);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: sticky; top: 90px;
+    }
+    .booking-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .booking-sub { font-size: 0.85rem; color: var(--cream-dark); margin-bottom: 28px; }
+    .booking-field { margin-bottom: 18px; }
+    .booking-field label {
+      display: block; font-size: 0.78rem;
+      color: rgba(245,239,230,0.6);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .booking-field input,
+    .booking-field select,
+    .booking-field textarea {
+      width: 100%; background: rgba(245,239,230,0.08);
+      border: 1px solid rgba(245,239,230,0.15);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px; color: var(--cream);
+      font-size: 0.9rem; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .booking-field input:focus,
+    .booking-field select:focus,
+    .booking-field textarea:focus { border-color: var(--teal); }
+    .booking-field select option { background: var(--brown-dark); }
+    .booking-field textarea { resize: vertical; min-height: 80px; }
+    .booking-time-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .time-input-desktop { display: block; }
+    .time-input-mobile { display: none; }
+    .booking-time-row input[type="time"] {
+      color-scheme: dark;
+    }
+    .booking-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .booking-chip {
+      border: 1px solid rgba(245,239,230,0.18);
+      background: rgba(245,239,230,0.08);
+      color: var(--cream);
+      border-radius: var(--radius-pill);
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .booking-chip:hover,
+    .booking-chip.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+    }
+    .booking-helper {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: rgba(245,239,230,0.65);
+      line-height: 1.5;
+    }
+    .booking-btn {
+      width: 100%; padding: 15px;
+      background: var(--teal); color: var(--white);
+      border: none; border-radius: var(--radius-pill);
+      font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 6px;
+    }
+    .booking-btn:hover { background: var(--teal-dark); }
+    .booking-note {
+      text-align: center; font-size: 0.78rem;
+      color: rgba(245,239,230,0.45); margin-top: 12px;
+    }
+    .booking-note a,
+    .booking-note a:visited,
+    .booking-note a:hover,
+    .booking-note a:active {
+      color: var(--teal) !important;
+      text-decoration: none;
+      -webkit-text-fill-color: var(--teal);
+    }
+
+    /* ─── Map ───────────────────────────────────────────── */
+    #map-section { background: var(--cream-dark); padding: 90px 40px; }
+    .map-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 48px; align-items: center;
+    }
+    .map-info { }
+    .map-info-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; color: var(--brown-dark); margin-bottom: 12px;
+    }
+    .map-info-sub { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 28px; }
+    .map-details { list-style: none; }
+    .map-details li {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 18px;
+    }
+    .map-ico {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--brown-dark); color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .map-ico.teal { background: var(--teal); }
+    .map-txt strong { display: block; font-size: 0.9rem; color: var(--brown-dark); margin-bottom: 2px; }
+    .map-txt span { font-size: 0.82rem; color: var(--text-mid); }
+    .map-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(92,61,46,0.15);
+      height: 420px;
+    }
+    .map-frame iframe { width: 100%; height: 100%; border: none; }
+
+    /* ─── Contact ───────────────────────────────────────── */
+    #contact { background: var(--brown-dark); text-align: center; }
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .contact-title em { color: var(--gold); font-style: italic; }
+    .contact-sub { font-size: 1rem; color: var(--cream-dark); margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .contact-cards {
+      display: flex; gap: 16px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .contact-card {
+      background: rgba(245,239,230,0.07);
+      border: 1px solid rgba(245,239,230,0.12);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      text-decoration: none; transition: all 0.25s;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; min-width: 180px;
+    }
+    .contact-card:hover {
+      background: var(--teal);
+      border-color: var(--teal);
+      transform: translateY(-4px);
+    }
+    .contact-card-icon { font-size: 2rem; }
+    .contact-card-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(245,239,230,0.55); font-weight: 600; }
+    .contact-card-val { font-size: 0.95rem; color: var(--cream); font-weight: 500; }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer {
+      background: #1A0D07;
+      padding: 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand-text { font-family: 'Playfair Display', serif; color: var(--cream); font-size: 1rem; }
+    .footer-brand-text span { color: var(--gold); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: rgba(245,239,230,0.45); font-size: 0.82rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-copy { color: rgba(245,239,230,0.3); font-size: 0.78rem; }
+
+    /* ─── Scroll reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      section { padding: 60px 24px; }
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .nav-right { display: none; }
+      .nav-mobile-left {
+        display: flex;
+        flex: 0 0 auto;
+      }
+      .nav-toggle { display: inline-flex; }
+      .mobile-menu,
+      .mobile-menu-backdrop { display: block; }
+      .nav-logo { gap: 8px; }
+      .nav-logo svg { width: 34px; height: 34px; }
+      .nav-logo-text { font-size: 0.98rem; }
+      .nav-cta-mobile {
+        padding: 12px 24px;
+        font-size: 0.92rem;
+      }
+      .nav-right .lang-switcher { display: none; }
+      .mobile-menu .lang-switcher { display: inline-flex; }
+      .lang-btn { padding: 8px 10px; font-size: 0.72rem; }
+      .feat-layout, .calendar-layout, .map-layout { grid-template-columns: 1fr; }
+      .booking-card { position: static; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-cell:first-child { grid-column: 1 / 3; grid-row: auto; height: 220px; }
+      .gallery-cell { height: 180px; }
+      .hero-stats { display: none; }
+      footer { flex-direction: column; text-align: center; align-items: center; }
+    }
+    @media (max-width: 600px) {
+      .pricing-grid, .cat-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-cell:first-child { grid-column: auto; }
+      .stat-item { padding: 14px 20px; }
+      .contact-cards { flex-direction: column; align-items: center; }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .time-input-desktop { display: none; }
+      .time-input-mobile { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<nav>
+  <div class="nav-mobile-left">
+    <button type="button" class="nav-toggle" aria-label="Atvērt izvēlni" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a href="#calendar" class="nav-cta nav-cta-mobile">Rezervēt</a>
+  </div>
+  <a href="#" class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 12 L82 40 L82 82 L18 82 L18 40 Z" stroke="#4A9B9B" stroke-width="5" fill="none" stroke-linejoin="round"/>
+      <rect x="38" y="52" width="24" height="30" fill="#4A9B9B" rx="3"/>
+      <circle cx="78" cy="20" r="10" fill="#C9A84C"/>
+      <line x1="78" y1="5" x2="78" y2="2" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="88" y1="10" x2="91" y2="8" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="92" y1="20" x2="95" y2="20" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M20 90 Q35 84 50 90 Q65 96 80 90" stroke="#4A9B9B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">ROOM <span>Jūrmala</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#categories">Telpas</a>
+    <a href="#pricing">Cenas</a>
+    <a href="#calendar">Pieejamība</a>
+    <a href="#map-section">Atrašanās</a>
+    <a href="#contact">Kontakti</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switcher" aria-label="Language switcher">
+      <button type="button" class="lang-btn active" data-lang="lv">LV</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+    </div>
+    <a href="#calendar" class="nav-cta nav-cta-desktop">Rezervēt</a>
+  </div>
+</nav>
+<div class="mobile-menu-backdrop"></div>
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button type="button" class="mobile-menu-close" aria-label="Aizvērt izvēlni">×</button>
+  <div class="lang-switcher" aria-label="Language switcher">
+    <button type="button" class="lang-btn active" data-lang="lv">LV</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="ru">RU</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="#categories">Telpas</a>
+    <a href="#pricing">Cenas</a>
+    <a href="#calendar">Pieejamība</a>
+    <a href="#map-section">Atrašanās</a>
+    <a href="#contact">Kontakti</a>
+  </div>
+</aside>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video-1.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-logo">
+      <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 12 L82 40 L82 82 L18 82 L18 40 Z" stroke="#4A9B9B" stroke-width="5" fill="rgba(74,155,155,0.15)" stroke-linejoin="round"/>
+        <rect x="38" y="52" width="24" height="30" fill="#4A9B9B" rx="3"/>
+        <circle cx="78" cy="20" r="10" fill="#C9A84C"/>
+        <line x1="78" y1="5" x2="78" y2="2" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="88" y1="10" x2="91" y2="8" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="92" y1="20" x2="95" y2="20" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M20 90 Q35 84 50 90 Q65 96 80 90" stroke="#4A9B9B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M15 95 Q30 89 50 95 Q70 101 85 95" stroke="#4A9B9B" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="hero-badge">✦ Jūrmala, Latvija ✦</div>
+    <h1>Telpas Taviem<br/><em>mirkļiem</em> Jūrmalā</h1>
+    <p class="hero-sub">Mājīga, elastīga telpa bērnu ballītēm, meistarklasēm, fotosesijām un īpašiem brīžiem</p>
+    <div class="hero-actions">
+      <a href="#calendar" class="btn-primary">Rezervēt</a>
+      <a href="#categories" class="btn-outline">Uzzināt vairāk</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CATEGORIES ════════════════════════ -->
+<section id="categories">
+  <div class="container">
+    <div class="cat-header reveal">
+      <div class="section-tag">Mūsu telpas</div>
+      <h2 class="section-title" style="color:var(--cream);">Atrodi savu <em style="color:var(--gold);">mirkļu vietu</em></h2>
+      <p class="section-sub" style="color:var(--cream-dark);">Viena telpa — bezgalīgas iespējas. Pielāgojam vidi tieši tavām idejām.</p>
+    </div>
+    <div class="cat-grid">
+      <!-- Card 1 — with video -->
+      <div class="cat-card reveal">
+        <video class="cat-card-video" autoplay muted loop playsinline>
+          <source src="video-2.mp4" type="video/mp4" />
+        </video>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <span class="cat-icon">🎈</span>
+          <div class="cat-title">Bērnu ballītes</div>
+          <p class="cat-desc">Rotaļu elementi, dekorācijas - viss gatavs prieka brīžiem</p>
+        </div>
+      </div>
+      <!-- Card 2 — with video -->
+      <div class="cat-card reveal">
+        <video class="cat-card-video" autoplay muted loop playsinline>
+          <source src="video-3.mp4" type="video/mp4" />
+        </video>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <span class="cat-icon">🎨</span>
+          <div class="cat-title">Meistarklases</div>
+          <p class="cat-desc">Radošas darbnīcas ar lielu galdu, krēsliem un ērtu darba telpu grupām</p>
+        </div>
+      </div>
+      <!-- Card 3 — with video -->
+      <div class="cat-card reveal">
+        <video class="cat-card-video" autoplay muted loop playsinline>
+          <source src="video-4.mp4" type="video/mp4" />
+        </video>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <span class="cat-icon">📸</span>
+          <div class="cat-title">Fotosesijas</div>
+          <p class="cat-desc">Dabiska gaisma un tīra telpa</p>
+        </div>
+      </div>
+      <!-- Card 4 — with video -->
+      <div class="cat-card reveal">
+        <video class="cat-card-video" autoplay muted loop playsinline>
+          <source src="video-5.mp4" type="video/mp4" />
+        </video>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <span class="cat-icon">🌿</span>
+          <div class="cat-title">Privātie pasākumi</div>
+          <p class="cat-desc">Svētki, tikšanās, joga, semināri</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FEATURES ══════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="feat-layout">
+      <div class="feat-visual reveal">
+        <video class="feat-video" autoplay muted loop playsinline>
+          <source src="video-2.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="reveal">
+        <div class="section-tag">Kāpēc mēs?</div>
+        <h2 class="section-title">Vairāk nekā tikai <em>telpa</em></h2>
+        <ul class="feat-list">
+          <li>
+            <div class="feat-icon">🏠</div>
+            <div class="feat-txt">
+              <h4>Mājīga atmosfēra</h4>
+              <p>Silta, ērta telpa ar ķieģeļu sienu, mīkstu paklāju un dabisko gaismu</p>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon gold-bg">🎪</div>
+            <div class="feat-txt">
+              <h4>Gatavi risinājumi</h4>
+              <p>Dekorācijas, Rotaļu elementi, meistarklases — mēs visu saorganizējam.</p>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon">⚡</div>
+            <div class="feat-txt">
+              <h4>Elastīga pielāgošana</h4>
+              <p>Katrs pasākums ir atšķirīgs — pielāgojam telpu tieši tavām vajadzībām.</p>
+            </div>
+          </li>
+          <li>
+            <div class="feat-icon gold-bg">🍽️</div>
+            <div class="feat-txt">
+              <h4>Pilna virtuve</h4>
+              <p>Ledusskapis, plīts, trauki, izlietne — vari pagatavot vai atvest savus ēdienus.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ GALLERY ════════════════════════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <div class="section-tag gold">Galerija</div>
+      <h2 class="section-title">Ieskaties <em>telpā</em></h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-cell">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="video-1.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="gallery-cell">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="video-3.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="gallery-cell">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="video-4.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="gallery-cell">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="video-5.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="gallery-cell">
+        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+          <source src="video-2.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ PRICING ════════════════════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header reveal">
+      <div class="section-tag">Cenas</div>
+      <h2 class="section-title">Cenu lapa <em style="color:var(--gold);">Taviem</em> mirkļiem</h2>
+    </div>
+    <div class="pricing-grid">
+      <!-- Hourly -->
+      <div class="price-card reveal">
+        <span class="price-icon">⏰</span>
+        <div class="price-type">Stundas noma</div>
+        <div class="price-amount"><sup>€</sup>10<span style="font-size:1.4rem">–20</span></div>
+        <div class="price-period">par stundu</div>
+        <hr class="price-divider"/>
+        <ul class="price-features">
+          <li>Darba dienās līdz 18:00 10€/stundā</li>
+          <li>Pēc 18:00 un brīvdienās 20€/stundā</li>
+          <li>Pilna telpa (visi stūri)</li>
+          <li>Virtuve iekļauta</li>
+          <li>Brīva parking vieta</li>
+        </ul>
+        <a href="#calendar" class="price-cta outline">Rezervēt</a>
+      </div>
+      <!-- Package — featured -->
+      <div class="price-card featured reveal">
+        <div class="price-popular">Populārākais</div>
+        <span class="price-icon">🎉</span>
+        <div class="price-type">Ballītes pakete</div>
+        <div class="price-period">Ballītēm (līdz 15 cilvēkiem)</div>
+        <div class="price-amount"><sup>€</sup>100<span style="font-size:1.4rem">–130</span></div>
+        <div class="price-period">par pasākumu</div>
+        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2)"/>
+        <ul class="price-features">
+          <li>3 stundas 100€</li>
+          <li>Katra nākamā stunda 20€</li>
+          <li>Pilna telpa privātam pasākumam</li>
+        </ul>
+        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2); margin-top:18px;"/>
+        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">Ja viesu skaits ir vairāk par 15 cilvēkiem</div>
+        <ul class="price-features" style="margin-bottom:8px;">
+          <li>3 stundas 130€</li>
+          <li>Katra nākamā stunda 30€</li>
+        </ul>
+        <a href="#calendar" class="price-cta solid">Pieprasīt paketi</a>
+      </div>
+      <!-- Custom -->
+      <div class="price-card reveal">
+        <span class="price-icon">✨</span>
+        <div class="price-type">Individuāls piedāvājums</div>
+        <div class="price-amount" style="font-size:2rem;">Pēc<br/>vienošanās</div>
+        <div class="price-period">semināri, foto, korporatīvi</div>
+        <hr class="price-divider"/>
+        <ul class="price-features">
+          <li>Joga un fitness klases</li>
+          <li>Profesionālas fotosesijas</li>
+          <li>Korporatīvie pasākumi</li>
+          <li>Regulāri nomas līgumi</li>
+          <li>Meistarklases no A–Z</li>
+        </ul>
+        <a href="tel:+37127850380" class="price-cta outline">Sazināties</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CALENDAR ══════════════════════════ -->
+<section id="calendar">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <h2 class="section-title">Atrodi dienu, kas būs <em style="color:var(--gold);">Tavējā</em></h2>
+    </div>
+    <div class="calendar-layout">
+      <!-- Calendar widget -->
+      <div class="cal-widget reveal">
+        <div class="cal-nav">
+          <button class="cal-arrow" id="prevMonth">&#8249;</button>
+          <div class="cal-month" id="calMonthLabel"></div>
+          <button class="cal-arrow" id="nextMonth">&#8250;</button>
+        </div>
+        <div class="cal-days-header">
+          <div class="cal-day-name">P</div>
+          <div class="cal-day-name">O</div>
+          <div class="cal-day-name">T</div>
+          <div class="cal-day-name">C</div>
+          <div class="cal-day-name">Pk</div>
+          <div class="cal-day-name">S</div>
+          <div class="cal-day-name">Sv</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <!-- Booking form -->
+      <div class="booking-card reveal">
+        <div class="booking-title">Rezervēt telpu</div>
+        <p class="booking-sub">Aizpildi formu un mēs sazināsimies ar tevi drīz</p>
+        <form onsubmit="handleBooking(event)">
+          <div class="booking-field">
+            <label>Tavs vārds</label>
+            <input type="text" id="customerName" placeholder="Anna Kalniņa" required />
+          </div>
+          <div class="booking-field">
+            <label>Tālrunis / WhatsApp</label>
+            <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" required />
+          </div>
+          <div class="booking-field">
+            <label>Pasākuma veids</label>
+            <select id="eventTypeSelect">
+              <option value="">Izvēlies formātu...</option>
+              <option>🎈 Bērnu ballīte</option>
+              <option>🎨 Meistarklase</option>
+              <option>📸 Fotosesija</option>
+              <option>🌿 Joga / Fitness</option>
+              <option>🎉 Privātais pasākums</option>
+              <option>✨ Cits</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Datums</label>
+            <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" />
+          </div>
+          <div class="booking-field">
+            <label>Laiks</label>
+            <div class="booking-time-row">
+              <input class="time-input-desktop" type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
+              <input class="time-input-desktop" type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
+              <input class="time-input-mobile" type="time" id="startTimeMobile" aria-label="Sākuma laiks" step="60" />
+              <input class="time-input-mobile" type="time" id="endTimeMobile" aria-label="Beigu laiks" step="60" />
+            </div>
+          </div>
+          <div class="booking-field">
+            <label>Piezīmes</label>
+            <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?"></textarea>
+          </div>
+          <button type="submit" class="booking-btn">Nosūtīt pieprasījumu ✦</button>
+          <p class="booking-note">Vai raksti WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ MAP ════════════════════════════════ -->
+<section id="map-section">
+  <div class="container">
+    <div class="map-layout">
+      <div class="reveal">
+        <div class="section-tag">Atrašanās</div>
+        <h2 class="map-info-title">Kā mūs atrast?</h2>
+        <p class="map-info-sub">Atrodamies Jūrmalas sirdī — ērti pieejami gan ar auto, gan sabiedrisko transportu.</p>
+        <ul class="map-details">
+          <li>
+            <div class="map-ico teal">📍</div>
+            <div class="map-txt">
+              <strong>Adrese</strong>
+              <span>Skolas iela 50, Jūrmala, LV-2016</span>
+            </div>
+          </li>
+          <li>
+            <div class="map-ico">🚗</div>
+            <div class="map-txt">
+              <strong>Ar automašīnu</strong>
+              <span>Brīva stāvvieta ēkai blakus</span>
+            </div>
+          </li>
+          <li>
+            <div class="map-ico teal">🚆</div>
+            <div class="map-txt">
+              <strong>Ar vilcienu</strong>
+              <span>Tuvākā stacija — Dzintari (5 min ar kājām)</span>
+            </div>
+          </li>
+          <li>
+            <div class="map-ico">📞</div>
+            <div class="map-txt">
+              <strong>Tālrunis</strong>
+              <span>+371 27 850 380</span>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://www.google.com/maps/place/ROOM+J%C5%ABrmala/@56.9619668,23.6028556,18z/data=!4m14!1m7!3m6!1s0x46eee77eef601e47:0x5ac3c96f8826ce3d!2sROOM+J%C5%ABrmala!8m2!3d56.9619657!4d23.6038606!16s%2Fg%2F11yqcg_q_z!3m5!1s0x46eee77eef601e47:0x5ac3c96f8826ce3d!8m2!3d56.9619657!4d23.6038606!16s%2Fg%2F11yqcg_q_z?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-primary" style="font-size:0.88rem;padding:11px 24px;">
+            Atvērt Google Maps
+          </a>
+          <a href="tel:+37127850380" class="btn-outline" style="font-size:0.88rem;padding:11px 24px;border-color:var(--brown-mid);color:var(--brown-dark);">
+            Zvanīt
+          </a>
+        </div>
+      </div>
+      <div class="map-frame reveal">
+        <iframe
+          src="https://www.google.com/maps?q=56.9619657,23.6038606+(ROOM%20J%C5%ABrmala)&z=18&hl=lv&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Room Jūrmala atrašanās vieta">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CONTACT ════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag" style="background:var(--gold); margin-bottom:16px; display:inline-block;">Sazinies ar mums</div>
+      <h2 class="contact-title">Gatavs savam <em>pasākumam?</em></h2>
+      <p class="contact-sub">Sazinieties ar mums jebkurā ērtā veidā</p>
+    </div>
+    <div class="contact-cards reveal">
+      <a href="tel:+37127850380" class="contact-card">
+        <span class="contact-card-icon">📞</span>
+        <span class="contact-card-label">Tālrunis</span>
+        <span class="contact-card-val">+371 27 850 380</span>
+      </a>
+      <a href="https://wa.me/37127850380" target="_blank" class="contact-card">
+        <span class="contact-card-icon">💬</span>
+        <span class="contact-card-label">WhatsApp</span>
+        <span class="contact-card-val">Raksti tūlīt</span>
+      </a>
+      <a href="https://www.instagram.com/room.jurmala/" target="_blank" class="contact-card">
+        <span class="contact-card-icon">📸</span>
+        <span class="contact-card-label">Instagram</span>
+        <span class="contact-card-val">@room.jurmala</span>
+      </a>
+      <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/?locale=lv_LV" target="_blank" class="contact-card">
+        <span class="contact-card-icon">👥</span>
+        <span class="contact-card-label">Facebook</span>
+        <span class="contact-card-val">Room Jūrmala</span>
+      </a>
+    </div>
+    <div class="reveal">
+      <p style="color:rgba(245,239,230,0.35); font-size:0.85rem; margin-top: 12px;">
+        📍 Skolas iela 50, Jūrmala, LV-2016, Latvija
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ═════════════════════════════ -->
+<footer>
+  <div class="footer-brand">
+    <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 12 L82 40 L82 82 L18 82 L18 40 Z" stroke="#4A9B9B" stroke-width="5" fill="none" stroke-linejoin="round"/>
+      <rect x="38" y="52" width="24" height="30" fill="#4A9B9B" rx="3"/>
+      <circle cx="78" cy="20" r="10" fill="#C9A84C"/>
+      <path d="M20 90 Q35 84 50 90 Q65 96 80 90" stroke="#4A9B9B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span class="footer-brand-text">ROOM <span>Jūrmala</span></span>
+  </div>
+  <div class="footer-links">
+    <a href="#categories">Telpas</a>
+    <a href="#pricing">Cenas</a>
+    <a href="#calendar">Rezervēt</a>
+    <a href="https://www.instagram.com/room.jurmala/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank">Facebook</a>
+  </div>
+  <span class="footer-copy">© 2026 Room Jūrmala. Visas tiesības aizsargātas.</span>
+</footer>
+
+<!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
+<script>
+  const I18N = {
+    lv: {
+      meta: { title: 'ROOM Jūrmala — Telpas Taviem mirkļiem Jūrmalā' },
+      nav: {
+        links: ['Telpas', 'Cenas', 'Pieejamība', 'Atrašanās', 'Kontakti'],
+        cta: 'Rezervēt',
+        menuOpen: 'Atvērt izvēlni',
+        menuClose: 'Aizvērt izvēlni'
+      },
+      hero: {
+        badge: '✦ Jūrmala, Latvija ✦',
+        titleHtml: 'Telpas Taviem<br/><em>mirkļiem</em> Jūrmalā',
+        sub: 'Mājīga, elastīga telpa bērnu ballītēm, meistarklasēm, fotosesijām un īpašiem brīžiem',
+        actions: ['Rezervēt', 'Uzzināt vairāk']
+      },
+      categories: {
+        tag: 'Mūsu telpas',
+        titleHtml: 'Atrodi savu <em style="color:var(--gold);">mirkļu vietu</em>',
+        sub: 'Viena telpa — bezgalīgas iespējas. Pielāgojam vidi tieši tavām idejām.',
+        cards: [
+          ['Bērnu ballītes', 'Rotaļu elementi, dekorācijas - viss gatavs prieka brīžiem'],
+          ['Meistarklases', 'Radošas darbnīcas ar lielu galdu, krēsliem un ērtu darba telpu grupām'],
+          ['Fotosesijas', 'Dabiska gaisma un tīra telpa'],
+          ['Privātie pasākumi', 'Svētki, tikšanās, joga, semināri']
+        ]
+      },
+      features: {
+        tag: 'Kāpēc mēs?',
+        titleHtml: 'Vairāk nekā tikai <em>telpa</em>',
+        items: [
+          ['Mājīga atmosfēra', 'Silta, ērta telpa ar ķieģeļu sienu, mīkstu paklāju un dabisko gaismu'],
+          ['Gatavi risinājumi', 'Dekorācijas, Rotaļu elementi, meistarklases — mēs visu saorganizējam.'],
+          ['Elastīga pielāgošana', 'Katrs pasākums ir atšķirīgs — pielāgojam telpu tieši tavām vajadzībām.'],
+          ['Pilna virtuve', 'Ledusskapis, plīts, trauki, izlietne — vari pagatavot vai atvest savus ēdienus.']
+        ]
+      },
+      gallery: {
+        tag: 'Galerija',
+        titleHtml: 'Ieskaties <em>telpā</em>'
+      },
+      pricing: {
+        tag: 'Cenas',
+        titleHtml: 'Cenu lapa <em style="color:var(--gold);">Taviem</em> mirkļiem',
+        cards: {
+          hourly: {
+            type: 'Stundas noma',
+            period: 'par stundu',
+            features: [
+              'Darba dienās līdz 18:00 10€/stundā',
+              'Pēc 18:00 un brīvdienās 20€/stundā',
+              'Pilna telpa (visi stūri)',
+              'Virtuve iekļauta',
+              'Brīva parking vieta'
+            ],
+            cta: 'Rezervēt'
+          },
+          party: {
+            popular: 'Populārākais',
+            type: 'Ballītes pakete',
+            forUpTo: 'Ballītēm (līdz 15 cilvēkiem)',
+            perEvent: 'par pasākumu',
+            featuresPrimary: [
+              '3 stundas 100€',
+              'Katra nākamā stunda 20€',
+              'Pilna telpa privātam pasākumam'
+            ],
+            moreThan15: 'Ja viesu skaits ir vairāk par 15 cilvēkiem',
+            featuresSecondary: [
+              '3 stundas 130€',
+              'Katra nākamā stunda 30€'
+            ],
+            cta: 'Pieprasīt paketi'
+          },
+          custom: {
+            type: 'Individuāls piedāvājums',
+            amountHtml: 'Pēc<br/>vienošanās',
+            period: 'semināri, foto, korporatīvi',
+            features: [
+              'Joga un fitness klases',
+              'Profesionālas fotosesijas',
+              'Korporatīvie pasākumi',
+              'Regulāri nomas līgumi',
+              'Meistarklases no A–Z'
+            ],
+            cta: 'Sazināties'
+          }
+        }
+      },
+      calendar: {
+        titleHtml: 'Atrodi dienu, kas būs <em style="color:var(--gold);">Tavējā</em>',
+        daysShort: ['P', 'O', 'T', 'C', 'Pk', 'S', 'Sv'],
+        monthsHeader: ['Janvāris','Februāris','Marts','Aprīlis','Maijs','Jūnijs','Jūlijs','Augusts','Septembris','Oktobris','Novembris','Decembris'],
+        monthsDate: ['Janvāris','Februāris','Marts','Aprīlis','Maijs','Jūnijs','Jūlijs','Augusts','Septembris','Oktobris','Novembris','Decembris'],
+        freeLabel: 'Brīvs'
+      },
+      booking: {
+        title: 'Rezervēt telpu',
+        sub: 'Aizpildi formu un mēs sazināsimies ar tevi drīz',
+        labels: ['Tavs vārds', 'Tālrunis / WhatsApp', 'Pasākuma veids', 'Datums', 'Laiks', 'Piezīmes'],
+        placeholders: {
+          name: 'Anna Kalniņa',
+          phone: '+371 2X XXX XXX',
+          date: 'piem. 20. aprīlis',
+          start: 'No, piem. 14:00',
+          end: 'Līdz, piem. 17:00',
+          notes: 'Cik cilvēku? Īpašas vēlmes?'
+        },
+        options: [
+          'Izvēlies formātu...',
+          '🎈 Bērnu ballīte',
+          '🎨 Meistarklase',
+          '📸 Fotosesija',
+          '🌿 Joga / Fitness',
+          '🎉 Privātais pasākums',
+          '✨ Cits'
+        ],
+        button: 'Nosūtīt pieprasījumu ✦',
+        buttonSent: '✓ Pieprasījums nosūtīts!',
+        notePrefix: 'Vai raksti WhatsApp:',
+        startTimeAria: 'Sākuma laiks',
+        endTimeAria: 'Beigu laiks'
+      },
+      map: {
+        tag: 'Atrašanās',
+        title: 'Kā mūs atrast?',
+        sub: 'Atrodamies Jūrmalas sirdī — ērti pieejami gan ar auto, gan sabiedrisko transportu.',
+        details: [
+          ['Adrese', 'Skolas iela 50, Jūrmala, LV-2016'],
+          ['Ar automašīnu', 'Brīva stāvvieta ēkai blakus'],
+          ['Ar vilcienu', 'Tuvākā stacija — Dzintari (5 min ar kājām)'],
+          ['Tālrunis', '+371 27 850 380']
+        ],
+        buttons: ['Atvērt Google Maps', 'Zvanīt'],
+        iframeTitle: 'Room Jūrmala atrašanās vieta',
+        iframeLang: 'lv'
+      },
+      contact: {
+        tag: 'Sazinies ar mums',
+        titleHtml: 'Gatavs savam <em>pasākumam?</em>',
+        sub: 'Sazinieties ar mums jebkurā ērtā veidā',
+        labels: ['Tālrunis', 'WhatsApp', 'Instagram', 'Facebook'],
+        values: ['+371 27 850 380', 'Raksti tūlīt', '@room.jurmala', 'Room Jūrmala'],
+        address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvija'
+      },
+      footer: {
+        links: ['Telpas', 'Cenas', 'Rezervēt', 'Instagram', 'Facebook'],
+        copy: '© 2026 Room Jūrmala. Visas tiesības aizsargātas.'
+      },
+      whatsapp: {
+        greeting: 'Sveiki! Es vēlos rezervēt ROOM Jūrmala telpu.',
+        labels: {
+          name: 'Vārds',
+          phone: 'Tālrunis / WhatsApp',
+          eventType: 'Pasākuma veids',
+          date: 'Datums',
+          time: 'Laiks',
+          notes: 'Piezīmes'
+        },
+        timePrefixes: {
+          from: 'No',
+          until: 'Līdz'
+        }
+      }
+    },
+    en: {
+      meta: { title: 'ROOM Jūrmala — Space for Your Moments in Jurmala' },
+      nav: {
+        links: ['Spaces', 'Prices', 'Availability', 'Location', 'Contact'],
+        cta: 'Reserve',
+        menuOpen: 'Open menu',
+        menuClose: 'Close menu'
+      },
+      hero: {
+        badge: '✦ Jurmala, Latvia ✦',
+        titleHtml: 'Space for Your<br/><em>moments</em> in Jurmala',
+        sub: 'A cozy, flexible space for kids’ parties, workshops, photoshoots and special moments',
+        actions: ['Reserve', 'Learn more']
+      },
+      categories: {
+        tag: 'Our spaces',
+        titleHtml: 'Find your place for <em style="color:var(--gold);">moments</em>',
+        sub: 'One space — endless possibilities. We adapt the setting exactly to your ideas.',
+        cards: [
+          ['Kids’ parties', 'Play elements and decorations — everything is ready for joyful moments'],
+          ['Workshops', 'Creative workshops with a large table, chairs and a comfortable workspace for groups'],
+          ['Photoshoots', 'Natural light and a clean space'],
+          ['Private events', 'Celebrations, meetups, yoga, seminars']
+        ]
+      },
+      features: {
+        tag: 'Why us?',
+        titleHtml: 'More than just a <em>space</em>',
+        items: [
+          ['Cozy atmosphere', 'A warm, comfortable space with a brick wall, soft carpet and natural light'],
+          ['Ready-made solutions', 'Decorations, play elements and workshops — we organize everything for you.'],
+          ['Flexible setup', 'Every event is different — we adapt the space to your exact needs.'],
+          ['Full kitchen', 'Fridge, stove, dishes and sink — bring or prepare your own food with ease.']
+        ]
+      },
+      gallery: {
+        tag: 'Gallery',
+        titleHtml: 'Take a look <em>inside</em>'
+      },
+      pricing: {
+        tag: 'Prices',
+        titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> moments',
+        cards: {
+          hourly: {
+            type: 'Hourly rental',
+            period: 'per hour',
+            features: [
+              'Weekdays until 6:00 PM — €10/hour',
+              'After 6:00 PM and on weekends — €20/hour',
+              'Entire space included',
+              'Kitchen included',
+              'Free parking'
+            ],
+            cta: 'Reserve'
+          },
+          party: {
+            popular: 'Most popular',
+            type: 'Party package',
+            forUpTo: 'For parties (up to 15 people)',
+            perEvent: 'per event',
+            featuresPrimary: [
+              '3 hours €100',
+              'Each additional hour €20',
+              'Entire space for a private event'
+            ],
+            moreThan15: 'If there are more than 15 guests',
+            featuresSecondary: [
+              '3 hours €130',
+              'Each additional hour €30'
+            ],
+            cta: 'Request package'
+          },
+          custom: {
+            type: 'Custom offer',
+            amountHtml: 'By<br/>agreement',
+            period: 'seminars, photo, corporate',
+            features: [
+              'Yoga and fitness classes',
+              'Professional photoshoots',
+              'Corporate events',
+              'Regular rental agreements',
+              'Workshops from A to Z'
+            ],
+            cta: 'Contact us'
+          }
+        }
+      },
+      calendar: {
+        titleHtml: 'Find the day that will be <em style="color:var(--gold);">Yours</em>',
+        daysShort: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        monthsHeader: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        monthsDate: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        freeLabel: 'Available'
+      },
+      booking: {
+        title: 'Book the space',
+        sub: 'Fill in the form and we’ll get back to you soon',
+        labels: ['Your name', 'Phone / WhatsApp', 'Event type', 'Date', 'Time', 'Notes'],
+        placeholders: {
+          name: 'Anna Smith',
+          phone: '+371 2X XXX XXX',
+          date: 'e.g. 20 April',
+          start: 'From, e.g. 14:00',
+          end: 'Until, e.g. 17:00',
+          notes: 'How many guests? Any special wishes?'
+        },
+        options: [
+          'Choose a format...',
+          '🎈 Kids’ party',
+          '🎨 Workshop',
+          '📸 Photoshoot',
+          '🌿 Yoga / Fitness',
+          '🎉 Private event',
+          '✨ Other'
+        ],
+        button: 'Send request ✦',
+        buttonSent: '✓ Request sent!',
+        notePrefix: 'Or write on WhatsApp:',
+        startTimeAria: 'Start time',
+        endTimeAria: 'End time'
+      },
+      map: {
+        tag: 'Location',
+        title: 'How to find us?',
+        sub: 'We are located in the heart of Jurmala — easy to reach by car and public transport.',
+        details: [
+          ['Address', 'Skolas iela 50, Jūrmala, LV-2016'],
+          ['By car', 'Free parking next to the building'],
+          ['By train', 'Nearest station — Dzintari (5 min walk)'],
+          ['Phone', '+371 27 850 380']
+        ],
+        buttons: ['Open Google Maps', 'Call'],
+        iframeTitle: 'Room Jūrmala location',
+        iframeLang: 'en'
+      },
+      contact: {
+        tag: 'Contact us',
+        titleHtml: 'Ready for your <em>event?</em>',
+        sub: 'Contact us in any way convenient for you',
+        labels: ['Phone', 'WhatsApp', 'Instagram', 'Facebook'],
+        values: ['+371 27 850 380', 'Write now', '@room.jurmala', 'Room Jūrmala'],
+        address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvia'
+      },
+      footer: {
+        links: ['Spaces', 'Prices', 'Reserve', 'Instagram', 'Facebook'],
+        copy: '© 2026 Room Jūrmala. All rights reserved.'
+      },
+      whatsapp: {
+        greeting: 'Hello! I would like to book ROOM Jūrmala.',
+        labels: {
+          name: 'Name',
+          phone: 'Phone / WhatsApp',
+          eventType: 'Event type',
+          date: 'Date',
+          time: 'Time',
+          notes: 'Notes'
+        },
+        timePrefixes: {
+          from: 'From',
+          until: 'Until'
+        }
+      }
+    },
+    ru: {
+      meta: { title: 'ROOM Jūrmala — Пространство для ваших моментов в Юрмале' },
+      nav: {
+        links: ['Пространства', 'Цены', 'Доступность', 'Локация', 'Контакты'],
+        cta: 'Забронировать',
+        menuOpen: 'Открыть меню',
+        menuClose: 'Закрыть меню'
+      },
+      hero: {
+        badge: '✦ Юрмала, Латвия ✦',
+        titleHtml: 'Пространство для ваших<br/><em>моментов</em> в Юрмале',
+        sub: 'Уютное и гибкое пространство для детских праздников, мастер-классов, фотосессий и особенных моментов',
+        actions: ['Забронировать', 'Узнать больше']
+      },
+      categories: {
+        tag: 'Наши пространства',
+        titleHtml: 'Найди место для своих <em style="color:var(--gold);">моментов</em>',
+        sub: 'Одно пространство — бесконечные возможности. Мы адаптируем атмосферу именно под ваши идеи.',
+        cards: [
+          ['Детские праздники', 'Игровые элементы и декорации — всё готово для радостных моментов'],
+          ['Мастер-классы', 'Творческие занятия с большим столом, стульями и удобным пространством для групп'],
+          ['Фотосессии', 'Естественный свет и чистое пространство'],
+          ['Частные мероприятия', 'Праздники, встречи, йога, семинары']
+        ]
+      },
+      features: {
+        tag: 'Почему мы?',
+        titleHtml: 'Больше, чем просто <em>пространство</em>',
+        items: [
+          ['Уютная атмосфера', 'Тёплое, удобное пространство с кирпичной стеной, мягким ковром и естественным светом'],
+          ['Готовые решения', 'Декорации, игровые элементы и мастер-классы — мы организуем всё для вас.'],
+          ['Гибкая адаптация', 'Каждое событие отличается — мы подстраиваем пространство под ваши потребности.'],
+          ['Полноценная кухня', 'Холодильник, плита, посуда и раковина — можно привезти или приготовить свою еду.']
+        ]
+      },
+      gallery: {
+        tag: 'Галерея',
+        titleHtml: 'Загляни <em>внутрь</em>'
+      },
+      pricing: {
+        tag: 'Цены',
+        titleHtml: 'Цены для <em style="color:var(--gold);">ваших</em> моментов',
+        cards: {
+          hourly: {
+            type: 'Почасовая аренда',
+            period: 'в час',
+            features: [
+              'По будням до 18:00 — 10€/час',
+              'После 18:00 и в выходные — 20€/час',
+              'Всё пространство включено',
+              'Кухня включена',
+              'Бесплатная парковка'
+            ],
+            cta: 'Забронировать'
+          },
+          party: {
+            popular: 'Самый популярный',
+            type: 'Пакет для праздника',
+            forUpTo: 'Для праздников (до 15 человек)',
+            perEvent: 'за мероприятие',
+            featuresPrimary: [
+              '3 часа 100€',
+              'Каждый следующий час 20€',
+              'Всё пространство для частного мероприятия'
+            ],
+            moreThan15: 'Если гостей больше 15 человек',
+            featuresSecondary: [
+              '3 часа 130€',
+              'Каждый следующий час 30€'
+            ],
+            cta: 'Запросить пакет'
+          },
+          custom: {
+            type: 'Индивидуальное предложение',
+            amountHtml: 'По<br/>договорённости',
+            period: 'семинары, фото, корпоративы',
+            features: [
+              'Занятия йогой и фитнесом',
+              'Профессиональные фотосессии',
+              'Корпоративные мероприятия',
+              'Регулярные договоры аренды',
+              'Мастер-классы от А до Я'
+            ],
+            cta: 'Связаться'
+          }
+        }
+      },
+      calendar: {
+        titleHtml: 'Найди день, который станет <em style="color:var(--gold);">твоим</em>',
+        daysShort: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+        monthsHeader: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthsDate: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+        freeLabel: 'Свободно'
+      },
+      booking: {
+        title: 'Забронировать помещение',
+        sub: 'Заполни форму, и мы скоро свяжемся с тобой',
+        labels: ['Ваше имя', 'Телефон / WhatsApp', 'Формат мероприятия', 'Дата', 'Время', 'Примечания'],
+        placeholders: {
+          name: 'Анна Иванова',
+          phone: '+371 2X XXX XXX',
+          date: 'например, 20 апреля',
+          start: 'С, например 14:00',
+          end: 'До, например 17:00',
+          notes: 'Сколько гостей? Особые пожелания?'
+        },
+        options: [
+          'Выберите формат...',
+          '🎈 Детский праздник',
+          '🎨 Мастер-класс',
+          '📸 Фотосессия',
+          '🌿 Йога / Фитнес',
+          '🎉 Частное мероприятие',
+          '✨ Другое'
+        ],
+        button: 'Отправить заявку ✦',
+        buttonSent: '✓ Заявка отправлена!',
+        notePrefix: 'Или напишите в WhatsApp:',
+        startTimeAria: 'Время начала',
+        endTimeAria: 'Время окончания'
+      },
+      map: {
+        tag: 'Локация',
+        title: 'Как нас найти?',
+        sub: 'Мы находимся в самом сердце Юрмалы — удобно добраться как на машине, так и на общественном транспорте.',
+        details: [
+          ['Адрес', 'Skolas iela 50, Jūrmala, LV-2016'],
+          ['На машине', 'Бесплатная парковка рядом со зданием'],
+          ['На поезде', 'Ближайшая станция — Dzintari (5 минут пешком)'],
+          ['Телефон', '+371 27 850 380']
+        ],
+        buttons: ['Открыть Google Maps', 'Позвонить'],
+        iframeTitle: 'Местоположение Room Jūrmala',
+        iframeLang: 'ru'
+      },
+      contact: {
+        tag: 'Свяжитесь с нами',
+        titleHtml: 'Готовы к своему <em>событию?</em>',
+        sub: 'Свяжитесь с нами любым удобным способом',
+        labels: ['Телефон', 'WhatsApp', 'Instagram', 'Facebook'],
+        values: ['+371 27 850 380', 'Напиши сейчас', '@room.jurmala', 'Room Jūrmala'],
+        address: '📍 Skolas iela 50, Jūrmala, LV-2016, Латвия'
+      },
+      footer: {
+        links: ['Пространства', 'Цены', 'Забронировать', 'Instagram', 'Facebook'],
+        copy: '© 2026 Room Jūrmala. Все права защищены.'
+      },
+      whatsapp: {
+        greeting: 'Здравствуйте! Я хочу забронировать помещение ROOM Jūrmala.',
+        labels: {
+          name: 'Имя',
+          phone: 'Телефон / WhatsApp',
+          eventType: 'Формат мероприятия',
+          date: 'Дата',
+          time: 'Время',
+          notes: 'Примечания'
+        },
+        timePrefixes: {
+          from: 'С',
+          until: 'До'
+        }
+      }
+    }
+  };
+
+  const MAP_IFRAME_BASE = 'https://www.google.com/maps?q=56.9619657,23.6038606+(ROOM%20J%C5%ABrmala)&z=18';
+  let currentLang = getInitialLanguage();
+  let selectedDateParts = null;
+
+  function getInitialLanguage() {
+    const saved = localStorage.getItem('roomJurmalaLang');
+    if (saved && I18N[saved]) return saved;
+    const browserLang = (navigator.language || 'lv').toLowerCase();
+    if (browserLang.startsWith('ru')) return 'ru';
+    if (browserLang.startsWith('en')) return 'en';
+    return 'lv';
+  }
+
+  function setText(selector, value) {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = value;
+  }
+
+  function setHTML(selector, value) {
+    const node = document.querySelector(selector);
+    if (node) node.innerHTML = value;
+  }
+
+  function setNodeListText(nodes, values) {
+    values.forEach((value, index) => {
+      if (nodes[index]) nodes[index].textContent = value;
+    });
+  }
+
+  function setSelectorListText(selector, values) {
+    setNodeListText(document.querySelectorAll(selector), values);
+  }
+
+  function setPlaceholder(id, value) {
+    const node = document.getElementById(id);
+    if (node) node.placeholder = value;
+  }
+
+  function setOptionTexts(selectId, values) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    values.forEach((value, index) => {
+      if (select.options[index]) select.options[index].textContent = value;
+    });
+  }
+
+  function formatSelectedDate(day, monthIndex) {
+    const calendarCopy = I18N[currentLang].calendar;
+    if (currentLang === 'lv') return `${day}. ${calendarCopy.monthsDate[monthIndex]}`;
+    return `${day} ${calendarCopy.monthsDate[monthIndex]}`;
+  }
+
+  function getDateInput() {
+    return document.getElementById('desiredDateTime');
+  }
+
+  function setDateTimeValue(timeSlot) {
+    const dateInput = getDateInput();
+    if (!dateInput) return;
+    const dateLabel = selectedDateParts ? formatSelectedDate(selectedDateParts.day, selectedDateParts.month) : '';
+    if (dateLabel && timeSlot) {
+      dateInput.value = `${dateLabel}, ${timeSlot}`;
+      return;
+    }
+    if (dateLabel) {
+      dateInput.value = dateLabel;
+      return;
+    }
+    if (timeSlot) {
+      dateInput.value = timeSlot;
+    }
+  }
+
+  function applyLanguage(lang) {
+    const copy = I18N[lang] || I18N.lv;
+    currentLang = I18N[lang] ? lang : 'lv';
+    localStorage.setItem('roomJurmalaLang', currentLang);
+    document.documentElement.lang = currentLang;
+    document.title = copy.meta.title;
+
+    setSelectorListText('.nav-links a', copy.nav.links);
+    setSelectorListText('.mobile-menu-links a', copy.nav.links);
+    document.querySelectorAll('.nav-cta').forEach((node) => {
+      node.textContent = copy.nav.cta;
+    });
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    if (navToggle) {
+      navToggle.setAttribute('aria-label', navToggle.classList.contains('active') ? copy.nav.menuClose : copy.nav.menuOpen);
+    }
+    if (mobileMenuClose) mobileMenuClose.setAttribute('aria-label', copy.nav.menuClose);
+    setText('.hero-badge', copy.hero.badge);
+    setHTML('.hero h1', copy.hero.titleHtml);
+    setText('.hero-sub', copy.hero.sub);
+    setSelectorListText('.hero-actions a', copy.hero.actions);
+
+    setText('#categories .section-tag', copy.categories.tag);
+    setHTML('#categories .section-title', copy.categories.titleHtml);
+    setText('#categories .section-sub', copy.categories.sub);
+    setSelectorListText('.cat-title', copy.categories.cards.map((item) => item[0]));
+    setSelectorListText('.cat-desc', copy.categories.cards.map((item) => item[1]));
+
+    setText('#features .section-tag', copy.features.tag);
+    setHTML('#features .section-title', copy.features.titleHtml);
+    setSelectorListText('.feat-txt h4', copy.features.items.map((item) => item[0]));
+    setSelectorListText('.feat-txt p', copy.features.items.map((item) => item[1]));
+
+    setText('#gallery .section-tag', copy.gallery.tag);
+    setHTML('#gallery .section-title', copy.gallery.titleHtml);
+
+    setText('#pricing .section-tag', copy.pricing.tag);
+    setHTML('#pricing .section-title', copy.pricing.titleHtml);
+
+    const priceCards = document.querySelectorAll('.price-card');
+    const hourlyCard = priceCards[0];
+    const partyCard = priceCards[1];
+    const customCard = priceCards[2];
+
+    if (hourlyCard) {
+      const pricePeriods = hourlyCard.querySelectorAll('.price-period');
+      setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
+      if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
+      setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
+      setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
+    }
+
+    if (partyCard) {
+      const partyPeriods = partyCard.querySelectorAll('.price-period');
+      const partyLists = partyCard.querySelectorAll('.price-features');
+      setText('.pricing-grid .price-card:nth-of-type(2) .price-popular', copy.pricing.cards.party.popular);
+      setText('.pricing-grid .price-card:nth-of-type(2) .price-type', copy.pricing.cards.party.type);
+      if (partyPeriods[0]) partyPeriods[0].textContent = copy.pricing.cards.party.forUpTo;
+      if (partyPeriods[1]) partyPeriods[1].textContent = copy.pricing.cards.party.perEvent;
+      if (partyPeriods[2]) partyPeriods[2].textContent = copy.pricing.cards.party.moreThan15;
+      if (partyLists[0]) setNodeListText(partyLists[0].querySelectorAll('li'), copy.pricing.cards.party.featuresPrimary);
+      if (partyLists[1]) setNodeListText(partyLists[1].querySelectorAll('li'), copy.pricing.cards.party.featuresSecondary);
+      setText('.pricing-grid .price-card:nth-of-type(2) .price-cta', copy.pricing.cards.party.cta);
+    }
+
+    if (customCard) {
+      const customAmount = customCard.querySelector('.price-amount');
+      const customPeriods = customCard.querySelectorAll('.price-period');
+      setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
+      if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
+      if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.period;
+      setNodeListText(customCard.querySelectorAll('.price-features li'), copy.pricing.cards.custom.features);
+      setText('.pricing-grid .price-card:nth-of-type(3) .price-cta', copy.pricing.cards.custom.cta);
+    }
+
+    setHTML('#calendar .section-title', copy.calendar.titleHtml);
+    setSelectorListText('.cal-day-name', copy.calendar.daysShort);
+
+    setText('.booking-title', copy.booking.title);
+    setText('.booking-sub', copy.booking.sub);
+    setSelectorListText('.booking-field label', copy.booking.labels);
+    setPlaceholder('customerName', copy.booking.placeholders.name);
+    setPlaceholder('customerPhone', copy.booking.placeholders.phone);
+    setPlaceholder('desiredDateTime', copy.booking.placeholders.date);
+    setPlaceholder('startTimeDesktop', copy.booking.placeholders.start);
+    setPlaceholder('endTimeDesktop', copy.booking.placeholders.end);
+    setPlaceholder('bookingNotes', copy.booking.placeholders.notes);
+    setOptionTexts('eventTypeSelect', copy.booking.options);
+    setText('.booking-btn', copy.booking.button);
+    const bookingNote = document.querySelector('.booking-note');
+    if (bookingNote) {
+      bookingNote.innerHTML = `${copy.booking.notePrefix} <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a>`;
+    }
+    const startTimeMobile = document.getElementById('startTimeMobile');
+    const endTimeMobile = document.getElementById('endTimeMobile');
+    if (startTimeMobile) startTimeMobile.setAttribute('aria-label', copy.booking.startTimeAria);
+    if (endTimeMobile) endTimeMobile.setAttribute('aria-label', copy.booking.endTimeAria);
+
+    setText('#map-section .section-tag', copy.map.tag);
+    setText('.map-info-title', copy.map.title);
+    setText('.map-info-sub', copy.map.sub);
+    setSelectorListText('.map-txt strong', copy.map.details.map((item) => item[0]));
+    setSelectorListText('.map-txt span', copy.map.details.map((item) => item[1]));
+    setSelectorListText('#map-section .btn-primary, #map-section .btn-outline', copy.map.buttons);
+    const mapFrame = document.querySelector('.map-frame iframe');
+    if (mapFrame) {
+      mapFrame.title = copy.map.iframeTitle;
+      mapFrame.src = `${MAP_IFRAME_BASE}&hl=${copy.map.iframeLang}&output=embed`;
+    }
+
+    setText('#contact .section-tag', copy.contact.tag);
+    setHTML('.contact-title', copy.contact.titleHtml);
+    setText('.contact-sub', copy.contact.sub);
+    setSelectorListText('.contact-card-label', copy.contact.labels);
+    setSelectorListText('.contact-card-val', copy.contact.values);
+    const contactAddress = document.querySelector('#contact p[style*="font-size:0.85rem"]');
+    if (contactAddress) contactAddress.textContent = copy.contact.address;
+
+    setSelectorListText('.footer-links a', copy.footer.links);
+    setText('.footer-copy', copy.footer.copy);
+
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+
+    renderCalendar();
+    if (selectedDateParts) setDateTimeValue('');
+  }
+
+  let curYear  = new Date().getFullYear();
+  let curMonth = new Date().getMonth();
+  const today  = new Date();
+
+  function renderCalendar() {
+    const calendarCopy = I18N[currentLang].calendar;
+    const label = document.getElementById('calMonthLabel');
+    const grid  = document.getElementById('calGrid');
+    label.textContent = calendarCopy.monthsHeader[curMonth] + ' ' + curYear;
+    grid.innerHTML = '';
+
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
+    const startOffset = (firstDay === 0 ? 6 : firstDay - 1);
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+    for (let i = 0; i < startOffset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-cell empty';
+      grid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement('div');
+      const isToday = (d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear());
+      const isPast  = new Date(curYear, curMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+      cell.className = 'cal-cell' + (isToday ? ' today' : '') + (isPast ? ' past' : '');
+      if (selectedDateParts && selectedDateParts.day === d && selectedDateParts.month === curMonth && selectedDateParts.year === curYear) {
+        cell.classList.add('free-sel');
+      }
+      cell.textContent = d;
+      if (isPast) cell.style.opacity = '0.3';
+      if (!isPast) {
+        cell.title = `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`;
+        cell.addEventListener('click', () => {
+          document.querySelectorAll('.cal-cell.free-sel').forEach(c => c.classList.remove('free-sel'));
+          cell.classList.add('free-sel');
+          selectedDateParts = { day: d, month: curMonth, year: curYear };
+          setDateTimeValue('');
+        });
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  document.getElementById('prevMonth').addEventListener('click', () => {
+    curMonth--;
+    if (curMonth < 0) {
+      curMonth = 11;
+      curYear--;
+    }
+    renderCalendar();
+  });
+
+  document.getElementById('nextMonth').addEventListener('click', () => {
+    curMonth++;
+    if (curMonth > 11) {
+      curMonth = 0;
+      curYear++;
+    }
+    renderCalendar();
+  });
+
+  function formatDesktopTimeInput(value) {
+    const digits = value.replace(/\D/g, '').slice(0, 4);
+    if (digits.length <= 2) return digits;
+    return digits.slice(0, 2) + ':' + digits.slice(2);
+  }
+
+  ['startTimeDesktop', 'endTimeDesktop'].forEach((id) => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.addEventListener('input', (e) => {
+      e.target.value = formatDesktopTimeInput(e.target.value);
+    });
+  });
+
+  function getTimeFieldValue(desktopId, mobileId) {
+    const desktopInput = document.getElementById(desktopId);
+    const mobileInput = document.getElementById(mobileId);
+    const desktopValue = desktopInput?.value.trim() || '';
+    const mobileValue = mobileInput?.value.trim() || '';
+    return mobileValue || desktopValue;
+  }
+
+  function syncTimeInputsForDevice() {
+    const isMobileLike = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const desktopIds = ['startTimeDesktop', 'endTimeDesktop'];
+    const mobileIds = ['startTimeMobile', 'endTimeMobile'];
+
+    desktopIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.disabled = isMobileLike;
+    });
+
+    mobileIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.disabled = !isMobileLike;
+    });
+  }
+
+  syncTimeInputsForDevice();
+  window.addEventListener('resize', syncTimeInputsForDevice);
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuBackdrop = document.querySelector('.mobile-menu-backdrop');
+  const mobileMenuClose = document.querySelector('.mobile-menu-close');
+
+  function setMobileMenuOpen(isOpen) {
+    if (!navToggle || !mobileMenu || !mobileMenuBackdrop) return;
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.setAttribute('aria-label', isOpen ? I18N[currentLang].nav.menuClose : I18N[currentLang].nav.menuOpen);
+    mobileMenu.classList.toggle('open', isOpen);
+    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    mobileMenuBackdrop.classList.toggle('open', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      setMobileMenuOpen(!mobileMenu.classList.contains('open'));
+    });
+  }
+
+  [mobileMenuBackdrop, mobileMenuClose].forEach((element) => {
+    if (!element) return;
+    element.addEventListener('click', () => setMobileMenuOpen(false));
+  });
+
+  document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link) => {
+    link.addEventListener('click', () => setMobileMenuOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMobileMenuOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setMobileMenuOpen(false);
+  });
+
+  function handleBooking(e) {
+    e.preventDefault();
+    const copy = I18N[currentLang];
+    const name = document.getElementById('customerName')?.value.trim() || '-';
+    const customerPhone = document.getElementById('customerPhone')?.value.trim() || '-';
+    const eventType = document.getElementById('eventTypeSelect')?.value.trim() || '-';
+    const bookingDate = document.getElementById('desiredDateTime')?.value.trim() || '-';
+    const startTime = getTimeFieldValue('startTimeDesktop', 'startTimeMobile');
+    const endTime = getTimeFieldValue('endTimeDesktop', 'endTimeMobile');
+    const notes = document.getElementById('bookingNotes')?.value.trim() || '-';
+    let bookingTime = '-';
+    if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
+    else if (startTime) bookingTime = `${copy.whatsapp.timePrefixes.from} ${startTime}`;
+    else if (endTime) bookingTime = `${copy.whatsapp.timePrefixes.until} ${endTime}`;
+
+    const btn = e.target.querySelector('.booking-btn');
+    btn.textContent = copy.booking.buttonSent;
+    btn.style.background = '#357575';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = copy.booking.button;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+
+    const phone = '+37127850380';
+    const msg = encodeURIComponent(
+      copy.whatsapp.greeting + '\n\n' +
+      copy.whatsapp.labels.name + ': ' + name + '\n' +
+      copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
+      copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
+      copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
+      copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +
+      copy.whatsapp.labels.notes + ': ' + notes
+    );
+    setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank'); }, 500);
+  }
+
+  applyLanguage(currentLang);
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
