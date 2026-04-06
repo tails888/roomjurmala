@@ -1825,9 +1825,6 @@
   function getInitialLanguage() {
     const saved = localStorage.getItem('roomJurmalaLang');
     if (saved && I18N[saved]) return saved;
-    const browserLang = (navigator.language || 'lv').toLowerCase();
-    if (browserLang.startsWith('ru')) return 'ru';
-    if (browserLang.startsWith('en')) return 'en';
     return 'lv';
   }
 
