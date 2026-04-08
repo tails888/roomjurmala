@@ -907,6 +907,34 @@
       .nav-right .lang-switcher { display: none; }
       .mobile-menu .lang-switcher { display: inline-flex; }
       .lang-btn { padding: 8px 10px; font-size: 0.72rem; }
+      .hero {
+        min-height: 100svh;
+        padding-top: 88px;
+      }
+      .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 18px 28px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero h1 {
+        max-width: 100%;
+        font-size: clamp(2.5rem, 11vw, 4.2rem);
+        line-height: 1.04;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-sub {
+        max-width: min(92vw, 520px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        width: 100%;
+        justify-content: center;
+      }
       .feat-layout, .calendar-layout, .map-layout { grid-template-columns: 1fr; }
       .booking-card { position: static; }
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -921,6 +949,33 @@
       .gallery-cell:first-child { grid-column: auto; }
       .stat-item { padding: 14px 20px; }
       .contact-cards { flex-direction: column; align-items: center; }
+      .hero {
+        padding-top: 82px;
+      }
+      .hero-content {
+        padding: 0 16px 24px;
+      }
+      .hero h1 {
+        font-size: clamp(2.2rem, 14vw, 3.4rem);
+        max-width: 100%;
+        line-height: 1.02;
+        margin-bottom: 18px;
+      }
+      .hero-sub {
+        max-width: 92vw;
+        font-size: 0.96rem;
+        margin-bottom: 34px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-outline {
+        width: min(92vw, 320px);
+        text-align: center;
+      }
     }
     @media (hover: none) and (pointer: coarse) {
       .time-input-desktop { display: none; }
@@ -1350,6 +1405,11 @@
         <span class="contact-card-label">WhatsApp</span>
         <span class="contact-card-val">Raksti tūlīt</span>
       </a>
+      <a href="mailto:welcome@roomjurmala.lv" class="contact-card">
+        <span class="contact-card-icon">✉️</span>
+        <span class="contact-card-label">E-pasts</span>
+        <span class="contact-card-val">welcome@roomjurmala.lv</span>
+      </a>
       <a href="https://www.instagram.com/room.jurmala/" target="_blank" class="contact-card">
         <span class="contact-card-icon">📸</span>
         <span class="contact-card-label">Instagram</span>
@@ -1528,8 +1588,8 @@
         tag: 'Sazinies ar mums',
         titleHtml: 'Gatavs savam <em>pasākumam?</em>',
         sub: 'Sazinieties ar mums jebkurā ērtā veidā',
-        labels: ['Tālrunis', 'WhatsApp', 'Instagram', 'Facebook', 'Atsauksme'],
-        values: ['+371 27 850 380', 'Raksti tūlīt', '@room.jurmala', 'Room Jūrmala', 'Padalies ar savu pieredzi'],
+        labels: ['Tālrunis', 'WhatsApp', 'E-pasts', 'Instagram', 'Facebook', 'Atsauksme'],
+        values: ['+371 27 850 380', 'Raksti tūlīt', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Tavs vērtējums mums ļoti nozīmē'],
         address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvija'
       },
       footer: {
@@ -1690,8 +1750,8 @@
         tag: 'Contact us',
         titleHtml: 'Ready for your <em>event?</em>',
         sub: 'Contact us in any way convenient for you',
-        labels: ['Phone', 'WhatsApp', 'Instagram', 'Facebook', 'Review'],
-        values: ['+371 27 850 380', 'Write now', '@room.jurmala', 'Room Jūrmala', 'Share your experience'],
+        labels: ['Phone', 'WhatsApp', 'Email', 'Instagram', 'Facebook', 'Review'],
+        values: ['+371 27 850 380', 'Write now', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Your review means a lot to us'],
         address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvia'
       },
       footer: {
@@ -1852,8 +1912,8 @@
         tag: 'Свяжитесь с нами',
         titleHtml: 'Готовы к своему <em>событию?</em>',
         sub: 'Свяжитесь с нами любым удобным способом',
-        labels: ['Телефон', 'WhatsApp', 'Instagram', 'Facebook', 'Отзыв'],
-        values: ['+371 27 850 380', 'Напиши сейчас', '@room.jurmala', 'Room Jūrmala', 'Поделись своим опытом'],
+        labels: ['Телефон', 'WhatsApp', 'Эл. почта', 'Instagram', 'Facebook', 'Отзыв'],
+        values: ['+371 27 850 380', 'Напиши сейчас', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Твой отзыв очень важен для нас'],
         address: '📍 Skolas iela 50, Jūrmala, LV-2016, Латвия'
       },
       footer: {
