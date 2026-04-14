@@ -664,6 +664,8 @@
       border-radius: var(--radius-lg);
       padding: 32px 28px;
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
     .testimonial-stars {
       color: var(--gold);
@@ -682,10 +684,8 @@
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--brown-dark);
-    }
-    .testimonial-date {
-      font-size: 0.75rem;
-      color: var(--text-mid);
+      margin-top: auto;
+      padding-top: 10px;
     }
     .testimonials-cta {
       text-align: center;
@@ -1416,27 +1416,23 @@
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">„Plašas, gaišas telpas. Lieliska vieta dažādām aktivitātēm — gan rotaļām bērniem, gan sportiskām nodarbībām, gan svinību organizēšanai!”</p>
         <div class="testimonial-author">Marita Paegle</div>
-        <div class="testimonial-date">Google atsauksme</div>
       </div>
       <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">„Omulīga un jauka atmosfēra. Labi pārdomāta un aprīkota telpa. Lieliska vieta maziem bērniem 😊”</p>
         <div class="testimonial-author">Renāte France</div>
-        <div class="testimonial-date">Google atsauksme</div>
       </div>
       <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-author">Evija Civkule</div>
-        <div class="testimonial-date">Google atsauksme — 5/5</div>
       </div>
       <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-author">Signija MIndere</div>
-        <div class="testimonial-date">Google atsauksme — 5/5</div>
       </div>
     </div>
     <div class="testimonials-cta reveal">
-      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank">★ Atstāj savu atsauksmi Google →</a>
+      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank">★ Atstāj savu atsauksmi</a>
     </div>
   </div>
 </section>
@@ -1775,7 +1771,7 @@
         tag: 'Atsauksmes',
         titleHtml: 'Ko saka mūsu <em>viesi</em>',
         sub: '5.0 ★ vidējais vērtējums Google',
-        cta: '★ Atstāj savu atsauksmi Google →'
+        cta: '★ Atstāj savu atsauksmi'
       },
       gallery: {
         tag: 'Galerija',
@@ -1943,7 +1939,7 @@
         tag: 'Reviews',
         titleHtml: 'What our <em>guests</em> say',
         sub: '5.0 ★ average Google rating',
-        cta: '★ Leave your Google review →'
+        cta: '★ Leave your review'
       },
       gallery: {
         tag: 'Gallery',
@@ -2111,7 +2107,7 @@
         tag: 'Отзывы',
         titleHtml: 'Что говорят наши <em>гости</em>',
         sub: '5.0 ★ средняя оценка в Google',
-        cta: '★ Оставьте отзыв в Google →'
+        cta: '★ Оставьте отзыв'
       },
       gallery: {
         tag: 'Галерея',
