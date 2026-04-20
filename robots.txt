@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /*.mp4$
 
 Sitemap: https://roomjurmala.lv/sitemap.xml

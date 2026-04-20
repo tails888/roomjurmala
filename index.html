@@ -7,6 +7,16 @@
   <meta name="description" content="ROOM Jūrmala — mājīga pasākumu telpa Jūrmalā: bērnu ballītes, meistarklases, rokdarbi, fotosesijas, joga. No 10€/h. Skolas iela 50. Rezervē tagad!" />
   <meta name="keywords" content="pasākumu telpa Jūrmala, bērnu ballītes Jūrmala, meistarklases Jūrmala, telpu noma Jūrmalā, fotosesiju telpa Jūrmala, dzimšanas dienas Jūrmala, rokdarbi Jūrmala, event venue Jurmala" />
   <meta name="robots" content="index, follow" />
+  <!-- Prevent indexing of language variant URLs — only LV is canonical -->
+  <script>
+  (function () {
+    var langParam = new URLSearchParams(window.location.search).get('lang');
+    if (langParam && langParam !== 'lv') {
+      var robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) robotsMeta.setAttribute('content', 'noindex, follow');
+    }
+  })();
+  </script>
   <link rel="canonical" href="https://roomjurmala.lv/" />
   <link rel="alternate" hreflang="lv" href="https://roomjurmala.lv/" />
   <link rel="alternate" hreflang="en" href="https://roomjurmala.lv/?lang=en" />
@@ -1281,7 +1291,7 @@
 
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="space-open.jpeg">
     <source src="video-1.mp4" type="video/mp4" />
   </video>
   <div class="hero-overlay"></div>
@@ -1306,7 +1316,7 @@
     <div class="cat-grid">
       <!-- Card 1 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline>
+        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="soft-play.jpeg">
           <source src="video-2.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
@@ -1318,7 +1328,7 @@
       </div>
       <!-- Card 2 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline>
+        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="creative-table.jpeg">
           <source src="video-3.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
@@ -1330,7 +1340,7 @@
       </div>
       <!-- Card 3 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline>
+        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="activity-room.jpeg">
           <source src="video-4.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
@@ -1342,7 +1352,7 @@
       </div>
       <!-- Card 4 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline>
+        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="kitchen-dining.jpeg">
           <source src="video-5.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
@@ -1430,6 +1440,16 @@
         <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-author">Signija MIndere</div>
       </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">„Lieliska vieta, kur mamma var pabūt ar savu bērnu. Profesionāla un atsaucīga fizioterapeite Inta lietderīgi aizņems jūsu bērnu! Mierīga gaisotne, kur bērniem ir interesanti un kur viņi var iemācīties ko jaunu. Iesaku šo vietu!”</p>
+        <div class="testimonial-author">Aleksandra Kerimova</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">„Brīnišķīgas telpas. Gaišas, plašas, omulīgas ar burvīgu virtuvīti un jauku rotaļu stūrīti mazajiem. Vienmēr tīra un sakopta.”</p>
+        <div class="testimonial-author">Edīte Grunde</div>
+      </div>
     </div>
     <div class="testimonials-cta reveal">
       <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank">★ Atstāj savu atsauksmi</a>
@@ -1446,27 +1466,27 @@
     </div>
     <div class="gallery-grid reveal">
       <div class="gallery-cell">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+        <video autoplay muted loop playsinline preload="auto" poster="space-open.jpeg" style="width:100%;height:100%;object-fit:cover;">
           <source src="video-1.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="gallery-cell">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+        <video autoplay muted loop playsinline preload="auto" poster="gallery-warm-corner.png" style="width:100%;height:100%;object-fit:cover;">
           <source src="video-3.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="gallery-cell">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+        <video autoplay muted loop playsinline preload="auto" poster="gallery-event-floor.png" style="width:100%;height:100%;object-fit:cover;">
           <source src="video-4.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="gallery-cell">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+        <video autoplay muted loop playsinline preload="auto" poster="gallery-activity-setup.jpeg" style="width:100%;height:100%;object-fit:cover;">
           <source src="video-5.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="gallery-cell">
-        <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+        <video autoplay muted loop playsinline preload="auto" poster="workshop-kids.jpeg" style="width:100%;height:100%;object-fit:cover;">
           <source src="video-2.mp4" type="video/mp4" />
         </video>
       </div>
@@ -2243,6 +2263,8 @@
   let selectedDateParts = null;
 
   function getInitialLanguage() {
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang && I18N[urlLang]) return urlLang;
     const saved = localStorage.getItem('roomJurmalaLang');
     if (saved && I18N[saved]) return saved;
     return 'lv';
@@ -2313,6 +2335,15 @@
     currentLang = I18N[lang] ? lang : 'lv';
     localStorage.setItem('roomJurmalaLang', currentLang);
     document.documentElement.lang = currentLang;
+
+    // Sync ?lang= URL param so language-specific links are shareable
+    const url = new URL(window.location.href);
+    if (currentLang === 'lv') {
+      url.searchParams.delete('lang');
+    } else {
+      url.searchParams.set('lang', currentLang);
+    }
+    window.history.replaceState(null, '', url.toString());
     document.title = copy.meta.title;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && copy.meta.description) metaDesc.setAttribute('content', copy.meta.description);
