@@ -210,8 +210,8 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'Your event venue<br/>in <em>Jūrmala</em>',
-      sub: 'A cozy event venue in Kauguri, Jūrmala for children’s birthday parties, workshops, photoshoots and private events',
+      titleHtml: 'Spaces for your<br/><em>events</em>',
+      sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
     categories: {
@@ -401,8 +401,8 @@ const I18N = {
       menuClose: 'Закрыть меню'
     },
     hero: {
-      titleHtml: 'Зал для ваших<br/><em>праздников</em> в Юрмале',
-      sub: 'Уютный зал в Каугури, Юрмале для детских дней рождения, мастер-классов, фотосессий и частных мероприятий',
+      titleHtml: 'Зал для ваших<br/><em>мероприятий</em>',
+      sub: 'Зал в Каугури для детских праздников, фотосессий, мастер-классов, занятий с тренерами, семинаров и детских лагерей',
       actions: ['Забронировать', 'Узнать больше']
     },
     categories: {
