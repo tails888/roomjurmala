@@ -1,11 +1,13 @@
 const I18N = {
   lv: {
     meta: {
-      title: 'Pasākumu telpa Jūrmalā, Kauguri | Bērnu ballītes, meistarklases, fotosesijas — ROOM Jūrmala',
-      description: 'ROOM Jūrmala — mājīga pasākumu telpa Kauguri, Jūrmalā bērnu ballītēm, meistarklasēm, fotosesijām un privātiem pasākumiem. No 10€/h. Skolas iela 50.',
+      title: 'Pasākumu telpa Jūrmalā | Bērnu ballītes, fotosesijas, nodarbības — ROOM Jūrmala',
+      description: 'ROOM Jūrmala ir mājīga pasākumu telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, semināriem, treneru nodarbībām un bērnu nometnēm. Noma no 10€/h.',
       url: 'https://roomjurmala.lv/',
-      ogTitle: 'ROOM Jūrmala — Pasākumu telpa Jūrmalā',
-      ogDescription: 'Mājīga pasākumu telpa Kauguri, Jūrmalā bērnu ballītēm, meistarklasēm, fotosesijām un privātiem pasākumiem. No 10€/h.',
+      ogTitle: 'Pasākumu telpa Jūrmalā — bērnu ballītēm, fotosesijām un nodarbībām',
+      ogDescription: 'Mājīga telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, semināriem, treneriem un bērnu nometnēm. No 10€/h.',
+      twitterTitle: 'ROOM Jūrmala — pasākumu telpa Jūrmalā',
+      twitterDescription: 'Telpa bērnu ballītēm, fotosesijām, nodarbībām un nometnēm Jūrmalā.',
       locale: 'lv_LV'
     },
     nav: {
@@ -15,19 +17,19 @@ const I18N = {
       menuClose: 'Aizvērt izvēlni'
     },
     hero: {
-      titleHtml: 'Telpas Jūsu<br/><em>mirkļiem</em> Jūrmalā',
-      sub: 'Silta vieta Kauguros, Jūrmalā, kur svinēt bērnu ballītes, rīkot meistarklases, fotosesijas un savus īpašos mirkļus',
+      titleHtml: 'Telpas jūsu<br/><em>pasākumiem</em>',
+      sub: 'Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm',
       actions: ['Rezervēt', 'Uzzināt vairāk']
     },
     categories: {
       tag: 'Mūsu telpa',
       titleHtml: 'Atrodiet vietu savam <em style="color:var(--gold);">pasākumam</em>',
-      sub: 'Pie mums var svinēt, radīt un satikties. Mēs parūpēsimies, lai telpa būtu mājīga un ērta Jūsu dienai.',
+      sub: 'Pie mums var svinēt, radīt, mācīties un satikties. Telpu pielāgojam Jūsu pasākuma formātam, viesu skaitam un noskaņai.',
       cards: [
-        ['Bērnu ballītes', 'Rotaļu stūrītis, dekorācijas un vieta, kur bērniem tiešām ir prieks svinēt'],
-        ['Meistarklases', 'Liels galds, ērta vieta darbam un mierīga atmosfēra radošām nodarbībām'],
-        ['Fotosesijas', 'Vienkārša, tīra vide skaistiem kadriem'],
-        ['Privātie pasākumi', 'Mierīga vieta mazām svinībām, sarunām, jogai vai semināriem']
+        ['Bērnu ballītes un dzimšanas dienas', 'Mājīga telpa bērnu svinībām, ģimenes pasākumiem un nelielām ballītēm Jūrmalā'],
+        ['Meistarklases un radošās darbnīcas', 'Liels galds, ērta vieta darbam un mierīga atmosfēra radošām nodarbībām'],
+        ['Fotosesijas un satura veidošana', 'Gaiša telpa ar dabisko gaismu, ķieģeļu sienu un mājīgu interjeru'],
+        ['Telpa treneriem un nodarbībām', 'Vieta jogai, vingrošanai, bērnu kustību nodarbībām, semināriem un nometnēm']
       ]
     },
     features: {
@@ -35,8 +37,8 @@ const I18N = {
       titleHtml: 'Mājīga vieta <em>nodarbībām</em>',
       items: [
         ['Silti un mājīgi', 'Gaiša telpa ar mīkstu paklāju, ķieģeļu sienu un mierīgu sajūtu jau ienākot.'],
-        ['Viss pa rokai', 'Galdi, krēsli un ērta telpa, ko var pielāgot Jūsu pasākumam.'],
-        ['Pielāgojam Jums', 'Sakārtojam telpu tā, lai tā derētu tieši Jūsu pasākumam un viesiem.'],
+        ['Viss pa rokai', 'Galdi, krēsli un ērta telpa ballītēm, darbnīcām, semināriem un grupu nodarbībām.'],
+        ['Pielāgojam Jums', 'Sakārtojam telpu tā, lai tā derētu pasākuma formātam, viesiem un bērnu vecumam.'],
         ['Virtuve pa rokai', 'Kūku, uzkodas un dzērienus varat ērti sagatavot un pasniegt uz vietas.']
       ]
     },
@@ -86,10 +88,11 @@ const I18N = {
         custom: {
           type: 'Individuāls piedāvājums',
           amountHtml: 'Pēc<br/>vienošanās',
-          period: 'semināri, fotosesijas, korporatīvie pasākumi',
+          period: 'semināri, fotosesijas, treneru nodarbības, nometnes',
           features: [
             'Jogas un fitnesa nodarbības',
             'Profesionālas fotosesijas',
+            'Bērnu nometnes un attīstības grupas',
             'Korporatīvie pasākumi',
             'Regulāri nomas līgumi',
             'Meistarklases no A–Z'
@@ -112,7 +115,7 @@ const I18N = {
       cta: 'Rezervēt savu datumu',
       items: [
         ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem.'],
-        ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, meistarklases, rokdarbu nodarbības, fotosesijas, jogas un fitnesa nodarbības, seminārus, korporatīvus un privātus pasākumus.'],
+        ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
         ['Kur atrodas ROOM Jūrmala?', 'ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.']
       ]
     },
@@ -134,6 +137,7 @@ const I18N = {
         '🎨 Meistarklase',
         '📸 Fotosesija',
         '🌿 Joga / Fitness',
+        '☀️ Bērnu nometne',
         '🎉 Privātais pasākums',
         '✨ Cits'
       ],
@@ -826,9 +830,9 @@ function applyLanguage(lang) {
 	    const ogLocale = document.querySelector('meta[property="og:locale"]');
 	    if (ogLocale && copy.meta.locale) ogLocale.setAttribute('content', copy.meta.locale);
 	    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-	    if (twitterTitle) twitterTitle.setAttribute('content', copy.meta.ogTitle || copy.meta.title);
+	    if (twitterTitle) twitterTitle.setAttribute('content', copy.meta.twitterTitle || copy.meta.ogTitle || copy.meta.title);
 	    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
-	    if (twitterDescription) twitterDescription.setAttribute('content', copy.meta.ogDescription || copy.meta.description);
+	    if (twitterDescription) twitterDescription.setAttribute('content', copy.meta.twitterDescription || copy.meta.ogDescription || copy.meta.description);
 
 	    setSelectorListText('.nav-links a', copy.nav.links);
   setSelectorListText('.mobile-menu-links a', copy.nav.links);
