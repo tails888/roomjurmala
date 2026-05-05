@@ -17,7 +17,7 @@ const I18N = {
       menuClose: 'Aizvērt izvēlni'
     },
     hero: {
-      titleHtml: 'Telpas jūsu<br/><em>pasākumiem</em>',
+      titleHtml: 'Telpa jūsu<br/><em>pasākumiem</em>',
       sub: 'Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm',
       actions: ['Rezervēt', 'Uzzināt vairāk']
     },
@@ -210,7 +210,7 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'Spaces for your<br/><em>events</em>',
+      titleHtml: 'A space for your<br/><em>events</em>',
       sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
