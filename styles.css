@@ -895,30 +895,66 @@ section { padding: 90px 40px; }
   margin-bottom: 14px;
 }
 .contact-title em { color: var(--gold); font-style: italic; }
-.contact-sub { font-size: 1rem; color: var(--cream-dark); margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.contact-sub { font-size: 1rem; color: var(--cream-dark); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
 .contact-cards {
-  display: flex; gap: 16px; justify-content: center;
-  flex-wrap: wrap; margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: min(100%, 860px);
+  margin: 0 auto 34px;
 }
 .contact-card {
   background: rgba(216,137,76,0.08);
   border: 1px solid rgba(216,137,76,0.22);
   border-radius: var(--radius-lg);
-  padding: 28px 32px;
+  padding: 22px 24px;
   text-decoration: none; transition: all 0.25s;
   display: flex; flex-direction: column; align-items: center;
-  gap: 10px; min-width: 180px;
+  justify-content: center;
+  gap: 8px;
+  min-height: 158px;
+  min-width: 0;
 }
 .contact-card:hover {
   background: var(--gold);
   border-color: var(--gold);
   transform: translateY(-4px);
 }
-.contact-card-icon { font-size: 2rem; }
+.contact-card-icon { font-size: 2rem; line-height: 1; }
+.contact-card-icon svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+.contact-card-icon.whatsapp-mark {
+  color: #25D366;
+  filter: drop-shadow(0 4px 10px rgba(37,211,102,0.24));
+}
+.contact-card-icon.whatsapp-mark svg path:first-child {
+  fill: currentColor;
+}
+.contact-card-icon.whatsapp-mark svg path:last-child {
+  fill: #fff;
+}
 .contact-card-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(245,239,230,0.55); font-weight: 600; }
 .contact-card-val { font-size: 0.95rem; color: var(--cream); font-weight: 500; overflow-wrap: anywhere; word-break: break-word; }
 .contact-card:hover .contact-card-label,
 .contact-card:hover .contact-card-val { color: var(--brown-dark); }
+.contact-card-review {
+  background: linear-gradient(145deg, #E08A49 0%, #F0A35C 58%, #D27B3F 100%);
+  border-color: rgba(34,19,12,0.72);
+  box-shadow: 5px 5px 0 rgba(34,19,12,0.42), 0 18px 36px rgba(216,137,76,0.18);
+}
+.contact-card-review .contact-card-label,
+.contact-card-review .contact-card-val {
+  color: var(--brown-dark);
+}
+.contact-card-review .contact-card-val {
+  font-weight: 800;
+}
+.contact-card-review:hover {
+  background: linear-gradient(145deg, #F0A35C 0%, #F6B776 58%, #D8894C 100%);
+}
 .social-section {
   margin: 0 auto 42px;
   max-width: 620px;
@@ -1105,7 +1141,7 @@ footer {
   footer { flex-direction: column; text-align: center; align-items: center; }
   .container { width: 100%; max-width: 100%; }
   .contact-cards { width: 100%; }
-  .contact-card { width: min(100%, 340px); min-width: 0; }
+  .contact-card { width: auto; min-width: 0; }
 }
 @media (max-width: 600px) {
   .pricing-grid, .cat-grid { grid-template-columns: 1fr; }
@@ -1120,8 +1156,8 @@ footer {
   .review-cta {
     width: min(100%, 360px);
   }
-  .contact-cards { flex-direction: column; align-items: center; width: 100%; }
-  .contact-card { width: min(100%, 320px); min-width: 0; padding: 24px 20px; }
+  .contact-cards { grid-template-columns: 1fr; width: 100%; max-width: 360px; }
+  .contact-card { width: auto; min-width: 0; min-height: 142px; padding: 20px 18px; }
   .footer-links { width: 100%; justify-content: center; gap: 16px 22px; }
   .footer-links a { white-space: normal; text-align: center; }
   .hero {
@@ -1635,10 +1671,6 @@ h1, h2, h3,
   color: var(--text-mid);
   font-size: 0.94rem;
   line-height: 1.7;
-}
-
-.faq-cta {
-  margin-top: 28px;
 }
 
 .animal-stage {

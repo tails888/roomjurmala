@@ -113,7 +113,6 @@ const I18N = {
       tag: 'Biežākie jautājumi',
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
-      cta: 'Rezervēt savu datumu',
       items: [
         ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem.'],
         ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
@@ -170,7 +169,7 @@ const I18N = {
       titleHtml: 'Plānojat savu <em>pasākumu?</em>',
       sub: 'Sazinieties ar mums Jums ērtā veidā',
       labels: ['Tālrunis', 'WhatsApp', 'E-pasts', 'Atsauksme'],
-      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', 'Jūsu vērtējums mums ir ļoti svarīgs'],
+      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', 'Pastāsti, kā mums izdevās'],
       socialTitle: 'Seko mums',
       socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvija'
@@ -312,7 +311,6 @@ const I18N = {
       tag: 'Frequently asked',
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, event types and where to find us.',
-      cta: 'Book your date',
       items: [
         ['How much does ROOM Jūrmala cost to rent?', 'On weekdays until 6:00 PM the room is €10/hour. After 6:00 PM and on weekends it is €20/hour. The 3-hour party package starts from €100 for up to 15 guests.'],
         ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, corporate events and private gatherings.'],
@@ -369,7 +367,7 @@ const I18N = {
       titleHtml: 'Ready for your <em>event?</em>',
       sub: 'Get in touch however works best for you',
       labels: ['Phone', 'WhatsApp', 'Email', 'Review'],
-      values: ['+371 27 850 380', 'Message us', 'welcome@roomjurmala.lv', 'Your review means a lot to us'],
+      values: ['+371 27 850 380', 'Message us', 'welcome@roomjurmala.lv', 'Tell us how we did'],
       socialTitle: 'Follow us',
       socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvia'
@@ -511,7 +509,6 @@ const I18N = {
       tag: 'Частые вопросы',
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, форматах мероприятий и о том, где нас найти.',
-      cta: 'Забронировать дату',
       items: [
         ['Сколько стоит аренда ROOM Jūrmala?', 'По будням до 18:00 аренда стоит 10€/час. После 18:00 и в выходные — 20€/час. Пакет для праздника на 3 часа начинается от 100€ для компании до 15 гостей.'],
         ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, корпоративные и частные мероприятия.'],
@@ -568,7 +565,7 @@ const I18N = {
       titleHtml: 'Готовы провести своё <em>мероприятие?</em>',
       sub: 'Свяжитесь с нами любым удобным способом',
       labels: ['Телефон', 'WhatsApp', 'Эл. почта', 'Отзыв'],
-      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', 'Ваш отзыв очень важен для нас'],
+      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', 'Расскажите, как у нас получилось'],
       socialTitle: 'Подписывайтесь на нас',
       socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Латвия'
@@ -964,7 +961,6 @@ function applyLanguage(lang) {
     setText('#faq .section-tag', copy.faq.tag);
     setHTML('#faq .section-title', copy.faq.titleHtml);
     setText('#faq .section-sub', copy.faq.sub);
-    setText('#faq .faq-cta', copy.faq.cta);
     setSelectorListText('#faq .faq-question', copy.faq.items.map((item) => item[0]));
     setSelectorListText('#faq .faq-answer', copy.faq.items.map((item) => item[1]));
   }
