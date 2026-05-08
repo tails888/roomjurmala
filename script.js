@@ -46,7 +46,8 @@ const I18N = {
       tag: 'Atsauksmes',
       titleHtml: 'Ko saka mūsu <em>viesi</em>',
       sub: '5.0 ★ vidējais vērtējums Google',
-      cta: '★ Atstāj savu atsauksmi'
+      cta: 'Pastāsti, kā mums izdevās',
+      ctaImage: 'review-cta-button.png'
     },
     gallery: {
       tag: 'Galerija',
@@ -132,13 +133,17 @@ const I18N = {
         notes: 'Cik cilvēku? Īpašas vēlmes?'
       },
       options: [
-        'Izvēlies formātu...',
-        '🎈 Bērnu ballīte',
+        'Izvēlieties pasākuma veidu...',
+        '🎈 Bērnu dzimšanas diena',
+        '👨‍👩‍👧 Ģimenes svinības',
         '🎨 Meistarklase',
         '📸 Fotosesija',
-        '🌿 Joga / Fitness',
+        '🌿 Joga / vingrošana',
+        '🤲 Fizioterapija',
+        '🧒 Bērnu nodarbība',
         '☀️ Bērnu nometne',
-        '🎉 Privātais pasākums',
+        '🎓 Seminārs',
+        '🎉 Privāts pasākums',
         '✨ Cits'
       ],
       button: 'Nosūtīt pieprasījumu ✦',
@@ -164,12 +169,14 @@ const I18N = {
       tag: 'Sazinieties ar mums',
       titleHtml: 'Plānojat savu <em>pasākumu?</em>',
       sub: 'Sazinieties ar mums Jums ērtā veidā',
-      labels: ['Tālrunis', 'WhatsApp', 'E-pasts', 'Instagram', 'Facebook', 'Atsauksme'],
-      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Jūsu vērtējums mums ir ļoti svarīgs'],
+      labels: ['Tālrunis', 'WhatsApp', 'E-pasts', 'Atsauksme'],
+      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', 'Jūsu vērtējums mums ir ļoti svarīgs'],
+      socialTitle: 'Seko mums',
+      socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvija'
     },
     footer: {
-      links: ['Telpa', 'Cenas', 'Rezervēt', 'Instagram', 'Facebook', 'Atsauksme'],
+      links: ['Telpa', 'Cenas', 'Rezervēt', 'Instagram', 'TikTok', 'Facebook', 'Atsauksme'],
       business: 'ROOM Jūrmala',
       address: 'Skolas iela 50, Jūrmala, LV-2016, Latvija',
       phoneLabel: 'Tālrunis',
@@ -239,7 +246,8 @@ const I18N = {
       tag: 'Reviews',
       titleHtml: 'What our <em>guests</em> say',
       sub: '5.0 ★ average Google rating',
-      cta: '★ Leave your review'
+      cta: 'Tell us how we did',
+      ctaImage: 'review-cta-button-en.png'
     },
     gallery: {
       tag: 'Gallery',
@@ -324,11 +332,16 @@ const I18N = {
         notes: 'How many guests? Any special requests?'
       },
       options: [
-        'Choose a format...',
-        '🎈 Children’s party',
+        'Choose event type...',
+        '🎈 Children’s birthday',
+        '👨‍👩‍👧 Family celebration',
         '🎨 Workshop',
         '📸 Photoshoot',
-        '🌿 Yoga / Fitness',
+        '🌿 Yoga / exercise',
+        '🤲 Physiotherapy',
+        '🧒 Children’s class',
+        '☀️ Children’s camp',
+        '🎓 Seminar',
         '🎉 Private event',
         '✨ Other'
       ],
@@ -355,12 +368,14 @@ const I18N = {
       tag: 'Contact us',
       titleHtml: 'Ready for your <em>event?</em>',
       sub: 'Get in touch however works best for you',
-      labels: ['Phone', 'WhatsApp', 'Email', 'Instagram', 'Facebook', 'Review'],
-      values: ['+371 27 850 380', 'Message us', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Your review means a lot to us'],
+      labels: ['Phone', 'WhatsApp', 'Email', 'Review'],
+      values: ['+371 27 850 380', 'Message us', 'welcome@roomjurmala.lv', 'Your review means a lot to us'],
+      socialTitle: 'Follow us',
+      socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvia'
     },
     footer: {
-      links: ['The space', 'Prices', 'Book', 'Instagram', 'Facebook', 'Review'],
+      links: ['The space', 'Prices', 'Book', 'Instagram', 'TikTok', 'Facebook', 'Review'],
       business: 'ROOM Jūrmala',
       address: 'Skolas iela 50, Jūrmala, LV-2016, Latvia',
       phoneLabel: 'Phone',
@@ -430,7 +445,8 @@ const I18N = {
       tag: 'Отзывы',
       titleHtml: 'Что говорят наши <em>гости</em>',
       sub: '5.0 ★ средняя оценка в Google',
-      cta: '★ Оставьте отзыв'
+      cta: 'Расскажите, как у нас получилось',
+      ctaImage: 'review-cta-button-ru.png'
     },
     gallery: {
       tag: 'Галерея',
@@ -515,11 +531,16 @@ const I18N = {
         notes: 'Сколько гостей? Есть особые пожелания?'
       },
       options: [
-        'Выберите формат...',
+        'Выберите тип мероприятия...',
         '🎈 Детский день рождения',
+        '👨‍👩‍👧 Семейный праздник',
         '🎨 Мастер-класс',
         '📸 Фотосессия',
-        '🌿 Йога / Фитнес',
+        '🌿 Йога / гимнастика',
+        '🤲 Физиотерапия',
+        '🧒 Детское занятие',
+        '☀️ Детский лагерь',
+        '🎓 Семинар',
         '🎉 Частное мероприятие',
         '✨ Другое'
       ],
@@ -546,12 +567,14 @@ const I18N = {
       tag: 'Свяжитесь с нами',
       titleHtml: 'Готовы провести своё <em>мероприятие?</em>',
       sub: 'Свяжитесь с нами любым удобным способом',
-      labels: ['Телефон', 'WhatsApp', 'Эл. почта', 'Instagram', 'Facebook', 'Отзыв'],
-      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', '@room.jurmala', 'Room Jūrmala', 'Ваш отзыв очень важен для нас'],
+      labels: ['Телефон', 'WhatsApp', 'Эл. почта', 'Отзыв'],
+      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', 'Ваш отзыв очень важен для нас'],
+      socialTitle: 'Подписывайтесь на нас',
+      socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Латвия'
     },
     footer: {
-      links: ['Зал', 'Цены', 'Забронировать', 'Instagram', 'Facebook', 'Отзыв'],
+      links: ['Зал', 'Цены', 'Забронировать', 'Instagram', 'TikTok', 'Facebook', 'Отзыв'],
       business: 'ROOM Jūrmala',
       address: 'Skolas iela 50, Jūrmala, LV-2016, Латвия',
       phoneLabel: 'Телефон',
@@ -864,7 +887,14 @@ function applyLanguage(lang) {
   setHTML('#testimonials .section-title', copy.testimonials.titleHtml);
   setText('#testimonials .section-sub', copy.testimonials.sub);
   const testimonialsCta = document.querySelector('.testimonials-cta a');
-  if (testimonialsCta) testimonialsCta.textContent = copy.testimonials.cta;
+  if (testimonialsCta) {
+    testimonialsCta.setAttribute('aria-label', copy.testimonials.cta);
+    const testimonialsCtaImage = testimonialsCta.querySelector('img');
+    if (testimonialsCtaImage) {
+      testimonialsCtaImage.alt = copy.testimonials.cta;
+      if (copy.testimonials.ctaImage) testimonialsCtaImage.src = copy.testimonials.ctaImage;
+    }
+  }
 
   setText('#gallery .section-tag', copy.gallery.tag);
   setHTML('#gallery .section-title', copy.gallery.titleHtml);
@@ -956,6 +986,10 @@ function applyLanguage(lang) {
   setText('.contact-sub', copy.contact.sub);
   setSelectorListText('.contact-card-label', copy.contact.labels);
   setSelectorListText('.contact-card-val', copy.contact.values);
+  setText('.social-title', copy.contact.socialTitle);
+  const socialSection = document.querySelector('.social-section');
+  if (socialSection) socialSection.setAttribute('aria-label', copy.contact.socialTitle);
+  setSelectorListText('.social-name', copy.contact.socialLabels);
   const contactAddress = document.querySelector('#contact p[style*="font-size:0.85rem"]');
   if (contactAddress) contactAddress.textContent = copy.contact.address;
 
