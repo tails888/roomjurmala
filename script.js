@@ -47,7 +47,7 @@ const I18N = {
       titleHtml: 'Ko saka mūsu <em>viesi</em>',
       sub: '5.0 ★ vidējais vērtējums Google',
       cta: 'Pastāsti, kā mums izdevās',
-      ctaImage: 'review-cta-button.png'
+      ctaImage: 'assets/images/reviews/review-cta-button.png'
     },
     gallery: {
       tag: 'Galerija',
@@ -247,7 +247,7 @@ const I18N = {
       titleHtml: 'What our <em>guests</em> say',
       sub: '5.0 ★ average Google rating',
       cta: 'Tell us how we did',
-      ctaImage: 'review-cta-button-en.png'
+      ctaImage: 'assets/images/reviews/review-cta-button-en.png'
     },
     gallery: {
       tag: 'Gallery',
@@ -446,7 +446,7 @@ const I18N = {
       titleHtml: 'Что говорят наши <em>гости</em>',
       sub: '5.0 ★ средняя оценка в Google',
       cta: 'Расскажите, как у нас получилось',
-      ctaImage: 'review-cta-button-ru.png'
+      ctaImage: 'assets/images/reviews/review-cta-button-ru.png'
     },
     gallery: {
       tag: 'Галерея',
