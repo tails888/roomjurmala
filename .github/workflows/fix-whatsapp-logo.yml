@@ -1,0 +1,47 @@
+name: Fix WhatsApp logo rendering
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fix-whatsapp-logo.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Patch WhatsApp icon and remove temporary workflow
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+          html = html.replace('styles.css?v=20260508-socials', 'styles.css?v=20260508-whatsapp')
+          html = html.replace('script.js?v=20260508-socials', 'script.js?v=20260508-whatsapp')
+          html = html.replace(
+              '<svg viewBox="0 0 32 32" width="36" height="36" focusable="false">',
+              '<svg viewBox="0 0 32 32" width="36" height="36" focusable="false" role="img" aria-label="WhatsApp">'
+          )
+          html = html.replace('<path d="M16 3.5', '<path fill="#25D366" d="M16 3.5')
+          html = html.replace('<path d="M11.4 9.8', '<path fill="#ffffff" d="M11.4 9.8')
+          path.write_text(html, encoding='utf-8')
+          PY
+          rm -f .github/workflows/fix-whatsapp-logo.yml
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Fix WhatsApp logo rendering"
+            git push origin HEAD:main
+          fi
