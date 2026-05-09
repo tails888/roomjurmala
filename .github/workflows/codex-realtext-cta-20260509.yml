@@ -2,8 +2,10 @@ name: Apply review CTA update
 
 on:
   push:
+    branches: [main]
     paths:
       - .github/workflows/codex-realtext-cta-20260509.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,315 +16,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: true
-
-      - name: Apply local CTA changes
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Apply review CTA patch and remove temporary workflow
         shell: bash
         run: |
           set -euo pipefail
-          python3 <<'PY'
-          from pathlib import Path
-
-          def replace_once(text, old, new, label):
-              if old in text:
-                  return text.replace(old, new, 1)
-              if new in text:
-                  print(f"{label}: already applied")
-                  return text
-              raise SystemExit(f"Missing expected block for {label}")
-
-          index = Path('index.html')
-          html = index.read_text()
-          html = html.replace('styles.css?v=20260508-whatsapp', 'styles.css?v=20260509-realtextcta')
-          html = html.replace('script.js?v=20260508-whatsapp', 'script.js?v=20260509-realtextcta')
-          old_cta_html = '''      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener" class="review-cta" aria-label="Pastāsti kā mums izdevās">
-        <img src="assets/images/reviews/review-cta-button.png" alt="Pastāsti kā mums izdevās" width="1842" height="444" loading="lazy" />
-      </a>'''
-          new_cta_html = '''      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener" class="review-cta" aria-label="Pastāsti kā mums izdevās">
-        <span class="review-cta-spark review-cta-spark-left" aria-hidden="true">✦</span>
-        <span class="review-cta-spark review-cta-spark-top" aria-hidden="true">✦</span>
-        <span class="review-cta-dot" aria-hidden="true"></span>
-        <span class="review-cta-face" aria-hidden="true">
-          <span class="review-cta-eye"></span>
-          <span class="review-cta-eye"></span>
-          <span class="review-cta-mouth"></span>
-        </span>
-        <span class="review-cta-text">Pastāsti kā mums izdevās</span>
-      </a>'''
-          html = replace_once(html, old_cta_html, new_cta_html, 'index review CTA markup')
-          index.write_text(html)
-
-          styles = Path('styles.css')
-          css = styles.read_text()
-          start = css.find('.review-cta {\n  display: inline-block;')
-          if start != -1:
-              end = css.find('\n\n/* ─── Gallery', start)
-              if end == -1:
-                  raise SystemExit('Missing gallery marker after review CTA CSS')
-              new_cta_css = '''.review-cta {
-  --cta-border: #44291a;
-  --cta-text: #321f18;
-  display: block;
-  position: relative;
-  width: min(760px, calc(100% - 28px));
-  height: 178px;
-  text-decoration: none;
-  transition: transform 0.22s ease, filter 0.22s ease;
-  color: var(--cta-text);
-  filter: drop-shadow(0 16px 10px rgba(34, 19, 12, 0.24));
-}
-.review-cta::before {
-  content: '';
-  position: absolute;
-  top: 34px;
-  right: 0;
-  bottom: 28px;
-  left: 112px;
-  border: 7px solid var(--cta-border);
-  border-left-width: 0;
-  border-radius: 0 58px 58px 0;
-  background:
-    radial-gradient(circle at 92% 20%, rgba(255, 216, 150, 0.34) 0 12%, transparent 18%),
-    linear-gradient(180deg, #FFB76C 0%, #F58B22 54%, #DE721C 100%);
-  box-shadow:
-    inset 0 14px 0 rgba(255, 232, 190, 0.46),
-    inset 0 -12px 0 rgba(151, 65, 14, 0.18);
-}
-.review-cta::after {
-  content: '';
-  position: absolute;
-  right: 28px;
-  top: 48px;
-  width: 112px;
-  height: 34px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 238, 200, 0.42) 100%);
-  opacity: 0.7;
-  pointer-events: none;
-}
-.review-cta:hover {
-  transform: translateY(-3px) rotate(-0.4deg);
-  filter: brightness(1.04) saturate(1.03);
-}
-.review-cta-face {
-  position: absolute;
-  left: 18px;
-  top: 28px;
-  width: 156px;
-  height: 136px;
-  border: 7px solid var(--cta-border);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 34% 26%, rgba(255,255,255,0.76) 0 15%, transparent 30%),
-    linear-gradient(145deg, #FFF6E6 0%, #FFE2B9 76%, #F8C07D 100%);
-  box-shadow:
-    inset 12px 12px 0 rgba(255, 255, 255, 0.26),
-    10px 14px 0 rgba(89, 45, 14, 0.18);
-  z-index: 3;
-}
-.review-cta-face::after {
-  content: '';
-  position: absolute;
-  left: 16px;
-  bottom: -25px;
-  width: 54px;
-  height: 52px;
-  background: inherit;
-  border-left: 7px solid var(--cta-border);
-  border-bottom: 7px solid var(--cta-border);
-  border-radius: 0 0 0 36px;
-  transform: rotate(15deg);
-}
-.review-cta-eye {
-  position: absolute;
-  top: 56px;
-  width: 30px;
-  height: 18px;
-  border-top: 7px solid var(--cta-border);
-  border-radius: 28px 28px 0 0;
-  z-index: 4;
-}
-.review-cta-eye:nth-child(1) { left: 44px; }
-.review-cta-eye:nth-child(2) { right: 44px; }
-.review-cta-mouth {
-  position: absolute;
-  left: 50%;
-  top: 86px;
-  width: 42px;
-  height: 28px;
-  transform: translateX(-50%);
-  background: var(--cta-border);
-  border-radius: 0 0 32px 32px;
-  z-index: 4;
-}
-.review-cta-text {
-  position: absolute;
-  left: 218px;
-  right: 34px;
-  top: 50%;
-  z-index: 2;
-  transform: translateY(-50%);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 3.2vw, 2.62rem);
-  font-weight: 700;
-  line-height: 1.04;
-  color: var(--cta-text);
-  text-align: center;
-  white-space: nowrap;
-  text-shadow: 0 2px 0 rgba(255, 204, 126, 0.24);
-}
-html[lang="ru"] .review-cta-text {
-  font-size: clamp(1.78rem, 2.7vw, 2.22rem);
-}
-.review-cta-spark,
-.review-cta-dot {
-  position: absolute;
-  z-index: 4;
-  color: #F09A48;
-  text-shadow: 0 3px 0 rgba(83, 45, 22, 0.25);
-  pointer-events: none;
-}
-.review-cta-spark-left {
-  left: -8px;
-  top: 54px;
-  font-size: 2.3rem;
-}
-.review-cta-spark-top {
-  left: 136px;
-  top: 6px;
-  font-size: 4rem;
-}
-.review-cta-dot {
-  left: -8px;
-  top: 104px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #F8A857;
-  border: 2px solid #7A3F1B;
-}'''
-              css = css[:start] + new_cta_css + css[end:]
-          elif '--cta-border: #44291a;' not in css:
-              raise SystemExit('Missing expected review CTA CSS block')
-
-          old_mobile = '''  .review-cta {
-    width: min(100%, 360px);
-  }'''
-          new_mobile = '''  .review-cta {
-    width: min(100%, 360px);
-    height: 108px;
-  }
-  .review-cta::before {
-    top: 22px;
-    right: 0;
-    bottom: 16px;
-    left: 68px;
-    border-width: 4px;
-    border-left-width: 0;
-    border-radius: 0 36px 36px 0;
-    box-shadow:
-      inset 0 8px 0 rgba(255, 232, 190, 0.46),
-      inset 0 -8px 0 rgba(151, 65, 14, 0.18);
-  }
-  .review-cta::after {
-    right: 20px;
-    top: 32px;
-    width: 56px;
-    height: 18px;
-  }
-  .review-cta-face {
-    left: 10px;
-    top: 18px;
-    width: 86px;
-    height: 76px;
-    border-width: 4px;
-    box-shadow:
-      inset 7px 7px 0 rgba(255, 255, 255, 0.26),
-      6px 8px 0 rgba(89, 45, 14, 0.18);
-  }
-  .review-cta-face::after {
-    left: 9px;
-    bottom: -14px;
-    width: 30px;
-    height: 30px;
-    border-left-width: 4px;
-    border-bottom-width: 4px;
-    border-radius: 0 0 0 20px;
-  }
-  .review-cta-eye {
-    top: 30px;
-    width: 17px;
-    height: 11px;
-    border-top-width: 4px;
-  }
-  .review-cta-eye:nth-child(1) { left: 25px; }
-  .review-cta-eye:nth-child(2) { right: 25px; }
-  .review-cta-mouth {
-    top: 48px;
-    width: 24px;
-    height: 16px;
-    border-radius: 0 0 18px 18px;
-  }
-  .review-cta-text {
-    left: 112px;
-    right: 18px;
-    font-size: clamp(1.36rem, 6.2vw, 1.58rem);
-    white-space: normal;
-  }
-  html[lang="ru"] .review-cta-text {
-    font-size: clamp(1.12rem, 5.2vw, 1.36rem);
-  }
-  .review-cta-spark-left {
-    left: -5px;
-    top: 34px;
-    font-size: 1.35rem;
-  }
-  .review-cta-spark-top {
-    left: 72px;
-    top: 0;
-    font-size: 2.3rem;
-  }
-  .review-cta-dot {
-    left: -4px;
-    top: 64px;
-    width: 10px;
-    height: 10px;
-    border-width: 1px;
-  }'''
-          css = replace_once(css, old_mobile, new_mobile, 'mobile review CTA CSS')
-          styles.write_text(css)
-
-          script = Path('script.js')
-          js = script.read_text()
-          for old, new, label in [
-              ("      cta: 'Pastāsti kā mums izdevās',\n      ctaImage: 'assets/images/reviews/review-cta-button.png'", "      cta: 'Pastāsti kā mums izdevās'", 'LV ctaImage removal'),
-              ("      cta: 'Tell us how we did',\n      ctaImage: 'assets/images/reviews/review-cta-button-en.png'", "      cta: 'Tell us how we did'", 'EN ctaImage removal'),
-              ("      cta: 'Расскажите как у нас получилось',\n      ctaImage: 'assets/images/reviews/review-cta-button-ru.png'", "      cta: 'Расскажите как у нас получилось'", 'RU ctaImage removal'),
-          ]:
-              js = replace_once(js, old, new, label)
-
-          old_js_block = '''    const testimonialsCtaImage = testimonialsCta.querySelector('img');
-    if (testimonialsCtaImage) {
-      testimonialsCtaImage.alt = copy.testimonials.cta;
-      if (copy.testimonials.ctaImage) testimonialsCtaImage.src = copy.testimonials.ctaImage;
-    }'''
-          new_js_block = '''    const testimonialsCtaText = testimonialsCta.querySelector('.review-cta-text');
-    if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;'''
-          js = replace_once(js, old_js_block, new_js_block, 'testimonial CTA language updater')
-          script.write_text(js)
-          PY
-
-      - name: Commit update and remove workflow
-        shell: bash
-        run: |
-          set -euo pipefail
+          cat > /tmp/cta-realtext.patch.b64 <<'PATCH64'
+          ZGlmZiAtLWdpdCBhL2luZGV4Lmh0bWwgYi9pbmRleC5odG1sCmluZGV4IDFjMTViOGEuLjRlZWZlODkgMTAwNjQ0Ci0tLSBhL2luZGV4Lmh0bWwKKysrIGIvaW5kZXguaHRtbApAQCAtMjA1LDcgKzIwNSw3IEBACiAgIDxsaW5rIHJlbD0ic2hvcnRjdXQgaWNvbiIgaHJlZj0iL2Fzc2V0cy9pbWFnZXMvaWNvbnMvZmF2aWNvbi5pY28/dj0yMDI2MDUwNiIgLz4KICAgPGxpbmsgcmVsPSJhcHBsZS10b3VjaC1pY29uIiBocmVmPSIvYXNzZXRzL2ltYWdlcy9pY29ucy9hcHBsZS10b3VjaC1pY29uLnBuZz92PTIwMjYwNTA2IiAvPgogICA8bGluayBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUJhZCtTY3JpcHQmYW1wO2ZhbWlseT1DYXZlYXQ6d2dodEA0MDA7NjAwOzcwMCZhbXA7ZmFtaWx5PUNvcm1vcmFudCtHYXJhbW9uZDppdGFsLHdnaHRAMCw1MDA7MCw2MDA7MCw3MDA7MSw1MDA7MSw2MDAmYW1wO2ZhbWlseT1JbnRlcjppdGFsLHdnaHRAMCwzMDA7MCw0MDA7MCw1MDA7MCw2MDA7MCw3MDA7MSw0MDA7MSw1MDA7MSw2MDAmYW1wO2ZhbWlseT1NYXJjaytTY3JpcHQmYW1wO2ZhbWlseT1QbGF5ZmFpcitEaXNwbGF5Oml0YWwsd2dodEAwLDQwMDswLDYwMDswLDcwMDsxLDQwMCZhbXA7ZGlzcGxheT1zd2FwIiByZWw9InN0eWxlc2hlZXQiIC8+Ci0gIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0ic3R5bGVzLmNzcz92PTIwMjYwNTA4LXdoYXRzYXBwIiAvPgorICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9InN0eWxlcy5jc3M/dj0yMDI2MDUwOS1yZWFsdGV4dGN0YSIgLz4KIDwvaGVhZD4KIDxib2R5PgogPCEtLSDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZAgTkFWIOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkCAtLT4KQEAgLTQyMCw3ICs0MjAsMTUgQEAKICAgICA8L2Rpdj4KICAgICA8ZGl2IGNsYXNzPSJ0ZXN0aW1vbmlhbHMtY3RhIj4KICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZy5wYWdlL3IvQ1QzT0pvaHZ5Y05hRUJNL3JldmlldyIgdGFyZ2V0PSJfYmxhbmsiIHJlbD0ibm9vcGVuZXIiIGNsYXNzPSJyZXZpZXctY3RhIiBhcmlhLWxhYmVsPSJQYXN0xIFzdGkga8SBIG11bXMgaXpkZXbEgXMiPgotICAgICAgICA8aW1nIHNyYz0iYXNzZXRzL2ltYWdlcy9yZXZpZXdzL3Jldmlldy1jdGEtYnV0dG9uLnBuZyIgYWx0PSJQYXN0xIFzdGkga8SBIG11bXMgaXpkZXbEgXMiIHdpZHRoPSIxODQyIiBoZWlnaHQ9IjQ0NCIgbG9hZGluZz0ibGF6eSIgLz4KKyAgICAgICAgPHNwYW4gY2xhc3M9InJldmlldy1jdGEtc3BhcmsgcmV2aWV3LWN0YS1zcGFyay1sZWZ0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+4pymPC9zcGFuPgorICAgICAgICA8c3BhbiBjbGFzcz0icmV2aWV3LWN0YS1zcGFyayByZXZpZXctY3RhLXNwYXJrLXRvcCIgYXJpYS1oaWRkZW49InRydWUiPuKcpjwvc3Bhbj4KKyAgICAgICAgPHNwYW4gY2xhc3M9InJldmlldy1jdGEtZG90IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9zcGFuPgorICAgICAgICA8c3BhbiBjbGFzcz0icmV2aWV3LWN0YS1mYWNlIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CisgICAgICAgICAgPHNwYW4gY2xhc3M9InJldmlldy1jdGEtZXllIj48L3NwYW4+CisgICAgICAgICAgPHNwYW4gY2xhc3M9InJldmlldy1jdGEtZXllIj48L3NwYW4+CisgICAgICAgICAgPHNwYW4gY2xhc3M9InJldmlldy1jdGEtbW91dGgiPjwvc3Bhbj4KKyAgICAgICAgPC9zcGFuPgorICAgICAgICA8c3BhbiBjbGFzcz0icmV2aWV3LWN0YS10ZXh0Ij5QYXN0xIFzdGkga8SBIG11bXMgaXpkZXbEgXM8L3NwYW4+CiAgICAgICA8L2E+CiAgICAgPC9kaXY+CiAgIDwvZGl2PgpAQCAtNzkzLDYgKzgwMSw2IEBACiA8L2Zvb3Rlcj4KIAogPCEtLSDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZAgU0NSSVBUUyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZAgLS0+Ci08c2NyaXB0IHNyYz0ic2NyaXB0LmpzP3Y9MjAyNjA1MDgtd2hhdHNhcHAiPjwvc2NyaXB0PgorPHNjcmlwdCBzcmM9InNjcmlwdC5qcz92PTIwMjYwNTA5LXJlYWx0ZXh0Y3RhIj48L3NjcmlwdD4KIDwvYm9keT4KIDwvaHRtbD4KZGlmZiAtLWdpdCBhL3NjcmlwdC5qcyBiL3NjcmlwdC5qcwppbmRleCA1ZDJmODU1Li44Njk0MWNmIDEwMDY0NAotLS0gYS9zY3JpcHQuanMKKysrIGIvc2NyaXB0LmpzCkBAIC00Niw4ICs0Niw3IEBAIGNvbnN0IEkxOE4gPSB7CiAgICAgICB0YWc6ICdBdHNhdWtzbWVzJywKICAgICAgIHRpdGxlSHRtbDogJ0tvIHNha2EgbcWrc3UgPGVtPnZpZXNpPC9lbT4nLAogICAgICAgc3ViOiAnNS4wIOKYhSB2aWTEk2phaXMgdsSTcnTEk2p1bXMgR29vZ2xlJywKLSAgICAgIGN0YTogJ1Bhc3TEgXN0aSBrxIEgbXVtcyBpemRldsSBcycsCi0gICAgICBjdGFJbWFnZTogJ2Fzc2V0cy9pbWFnZXMvcmV2aWV3cy9yZXZpZXctY3RhLWJ1dHRvbi5wbmcnCisgICAgICBjdGE6ICdQYXN0xIFzdGkga8SBIG11bXMgaXpkZXbEgXMnCiAgICAgfSwKICAgICBnYWxsZXJ5OiB7CiAgICAgICB0YWc6ICdHYWxlcmlqYScsCkBAIC0yNDUsOCArMjQ0LDcgQEAgY29uc3QgSTE4TiA9IHsKICAgICAgIHRhZzogJ1Jldmlld3MnLAogICAgICAgdGl0bGVIdG1sOiAnV2hhdCBvdXIgPGVtPmd1ZXN0czwvZW0+IHNheScsCiAgICAgICBzdWI6ICc1LjAg4piFIGF2ZXJhZ2UgR29vZ2xlIHJhdGluZycsCi0gICAgICBjdGE6ICdUZWxsIHVzIGhvdyB3ZSBkaWQnLAotICAgICAgY3RhSW1hZ2U6ICdhc3NldHMvaW1hZ2VzL3Jldmlld3MvcmV2aWV3LWN0YS1idXR0b24tZW4ucG5nJworICAgICAgY3RhOiAnVGVsbCB1cyBob3cgd2UgZGlkJwogICAgIH0sCiAgICAgZ2FsbGVyeTogewogICAgICAgdGFnOiAnR2FsbGVyeScsCkBAIC00NDMsOCArNDQxLDcgQEAgY29uc3QgSTE4TiA9IHsKICAgICAgIHRhZzogJ9Ce0YLQt9GL0LLRiycsCiAgICAgICB0aXRsZUh0bWw6ICfQp9GC0L4g0LPQvtCy0L7RgNGP0YIg0L3QsNGI0LggPGVtPtCz0L7RgdGC0Lg8L2VtPicsCiAgICAgICBzdWI6ICc1LjAg4piFINGB0YDQtdC00L3Rj9GPINC+0YbQtdC90LrQsCDQsiBHb29nbGUnLAotICAgICAgY3RhOiAn0KDQsNGB0YHQutCw0LbQuNGC0LUg0LrQsNC6INGDINC90LDRgSDQv9C+0LvRg9GH0LjQu9C+0YHRjCcsCi0gICAgICBjdGFJbWFnZTogJ2Fzc2V0cy9pbWFnZXMvcmV2aWV3cy9yZXZpZXctY3RhLWJ1dHRvbi1ydS5wbmcnCisgICAgICBjdGE6ICfQoNCw0YHRgdC60LDQttC40YLQtSDQutCw0Log0YMg0L3QsNGBINC/0L7Qu9GD0YfQuNC70L7RgdGMJwogICAgIH0sCiAgICAgZ2FsbGVyeTogewogICAgICAgdGFnOiAn0JPQsNC70LXRgNC10Y8nLApAQCAtODg2LDExICs4ODMsOCBAQCBmdW5jdGlvbiBhcHBseUxhbmd1YWdlKGxhbmcpIHsKICAgY29uc3QgdGVzdGltb25pYWxzQ3RhID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLnRlc3RpbW9uaWFscy1jdGEgYScpOwogICBpZiAodGVzdGltb25pYWxzQ3RhKSB7CiAgICAgdGVzdGltb25pYWxzQ3RhLnNldEF0dHJpYnV0ZSgnYXJpYS1sYWJlbCcsIGNvcHkudGVzdGltb25pYWxzLmN0YSk7Ci0gICAgY29uc3QgdGVzdGltb25pYWxzQ3RhSW1hZ2UgPSB0ZXN0aW1vbmlhbHNDdGEucXVlcnlTZWxlY3RvcignaW1nJyk7Ci0gICAgaWYgKHRlc3RpbW9uaWFsc0N0YUltYWdlKSB7Ci0gICAgICB0ZXN0aW1vbmlhbHNDdGFJbWFnZS5hbHQgPSBjb3B5LnRlc3RpbW9uaWFscy5jdGE7Ci0gICAgICBpZiAoY29weS50ZXN0aW1vbmlhbHMuY3RhSW1hZ2UpIHRlc3RpbW9uaWFsc0N0YUltYWdlLnNyYyA9IGNvcHkudGVzdGltb25pYWxzLmN0YUltYWdlOwotICAgIH0KKyAgICBjb25zdCB0ZXN0aW1vbmlhbHNDdGFUZXh0ID0gdGVzdGltb25pYWxzQ3RhLnF1ZXJ5U2VsZWN0b3IoJy5yZXZpZXctY3RhLXRleHQnKTsKKyAgICBpZiAodGVzdGltb25pYWxzQ3RhVGV4dCkgdGVzdGltb25pYWxzQ3RhVGV4dC50ZXh0Q29udGVudCA9IGNvcHkudGVzdGltb25pYWxzLmN0YTsKICAgfQogCiAgIHNldFRleHQoJyNnYWxsZXJ5IC5zZWN0aW9uLXRhZycsIGNvcHkuZ2FsbGVyeS50YWcpOwpkaWZmIC0tZ2l0IGEvc3R5bGVzLmNzcyBiL3N0eWxlcy5jc3MKaW5kZXggNTZiMmRiZi4uZDA4M2M3ZSAxMDA2NDQKLS0tIGEvc3R5bGVzLmNzcworKysgYi9zdHlsZXMuY3NzCkBAIC01MDcsMjEgKzUwNywxNDYgQEAgc2VjdGlvbiB7IHBhZGRpbmc6IDkwcHggNDBweDsgfQogICB6LWluZGV4OiAzOwogfQogLnJldmlldy1jdGEgewotICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7Ci0gIHdpZHRoOiBtaW4oNzIwcHgsIDEwMCUpOwotICBtYXgtd2lkdGg6IDEwMCU7CisgIC0tY3RhLWJvcmRlcjogIzQ0MjkxYTsKKyAgLS1jdGEtdGV4dDogIzMyMWYxODsKKyAgZGlzcGxheTogYmxvY2s7CisgIHBvc2l0aW9uOiByZWxhdGl2ZTsKKyAgd2lkdGg6IG1pbig3NjBweCwgY2FsYygxMDAlIC0gMjhweCkpOworICBoZWlnaHQ6IDE3OHB4OwogICB0ZXh0LWRlY29yYXRpb246IG5vbmU7CiAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjIycyBlYXNlLCBmaWx0ZXIgMC4yMnMgZWFzZTsKKyAgY29sb3I6IHZhcigtLWN0YS10ZXh0KTsKKyAgZmlsdGVyOiBkcm9wLXNoYWRvdygwIDE2cHggMTBweCByZ2JhKDM0LCAxOSwgMTIsIDAuMjQpKTsKK30KKy5yZXZpZXctY3RhOjpiZWZvcmUgeworICBjb250ZW50OiAnJzsKKyAgcG9zaXRpb246IGFic29sdXRlOworICB0b3A6IDM0cHg7CisgIHJpZ2h0OiAwOworICBib3R0b206IDI4cHg7CisgIGxlZnQ6IDExMnB4OworICBib3JkZXI6IDdweCBzb2xpZCB2YXIoLS1jdGEtYm9yZGVyKTsKKyAgYm9yZGVyLWxlZnQtd2lkdGg6IDA7CisgIGJvcmRlci1yYWRpdXM6IDAgNThweCA1OHB4IDA7CisgIGJhY2tncm91bmQ6CisgICAgcmFkaWFsLWdyYWRpZW50KGNpcmNsZSBhdCA5MiUgMjAlLCByZ2JhKDI1NSwgMjE2LCAxNTAsIDAuMzQpIDAgMTIlLCB0cmFuc3BhcmVudCAxOCUpLAorICAgIGxpbmVhci1ncmFkaWVudCgxODBkZWcsICNGRkI3NkMgMCUsICNGNThCMjIgNTQlLCAjREU3MjFDIDEwMCUpOworICBib3gtc2hhZG93OgorICAgIGluc2V0IDAgMTRweCAwIHJnYmEoMjU1LCAyMzIsIDE5MCwgMC40NiksCisgICAgaW5zZXQgMCAtMTJweCAwIHJnYmEoMTUxLCA2NSwgMTQsIDAuMTgpOworfQorLnJldmlldy1jdGE6OmFmdGVyIHsKKyAgY29udGVudDogJyc7CisgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKKyAgcmlnaHQ6IDI4cHg7CisgIHRvcDogNDhweDsKKyAgd2lkdGg6IDExMnB4OworICBoZWlnaHQ6IDM0cHg7CisgIGJvcmRlci1yYWRpdXM6IDk5OXB4OworICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsIHRyYW5zcGFyZW50IDAlLCByZ2JhKDI1NSwgMjM4LCAyMDAsIDAuNDIpIDEwMCUpOworICBvcGFjaXR5OiAwLjc7CisgIHBvaW50ZXItZXZlbnRzOiBub25lOwogfQogLnJldmlldy1jdGE6aG92ZXIgewogICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTNweCkgcm90YXRlKC0wLjRkZWcpOwogICBmaWx0ZXI6IGJyaWdodG5lc3MoMS4wNCkgc2F0dXJhdGUoMS4wMyk7CiB9Ci0ucmV2aWV3LWN0YSBpbWcgewotICBkaXNwbGF5OiBibG9jazsKLSAgd2lkdGg6IDEwMCU7Ci0gIGhlaWdodDogYXV0bzsKLSAgbWluLWhlaWdodDogMXB4OworLnJldmlldy1jdGEtZmFjZSB7CisgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKKyAgbGVmdDogMThweDsKKyAgdG9wOiAyOHB4OworICB3aWR0aDogMTU2cHg7CisgIGhlaWdodDogMTM2cHg7CisgIGJvcmRlcjogN3B4IHNvbGlkIHZhcigtLWN0YS1ib3JkZXIpOworICBib3JkZXItcmFkaXVzOiA1MCU7CisgIGJhY2tncm91bmQ6CisgICAgcmFkaWFsLWdyYWRpZW50KGNpcmNsZSBhdCAzNCUgMjYlLCByZ2JhKDI1NSwyNTUsMjU1LDAuNzYpIDAgMTUlLCB0cmFuc3BhcmVudCAzMCUpLAorICAgIGxpbmVhci1ncmFkaWVudCgxNDVkZWcsICNGRkY2RTYgMCUsICNGRkUyQjkgNzYlLCAjRjhDMDdEIDEwMCUpOworICBib3gtc2hhZG93OgorICAgIGluc2V0IDEycHggMTJweCAwIHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4yNiksCisgICAgMTBweCAxNHB4IDAgcmdiYSg4OSwgNDUsIDE0LCAwLjE4KTsKKyAgei1pbmRleDogMzsKK30KKy5yZXZpZXctY3RhLWZhY2U6OmFmdGVyIHsKKyAgY29udGVudDogJyc7CisgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKKyAgbGVmdDogMTZweDsKKyAgYm90dG9tOiAtMjVweDsKKyAgd2lkdGg6IDU0cHg7CisgIGhlaWdodDogNTJweDsKKyAgYmFja2dyb3VuZDogaW5oZXJpdDsKKyAgYm9yZGVyLWxlZnQ6IDdweCBzb2xpZCB2YXIoLS1jdGEtYm9yZGVyKTsKKyAgYm9yZGVyLWJvdHRvbTogN3B4IHNvbGlkIHZhcigtLWN0YS1ib3JkZXIpOworICBib3JkZXItcmFkaXVzOiAwIDAgMCAzNnB4OworICB0cmFuc2Zvcm06IHJvdGF0ZSgxNWRlZyk7Cit9CisucmV2aWV3LWN0YS1leWUgeworICBwb3NpdGlvbjogYWJzb2x1dGU7CisgIHRvcDogNTZweDsKKyAgd2lkdGg6IDMwcHg7CisgIGhlaWdodDogMThweDsKKyAgYm9yZGVyLXRvcDogN3B4IHNvbGlkIHZhcigtLWN0YS1ib3JkZXIpOworICBib3JkZXItcmFkaXVzOiAyOHB4IDI4cHggMCAwOworICB6LWluZGV4OiA0OworfQorLnJldmlldy1jdGEtZXllOm50aC1jaGlsZCgxKSB7IGxlZnQ6IDQ0cHg7IH0KKy5yZXZpZXctY3RhLWV5ZTpudGgtY2hpbGQoMikgeyByaWdodDogNDRweDsgfQorLnJldmlldy1jdGEtbW91dGggeworICBwb3NpdGlvbjogYWJzb2x1dGU7CisgIGxlZnQ6IDUwJTsKKyAgdG9wOiA4NnB4OworICB3aWR0aDogNDJweDsKKyAgaGVpZ2h0OiAyOHB4OworICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7CisgIGJhY2tncm91bmQ6IHZhcigtLWN0YS1ib3JkZXIpOworICBib3JkZXItcmFkaXVzOiAwIDAgMzJweCAzMnB4OworICB6LWluZGV4OiA0OworfQorLnJldmlldy1jdGEtdGV4dCB7CisgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKKyAgbGVmdDogMjE4cHg7CisgIHJpZ2h0OiAzNHB4OworICB0b3A6IDUwJTsKKyAgei1pbmRleDogMjsKKyAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpOworICBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXknLCBHZW9yZ2lhLCBzZXJpZjsKKyAgZm9udC1zaXplOiBjbGFtcCgycmVtLCAzLjJ2dywgMi42MnJlbSk7CisgIGZvbnQtd2VpZ2h0OiA3MDA7CisgIGxpbmUtaGVpZ2h0OiAxLjA0OworICBjb2xvcjogdmFyKC0tY3RhLXRleHQpOworICB0ZXh0LWFsaWduOiBjZW50ZXI7CisgIHdoaXRlLXNwYWNlOiBub3dyYXA7CisgIHRleHQtc2hhZG93OiAwIDJweCAwIHJnYmEoMjU1LCAyMDQsIDEyNiwgMC4yNCk7Cit9CitodG1sW2xhbmc9InJ1Il0gLnJldmlldy1jdGEtdGV4dCB7CisgIGZvbnQtc2l6ZTogY2xhbXAoMS43OHJlbSwgMi43dncsIDIuMjJyZW0pOworfQorLnJldmlldy1jdGEtc3BhcmssCisucmV2aWV3LWN0YS1kb3QgeworICBwb3NpdGlvbjogYWJzb2x1dGU7CisgIHotaW5kZXg6IDQ7CisgIGNvbG9yOiAjRjA5QTQ4OworICB0ZXh0LXNoYWRvdzogMCAzcHggMCByZ2JhKDgzLCA0NSwgMjIsIDAuMjUpOworICBwb2ludGVyLWV2ZW50czogbm9uZTsKK30KKy5yZXZpZXctY3RhLXNwYXJrLWxlZnQgeworICBsZWZ0OiAtOHB4OworICB0b3A6IDU0cHg7CisgIGZvbnQtc2l6ZTogMi4zcmVtOworfQorLnJldmlldy1jdGEtc3BhcmstdG9wIHsKKyAgbGVmdDogMTM2cHg7CisgIHRvcDogNnB4OworICBmb250LXNpemU6IDRyZW07Cit9CisucmV2aWV3LWN0YS1kb3QgeworICBsZWZ0OiAtOHB4OworICB0b3A6IDEwNHB4OworICB3aWR0aDogMTZweDsKKyAgaGVpZ2h0OiAxNnB4OworICBib3JkZXItcmFkaXVzOiA1MCU7CisgIGJhY2tncm91bmQ6ICNGOEE4NTc7CisgIGJvcmRlcjogMnB4IHNvbGlkICM3QTNGMUI7CiB9CiAKIC8qIOKUgOKUgOKUgCBHYWxsZXJ5IChWaWRlbyB3YWxsKSDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgKi8KQEAgLTExNTUsNiArMTI4MCw4NCBAQCBmb290ZXIgewogICB9CiAgIC5yZXZpZXctY3RhIHsKICAgICB3aWR0aDogbWluKDEwMCUsIDM2MHB4KTsKKyAgICBoZWlnaHQ6IDEwOHB4OworICB9CisgIC5yZXZpZXctY3RhOjpiZWZvcmUgeworICAgIHRvcDogMjJweDsKKyAgICByaWdodDogMDsKKyAgICBib3R0b206IDE2cHg7CisgICAgbGVmdDogNjhweDsKKyAgICBib3JkZXItd2lkdGg6IDRweDsKKyAgICBib3JkZXItbGVmdC13aWR0aDogMDsKKyAgICBib3JkZXItcmFkaXVzOiAwIDM2cHggMzZweCAwOworICAgIGJveC1zaGFkb3c6CisgICAgICBpbnNldCAwIDhweCAwIHJnYmEoMjU1LCAyMzIsIDE5MCwgMC40NiksCisgICAgICBpbnNldCAwIC04cHggMCByZ2JhKDE1MSwgNjUsIDE0LCAwLjE4KTsKKyAgfQorICAucmV2aWV3LWN0YTo6YWZ0ZXIgeworICAgIHJpZ2h0OiAyMHB4OworICAgIHRvcDogMzJweDsKKyAgICB3aWR0aDogNTZweDsKKyAgICBoZWlnaHQ6IDE4cHg7CisgIH0KKyAgLnJldmlldy1jdGEtZmFjZSB7CisgICAgbGVmdDogMTBweDsKKyAgICB0b3A6IDE4cHg7CisgICAgd2lkdGg6IDg2cHg7CisgICAgaGVpZ2h0OiA3NnB4OworICAgIGJvcmRlci13aWR0aDogNHB4OworICAgIGJveC1zaGFkb3c6CisgICAgICBpbnNldCA3cHggN3B4IDAgcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjI2KSwKKyAgICAgIDZweCA4cHggMCByZ2JhKDg5LCA0NSwgMTQsIDAuMTgpOworICB9CisgIC5yZXZpZXctY3RhLWZhY2U6OmFmdGVyIHsKKyAgICBsZWZ0OiA5cHg7CisgICAgYm90dG9tOiAtMTRweDsKKyAgICB3aWR0aDogMzBweDsKKyAgICBoZWlnaHQ6IDMwcHg7CisgICAgYm9yZGVyLWxlZnQtd2lkdGg6IDRweDsKKyAgICBib3JkZXItYm90dG9tLXdpZHRoOiA0cHg7CisgICAgYm9yZGVyLXJhZGl1czogMCAwIDAgMjBweDsKKyAgfQorICAucmV2aWV3LWN0YS1leWUgeworICAgIHRvcDogMzBweDsKKyAgICB3aWR0aDogMTdweDsKKyAgICBoZWlnaHQ6IDExcHg7CisgICAgYm9yZGVyLXRvcC13aWR0aDogNHB4OworICB9CisgIC5yZXZpZXctY3RhLWV5ZTpudGgtY2hpbGQoMSkgeyBsZWZ0OiAyNXB4OyB9CisgIC5yZXZpZXctY3RhLWV5ZTpudGgtY2hpbGQoMikgeyByaWdodDogMjVweDsgfQorICAucmV2aWV3LWN0YS1tb3V0aCB7CisgICAgdG9wOiA0OHB4OworICAgIHdpZHRoOiAyNHB4OworICAgIGhlaWdodDogMTZweDsKKyAgICBib3JkZXItcmFkaXVzOiAwIDAgMThweCAxOHB4OworICB9CisgIC5yZXZpZXctY3RhLXRleHQgeworICAgIGxlZnQ6IDExMnB4OworICAgIHJpZ2h0OiAxOHB4OworICAgIGZvbnQtc2l6ZTogY2xhbXAoMS4zNnJlbSwgNi4ydncsIDEuNThyZW0pOworICAgIHdoaXRlLXNwYWNlOiBub3JtYWw7CisgIH0KKyAgaHRtbFtsYW5nPSJydSJdIC5yZXZpZXctY3RhLXRleHQgeworICAgIGZvbnQtc2l6ZTogY2xhbXAoMS4xMnJlbSwgNS4ydncsIDEuMzZyZW0pOworICB9CisgIC5yZXZpZXctY3RhLXNwYXJrLWxlZnQgeworICAgIGxlZnQ6IC01cHg7CisgICAgdG9wOiAzNHB4OworICAgIGZvbnQtc2l6ZTogMS4zNXJlbTsKKyAgfQorICAucmV2aWV3LWN0YS1zcGFyay10b3AgeworICAgIGxlZnQ6IDcycHg7CisgICAgdG9wOiAwOworICAgIGZvbnQtc2l6ZTogMi4zcmVtOworICB9CisgIC5yZXZpZXctY3RhLWRvdCB7CisgICAgbGVmdDogLTRweDsKKyAgICB0b3A6IDY0cHg7CisgICAgd2lkdGg6IDEwcHg7CisgICAgaGVpZ2h0OiAxMHB4OworICAgIGJvcmRlci13aWR0aDogMXB4OwogICB9CiAgIC5jb250YWN0LWNhcmRzIHsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnI7IHdpZHRoOiAxMDAlOyBtYXgtd2lkdGg6IDM2MHB4OyB9CiAgIC5jb250YWN0LWNhcmQgeyB3aWR0aDogYXV0bzsgbWluLXdpZHRoOiAwOyBtaW4taGVpZ2h0OiAxNDJweDsgcGFkZGluZzogMjBweCAxOHB4OyB9Cg==
+          PATCH64
+          base64 -d /tmp/cta-realtext.patch.b64 > /tmp/cta-realtext.patch
+          git apply /tmp/cta-realtext.patch
           rm -f .github/workflows/codex-realtext-cta-20260509.yml
+          git add -A
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html styles.css script.js .github/workflows/codex-realtext-cta-20260509.yml
           if git diff --cached --quiet; then
             echo "No changes to commit"
-            exit 0
+          else
+            git commit -m "Render review CTA with HTML text"
+            git push origin HEAD:main
           fi
-          git commit -m "Render review CTA with HTML text"
-          git push
