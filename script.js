@@ -46,7 +46,7 @@ const I18N = {
       tag: 'Atsauksmes',
       titleHtml: 'Ko saka mūsu <em>viesi</em>',
       sub: '5.0 ★ vidējais vērtējums Google',
-      cta: 'Pastāsti, kā mums izdevās',
+      cta: 'Pastāsti kā mums izdevās',
       ctaImage: 'assets/images/reviews/review-cta-button.png'
     },
     gallery: {
@@ -169,7 +169,7 @@ const I18N = {
       titleHtml: 'Plānojat savu <em>pasākumu?</em>',
       sub: 'Sazinieties ar mums Jums ērtā veidā',
       labels: ['Tālrunis', 'WhatsApp', 'E-pasts', 'Atsauksme'],
-      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', 'Pastāsti, kā mums izdevās'],
+      values: ['+371 27 850 380', 'Rakstiet mums', 'welcome@roomjurmala.lv', 'Pastāsti kā mums izdevās'],
       socialTitle: 'Seko mums',
       socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Latvija'
@@ -443,7 +443,7 @@ const I18N = {
       tag: 'Отзывы',
       titleHtml: 'Что говорят наши <em>гости</em>',
       sub: '5.0 ★ средняя оценка в Google',
-      cta: 'Расскажите, как у нас получилось',
+      cta: 'Расскажите как у нас получилось',
       ctaImage: 'assets/images/reviews/review-cta-button-ru.png'
     },
     gallery: {
@@ -565,7 +565,7 @@ const I18N = {
       titleHtml: 'Готовы провести своё <em>мероприятие?</em>',
       sub: 'Свяжитесь с нами любым удобным способом',
       labels: ['Телефон', 'WhatsApp', 'Эл. почта', 'Отзыв'],
-      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', 'Расскажите, как у нас получилось'],
+      values: ['+371 27 850 380', 'Написать нам', 'welcome@roomjurmala.lv', 'Расскажите как у нас получилось'],
       socialTitle: 'Подписывайтесь на нас',
       socialLabels: ['Instagram', 'TikTok', 'Facebook'],
       address: '📍 Skolas iela 50, Jūrmala, LV-2016, Латвия'
