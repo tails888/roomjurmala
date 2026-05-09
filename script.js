@@ -46,8 +46,7 @@ const I18N = {
       tag: 'Atsauksmes',
       titleHtml: 'Ko saka mūsu <em>viesi</em>',
       sub: '5.0 ★ vidējais vērtējums Google',
-      cta: 'Pastāsti kā mums izdevās',
-      ctaImage: 'assets/images/reviews/review-cta-button.png'
+      cta: 'Pastāsti kā mums izdevās'
     },
     gallery: {
       tag: 'Galerija',
@@ -245,8 +244,7 @@ const I18N = {
       tag: 'Reviews',
       titleHtml: 'What our <em>guests</em> say',
       sub: '5.0 ★ average Google rating',
-      cta: 'Tell us how we did',
-      ctaImage: 'assets/images/reviews/review-cta-button-en.png'
+      cta: 'Tell us how we did'
     },
     gallery: {
       tag: 'Gallery',
@@ -443,8 +441,7 @@ const I18N = {
       tag: 'Отзывы',
       titleHtml: 'Что говорят наши <em>гости</em>',
       sub: '5.0 ★ средняя оценка в Google',
-      cta: 'Расскажите как у нас получилось',
-      ctaImage: 'assets/images/reviews/review-cta-button-ru.png'
+      cta: 'Расскажите как у нас получилось'
     },
     gallery: {
       tag: 'Галерея',
@@ -886,11 +883,8 @@ function applyLanguage(lang) {
   const testimonialsCta = document.querySelector('.testimonials-cta a');
   if (testimonialsCta) {
     testimonialsCta.setAttribute('aria-label', copy.testimonials.cta);
-    const testimonialsCtaImage = testimonialsCta.querySelector('img');
-    if (testimonialsCtaImage) {
-      testimonialsCtaImage.alt = copy.testimonials.cta;
-      if (copy.testimonials.ctaImage) testimonialsCtaImage.src = copy.testimonials.ctaImage;
-    }
+    const testimonialsCtaText = testimonialsCta.querySelector('.review-cta-text');
+    if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;
   }
 
   setText('#gallery .section-tag', copy.gallery.tag);
