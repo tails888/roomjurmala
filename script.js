@@ -203,7 +203,7 @@ const I18N = {
     meta: {
       title: 'Event Venue in Jūrmala, Kauguri | Children’s Parties, Workshops, Photoshoots — ROOM Jūrmala',
       description: 'ROOM Jūrmala is a cozy event venue in Kauguri, Jūrmala for children’s birthday parties, workshops, photoshoots and private events. From €10/h at Skolas iela 50.',
-      url: 'https://roomjurmala.lv/?lang=en',
+      url: 'https://roomjurmala.lv/en/',
       ogTitle: 'ROOM Jūrmala — Event Venue in Jūrmala',
       ogDescription: 'A cozy event venue in Kauguri, Jūrmala for children’s parties, workshops, photoshoots and private events. From €10/h.',
       locale: 'en_GB'
@@ -400,7 +400,7 @@ const I18N = {
     meta: {
       title: 'Зал для мероприятий в Юрмале, Каугури | Детские дни рождения, мастер-классы, фотосессии — ROOM Jūrmala',
       description: 'ROOM Jūrmala — уютный зал для мероприятий в Каугури, Юрмале: детские дни рождения, мастер-классы, фотосессии и частные мероприятия. От 10€/ч. Skolas iela 50.',
-      url: 'https://roomjurmala.lv/?lang=ru',
+      url: 'https://roomjurmala.lv/ru/',
       ogTitle: 'ROOM Jūrmala — Зал для мероприятий в Юрмале',
       ogDescription: 'Уютный зал для мероприятий в Каугури, Юрмале: детские дни рождения, мастер-классы, фотосессии и частные мероприятия. От 10€/ч.',
       locale: 'ru_RU'
@@ -596,15 +596,40 @@ const I18N = {
 };
 
 const MAP_IFRAME_BASE = 'https://www.google.com/maps?q=56.9619657,23.6038606+(ROOM%20J%C5%ABrmala)&z=18';
+const LANGUAGE_PATHS = {
+  lv: '/',
+  en: '/en/',
+  ru: '/ru/'
+};
 let currentLang = getInitialLanguage();
 let selectedDateParts = null;
 
+function getLanguageFromPath() {
+  const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
+  return I18N[firstSegment] ? firstSegment : null;
+}
+
 function getInitialLanguage() {
+  const pathLang = getLanguageFromPath();
+  if (pathLang) return pathLang;
   const urlLang = new URLSearchParams(window.location.search).get('lang');
   if (urlLang && I18N[urlLang]) return urlLang;
+  if (window.ROOM_PAGE_LANG && I18N[window.ROOM_PAGE_LANG]) return window.ROOM_PAGE_LANG;
   const saved = localStorage.getItem('roomJurmalaLang');
   if (saved && I18N[saved]) return saved;
   return 'lv';
+}
+
+function syncLocalizedUrl(lang) {
+  const targetPath = LANGUAGE_PATHS[lang] || LANGUAGE_PATHS.lv;
+  const url = new URL(window.location.href);
+  const hasLegacyLangParam = url.searchParams.has('lang');
+  url.searchParams.delete('lang');
+
+  if (url.pathname !== targetPath || hasLegacyLangParam) {
+    url.pathname = targetPath;
+    window.history.replaceState(null, '', url.toString());
+  }
 }
 
 function setText(selector, value) {
@@ -822,15 +847,7 @@ function applyLanguage(lang) {
   currentLang = I18N[lang] ? lang : 'lv';
   localStorage.setItem('roomJurmalaLang', currentLang);
   document.documentElement.lang = currentLang;
-
-  // Sync ?lang= URL param so language-specific links are shareable
-  const url = new URL(window.location.href);
-  if (currentLang === 'lv') {
-    url.searchParams.delete('lang');
-  } else {
-    url.searchParams.set('lang', currentLang);
-  }
-	    window.history.replaceState(null, '', url.toString());
+  syncLocalizedUrl(currentLang);
 	    document.title = copy.meta.title;
 	    const metaDesc = document.querySelector('meta[name="description"]');
 	    if (metaDesc && copy.meta.description) metaDesc.setAttribute('content', copy.meta.description);

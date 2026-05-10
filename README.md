@@ -5,8 +5,11 @@ Static website for ROOM Jurmala, an event and activity space in Jurmala.
 ## Project Structure
 
 - `index.html` - page markup and SEO metadata
+- `en/index.html` - English SEO landing page
+- `ru/index.html` - Russian SEO landing page
 - `styles.css` - site styling
 - `script.js` - language switching and interactive behavior
+- `favicon.ico` - root favicon for browsers and search crawlers
 - `assets/images/brand/` - logos and brand marks
 - `assets/images/icons/` - favicons and app icons
 - `assets/images/gallery/` - space and event photography
