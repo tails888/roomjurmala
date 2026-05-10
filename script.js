@@ -159,7 +159,7 @@ const I18N = {
         ['Ar automašīnu', 'Bezmaksas autostāvvieta pie ēkas'],
         ['Tālrunis', '+371 27 850 380']
       ],
-      buttons: ['Atvērt Google Maps', 'Zvanīt'],
+      buttons: ['Atvērt Google Maps'],
       iframeTitle: 'Room Jūrmala atrašanās vieta',
       iframeLang: 'lv'
     },
@@ -356,7 +356,7 @@ const I18N = {
         ['By car', 'Free parking next to the building'],
         ['Phone', '+371 27 850 380']
       ],
-      buttons: ['Open Google Maps', 'Call'],
+      buttons: ['Open Google Maps'],
       iframeTitle: 'Room Jūrmala location',
       iframeLang: 'en'
     },
@@ -553,7 +553,7 @@ const I18N = {
         ['На машине', 'Бесплатная парковка рядом со зданием'],
         ['Телефон', '+371 27 850 380']
       ],
-      buttons: ['Открыть в Google Maps', 'Позвонить'],
+      buttons: ['Открыть в Google Maps'],
       iframeTitle: 'Местоположение Room Jūrmala',
       iframeLang: 'ru'
     },
@@ -964,7 +964,7 @@ function applyLanguage(lang) {
   setText('.map-info-sub', copy.map.sub);
   setSelectorListText('.map-txt strong', copy.map.details.map((item) => item[0]));
   setSelectorListText('.map-txt span', copy.map.details.map((item) => item[1]));
-  setSelectorListText('#map-section .btn-primary, #map-section .btn-outline', copy.map.buttons);
+  setSelectorListText('#map-section .btn-primary', copy.map.buttons);
   const mapFrame = document.querySelector('.map-frame iframe');
   if (mapFrame) {
     mapFrame.title = copy.map.iframeTitle;

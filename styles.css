@@ -534,10 +534,13 @@ section { padding: 90px 40px; }
 }
 .review-cta-text {
   position: absolute;
-  left: 25%;
-  right: 7%;
+  left: 27%;
+  right: 6%;
   top: 51%;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform: translateY(-50%);
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.3rem, 2.25vw, 1.94rem);
@@ -549,10 +552,9 @@ section { padding: 90px 40px; }
   text-shadow: 0 2px 0 rgba(255, 204, 126, 0.3);
 }
 html[lang="ru"] .review-cta-text {
-  left: 31%;
-  right: 5%;
-  font-size: clamp(1rem, 1.5vw, 1.18rem);
   font-weight: 800;
+  line-height: 0.96;
+  white-space: normal;
   -webkit-text-stroke: 0.15px currentColor;
   text-shadow:
     0 2px 0 rgba(255, 204, 126, 0.3),
@@ -1193,16 +1195,14 @@ footer {
     aspect-ratio: 4 / 1;
   }
   .review-cta-text {
-    left: 30%;
-    right: 5%;
+    left: 27%;
+    right: 6%;
     font-size: clamp(0.74rem, 3.4vw, 0.9rem);
     line-height: 0.98;
     white-space: normal;
   }
   html[lang="ru"] .review-cta-text {
-    left: 30%;
-    right: 5%;
-    font-size: clamp(0.68rem, 3.15vw, 0.82rem);
+    line-height: 0.94;
     -webkit-text-stroke-width: 0.1px;
   }
   .contact-cards { grid-template-columns: 1fr; width: 100%; max-width: 360px; }
