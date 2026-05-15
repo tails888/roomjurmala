@@ -197,13 +197,13 @@ const I18N = {
   },
   en: {
     meta: {
-      title: 'Event Space in Jūrmala | ROOM Jūrmala',
-      description: 'Event and activity space in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      title: 'Event Venue in Jūrmala | ROOM Jūrmala',
+      description: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
       url: 'https://roomjurmala.lv/en/',
-      ogTitle: 'Event Space in Jūrmala | ROOM Jūrmala',
-      ogDescription: 'Event and activity space in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
-      twitterTitle: 'Event Space in Jūrmala | ROOM Jūrmala',
-      twitterDescription: 'Event and activity space in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      ogTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
+      ogDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      twitterTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
+      twitterDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
       locale: 'en_GB'
     },
     nav: {
@@ -213,7 +213,7 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'A space for your<br/><em>events</em>',
+      titleHtml: 'Event venue in Jūrmala<br/><em>for celebrations and classes</em>',
       sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
