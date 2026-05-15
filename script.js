@@ -48,10 +48,6 @@ const I18N = {
       sub: '5.0 ★ vidējais vērtējums Google',
       cta: 'Pastāsti kā mums izdevās'
     },
-    gallery: {
-      tag: 'Galerija',
-      titleHtml: 'Ieskaties <em>telpā</em>'
-    },
     pricing: {
       tag: 'Cenas',
       titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
@@ -246,10 +242,6 @@ const I18N = {
       sub: '5.0 ★ average Google rating',
       cta: 'Tell us how we did'
     },
-    gallery: {
-      tag: 'Gallery',
-      titleHtml: 'Take a look <em>inside</em>'
-    },
     pricing: {
       tag: 'Prices',
       titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
@@ -443,10 +435,6 @@ const I18N = {
       sub: '5.0 ★ средняя оценка в Google',
       cta: 'Расскажите как у нас получилось'
     },
-    gallery: {
-      tag: 'Галерея',
-      titleHtml: 'Загляните <em>внутрь</em>'
-    },
     pricing: {
       tag: 'Цены',
       titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
@@ -601,6 +589,11 @@ const LANGUAGE_PATHS = {
   en: '/en/',
   ru: '/ru/'
 };
+const SERVICES_PATHS = {
+  lv: '/telpa/',
+  en: '/en/telpa/',
+  ru: '/ru/telpa/'
+};
 let currentLang = getInitialLanguage();
 let selectedDateParts = null;
 
@@ -650,6 +643,19 @@ function setNodeListText(nodes, values) {
 
 function setSelectorListText(selector, values) {
   setNodeListText(document.querySelectorAll(selector), values);
+}
+
+function updateLocalizedServiceLinks(lang) {
+  const servicePath = SERVICES_PATHS[lang] || SERVICES_PATHS.lv;
+  [
+    '.nav-links a:first-child',
+    '.mobile-menu-links a:first-child',
+    '.hero-actions .btn-outline',
+    '.footer-links a:nth-child(1)'
+  ].forEach((selector) => {
+    const node = document.querySelector(selector);
+    if (node) node.setAttribute('href', servicePath);
+  });
 }
 
 function setPlaceholder(id, value) {
@@ -717,8 +723,6 @@ function prepareLiveWriting() {
     '#testimonials .section-tag',
     '#testimonials .section-title',
     '#testimonials .section-sub',
-    '#gallery .section-tag',
-    '#gallery .section-title',
     '#pricing .section-title',
     '#calendar .section-title',
     '.booking-title',
@@ -870,6 +874,7 @@ function applyLanguage(lang) {
 
 	    setSelectorListText('.nav-links a', copy.nav.links);
   setSelectorListText('.mobile-menu-links a', copy.nav.links);
+  updateLocalizedServiceLinks(currentLang);
   document.querySelectorAll('.nav-cta').forEach((node) => {
     node.textContent = copy.nav.cta;
   });
@@ -903,9 +908,6 @@ function applyLanguage(lang) {
     const testimonialsCtaText = testimonialsCta.querySelector('.review-cta-text');
     if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;
   }
-
-  setText('#gallery .section-tag', copy.gallery.tag);
-  setHTML('#gallery .section-title', copy.gallery.titleHtml);
 
   setHTML('#pricing .section-title', copy.pricing.titleHtml);
 
