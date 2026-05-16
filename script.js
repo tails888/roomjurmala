@@ -107,11 +107,16 @@ const I18N = {
     faq: {
       tag: 'Biežākie jautājumi',
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
-      sub: 'Īsi par cenu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
+      sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem.'],
-        ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
-        ['Kur atrodas ROOM Jūrmala?', 'ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.']
+        ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem; ja viesu ir vairāk, pakete sākas no 130€.'],
+        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
+        ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
+        ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
+        ['Cik cilvēkiem telpa ir piemērota?', 'Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.'],
+        ['Vai telpā ir virtuve un vai drīkst atnest ēdienu?', 'Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī.'],
+        ['Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?', 'ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.'],
+        ['Kā rezervēt vai apskatīt telpu pirms pasākuma?', 'Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku.']
       ]
     },
     booking: {
@@ -302,11 +307,16 @@ const I18N = {
     faq: {
       tag: 'Frequently asked',
       titleHtml: 'Small questions <em>before booking</em>',
-      sub: 'A quick note on pricing, event types and where to find us.',
+      sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', 'On weekdays until 6:00 PM the room is €10/hour. After 6:00 PM and on weekends it is €20/hour. The 3-hour party package starts from €100 for up to 15 guests.'],
-        ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, corporate events and private gatherings.'],
-        ['Where is ROOM Jūrmala located?', 'ROOM Jūrmala is located at Skolas iela 50, Jūrmala, LV-2016. Free parking is available by the building, and the room is easy to reach by car or public transport.']
+        ['How much does ROOM Jūrmala cost to rent?', 'On weekdays until 6:00 PM the room is €10/hour. After 6:00 PM and on weekends it is €20/hour. The 3-hour party package starts from €100 for up to 15 guests; for larger groups, it starts from €130.'],
+        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
+        ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
+        ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
+        ['How many guests is the venue suitable for?', 'Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking.'],
+        ['Is there a kitchen and can we bring food?', 'The venue has a small kitchen and an area for food or drinks, so it works for children’s parties, family celebrations and workshops with a break. Food details and the exact layout are best agreed during booking.'],
+        ['Where is ROOM Jūrmala located and is parking available?', 'ROOM Jūrmala is located at Skolas iela 50, Jūrmala, LV-2016. Free parking is available by the building, and the room is easy to reach by car or public transport.'],
+        ['How can I book or view the venue before an event?', 'You can send a booking request through the website form, WhatsApp or by phone at +371 27 850 380. If you want to view the venue before your event, contact us in advance to agree on a suitable time.']
       ]
     },
     booking: {
@@ -497,11 +507,16 @@ const I18N = {
     faq: {
       tag: 'Частые вопросы',
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
-      sub: 'Коротко о ценах, форматах мероприятий и о том, где нас найти.',
+      sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', 'По будням до 18:00 аренда стоит 10€/час. После 18:00 и в выходные — 20€/час. Пакет для праздника на 3 часа начинается от 100€ для компании до 15 гостей.'],
-        ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, корпоративные и частные мероприятия.'],
-        ['Где находится ROOM Jūrmala?', 'ROOM Jūrmala находится по адресу Skolas iela 50, Jūrmala, LV-2016. У здания есть бесплатная парковка, до зала удобно добраться на машине или общественном транспорте.']
+        ['Сколько стоит аренда ROOM Jūrmala?', 'По будням до 18:00 аренда стоит 10€/час. После 18:00 и в выходные — 20€/час. Пакет для праздника на 3 часа начинается от 100€ для компании до 15 гостей; для больших групп — от 130€.'],
+        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
+        ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
+        ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
+        ['На сколько гостей рассчитан зал?', 'Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей.'],
+        ['Есть ли кухня и можно ли принести еду?', 'В зале есть небольшая кухня и зона для еды или напитков, поэтому здесь удобно проводить детский праздник, семейное торжество или мастер-класс с перерывом. Детали по еде и расстановке лучше согласовать при бронировании.'],
+        ['Где находится ROOM Jūrmala и есть ли парковка?', 'ROOM Jūrmala находится по адресу Skolas iela 50, Jūrmala, LV-2016. У здания есть бесплатная парковка, до зала удобно добраться на машине или общественном транспорте.'],
+        ['Как забронировать или посмотреть зал перед мероприятием?', 'Заявку на бронирование можно отправить через форму на сайте, WhatsApp или по телефону +371 27 850 380. Если хотите посмотреть зал до мероприятия, свяжитесь заранее, чтобы договориться об удобном времени.']
       ]
     },
     booking: {
