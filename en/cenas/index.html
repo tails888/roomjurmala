@@ -992,7 +992,7 @@
       <button class="lang-btn active" type="button" data-lang="en" onclick="setLanguage('en')">ENG</button>
       <button class="lang-btn" type="button" data-lang="ru" onclick="setLanguage('ru')">RU</button>
     </div>
-    <a class="nav-cta" href="#contact">Book →</a>
+    <a class="nav-cta" href="/en/#calendar">Book →</a>
   </div>
 </nav>
 
@@ -1104,7 +1104,7 @@
             <span id="hours-meta">20 €/h</span>
           </div>
         </div>
-        <a class="calc-cta" id="hours-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 55 €</a>
+        <a class="calc-cta" id="hours-wa" href="/en/#calendar">Rezervēt — 55 €</a>
       </div>
     </div>
 
@@ -1141,7 +1141,7 @@
             <span id="days-meta">16.25 €/h</span>
           </div>
         </div>
-        <a class="calc-cta" id="days-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 130 €</a>
+        <a class="calc-cta" id="days-wa" href="/en/#calendar">Rezervēt — 130 €</a>
       </div>
     </div>
 
@@ -1178,7 +1178,7 @@
             <span id="weeks-meta">40h</span>
           </div>
         </div>
-        <a class="calc-cta" id="weeks-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 550 €</a>
+        <a class="calc-cta" id="weeks-wa" href="/en/#calendar">Rezervēt — 550 €</a>
       </div>
     </div>
 
@@ -1215,7 +1215,7 @@
             <span id="months-meta">460 €/mēn</span>
           </div>
         </div>
-        <a class="calc-cta" id="months-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Pieteikties — 460 €</a>
+        <a class="calc-cta" id="months-wa" href="/en/#calendar">Pieteikties — 460 €</a>
       </div>
     </div>
 
@@ -1243,7 +1243,7 @@
       </div>
       <div class="pkg-per">/ 8 stundas</div>
       <div class="pkg-saving">Ietaupi 30 € · 16.25 €/h</div>
-      <a href="#contact" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
+      <a href="/en/#calendar" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
     </div>
 
     <!-- NEDĒĻAS PAKETE (FEATURED) -->
@@ -1257,7 +1257,7 @@
       </div>
       <div class="pkg-per">/ 5 dienas</div>
       <div class="pkg-saving">Ietaupi 250 € · 13.75 €/h</div>
-      <a href="#contact" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
+      <a href="/en/#calendar" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
     </div>
 
     <!-- MĒNEŠA PAKETE -->
@@ -1271,7 +1271,7 @@
       </div>
       <div class="pkg-per">/ mēnesī · min. 3 mēneši</div>
       <div class="pkg-saving">Ietaupi 180 €/mēn · 8h nedēļā</div>
-      <a href="#contact" class="pkg-btn pkg-btn-outline">Pieteikties</a>
+      <a href="/en/#calendar" class="pkg-btn pkg-btn-outline">Pieteikties</a>
     </div>
 
   </div>
@@ -1318,10 +1318,19 @@ const PRICE_LANGUAGE_PATHS = {
   en: "/en/cenas/",
   ru: "/ru/cenas/"
 };
+const BOOKING_LANGUAGE_PATHS = {
+  lv: "/#calendar",
+  en: "/en/#calendar",
+  ru: "/ru/#calendar"
+};
 
 function getLanguageFromPath() {
   const firstSegment = window.location.pathname.split("/").filter(Boolean)[0];
   return firstSegment === "en" || firstSegment === "ru" ? firstSegment : "lv";
+}
+
+function getBookingPath() {
+  return BOOKING_LANGUAGE_PATHS[currentLang] || BOOKING_LANGUAGE_PATHS.lv;
 }
 
 let currentLang = getLanguageFromPath();
@@ -1992,8 +2001,10 @@ function calcMode(mode, value) {
   saveRow.style.display = data.save > 0 ? "flex" : "none";
 
   const wa = document.getElementById(`${mode}-wa`);
-  wa.href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(data.message);
-  wa.textContent = `💬 ${data.ctaPrefix} — ${data.price} €`;
+  wa.href = getBookingPath();
+  wa.removeAttribute("target");
+  wa.removeAttribute("rel");
+  wa.textContent = `${data.ctaPrefix} — ${data.price} €`;
   animPop(`${mode}-price`);
 
   const slider = document.getElementById(`${mode}-slider`);
