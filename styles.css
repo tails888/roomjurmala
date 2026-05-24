@@ -519,33 +519,43 @@ html[lang="ru"] .review-cta-text {
 
 /* ─── Pricing ───────────────────────────────────────── */
 #pricing {
+  scroll-margin-top: 86px;
+  padding-top: 76px;
+  padding-bottom: 72px;
   background:
     radial-gradient(circle at top, rgba(216,137,76,0.18) 0%, rgba(216,137,76,0) 28%),
     linear-gradient(180deg, #130D0A 0%, #080707 58%, #060606 100%);
 }
-.pricing-header { text-align: center; margin-bottom: 54px; }
+.pricing-header { text-align: center; margin-bottom: 34px; }
+.pricing-header .section-tag {
+  color: var(--brown-dark);
+  margin-bottom: 10px;
+}
 .pricing-header .section-title { color: var(--cream); }
 .pricing-header .section-sub { color: var(--cream-dark); margin: 0 auto; }
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 .price-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(216,137,76,0.18);
-  border-radius: var(--radius-lg);
-  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: rgba(255,250,245,0.075);
+  border: 1px solid rgba(232,198,164,0.24);
+  border-radius: var(--radius-md);
+  padding: 26px 24px 24px;
   transition: transform 0.3s, background 0.3s;
   position: relative; overflow: hidden;
-  box-shadow: 0 22px 38px rgba(0,0,0,0.18);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.16);
 }
-.price-card:hover { transform: translateY(-4px); background: rgba(216,137,76,0.08); border-color: rgba(216,137,76,0.34); }
+.price-card:hover { transform: translateY(-3px); background: rgba(216,137,76,0.11); border-color: rgba(216,137,76,0.34); }
 .price-card.featured {
-  background: linear-gradient(180deg, #D8894C 0%, #BA6C38 100%);
-  border-color: rgba(216,137,76,0.48);
+  background: rgba(216,137,76,0.72);
+  border-color: rgba(232,198,164,0.36);
 }
-.price-card.featured:hover { background: linear-gradient(180deg, #CC7F44 0%, #AF6030 100%); }
+.price-card.featured:hover { background: rgba(216,137,76,0.8); }
 .price-popular {
   position: absolute; top: 20px; right: 20px;
   background: rgba(8,7,7,0.12); color: var(--brown-dark);
@@ -553,35 +563,47 @@ html[lang="ru"] .review-cta-text {
   font-size: 0.7rem; font-weight: 700;
   padding: 4px 12px; text-transform: uppercase; letter-spacing: 0.1em;
 }
-.price-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
 .price-type {
-  font-size: 0.78rem; color: rgba(245,239,230,0.6);
+  font-size: 0.74rem; color: rgba(245,239,230,0.64);
   text-transform: uppercase; letter-spacing: 0.12em;
   margin-bottom: 8px; font-weight: 600;
 }
-.price-card.featured .price-type { color: rgba(34,19,12,0.72); }
+.price-card.featured .price-type { color: rgba(34,19,12,0.68); }
+.price-summary {
+  color: rgba(245,239,230,0.72);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  min-height: 58px;
+  margin-bottom: 22px;
+}
 .price-amount {
   font-family: 'Playfair Display', serif;
-  font-size: 2.6rem; color: var(--cream);
-  margin-bottom: 4px;
+  font-size: 2.45rem; color: var(--cream);
+  line-height: 0.98;
+  margin-bottom: 8px;
 }
+.price-card.featured .price-amount { color: var(--brown-dark); }
 .price-amount sup { font-size: 1.2rem; vertical-align: top; margin-top: 12px; display: inline-block; }
-.price-period { font-size: 0.82rem; color: rgba(245,239,230,0.55); margin-bottom: 24px; }
-.price-card.featured .price-period { color: rgba(34,19,12,0.76); }
+.price-period { font-size: 0.84rem; color: rgba(245,239,230,0.62); margin-bottom: 12px; }
+.price-card.featured .price-period { color: rgba(34,19,12,0.72); }
 .price-divider { border: none; border-top: 1px solid rgba(245,239,230,0.12); margin-bottom: 22px; }
-.price-features { list-style: none; }
+.price-features {
+  list-style: none;
+  min-height: 24px;
+  margin-top: 4px;
+}
 .price-features li {
-  font-size: 0.87rem; color: rgba(245,239,230,0.8);
-  padding: 7px 0;
+  font-size: 0.86rem; color: rgba(245,239,230,0.82);
+  padding: 0;
   display: flex; align-items: center; gap: 10px;
 }
-.price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; }
-.price-card.featured .price-features li::before { color: var(--brown-dark); }
-.price-card.featured .price-features li { color: rgba(34,19,12,0.92); }
+.price-features li::before { content: none; }
+.price-card.featured .price-summary,
+.price-card.featured .price-features li { color: rgba(34,19,12,0.84); }
 .price-cta {
   display: block; width: 100%;
-  margin-top: 28px; padding: 13px 0;
-  border-radius: var(--radius-pill);
+  margin-top: auto; padding: 12px 0;
+  border-radius: var(--radius-sm);
   text-align: center; font-size: 0.9rem; font-weight: 600;
   cursor: pointer; text-decoration: none;
   transition: all 0.2s;
@@ -593,10 +615,10 @@ html[lang="ru"] .review-cta-text {
 }
 .price-cta.outline:hover { border-color: var(--gold); color: var(--gold); background: rgba(216,137,76,0.06); }
 .price-cta.solid {
-  background: rgba(8,7,7,0.92); color: var(--cream);
-  border: 2px solid transparent;
+  background: var(--gold); color: var(--brown-dark);
+  border: 2px solid var(--gold);
 }
-.price-cta.solid:hover { background: rgba(8,7,7,1); }
+.price-cta.solid:hover { background: #E6A064; }
 
 /* ─── Calendar ──────────────────────────────────────── */
 #calendar {
@@ -1035,6 +1057,8 @@ footer {
     justify-content: center;
   }
   .feat-layout, .calendar-layout, .map-layout { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-summary { min-height: 0; }
   .booking-card { position: static; }
   footer { flex-direction: column; text-align: center; align-items: center; }
   .container { width: 100%; max-width: 100%; }
@@ -1631,6 +1655,7 @@ h1, h2, h3,
 }
 
 .pricing-cat-stage {
+  display: none;
   right: 40px;
   bottom: 0;
   width: 200px;
@@ -1691,6 +1716,15 @@ h1, h2, h3,
 
 .hero .paw-trail { left: 15%; bottom: 20%; }
 #pricing .paw-trail { right: 8%; top: 92px; }
+#pricing .paw-trail { display: none; }
+#pricing .price-card,
+#pricing .price-card:nth-child(odd),
+#pricing .price-card:nth-child(even) {
+  transform: none;
+}
+#pricing .price-card:hover {
+  transform: translateY(-3px);
+}
 #faq .paw-trail { left: 8%; bottom: 70px; }
 
 @keyframes draw-underline {

@@ -49,17 +49,16 @@ const I18N = {
       cta: 'Pastāsti kā mums izdevās'
     },
     pricing: {
-      tag: 'Cenas',
-      titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
+      tag: 'Paketes',
+      titleHtml: 'Dienas, nedēļas, mēneša',
       cards: {
         hourly: {
           type: 'Viena diena',
           amountHtml: '<sup>€</sup>130',
           lead: 'Dienas pakete',
+          summary: 'Pilna diena vienreizējam pasākumam vai intensīvam darbam.',
           period: '/ 8 stundas',
           features: [
-            'Pilna diena vienreizējam pasākumam',
-            'Intensīvam darbam vai nodarbībām',
             'Ietaupi 30€ · 16.25€/h'
           ],
           cta: 'Rezervēt dienu'
@@ -69,10 +68,9 @@ const I18N = {
           type: 'Nedēļa · 40h kopā',
           amountHtml: '<sup>€</sup>550',
           forUpTo: 'Nedēļas pakete',
+          summary: '5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.',
           perEvent: '/ 5 dienas',
           featuresPrimary: [
-            '5 darba dienas pēc kārtas',
-            'Ideāli nometnēm un kursiem',
             'Ietaupi 250€ · 13.75€/h'
           ],
           moreThan15: 'Laba izvēle',
@@ -86,11 +84,10 @@ const I18N = {
           type: 'Regulāri · mēnesī',
           amountHtml: '<sup>€</sup>460',
           lead: 'Abonements',
+          summary: 'Mēneša risinājums nodarbībām un grupām.',
           period: '/ mēnesī · min. 3 mēneši',
           features: [
-            'Mēneša risinājums nodarbībām un grupām',
-            'Ietaupi 180€/mēn · 8h nedēļā',
-            'Regulārs laiks katru nedēļu',
+            'Ietaupi 180€/mēn · 8h nedēļā'
           ],
           cta: 'Pieteikties'
         }
@@ -253,17 +250,16 @@ const I18N = {
       cta: 'Tell us how we did'
     },
     pricing: {
-      tag: 'Prices',
-      titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
+      tag: 'Packages',
+      titleHtml: 'Day, week, month',
       cards: {
         hourly: {
           type: 'One day',
           amountHtml: '<sup>€</sup>130',
           lead: 'Day package',
+          summary: 'A full day for a one-off event or focused work.',
           period: '/ 8 hours',
           features: [
-            'Full day for a one-off event',
-            'For intensive work or classes',
             'Save €30 · €16.25/h'
           ],
           cta: 'Book a day'
@@ -273,10 +269,9 @@ const I18N = {
           type: 'Week · 40h total',
           amountHtml: '<sup>€</sup>550',
           forUpTo: 'Week package',
+          summary: '5 working days in a row. Ideal for summer camps and courses.',
           perEvent: '/ 5 days',
           featuresPrimary: [
-            '5 working days in a row',
-            'Ideal for camps and courses',
             'Save €250 · €13.75/h'
           ],
           moreThan15: 'Best for',
@@ -290,11 +285,10 @@ const I18N = {
           type: 'Regular · monthly',
           amountHtml: '<sup>€</sup>460',
           lead: 'Subscription',
+          summary: 'A monthly solution for classes and groups.',
           period: '/ month · min. 3 months',
           features: [
-            'Monthly solution for classes and groups',
-            'Save €180/month · 8h weekly',
-            'Regular time every week'
+            'Save €180/month · 8h weekly'
           ],
           cta: 'Apply'
         }
@@ -457,17 +451,16 @@ const I18N = {
       cta: 'Расскажите как у нас получилось'
     },
     pricing: {
-      tag: 'Цены',
-      titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
+      tag: 'Пакеты',
+      titleHtml: 'День, неделя, месяц',
       cards: {
         hourly: {
           type: 'Один день',
           amountHtml: '<sup>€</sup>130',
           lead: 'Пакет на день',
+          summary: 'Полный день для разового события или интенсивной работы.',
           period: '/ 8 часов',
           features: [
-            'Полный день для разового события',
-            'Для интенсивной работы или занятий',
             'Экономия 30€ · 16.25€/ч'
           ],
           cta: 'Забронировать день'
@@ -477,10 +470,9 @@ const I18N = {
           type: 'Неделя · 40ч всего',
           amountHtml: '<sup>€</sup>550',
           forUpTo: 'Пакет на неделю',
+          summary: '5 рабочих дней подряд. Идеально для летних лагерей и курсов.',
           perEvent: '/ 5 дней',
           featuresPrimary: [
-            '5 рабочих дней подряд',
-            'Идеально для лагерей и курсов',
             'Экономия 250€ · 13.75€/ч'
           ],
           moreThan15: 'Подходит для',
@@ -494,11 +486,10 @@ const I18N = {
           type: 'Регулярно · месяц',
           amountHtml: '<sup>€</sup>460',
           lead: 'Абонемент',
+          summary: 'Месячное решение для занятий и групп.',
           period: '/ месяц · мин. 3 месяца',
           features: [
-            'Месячное решение для занятий и групп',
-            'Экономия 180€/мес · 8ч в неделю',
-            'Регулярное время каждую неделю'
+            'Экономия 180€/мес · 8ч в неделю'
           ],
           cta: 'Записаться'
         }
@@ -967,6 +958,7 @@ function applyLanguage(lang) {
     if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;
   }
 
+  setText('#pricing .section-tag', copy.pricing.tag);
   setHTML('#pricing .section-title', copy.pricing.titleHtml);
 
   const priceCards = document.querySelectorAll('.price-card');
@@ -978,6 +970,7 @@ function applyLanguage(lang) {
     const hourlyAmount = hourlyCard.querySelector('.price-amount');
     const pricePeriods = hourlyCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
+    setText('.pricing-grid .price-card:nth-of-type(1) .price-summary', copy.pricing.cards.hourly.summary);
     if (hourlyAmount) hourlyAmount.innerHTML = copy.pricing.cards.hourly.amountHtml;
     if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.lead;
     if (pricePeriods[1]) pricePeriods[1].textContent = copy.pricing.cards.hourly.period;
@@ -991,6 +984,7 @@ function applyLanguage(lang) {
     const partyLists = partyCard.querySelectorAll('.price-features');
     setText('.pricing-grid .price-card:nth-of-type(2) .price-popular', copy.pricing.cards.party.popular);
     setText('.pricing-grid .price-card:nth-of-type(2) .price-type', copy.pricing.cards.party.type);
+    setText('.pricing-grid .price-card:nth-of-type(2) .price-summary', copy.pricing.cards.party.summary);
     if (partyAmount) partyAmount.innerHTML = copy.pricing.cards.party.amountHtml;
     if (partyPeriods[0]) partyPeriods[0].textContent = copy.pricing.cards.party.forUpTo;
     if (partyPeriods[1]) partyPeriods[1].textContent = copy.pricing.cards.party.perEvent;
@@ -1004,6 +998,7 @@ function applyLanguage(lang) {
     const customAmount = customCard.querySelector('.price-amount');
     const customPeriods = customCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
+    setText('.pricing-grid .price-card:nth-of-type(3) .price-summary', copy.pricing.cards.custom.summary);
     if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
     if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.lead;
     if (customPeriods[1]) customPeriods[1].textContent = copy.pricing.cards.custom.period;
