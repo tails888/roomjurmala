@@ -899,9 +899,13 @@
       .cal-days-header,
       .cal-grid { gap: 4px; }
       .cal-cell { font-size: 13px; border-radius: 10px; }
+      .booking-time-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .time-input-desktop { display: block; }
+      .time-input-mobile { display: none; }
+    }
+
+    @media (max-width: 380px) {
       .booking-time-row { grid-template-columns: 1fr; }
-      .time-input-desktop { display: none; }
-      .time-input-mobile { display: block; }
     }
 
     /* CTA */

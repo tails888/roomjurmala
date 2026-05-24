@@ -190,14 +190,13 @@ function serviceBookingClearError(form) {
 }
 
 function serviceBookingSyncTimeInputsForDevice() {
-  const isMobileLike = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
   ["startTimeDesktop", "endTimeDesktop"].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = isMobileLike;
+    if (el) el.disabled = false;
   });
   ["startTimeMobile", "endTimeMobile"].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = !isMobileLike;
+    if (el) el.disabled = true;
   });
 }
 

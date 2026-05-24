@@ -1196,18 +1196,17 @@ function clearBookingError(form) {
 }
 
 function syncTimeInputsForDevice() {
-  const isMobileLike = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   const desktopIds = ['startTimeDesktop', 'endTimeDesktop'];
   const mobileIds = ['startTimeMobile', 'endTimeMobile'];
 
   desktopIds.forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = isMobileLike;
+    if (el) el.disabled = false;
   });
 
   mobileIds.forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = !isMobileLike;
+    if (el) el.disabled = true;
   });
 }
 
