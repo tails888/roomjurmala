@@ -713,6 +713,10 @@ html[lang="ru"] .review-cta-text {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+.booking-time-row input {
+  display: block;
+  min-width: 0;
+}
 .booking-btn {
   width: 100%; padding: 15px;
   background: var(--gold); color: var(--brown-dark);

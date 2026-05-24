@@ -843,6 +843,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
+    .booking-time-row input {
+      display: block;
+      min-width: 0;
+    }
     .booking-btn {
       width: 100%;
       border: 0;
@@ -1327,8 +1331,8 @@
           <div class="booking-field">
             <label>Laiks</label>
             <div class="booking-time-row">
-              <input class="time-input-desktop" type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
-              <input class="time-input-desktop" type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
+              <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
+              <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
             </div>
           </div>
           <div class="booking-field">
