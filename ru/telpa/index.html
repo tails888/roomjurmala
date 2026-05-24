@@ -467,6 +467,16 @@
               <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
             </div>
             <div class="booking-field">
+              <label>Тип бронирования</label>
+              <select id="bookingPackageSelect" required>
+                <option value="">Выберите тип аренды...</option>
+                <option value="hours">Почасовая аренда</option>
+                <option value="day">Пакет на день</option>
+                <option value="week">Пакет на неделю</option>
+                <option value="month">Месячный абонемент</option>
+              </select>
+            </div>
+            <div class="booking-field">
               <label>Формат мероприятия</label>
               <select id="eventTypeSelect" required>
                 <option value="">Выберите тип мероприятия...</option>
@@ -537,7 +547,7 @@
   <span class="footer-copy">© 2026 Room Jūrmala. Все права защищены.</span>
 </footer>
 
-<script src="/services-booking.js?v=20260524-time"></script>
+<script src="/services-booking.js?v=20260524-package"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');

@@ -118,7 +118,7 @@ const I18N = {
     booking: {
       title: 'Rezervēt telpu',
       sub: 'Aizpildiet formu, un mēs drīz ar Jums sazināsimies',
-      labels: ['Jūsu vārds', 'Tālrunis', 'Pasākuma veids', 'Datums', 'Laiks', 'Piezīmes'],
+      labels: ['Jūsu vārds', 'Tālrunis', 'Rezervācijas veids', 'Pasākuma veids', 'Datums', 'Laiks', 'Piezīmes'],
       placeholders: {
         name: 'Vārds, Uzvārds',
         phone: '+371 2X XXX XXX',
@@ -141,13 +141,20 @@ const I18N = {
         '🎉 Privāts pasākums',
         '✨ Cits'
       ],
+      packageOptions: [
+        'Izvēlieties nomas veidu...',
+        'Stundas noma',
+        'Dienas pakete',
+        'Nedēļas pakete',
+        'Mēneša abonements'
+      ],
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
       startTimeAria: 'Sākuma laiks',
       endTimeAria: 'Beigu laiks',
       errors: {
-        required: 'Lūdzu aizpildiet vārdu, tālruni, pasākuma veidu, datumu un laiku.',
+        required: 'Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.',
         tooLong: 'Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz.'
       }
     },
@@ -189,6 +196,7 @@ const I18N = {
       labels: {
         name: 'Vārds',
         phone: 'Tālrunis',
+        package: 'Rezervācijas veids',
         eventType: 'Pasākuma veids',
         date: 'Datums',
         time: 'Laiks',
@@ -319,7 +327,7 @@ const I18N = {
     booking: {
       title: 'Book your event',
       sub: "Fill in the form and we'll get back to you soon",
-      labels: ['Your name', 'Phone', 'Event type', 'Date', 'Time', 'Notes'],
+      labels: ['Your name', 'Phone', 'Booking type', 'Event type', 'Date', 'Time', 'Notes'],
       placeholders: {
         name: 'Name, Surname',
         phone: '+371 2X XXX XXX',
@@ -342,13 +350,20 @@ const I18N = {
         '🎉 Private event',
         '✨ Other'
       ],
+      packageOptions: [
+        'Choose rental type...',
+        'Hourly rental',
+        'Day package',
+        'Week package',
+        'Monthly subscription'
+      ],
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
       startTimeAria: 'Start time',
       endTimeAria: 'End time',
       errors: {
-        required: 'Please fill in your name, phone, event type, date and time.',
+        required: 'Please fill in your name, phone, booking type, event type, date and time.',
         tooLong: 'The message is too long. Please shorten the notes and try again.'
       }
     },
@@ -390,6 +405,7 @@ const I18N = {
       labels: {
         name: 'Name',
         phone: 'Phone',
+        package: 'Booking type',
         eventType: 'Event type',
         date: 'Date',
         time: 'Time',
@@ -520,7 +536,7 @@ const I18N = {
     booking: {
       title: 'Забронировать зал',
       sub: 'Заполните форму, и мы скоро свяжемся с вами',
-      labels: ['Ваше имя', 'Телефон', 'Формат мероприятия', 'Дата', 'Время', 'Примечания'],
+      labels: ['Ваше имя', 'Телефон', 'Тип бронирования', 'Формат мероприятия', 'Дата', 'Время', 'Примечания'],
       placeholders: {
         name: 'Имя, фамилия',
         phone: '+371 2X XXX XXX',
@@ -543,13 +559,20 @@ const I18N = {
         '🎉 Частное мероприятие',
         '✨ Другое'
       ],
+      packageOptions: [
+        'Выберите тип аренды...',
+        'Почасовая аренда',
+        'Пакет на день',
+        'Пакет на неделю',
+        'Месячный абонемент'
+      ],
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
       startTimeAria: 'Время начала',
       endTimeAria: 'Время окончания',
       errors: {
-        required: 'Пожалуйста, заполните имя, телефон, формат мероприятия, дату и время.',
+        required: 'Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.',
         tooLong: 'Сообщение слишком длинное. Сократите примечания и попробуйте снова.'
       }
     },
@@ -591,6 +614,7 @@ const I18N = {
       labels: {
         name: 'Имя',
         phone: 'Телефон',
+        package: 'Тип бронирования',
         eventType: 'Формат мероприятия',
         date: 'Дата',
         time: 'Время',
@@ -700,10 +724,6 @@ function updateLocalizedPricingLinks(lang) {
   ].forEach((selector) => {
     const node = document.querySelector(selector);
     if (node) node.setAttribute('href', pricingPath);
-  });
-
-  document.querySelectorAll('#pricing .price-cta').forEach((node) => {
-    node.setAttribute('href', pricingPath);
   });
 }
 
@@ -1018,6 +1038,7 @@ function applyLanguage(lang) {
   setPlaceholder('startTimeDesktop', copy.booking.placeholders.start);
   setPlaceholder('endTimeDesktop', copy.booking.placeholders.end);
   setPlaceholder('bookingNotes', copy.booking.placeholders.notes);
+  setOptionTexts('bookingPackageSelect', copy.booking.packageOptions);
   setOptionTexts('eventTypeSelect', copy.booking.options);
   setText('.booking-btn', copy.booking.button);
   const bookingNote = document.querySelector('.booking-note');
@@ -1244,6 +1265,14 @@ document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link
   link.addEventListener('click', () => setMobileMenuOpen(false));
 });
 
+document.querySelectorAll('#pricing .price-cta[data-booking-package]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const packageField = document.getElementById('bookingPackageSelect');
+    const packageValue = link.dataset.bookingPackage?.replace('package-', '') || '';
+    if (packageField && packageValue) packageField.value = packageValue;
+  });
+});
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setMobileMenuOpen(false);
 });
@@ -1260,6 +1289,7 @@ function handleBooking(e) {
 
   const nameField = document.getElementById('customerName');
   const phoneField = document.getElementById('customerPhone');
+  const packageField = document.getElementById('bookingPackageSelect');
   const eventField = document.getElementById('eventTypeSelect');
   const dateField = document.getElementById('desiredDateTime');
   const notesField = document.getElementById('bookingNotes');
@@ -1270,6 +1300,8 @@ function handleBooking(e) {
 
   const name = limitText(nameField?.value, BOOKING_LIMITS.name);
   const customerPhone = limitText(phoneField?.value, BOOKING_LIMITS.phone);
+  const bookingPackageValue = limitText(packageField?.value, 80);
+  const bookingPackage = limitText(packageField?.selectedOptions?.[0]?.textContent || bookingPackageValue, 80);
   const eventType = limitText(eventField?.value, 80);
   const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
   const startTime = getTimeFieldValue('startTimeDesktop', 'startTimeMobile');
@@ -1283,6 +1315,7 @@ function handleBooking(e) {
   const requiredFields = [
     [nameField, name],
     [phoneField, customerPhone],
+    [packageField, bookingPackageValue],
     [eventField, eventType],
     [dateField, bookingDate]
   ];
@@ -1305,6 +1338,7 @@ function handleBooking(e) {
     copy.whatsapp.greeting + '\n\n' +
     copy.whatsapp.labels.name + ': ' + name + '\n' +
     copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
+    copy.whatsapp.labels.package + ': ' + bookingPackage + '\n' +
     copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
     copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
     copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +

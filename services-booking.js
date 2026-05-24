@@ -16,13 +16,21 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Vārds",
       phone: "Tālrunis",
+      package: "Rezervācijas veids",
       eventType: "Pasākuma veids",
       date: "Datums",
       time: "Laiks",
       notes: "Piezīmes"
     },
+    packageOptions: [
+      "Izvēlieties nomas veidu...",
+      "Stundas noma",
+      "Dienas pakete",
+      "Nedēļas pakete",
+      "Mēneša abonements"
+    ],
     errors: {
-      required: "Lūdzu aizpildiet vārdu, tālruni, pasākuma veidu, datumu un laiku.",
+      required: "Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.",
       invalidTime: "Lūdzu ievadiet laiku formātā 14:00.",
       tooLong: "Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz."
     },
@@ -37,13 +45,21 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Name",
       phone: "Phone",
+      package: "Booking type",
       eventType: "Event type",
       date: "Date",
       time: "Time",
       notes: "Notes"
     },
+    packageOptions: [
+      "Choose rental type...",
+      "Hourly rental",
+      "Day package",
+      "Week package",
+      "Monthly subscription"
+    ],
     errors: {
-      required: "Please fill in your name, phone, event type, date and time.",
+      required: "Please fill in your name, phone, booking type, event type, date and time.",
       invalidTime: "Please enter the time in 14:00 format.",
       tooLong: "The message is too long. Please shorten the notes and try again."
     },
@@ -58,13 +74,21 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Имя",
       phone: "Телефон",
+      package: "Тип бронирования",
       eventType: "Формат мероприятия",
       date: "Дата",
       time: "Время",
       notes: "Примечания"
     },
+    packageOptions: [
+      "Выберите тип аренды...",
+      "Почасовая аренда",
+      "Пакет на день",
+      "Пакет на неделю",
+      "Месячный абонемент"
+    ],
     errors: {
-      required: "Пожалуйста, заполните имя, телефон, формат мероприятия, дату и время.",
+      required: "Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.",
       invalidTime: "Пожалуйста, укажите время в формате 14:00.",
       tooLong: "Сообщение слишком длинное. Сократите примечания и попробуйте снова."
     },
@@ -209,6 +233,7 @@ function handleBooking(event) {
 
   const nameField = document.getElementById("customerName");
   const phoneField = document.getElementById("customerPhone");
+  const packageField = document.getElementById("bookingPackageSelect");
   const eventField = document.getElementById("eventTypeSelect");
   const dateField = document.getElementById("desiredDateTime");
   const notesField = document.getElementById("bookingNotes");
@@ -217,6 +242,8 @@ function handleBooking(event) {
 
   const name = serviceBookingLimitText(nameField?.value, SERVICE_BOOKING_LIMITS.name);
   const phone = serviceBookingLimitText(phoneField?.value, SERVICE_BOOKING_LIMITS.phone);
+  const bookingPackageValue = serviceBookingLimitText(packageField?.value, 80);
+  const bookingPackage = serviceBookingLimitText(packageField?.selectedOptions?.[0]?.textContent || bookingPackageValue, 80);
   const eventType = serviceBookingLimitText(eventField?.value, 80);
   const bookingDate = serviceBookingLimitText(dateField?.value, SERVICE_BOOKING_LIMITS.date);
   const startTime = serviceBookingNormalizeTimeField(startDesktop);
@@ -231,6 +258,7 @@ function handleBooking(event) {
   const requiredFields = [
     [nameField, name],
     [phoneField, phone],
+    [packageField, bookingPackageValue],
     [eventField, eventType],
     [dateField, bookingDate]
   ];
@@ -258,6 +286,7 @@ function handleBooking(event) {
     `${serviceBookingCopy.greeting}\n\n`
     + `${serviceBookingCopy.labels.name}: ${name}\n`
     + `${serviceBookingCopy.labels.phone}: ${phone}\n`
+    + `${serviceBookingCopy.labels.package}: ${bookingPackage}\n`
     + `${serviceBookingCopy.labels.eventType}: ${eventType}\n`
     + `${serviceBookingCopy.labels.date}: ${bookingDate}\n`
     + `${serviceBookingCopy.labels.time}: ${bookingTime}\n`

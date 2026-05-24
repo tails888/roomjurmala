@@ -501,7 +501,7 @@
           <li>For intensive work or classes</li>
           <li>Save €30 · €16.25/h</li>
         </ul>
-        <a href="/en/cenas/" class="price-cta outline">Book a day</a>
+        <a href="#calendar" data-booking-package="package-day" class="price-cta outline">Book a day</a>
       </div>
       <!-- Week package — featured -->
       <div class="price-card featured reveal">
@@ -523,7 +523,7 @@
           <li>Children’s camps</li>
           <li>Courses and workshops</li>
         </ul>
-        <a href="/en/cenas/" class="price-cta solid">Book a week</a>
+        <a href="#calendar" data-booking-package="package-week" class="price-cta solid">Book a week</a>
       </div>
       <!-- Monthly package -->
       <div class="price-card reveal">
@@ -538,7 +538,7 @@
           <li>Save €180/month · 8h weekly</li>
           <li>Regular time every week</li>
         </ul>
-        <a href="/en/cenas/" class="price-cta outline">Apply</a>
+        <a href="#calendar" data-booking-package="package-month" class="price-cta outline">Apply</a>
       </div>
     </div>
   </div>
@@ -582,6 +582,16 @@
           <div class="booking-field">
             <label>Phone</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+          </div>
+          <div class="booking-field">
+            <label>Booking type</label>
+            <select id="bookingPackageSelect" required>
+              <option value="">Choose rental type...</option>
+              <option value="hours">Hourly rental</option>
+              <option value="day">Day package</option>
+              <option value="week">Week package</option>
+              <option value="month">Monthly subscription</option>
+            </select>
           </div>
           <div class="booking-field">
             <label>Event type</label>

@@ -495,7 +495,7 @@
         <ul class="price-features">
           <li>Ietaupi 30€ · 16.25€/h</li>
         </ul>
-        <a href="/cenas/" class="price-cta outline">Rezervēt dienu</a>
+        <a href="#calendar" data-booking-package="package-day" class="price-cta outline">Rezervēt dienu</a>
       </div>
       <!-- Week package — featured -->
       <div class="price-card featured reveal">
@@ -507,7 +507,7 @@
         <ul class="price-features">
           <li>Ietaupi 250€ · 13.75€/h</li>
         </ul>
-        <a href="/cenas/" class="price-cta solid">Rezervēt nedēļu</a>
+        <a href="#calendar" data-booking-package="package-week" class="price-cta solid">Rezervēt nedēļu</a>
       </div>
       <!-- Monthly package -->
       <div class="price-card reveal">
@@ -519,7 +519,7 @@
         <ul class="price-features">
           <li>Ietaupi 180€/mēn · 8h nedēļā</li>
         </ul>
-        <a href="/cenas/" class="price-cta outline">Pieteikties</a>
+        <a href="#calendar" data-booking-package="package-month" class="price-cta outline">Pieteikties</a>
       </div>
     </div>
   </div>
@@ -563,6 +563,16 @@
           <div class="booking-field">
             <label>Tālrunis</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+          </div>
+          <div class="booking-field">
+            <label>Rezervācijas veids</label>
+            <select id="bookingPackageSelect" required>
+              <option value="">Izvēlieties nomas veidu...</option>
+              <option value="hours">Stundas noma</option>
+              <option value="day">Dienas pakete</option>
+              <option value="week">Nedēļas pakete</option>
+              <option value="month">Mēneša abonements</option>
+            </select>
           </div>
           <div class="booking-field">
             <label>Pasākuma veids</label>

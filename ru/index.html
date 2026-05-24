@@ -501,7 +501,7 @@
           <li>Для интенсивной работы или занятий</li>
           <li>Экономия 30€ · 16.25€/ч</li>
         </ul>
-        <a href="/ru/cenas/" class="price-cta outline">Забронировать день</a>
+        <a href="#calendar" data-booking-package="package-day" class="price-cta outline">Забронировать день</a>
       </div>
       <!-- Week package — featured -->
       <div class="price-card featured reveal">
@@ -523,7 +523,7 @@
           <li>Детских лагерей</li>
           <li>Курсов и мастер-классов</li>
         </ul>
-        <a href="/ru/cenas/" class="price-cta solid">Забронировать неделю</a>
+        <a href="#calendar" data-booking-package="package-week" class="price-cta solid">Забронировать неделю</a>
       </div>
       <!-- Monthly package -->
       <div class="price-card reveal">
@@ -538,7 +538,7 @@
           <li>Экономия 180€/мес · 8ч в неделю</li>
           <li>Регулярное время каждую неделю</li>
         </ul>
-        <a href="/ru/cenas/" class="price-cta outline">Записаться</a>
+        <a href="#calendar" data-booking-package="package-month" class="price-cta outline">Записаться</a>
       </div>
     </div>
   </div>
@@ -582,6 +582,16 @@
           <div class="booking-field">
             <label>Телефон</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+          </div>
+          <div class="booking-field">
+            <label>Тип бронирования</label>
+            <select id="bookingPackageSelect" required>
+              <option value="">Выберите тип аренды...</option>
+              <option value="hours">Почасовая аренда</option>
+              <option value="day">Пакет на день</option>
+              <option value="week">Пакет на неделю</option>
+              <option value="month">Месячный абонемент</option>
+            </select>
           </div>
           <div class="booking-field">
             <label>Формат мероприятия</label>
