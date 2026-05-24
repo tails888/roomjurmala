@@ -2,12 +2,12 @@ const I18N = {
   lv: {
     meta: {
       title: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      description: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      description: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       url: 'https://roomjurmala.lv/',
       ogTitle: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      ogDescription: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      ogDescription: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       twitterTitle: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      twitterDescription: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      twitterDescription: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       locale: 'lv_LV'
     },
     nav: {
@@ -17,7 +17,7 @@ const I18N = {
       menuClose: 'Aizvērt izvēlni'
     },
     hero: {
-      titleHtml: 'Telpa jūsu<br/><em>pasākumiem</em>',
+      titleHtml: 'Telpa jūsu <br/><em>pasākumiem</em>',
       sub: 'Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm',
       actions: ['Rezervēt', 'Uzzināt vairāk']
     },
@@ -203,12 +203,12 @@ const I18N = {
   en: {
     meta: {
       title: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      description: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      description: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       url: 'https://roomjurmala.lv/en/',
       ogTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      ogDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      ogDescription: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       twitterTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      twitterDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      twitterDescription: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       locale: 'en_GB'
     },
     nav: {
@@ -218,7 +218,7 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'Event venue in Jūrmala<br/><em>for celebrations and classes</em>',
+      titleHtml: 'Event venue in Jūrmala <br/><em>for celebrations and classes</em>',
       sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
@@ -404,12 +404,12 @@ const I18N = {
   ru: {
     meta: {
       title: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      description: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      description: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       url: 'https://roomjurmala.lv/ru/',
       ogTitle: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      ogDescription: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      ogDescription: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       twitterTitle: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      twitterDescription: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      twitterDescription: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       locale: 'ru_RU'
     },
     nav: {
@@ -419,7 +419,7 @@ const I18N = {
       menuClose: 'Закрыть меню'
     },
     hero: {
-      titleHtml: 'Пространство для ваших<br/><em>мероприятий</em>',
+      titleHtml: 'Пространство для ваших <br/><em>мероприятий</em>',
       sub: 'Пространство в Каугури для детских праздников, фотосессий, мастер-классов, занятий с тренерами, семинаров и детских лагерей',
       actions: ['Забронировать', 'Узнать больше']
     },
