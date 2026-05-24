@@ -992,7 +992,7 @@
       <button class="lang-btn" type="button" data-lang="en" onclick="setLanguage('en')">ENG</button>
       <button class="lang-btn active" type="button" data-lang="ru" onclick="setLanguage('ru')">RU</button>
     </div>
-    <a class="nav-cta" href="/ru/#calendar">Забронировать →</a>
+    <a class="nav-cta" href="#calendar">Забронировать →</a>
   </div>
 </nav>
 
@@ -1104,7 +1104,7 @@
             <span id="hours-meta">20 €/h</span>
           </div>
         </div>
-        <a class="calc-cta" id="hours-wa" href="/ru/#calendar">Rezervēt — 55 €</a>
+        <a class="calc-cta" id="hours-wa" href="#calendar" data-booking-package="hours">Rezervēt — 55 €</a>
       </div>
     </div>
 
@@ -1141,7 +1141,7 @@
             <span id="days-meta">16.25 €/h</span>
           </div>
         </div>
-        <a class="calc-cta" id="days-wa" href="/ru/#calendar">Rezervēt — 130 €</a>
+        <a class="calc-cta" id="days-wa" href="#calendar" data-booking-package="day">Rezervēt — 130 €</a>
       </div>
     </div>
 
@@ -1178,7 +1178,7 @@
             <span id="weeks-meta">40h</span>
           </div>
         </div>
-        <a class="calc-cta" id="weeks-wa" href="/ru/#calendar">Rezervēt — 550 €</a>
+        <a class="calc-cta" id="weeks-wa" href="#calendar" data-booking-package="week">Rezervēt — 550 €</a>
       </div>
     </div>
 
@@ -1215,7 +1215,7 @@
             <span id="months-meta">460 €/mēn</span>
           </div>
         </div>
-        <a class="calc-cta" id="months-wa" href="/ru/#calendar">Pieteikties — 460 €</a>
+        <a class="calc-cta" id="months-wa" href="#calendar" data-booking-package="month">Pieteikties — 460 €</a>
       </div>
     </div>
 
@@ -1243,7 +1243,7 @@
       </div>
       <div class="pkg-per">/ 8 stundas</div>
       <div class="pkg-saving">Ietaupi 30 € · 16.25 €/h</div>
-      <a href="/ru/#calendar" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
+      <a href="#calendar" data-booking-package="day" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
     </div>
 
     <!-- NEDĒĻAS PAKETE (FEATURED) -->
@@ -1257,7 +1257,7 @@
       </div>
       <div class="pkg-per">/ 5 dienas</div>
       <div class="pkg-saving">Ietaupi 250 € · 13.75 €/h</div>
-      <a href="/ru/#calendar" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
+      <a href="#calendar" data-booking-package="week" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
     </div>
 
     <!-- MĒNEŠA PAKETE -->
@@ -1271,9 +1271,100 @@
       </div>
       <div class="pkg-per">/ mēnesī · min. 3 mēneši</div>
       <div class="pkg-saving">Ietaupi 180 €/mēn · 8h nedēļā</div>
-      <a href="/ru/#calendar" class="pkg-btn pkg-btn-outline">Pieteikties</a>
+      <a href="#calendar" data-booking-package="month" class="pkg-btn pkg-btn-outline">Pieteikties</a>
     </div>
 
+  </div>
+</section>
+
+<!-- BOOKING CALENDAR -->
+<section id="calendar">
+  <div class="calendar-inner">
+    <div class="calendar-header">
+      <div class="section-label">Pieejamība</div>
+      <h2 class="calendar-title">Atrodiet dienu savam <em>pasākumam</em></h2>
+      <p class="calendar-sub">Izvēlies datumu kalendārā un aizpildi īsu rezervācijas pieprasījumu.</p>
+    </div>
+
+    <div class="calendar-layout">
+      <div class="cal-widget">
+        <div class="cal-nav">
+          <button class="cal-arrow" id="prevMonth" type="button" aria-label="Iepriekšējais mēnesis">‹</button>
+          <div class="cal-month" id="calMonthLabel"></div>
+          <button class="cal-arrow" id="nextMonth" type="button" aria-label="Nākamais mēnesis">›</button>
+        </div>
+        <div class="cal-days-header">
+          <div class="cal-day-name">P</div>
+          <div class="cal-day-name">O</div>
+          <div class="cal-day-name">T</div>
+          <div class="cal-day-name">C</div>
+          <div class="cal-day-name">Pk</div>
+          <div class="cal-day-name">S</div>
+          <div class="cal-day-name">Sv</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+
+      <div class="booking-card">
+        <div class="booking-title">Rezervēt telpu</div>
+        <p class="booking-sub">Aizpildiet formu, un mēs drīz ar Jums sazināsimies.</p>
+        <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
+        <form onsubmit="handleBooking(event)" novalidate>
+          <div class="booking-field">
+            <label>Jūsu vārds</label>
+            <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
+          </div>
+          <div class="booking-field">
+            <label>Tālrunis</label>
+            <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+          </div>
+          <div class="booking-field">
+            <label>Nomas veids</label>
+            <select id="bookingPackageSelect" required>
+              <option value="">Izvēlieties nomas veidu...</option>
+              <option value="hours">Stundas noma</option>
+              <option value="day">Dienas pakete</option>
+              <option value="week">Nedēļas pakete</option>
+              <option value="month">Mēneša abonements</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Pasākuma veids</label>
+            <select id="eventTypeSelect" required>
+              <option value="">Izvēlieties pasākuma veidu...</option>
+              <option>🎈 Bērnu dzimšanas diena</option>
+              <option>👨‍👩‍👧 Ģimenes svinības</option>
+              <option>🎨 Meistarklase</option>
+              <option>📸 Fotosesija</option>
+              <option>🌿 Joga / vingrošana</option>
+              <option>🤲 Fizioterapija</option>
+              <option>🧒 Bērnu nodarbība</option>
+              <option>☀️ Bērnu nometne</option>
+              <option>🎓 Seminārs</option>
+              <option>🎉 Privāts pasākums</option>
+              <option>✨ Cits</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Datums</label>
+            <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
+          </div>
+          <div class="booking-field">
+            <label>Laiks</label>
+            <div class="booking-time-row">
+              <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
+              <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
+            </div>
+          </div>
+          <div class="booking-field">
+            <label>Piezīmes</label>
+            <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
+          </div>
+          <button type="submit" class="booking-btn">Nosūtīt pieprasījumu ✦</button>
+          <p class="booking-note">Rakstiet arī WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1318,22 +1409,53 @@ const PRICE_LANGUAGE_PATHS = {
   en: "/en/cenas/",
   ru: "/ru/cenas/"
 };
-const BOOKING_LANGUAGE_PATHS = {
-  lv: "/#calendar",
-  en: "/en/#calendar",
-  ru: "/ru/#calendar"
-};
 
 function getLanguageFromPath() {
   const firstSegment = window.location.pathname.split("/").filter(Boolean)[0];
   return firstSegment === "en" || firstSegment === "ru" ? firstSegment : "lv";
 }
 
-function getBookingPath() {
-  return BOOKING_LANGUAGE_PATHS[currentLang] || BOOKING_LANGUAGE_PATHS.lv;
+let currentLang = getLanguageFromPath();
+
+const CALC_BOOKING_PACKAGES = {
+  hours: "hours",
+  days: "day",
+  weeks: "week",
+  months: "month"
+};
+
+const BOOKING_SELECTION_PREFIXES = {
+  lv: "Izvēlēts no cenu lapas",
+  en: "Selected from pricing page",
+  ru: "Выбрано на странице цен"
+};
+
+function getBookingSelectionPrefix() {
+  return BOOKING_SELECTION_PREFIXES[currentLang] || BOOKING_SELECTION_PREFIXES.lv;
 }
 
-let currentLang = getLanguageFromPath();
+function getPackageBookingSummary(link) {
+  const card = link.closest(".pkg-card");
+  if (!card) return "";
+  const name = card.querySelector(".pkg-name")?.textContent.trim() || "";
+  const amount = card.querySelector(".pkg-amount")?.textContent.trim() || "";
+  const price = amount ? `${amount} €` : "";
+  const details = [name, price].filter(Boolean).join(" — ");
+  return details ? `${getBookingSelectionPrefix()}: ${details}` : "";
+}
+
+function setBookingSelection(packageValue, summary) {
+  const packageField = document.getElementById("bookingPackageSelect");
+  const notesField = document.getElementById("bookingNotes");
+  const calendar = document.getElementById("calendar");
+
+  if (packageField && packageValue) packageField.value = packageValue;
+  if (notesField && summary) notesField.value = summary;
+  if (calendar) {
+    calendar.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", "#calendar");
+  }
+}
 
 const HOUR_PRICES = {
   1: 20,
@@ -2001,7 +2123,9 @@ function calcMode(mode, value) {
   saveRow.style.display = data.save > 0 ? "flex" : "none";
 
   const wa = document.getElementById(`${mode}-wa`);
-  wa.href = getBookingPath();
+  wa.href = "#calendar";
+  wa.dataset.bookingPackage = CALC_BOOKING_PACKAGES[mode] || "";
+  wa.dataset.bookingSummary = data.message;
   wa.removeAttribute("target");
   wa.removeAttribute("rel");
   wa.textContent = `${data.ctaPrefix} — ${data.price} €`;
@@ -2377,11 +2501,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 
-  document.querySelectorAll(".pkg-btn[data-booking-package]").forEach((link) => {
-    link.addEventListener("click", () => {
-      const packageField = document.getElementById("bookingPackageSelect");
-      const packageValue = link.dataset.bookingPackage?.replace("package-", "") || "";
-      if (packageField && packageValue) packageField.value = packageValue;
+  document.querySelectorAll("[data-booking-package]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const packageValue = link.dataset.bookingPackage || "";
+      const summary = link.dataset.bookingSummary || getPackageBookingSummary(link);
+      setBookingSelection(packageValue, summary);
     });
   });
 
