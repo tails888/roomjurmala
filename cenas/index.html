@@ -130,14 +130,15 @@
       height: 64px;
     }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--black);
       text-decoration: none;
-      line-height: 1;
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+    .nav-logo img {
+      display: block;
+      width: 132px;
+      height: auto;
     }
     .nav-actions {
       display: flex;
@@ -187,7 +188,7 @@
 
     @media (max-width: 520px) {
       nav { padding: 0 10px; gap: 6px; }
-      .nav-logo { font-size: 15px; letter-spacing: 0.01em; }
+      .nav-logo img { width: 92px; }
       .nav-actions { gap: 5px; flex-shrink: 0; }
       .lang-switch {
         gap: 1px;
@@ -965,7 +966,9 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">ROOM Jūrmala</a>
+  <a class="nav-logo" href="/" aria-label="ROOM Jūrmala">
+    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+  </a>
   <div class="nav-actions">
     <div class="lang-switch" aria-label="Language">
       <button class="lang-btn active" type="button" data-lang="lv" onclick="setLanguage('lv')">LV</button>
@@ -2237,6 +2240,8 @@ function applyLanguage(lang) {
   document.title = t.title;
   const logo = document.querySelector(".nav-logo");
   if (logo) logo.setAttribute("href", lang === "lv" ? "/" : `/${lang}/`);
+  const logoImg = logo?.querySelector("img");
+  if (logoImg) logoImg.setAttribute("alt", "ROOM Jūrmala");
   setText(".nav-cta", t.navCta);
   setHtml(".hero h1", t.heroTitle);
   setText(".hero p", t.heroText);
