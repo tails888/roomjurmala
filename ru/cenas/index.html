@@ -137,8 +137,10 @@
     }
     .nav-logo img {
       display: block;
-      width: 132px;
-      height: auto;
+      width: auto;
+      height: 42px;
+      max-width: 132px;
+      object-fit: contain;
     }
     .nav-actions {
       display: flex;
@@ -188,7 +190,7 @@
 
     @media (max-width: 520px) {
       nav { padding: 0 10px; gap: 6px; }
-      .nav-logo img { width: 92px; }
+      .nav-logo img { height: 34px; max-width: 92px; }
       .nav-actions { gap: 5px; flex-shrink: 0; }
       .lang-switch {
         gap: 1px;
