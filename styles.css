@@ -700,6 +700,12 @@ html[lang="ru"] .review-cta-text {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(216,137,76,0.12);
 }
+.booking-field input.is-invalid,
+.booking-field select.is-invalid,
+.booking-field textarea.is-invalid {
+  border-color: #d96b5f;
+  box-shadow: 0 0 0 3px rgba(217,107,95,0.16);
+}
 .booking-field select option { background: var(--brown-dark); }
 .booking-field textarea { resize: vertical; min-height: 80px; }
 .booking-time-row {
@@ -724,6 +730,19 @@ html[lang="ru"] .review-cta-text {
 .booking-note {
   text-align: center; font-size: 0.78rem;
   color: rgba(245,239,230,0.45); margin-top: 12px;
+}
+.booking-error {
+  border: 1px solid rgba(217,107,95,0.42);
+  background: rgba(217,107,95,0.12);
+  color: #ffd8d2;
+  border-radius: 14px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+}
+.booking-error[hidden] {
+  display: none;
 }
 .booking-note a,
 .booking-note a:visited,
@@ -1518,8 +1537,15 @@ h1, h2, h3,
   background: rgba(255,255,255,0.58);
   border: 2px solid var(--sketch-line);
   border-radius: 8px;
-  padding: 26px 28px;
+  padding: 0;
   box-shadow: 7px 7px 0 rgba(34,19,12,0.13);
+  overflow: hidden;
+  transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.faq-item[open] {
+  background: rgba(255,255,255,0.78);
+  border-color: rgba(216,137,76,0.52);
 }
 
 .faq-item:nth-child(2) {
@@ -1531,16 +1557,62 @@ h1, h2, h3,
 }
 
 .faq-question {
+  position: relative;
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   color: var(--brown-dark);
-  margin-bottom: 10px;
+  cursor: pointer;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 24px 78px 24px 28px;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(216,137,76,0.34);
+  border-radius: 50%;
+  color: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+  transform: translateY(-50%);
+}
+
+.faq-item[open] .faq-question::after {
+  background: var(--orange);
+  color: var(--cream);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-question.live-write {
+  display: block;
+}
+
+.faq-question .write-word {
+  display: inline-block;
 }
 
 .faq-answer {
   color: var(--text-mid);
   font-size: 0.94rem;
   line-height: 1.7;
+  margin: 0;
+  padding: 0 28px 24px;
 }
 
 .animal-stage {

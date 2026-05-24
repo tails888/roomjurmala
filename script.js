@@ -149,7 +149,11 @@ const I18N = {
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
       startTimeAria: 'Sākuma laiks',
-      endTimeAria: 'Beigu laiks'
+      endTimeAria: 'Beigu laiks',
+      errors: {
+        required: 'Lūdzu aizpildiet vārdu, tālruni, pasākuma veidu, datumu un laiku.',
+        tooLong: 'Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz.'
+      }
     },
     map: {
       tag: 'Atrašanās',
@@ -349,7 +353,11 @@ const I18N = {
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
       startTimeAria: 'Start time',
-      endTimeAria: 'End time'
+      endTimeAria: 'End time',
+      errors: {
+        required: 'Please fill in your name, phone, event type, date and time.',
+        tooLong: 'The message is too long. Please shorten the notes and try again.'
+      }
     },
     map: {
       tag: 'Location',
@@ -549,7 +557,11 @@ const I18N = {
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
       startTimeAria: 'Время начала',
-      endTimeAria: 'Время окончания'
+      endTimeAria: 'Время окончания',
+      errors: {
+        required: 'Пожалуйста, заполните имя, телефон, формат мероприятия, дату и время.',
+        tooLong: 'Сообщение слишком длинное. Сократите примечания и попробуйте снова.'
+      }
     },
     map: {
       tag: 'Адрес',
@@ -612,6 +624,13 @@ const SERVICES_PATHS = {
   lv: '/telpa/',
   en: '/en/telpa/',
   ru: '/ru/telpa/'
+};
+const BOOKING_LIMITS = {
+  name: 80,
+  phone: 20,
+  date: 80,
+  notes: 500,
+  message: 1500
 };
 let currentLang = getInitialLanguage();
 let selectedDateParts = null;
@@ -749,7 +768,6 @@ function prepareLiveWriting() {
     '#faq .section-tag',
     '#faq .section-title',
     '#faq .section-sub',
-    '#faq .faq-question',
     '#map-section .section-tag',
     '.map-info-title',
     '.map-info-sub',
@@ -1128,6 +1146,28 @@ function getTimeFieldValue(desktopId, mobileId) {
   return mobileValue || desktopValue;
 }
 
+function limitText(value, max) {
+  return (value || '').trim().slice(0, max);
+}
+
+function setBookingError(form, message, focusNode) {
+  const error = form.querySelector('.booking-error') || form.parentElement?.querySelector('.booking-error');
+  if (error) {
+    error.textContent = message;
+    error.hidden = false;
+  }
+  if (focusNode) focusNode.focus({ preventScroll: true });
+}
+
+function clearBookingError(form) {
+  const error = form.querySelector('.booking-error') || form.parentElement?.querySelector('.booking-error');
+  if (error) {
+    error.textContent = '';
+    error.hidden = true;
+  }
+  form.querySelectorAll('.is-invalid').forEach((node) => node.classList.remove('is-invalid'));
+}
+
 function syncTimeInputsForDevice() {
   const isMobileLike = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   const desktopIds = ['startTimeDesktop', 'endTimeDesktop'];
@@ -1193,20 +1233,68 @@ window.addEventListener('resize', () => {
 
 function handleBooking(e) {
   e.preventDefault();
+  const form = e.target;
   const copy = I18N[currentLang];
-  const name = document.getElementById('customerName')?.value.trim() || '-';
-  const customerPhone = document.getElementById('customerPhone')?.value.trim() || '-';
-  const eventType = document.getElementById('eventTypeSelect')?.value.trim() || '-';
-  const bookingDate = document.getElementById('desiredDateTime')?.value.trim() || '-';
+  clearBookingError(form);
+
+  const nameField = document.getElementById('customerName');
+  const phoneField = document.getElementById('customerPhone');
+  const eventField = document.getElementById('eventTypeSelect');
+  const dateField = document.getElementById('desiredDateTime');
+  const notesField = document.getElementById('bookingNotes');
+  const startDesktop = document.getElementById('startTimeDesktop');
+  const endDesktop = document.getElementById('endTimeDesktop');
+  const startMobile = document.getElementById('startTimeMobile');
+  const endMobile = document.getElementById('endTimeMobile');
+
+  const name = limitText(nameField?.value, BOOKING_LIMITS.name);
+  const customerPhone = limitText(phoneField?.value, BOOKING_LIMITS.phone);
+  const eventType = limitText(eventField?.value, 80);
+  const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
   const startTime = getTimeFieldValue('startTimeDesktop', 'startTimeMobile');
   const endTime = getTimeFieldValue('endTimeDesktop', 'endTimeMobile');
-  const notes = document.getElementById('bookingNotes')?.value.trim() || '-';
+  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes) || '-';
   let bookingTime = '-';
   if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
   else if (startTime) bookingTime = `${copy.whatsapp.timePrefixes.from} ${startTime}`;
   else if (endTime) bookingTime = `${copy.whatsapp.timePrefixes.until} ${endTime}`;
 
+  const requiredFields = [
+    [nameField, name],
+    [phoneField, customerPhone],
+    [eventField, eventType],
+    [dateField, bookingDate]
+  ];
+  const missing = requiredFields.find(([, value]) => !value);
+  if (missing || bookingTime === '-') {
+    requiredFields.forEach(([node, value]) => {
+      if (node && !value) node.classList.add('is-invalid');
+    });
+    const timeFocus = [startDesktop, startMobile, endDesktop, endMobile].find((node) => node && !node.disabled);
+    if (bookingTime === '-') {
+      [startDesktop, endDesktop, startMobile, endMobile].forEach((node) => node?.classList.add('is-invalid'));
+    }
+    setBookingError(form, copy.booking.errors.required, missing?.[0] || timeFocus);
+    return;
+  }
+
   const btn = e.target.querySelector('.booking-btn');
+  const phone = '37127850380';
+  const message =
+    copy.whatsapp.greeting + '\n\n' +
+    copy.whatsapp.labels.name + ': ' + name + '\n' +
+    copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
+    copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
+    copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
+    copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +
+    copy.whatsapp.labels.notes + ': ' + notes;
+
+  if (message.length > BOOKING_LIMITS.message) {
+    notesField?.classList.add('is-invalid');
+    setBookingError(form, copy.booking.errors.tooLong, notesField);
+    return;
+  }
+
   btn.textContent = copy.booking.buttonSent;
   btn.style.background = '#C97942';
   btn.disabled = true;
@@ -1216,17 +1304,8 @@ function handleBooking(e) {
     btn.disabled = false;
   }, 3000);
 
-  const phone = '+37127850380';
-  const msg = encodeURIComponent(
-    copy.whatsapp.greeting + '\n\n' +
-    copy.whatsapp.labels.name + ': ' + name + '\n' +
-    copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
-    copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
-    copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
-    copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +
-    copy.whatsapp.labels.notes + ': ' + notes
-  );
-  setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank'); }, 500);
+  const msg = encodeURIComponent(message);
+  setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank', 'noopener,noreferrer'); }, 500);
 }
 
 applyLanguage(currentLang);

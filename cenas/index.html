@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cenas — ROOM Jūrmala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #ffffff;
+      --cream: #faf8f5;
+      --accent: #c8a96e;
+      --accent-light: #f0e8d8;
+      --gray-100: #f5f5f5;
+      --gray-300: #d1d1d1;
+      --gray-500: #8a8a8a;
+      --gray-700: #444444;
+      --radius: 16px;
+      --shadow: 0 2px 24px rgba(0,0,0,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,245,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-300);
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      text-decoration: none;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 100px;
+    }
+    .lang-btn {
+      border: 0;
+      border-radius: 100px;
+      background: transparent;
+      color: var(--gray-500);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 10px;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--black);
+      color: var(--white);
+    }
+    .nav-cta {
+      background: var(--black);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); }
+
+    @media (max-width: 520px) {
+      nav { padding: 0 10px; gap: 6px; }
+      .nav-logo { font-size: 15px; letter-spacing: 0.01em; }
+      .nav-actions { gap: 5px; flex-shrink: 0; }
+      .lang-switch {
+        gap: 1px;
+        padding: 2px;
+      }
+      .lang-btn {
+        font-size: 9px;
+        letter-spacing: 0.04em;
+        padding: 5px 5px;
+      }
+      .nav-cta {
+        padding: 9px 10px;
+        font-size: 11px;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 96px 24px 64px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 6.4vw, 76px);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--gray-700);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .hero-badges {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .badge {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: var(--gray-700);
+      font-weight: 400;
+    }
+
+    /* CALCULATOR */
+    .calc-section { padding: 0 0 48px; }
+    .calc-box {
+      background: var(--surface, #fff);
+      border: 1px solid var(--border, #e5e5e5);
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+    }
+    .calc-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--bg, #f5f3ef);
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 40px;
+      gap: 4px;
+    }
+    .calc-tab {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: var(--muted, #888);
+      transition: all 0.25s ease;
+      font-family: inherit;
+      min-width: 120px;
+    }
+    .calc-tab.active {
+      background: var(--surface, #fff);
+      color: var(--text, #1a1a1a);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    }
+    .hidden { display: none !important; }
+    .calc-slider-wrap { margin-bottom: 36px; }
+    .calc-slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: var(--muted, #888);
+      font-weight: 400;
+    }
+    .calc-val-lbl {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text, #1a1a1a);
+    }
+    .calc-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--border, #e5e5e5);
+      outline: none;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    .calc-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--gold, #b07d3a);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(176,125,58,0.35);
+      transition: transform 0.2s;
+    }
+    .calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .calc-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted, #aaa);
+      letter-spacing: 0.02em;
+    }
+    .calc-result {
+      background: var(--bg, #f5f3ef);
+      border-radius: 18px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+    .calc-r-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border, #e5e5e5);
+    }
+    .calc-r-price {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--text, #1a1a1a);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-family: 'Syne', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .calc-r-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold, #b07d3a);
+      background: rgba(176,125,58,0.1);
+      border: 1px solid rgba(176,125,58,0.2);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+    .calc-r-details { margin-bottom: 28px; }
+    .calc-r-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border, #e5e5e5);
+      font-size: 14px;
+      color: var(--muted, #888);
+    }
+    .calc-r-row:last-child { border-bottom: none; }
+    .calc-r-row.gold { color: var(--gold, #b07d3a); font-weight: 600; }
+    .calc-r-row span:last-child { font-weight: 500; color: var(--text, #1a1a1a); }
+    .calc-r-row.gold span:last-child { color: var(--gold, #b07d3a); }
+    .calc-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--text, #1a1a1a);
+      color: #fff;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+    }
+    .calc-cta:hover {
+      background: var(--gold, #b07d3a);
+      transform: translateY(-2px);
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0.92); opacity: 0.5; }
+      100% { transform: scale(1);    opacity: 1; }
+    }
+    .pop { animation: popIn 0.22s ease; }
+
+    /* SECTION TITLE */
+    .section-header {
+      text-align: center;
+      padding: 72px 24px 48px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--gray-500);
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* HOURLY PRICING */
+    .hourly-section { padding: 0 24px 56px; max-width: 1180px; margin: 0 auto; }
+
+    .hourly-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .hour-card {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      min-height: 164px;
+      padding: 22px 12px 18px;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hour-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .hour-card.popular {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+    .popular-tag {
+      position: absolute;
+      top: -10px; left: 50%; transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .hour-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+    .hour-card.popular .hour-label { color: rgba(255,255,255,0.6); }
+    .hour-duration {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .hour-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+    .hour-card.popular .hour-price { color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 1100px; margin: 0 auto 0;
+      border: none; border-top: 1px solid var(--gray-300);
+    }
+
+    /* PACKAGES */
+    .packages-section { padding: 0 24px 88px; max-width: 1240px; margin: 0 auto; }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--white);
+      border: 1px solid #e8e1d7;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    }
+    @media (max-width: 768px) {
+      .packages-grid { grid-template-columns: 1fr; }
+      .hourly-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 520px) {
+      .hourly-grid { grid-template-columns: repeat(2, 1fr); }
+      .hour-card { min-height: 150px; }
+    }
+
+    .pkg-card {
+      background: var(--white);
+      border-right: 1px solid #ebe4db;
+      border-radius: 0;
+      padding: 56px 48px 44px;
+      min-height: 700px;
+      position: relative;
+      display: flex; flex-direction: column;
+      transition: all 0.2s;
+    }
+    .pkg-card:last-child { border-right: 0; }
+    .pkg-card:hover {
+      box-shadow: inset 0 0 0 1px rgba(200,169,110,0.22);
+    }
+    .pkg-card.featured {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+    .pkg-kicker {
+      color: var(--gray-500);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+    }
+    .pkg-card.featured .pkg-kicker { color: rgba(255,255,255,0.38); }
+    .pkg-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 3.2vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      margin-bottom: 22px;
+    }
+    .pkg-sub {
+      font-size: 17px;
+      color: var(--gray-500);
+      line-height: 1.55;
+      min-height: 84px;
+      margin-bottom: 54px;
+    }
+    .pkg-card.featured .pkg-sub { color: rgba(255,255,255,0.5); }
+    .pkg-price-row {
+      display: flex; align-items: baseline; gap: 6px;
+      margin-bottom: 12px;
+    }
+    .pkg-currency {
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1;
+    }
+    .pkg-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(72px, 7vw, 104px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--black);
+    }
+    .pkg-per {
+      font-size: 18px;
+      color: var(--gray-500);
+      margin-bottom: 14px;
+    }
+    .pkg-card.featured .pkg-currency,
+    .pkg-card.featured .pkg-amount { color: var(--white); }
+    .pkg-card.featured .pkg-per { color: rgba(255,255,255,0.5); }
+    .pkg-saving {
+      color: var(--accent);
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 72px;
+      flex: 1;
+    }
+    .pkg-card.featured .pkg-saving {
+      color: var(--accent);
+    }
+    .pkg-btn {
+      display: block;
+      text-align: center;
+      padding: 18px 24px;
+      border-radius: 100px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.2s;
+    }
+    .pkg-btn-dark {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+    }
+    .pkg-btn-dark:hover { background: var(--accent); }
+    .pkg-btn-white {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+    }
+    .pkg-btn-white:hover { background: var(--accent); color: var(--white); }
+    .pkg-btn-outline {
+      background: transparent;
+      color: var(--black);
+      border: 1.5px solid #e5ded4;
+    }
+    .pkg-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .pkg-card.featured .pkg-btn-outline {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.16);
+    }
+    .pkg-card.featured .pkg-btn-outline:hover {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    @media (max-width: 980px) {
+      .pkg-card { padding: 44px 32px 36px; min-height: auto; }
+      .pkg-kicker { margin-bottom: 36px; }
+      .pkg-sub { min-height: auto; margin-bottom: 38px; }
+      .pkg-saving { margin-bottom: 44px; }
+    }
+
+    /* BOOKING CALENDAR */
+    #calendar {
+      padding: 88px 24px;
+      border-top: 1px solid var(--gray-300);
+      background: linear-gradient(180deg, var(--cream) 0%, #f2ece2 100%);
+    }
+    .calendar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .calendar-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 44px;
+    }
+    .calendar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.12;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .calendar-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .calendar-sub {
+      color: var(--gray-500);
+      font-size: 15px;
+    }
+    .calendar-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+      gap: 24px;
+      align-items: start;
+    }
+    .cal-widget {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #e8e1d7;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 16px 42px rgba(0,0,0,0.06);
+    }
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .cal-month {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--black);
+    }
+    .cal-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-300);
+      background: var(--cream);
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+    .cal-arrow:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+    .cal-days-header,
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .cal-days-header { margin-bottom: 8px; }
+    .cal-day-name {
+      text-align: center;
+      color: var(--gray-500);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 0;
+    }
+    .cal-cell {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-700);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.16s;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+    .cal-cell:hover:not(.empty):not(.past) {
+      background: var(--accent-light);
+      color: var(--black);
+    }
+    .cal-cell.empty {
+      cursor: default;
+      pointer-events: none;
+    }
+    .cal-cell.past {
+      cursor: default;
+      opacity: 0.28;
+    }
+    .cal-cell.today {
+      border-color: var(--accent);
+      color: var(--black);
+      background: rgba(200,169,110,0.12);
+    }
+    .cal-cell.free-sel {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+    .booking-card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 24px;
+      padding: 28px;
+      position: sticky;
+      top: 88px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.16);
+    }
+    .booking-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      line-height: 1.12;
+      margin-bottom: 8px;
+    }
+    .booking-sub {
+      color: rgba(255,255,255,0.54);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 26px;
+    }
+    .booking-field { margin-bottom: 16px; }
+    .booking-field label {
+      display: block;
+      color: rgba(255,255,255,0.56);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .booking-field input,
+    .booking-field select,
+    .booking-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.055);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .booking-field input:focus,
+    .booking-field select:focus,
+    .booking-field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,169,110,0.16);
+    }
+    .booking-field input.is-invalid,
+    .booking-field select.is-invalid,
+    .booking-field textarea.is-invalid {
+      border-color: #d96b5f;
+      box-shadow: 0 0 0 3px rgba(217,107,95,0.18);
+    }
+    .booking-field input::placeholder,
+    .booking-field textarea::placeholder { color: rgba(255,255,255,0.34); }
+    .booking-field select option {
+      background: var(--black);
+      color: var(--white);
+    }
+    .booking-field textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+    .booking-time-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .time-input-mobile { display: none; }
+    .booking-time-row input[type="time"] { color-scheme: dark; }
+    .booking-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 100px;
+      background: var(--accent);
+      color: var(--white);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 15px 18px;
+      margin-top: 4px;
+      transition: all 0.2s;
+    }
+    .booking-btn:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+    .booking-note {
+      text-align: center;
+      color: rgba(255,255,255,0.48);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+    .booking-error {
+      border: 1px solid rgba(217,107,95,0.42);
+      background: rgba(217,107,95,0.14);
+      color: #ffd8d2;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 0 0 16px;
+      padding: 11px 13px;
+    }
+    .booking-error[hidden] {
+      display: none;
+    }
+    .booking-note a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .calendar-layout { grid-template-columns: 1fr; }
+      .booking-card { position: static; }
+    }
+
+    @media (max-width: 560px) {
+      #calendar { padding: 72px 14px; }
+      .cal-widget,
+      .booking-card { padding: 22px; border-radius: 20px; }
+      .cal-days-header,
+      .cal-grid { gap: 4px; }
+      .cal-cell { font-size: 13px; border-radius: 10px; }
+      .booking-time-row { grid-template-columns: 1fr; }
+      .time-input-desktop { display: none; }
+      .time-input-mobile { display: block; }
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 96px 24px;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: var(--gray-500);
+      font-size: 16px;
+      margin-bottom: 36px;
+    }
+    .cta-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--black);
+      padding: 16px 36px;
+      border-radius: 100px;
+      border: 1.5px solid var(--gray-300);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-300);
+      padding: 32px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    footer p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ROOM Jūrmala</a>
+  <div class="nav-actions">
+    <div class="lang-switch" aria-label="Language">
+      <button class="lang-btn active" type="button" data-lang="lv" onclick="setLanguage('lv')">LV</button>
+      <button class="lang-btn" type="button" data-lang="en" onclick="setLanguage('en')">ENG</button>
+      <button class="lang-btn" type="button" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+    </div>
+    <a class="nav-cta" href="#calendar">Rezervēt →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Izvēlies laiku.<br/>Rezervē.</h1>
+  <p>Telpa Jūrmalā nodarbībām, darbnīcām un svētkiem.</p>
+  <div class="hero-badges">
+    <span class="badge">📍 Jūrmala</span>
+    <span class="badge">👥 Līdz 25 cilvēkiem</span>
+    <span class="badge">🕐 No 1 stundas</span>
+  </div>
+</section>
+
+<!-- HOURLY PRICING -->
+<div class="section-header">
+  <div class="section-label">Stundas noma</div>
+  <h2>Maksā tikai par laiku</h2>
+  <p>Izvēlies laiku, kas tev der vislabāk.</p>
+</div>
+
+<section class="hourly-section">
+  <div class="hourly-grid">
+    <div class="hour-card">
+      <div class="hour-label">1 stunda</div>
+      <div class="hour-duration">1h</div>
+      <div class="hour-price">20 €</div>
+    </div>
+    <div class="hour-card">
+      <div class="hour-label">2 stundas</div>
+      <div class="hour-duration">2h</div>
+      <div class="hour-price">38 €</div>
+    </div>
+    <div class="hour-card popular">
+      <div class="popular-tag">Populārākais</div>
+      <div class="hour-label">3 stundas</div>
+      <div class="hour-duration">3h</div>
+      <div class="hour-price">55 €</div>
+    </div>
+    <div class="hour-card">
+      <div class="hour-label">4 stundas</div>
+      <div class="hour-duration">4h</div>
+      <div class="hour-price">70 €</div>
+    </div>
+    <div class="hour-card">
+      <div class="hour-label">6 stundas</div>
+      <div class="hour-duration">6h</div>
+      <div class="hour-price">100 €</div>
+    </div>
+    <div class="hour-card">
+      <div class="hour-label">Visa diena</div>
+      <div class="hour-duration">8h</div>
+      <div class="hour-price">130 €</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CALCULATOR -->
+<div class="section-header">
+  <div class="section-label">Kalkulators</div>
+  <h2>Aprēķini savu cenu</h2>
+  <p>Pārvieto slīdni — kalkulators uzreiz parāda gala cenu.</p>
+</div>
+
+<section class="calc-section">
+  <div class="calc-box">
+
+    <!-- MODE TABS -->
+    <div class="calc-tabs">
+      <button class="calc-tab active" onclick="setMode('hours')" id="tab-hours">Stundas</button>
+      <button class="calc-tab" onclick="setMode('days')" id="tab-days">Dienas</button>
+      <button class="calc-tab" onclick="setMode('weeks')" id="tab-weeks">Nedēļa</button>
+      <button class="calc-tab" onclick="setMode('months')" id="tab-months">Mēnesis</button>
+    </div>
+
+    <!-- HOURS MODE -->
+    <div class="calc-mode" id="mode-hours">
+      <div class="calc-slider-wrap">
+        <div class="calc-slider-label">
+          <span>Stundas</span>
+          <span class="calc-val-lbl" id="hours-label">3 stundas</span>
+        </div>
+        <input type="range" class="calc-slider" id="hours-slider"
+               min="1" max="8" step="1" value="3"
+               oninput="calcMode('hours', this.value)"/>
+        <div class="calc-ticks">
+          <span>1h</span><span>2h</span><span>3h</span><span>4h</span>
+          <span>5h</span><span>6h</span><span>7h</span><span>8h</span>
+        </div>
+      </div>
+      <div class="calc-result" id="hours-result">
+        <div class="calc-r-main">
+          <div class="calc-r-price" id="hours-price">55 €</div>
+          <div class="calc-r-tag" id="hours-tag">Populārākais</div>
+        </div>
+        <div class="calc-r-details">
+          <div class="calc-r-row">
+            <span>Pilnā cena</span>
+            <span id="hours-full">60 €</span>
+          </div>
+          <div class="calc-r-row gold">
+            <span>Tu ietaupi</span>
+            <span id="hours-save">5 €</span>
+          </div>
+          <div class="calc-r-row">
+            <span id="hours-meta-label">Cena par stundu</span>
+            <span id="hours-meta">20 €/h</span>
+          </div>
+        </div>
+        <a class="calc-cta" id="hours-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 55 €</a>
+      </div>
+    </div>
+
+    <!-- DAYS MODE -->
+    <div class="calc-mode hidden" id="mode-days">
+      <div class="calc-slider-wrap">
+        <div class="calc-slider-label">
+          <span>Dienas</span>
+          <span class="calc-val-lbl" id="days-label">1 diena</span>
+        </div>
+        <input type="range" class="calc-slider" id="days-slider"
+               min="1" max="4" step="1" value="1"
+               oninput="calcMode('days', this.value)"/>
+        <div class="calc-ticks">
+          <span>1d</span><span>2d</span><span>3d</span><span>4d</span>
+        </div>
+      </div>
+      <div class="calc-result" id="days-result">
+        <div class="calc-r-main">
+          <div class="calc-r-price" id="days-price">130 €</div>
+          <div class="calc-r-tag" id="days-tag">Dienas noma</div>
+        </div>
+        <div class="calc-r-details">
+          <div class="calc-r-row">
+            <span>Pilnā cena</span>
+            <span id="days-full">160 €</span>
+          </div>
+          <div class="calc-r-row gold">
+            <span>Tu ietaupi</span>
+            <span id="days-save">30 €</span>
+          </div>
+          <div class="calc-r-row">
+            <span id="days-meta-label">Cena par stundu</span>
+            <span id="days-meta">16.25 €/h</span>
+          </div>
+        </div>
+        <a class="calc-cta" id="days-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 130 €</a>
+      </div>
+    </div>
+
+    <!-- WEEKS MODE -->
+    <div class="calc-mode hidden" id="mode-weeks">
+      <div class="calc-slider-wrap">
+        <div class="calc-slider-label">
+          <span>Nedēļas</span>
+          <span class="calc-val-lbl" id="weeks-label">1 nedēļa</span>
+        </div>
+        <input type="range" class="calc-slider" id="weeks-slider"
+               min="1" max="4" step="1" value="1"
+               oninput="calcMode('weeks', this.value)"/>
+        <div class="calc-ticks">
+          <span>1 ned.</span><span>2 ned.</span><span>3 ned.</span><span>4 ned.</span>
+        </div>
+      </div>
+      <div class="calc-result" id="weeks-result">
+        <div class="calc-r-main">
+          <div class="calc-r-price" id="weeks-price">550 €</div>
+          <div class="calc-r-tag" id="weeks-tag">Nedēļas pakete</div>
+        </div>
+        <div class="calc-r-details">
+          <div class="calc-r-row">
+            <span>Pilnā cena</span>
+            <span id="weeks-full">800 €</span>
+          </div>
+          <div class="calc-r-row gold">
+            <span>Tu ietaupi</span>
+            <span id="weeks-save">250 €</span>
+          </div>
+          <div class="calc-r-row">
+            <span id="weeks-meta-label">Stundas kopā</span>
+            <span id="weeks-meta">40h</span>
+          </div>
+        </div>
+        <a class="calc-cta" id="weeks-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Rezervēt — 550 €</a>
+      </div>
+    </div>
+
+    <!-- MONTHS MODE -->
+    <div class="calc-mode hidden" id="mode-months">
+      <div class="calc-slider-wrap">
+        <div class="calc-slider-label">
+          <span>Mēneši</span>
+          <span class="calc-val-lbl" id="months-label">1 mēnesis</span>
+        </div>
+        <input type="range" class="calc-slider" id="months-slider"
+               min="1" max="12" step="1" value="1"
+               oninput="calcMode('months', this.value)"/>
+        <div class="calc-ticks">
+          <span>1 mēn.</span><span>3 mēn.</span><span>6 mēn.</span><span>9 mēn.</span><span>12 mēn.</span>
+        </div>
+      </div>
+      <div class="calc-result" id="months-result">
+        <div class="calc-r-main">
+          <div class="calc-r-price" id="months-price">460 €</div>
+          <div class="calc-r-tag" id="months-tag">Abonements</div>
+        </div>
+        <div class="calc-r-details">
+          <div class="calc-r-row">
+            <span>Pilnā cena</span>
+            <span id="months-full">640 €</span>
+          </div>
+          <div class="calc-r-row gold">
+            <span>Tu ietaupi</span>
+            <span id="months-save">180 €</span>
+          </div>
+          <div class="calc-r-row">
+            <span id="months-meta-label">Cena mēnesī</span>
+            <span id="months-meta">460 €/mēn</span>
+          </div>
+        </div>
+        <a class="calc-cta" id="months-wa" href="#" target="_blank" rel="noopener noreferrer">💬 Pieteikties — 460 €</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<div class="section-header">
+  <div class="section-label">Paketes</div>
+  <h2>Dienas, Nedēļas, Mēneša</h2>
+  <p>Plāno uz priekšu. Ideāli pasniedzējiem, nodarbību vadītājiem un organizatoriem.</p>
+</div>
+
+<section class="packages-section">
+  <div class="packages-grid">
+
+    <!-- DIENAS PAKETE -->
+    <div class="pkg-card">
+      <div class="pkg-kicker">Viena diena</div>
+      <div class="pkg-name">Dienas pakete</div>
+      <div class="pkg-sub">Pilna diena vienreizējam pasākumam vai intensīvam darbam.</div>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">€</span>
+        <span class="pkg-amount">130</span>
+      </div>
+      <div class="pkg-per">/ 8 stundas</div>
+      <div class="pkg-saving">Ietaupi 30 € · 16.25 €/h</div>
+      <a href="#calendar" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
+    </div>
+
+    <!-- NEDĒĻAS PAKETE (FEATURED) -->
+    <div class="pkg-card featured">
+      <div class="pkg-kicker">Nedēļa · 40h kopā</div>
+      <div class="pkg-name">Nedēļas pakete</div>
+      <div class="pkg-sub">5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.</div>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">€</span>
+        <span class="pkg-amount">550</span>
+      </div>
+      <div class="pkg-per">/ 5 dienas</div>
+      <div class="pkg-saving">Ietaupi 250 € · 13.75 €/h</div>
+      <a href="#calendar" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
+    </div>
+
+    <!-- MĒNEŠA PAKETE -->
+    <div class="pkg-card">
+      <div class="pkg-kicker">Regulāri · Mēnesī</div>
+      <div class="pkg-name">Abonements</div>
+      <div class="pkg-sub">Mēneša risinājums nodarbībām un grupām.</div>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">€</span>
+        <span class="pkg-amount">460</span>
+      </div>
+      <div class="pkg-per">/ mēnesī · min. 3 mēneši</div>
+      <div class="pkg-saving">Ietaupi 180 €/mēn · 8h nedēļā</div>
+      <a href="#calendar" class="pkg-btn pkg-btn-outline">Pieteikties</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOOKING CALENDAR -->
+<section id="calendar">
+  <div class="calendar-inner">
+    <div class="calendar-header">
+      <div class="section-label">Pieejamība</div>
+      <h2 class="calendar-title">Atrodiet dienu savam <em>pasākumam</em></h2>
+      <p class="calendar-sub">Izvēlies datumu kalendārā un aizpildi īsu rezervācijas pieprasījumu.</p>
+    </div>
+
+    <div class="calendar-layout">
+      <div class="cal-widget">
+        <div class="cal-nav">
+          <button class="cal-arrow" id="prevMonth" type="button" aria-label="Iepriekšējais mēnesis">‹</button>
+          <div class="cal-month" id="calMonthLabel"></div>
+          <button class="cal-arrow" id="nextMonth" type="button" aria-label="Nākamais mēnesis">›</button>
+        </div>
+        <div class="cal-days-header">
+          <div class="cal-day-name">P</div>
+          <div class="cal-day-name">O</div>
+          <div class="cal-day-name">T</div>
+          <div class="cal-day-name">C</div>
+          <div class="cal-day-name">Pk</div>
+          <div class="cal-day-name">S</div>
+          <div class="cal-day-name">Sv</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+
+      <div class="booking-card">
+        <div class="booking-title">Rezervēt telpu</div>
+        <p class="booking-sub">Aizpildiet formu, un mēs drīz ar Jums sazināsimies.</p>
+        <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
+        <form onsubmit="handleBooking(event)" novalidate>
+          <div class="booking-field">
+            <label>Jūsu vārds</label>
+            <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
+          </div>
+          <div class="booking-field">
+            <label>Tālrunis</label>
+            <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+          </div>
+          <div class="booking-field">
+            <label>Pasākuma veids</label>
+            <select id="eventTypeSelect" required>
+              <option value="">Izvēlieties pasākuma veidu...</option>
+              <option>🎈 Bērnu dzimšanas diena</option>
+              <option>👨‍👩‍👧 Ģimenes svinības</option>
+              <option>🎨 Meistarklase</option>
+              <option>📸 Fotosesija</option>
+              <option>🌿 Joga / vingrošana</option>
+              <option>🤲 Fizioterapija</option>
+              <option>🧒 Bērnu nodarbība</option>
+              <option>☀️ Bērnu nometne</option>
+              <option>🎓 Seminārs</option>
+              <option>🎉 Privāts pasākums</option>
+              <option>✨ Cits</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Datums</label>
+            <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
+          </div>
+          <div class="booking-field">
+            <label>Laiks</label>
+            <div class="booking-time-row">
+              <input class="time-input-desktop" type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
+              <input class="time-input-desktop" type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
+              <input class="time-input-mobile" type="time" id="startTimeMobile" aria-label="Sākuma laiks" step="60" />
+              <input class="time-input-mobile" type="time" id="endTimeMobile" aria-label="Beigu laiks" step="60" />
+            </div>
+          </div>
+          <div class="booking-field">
+            <label>Piezīmes</label>
+            <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
+          </div>
+          <button type="submit" class="booking-btn">Nosūtīt pieprasījumu ✦</button>
+          <p class="booking-note">Rakstiet arī WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Gatavs rezervēt?</h2>
+  <p>Uzraksti mums, un kopā piemeklēsim ērtāko laiku.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/37127850380" class="btn-primary">💬 WhatsApp</a>
+    <a href="mailto:info@roomjurmala.lv" class="btn-secondary">✉️ Rakstīt e-pastu</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">ROOM Jūrmala</span>
+  <p>roomjurmala.lv · Jūrmala, Latvija</p>
+  <p style="color: var(--gray-500); font-size: 12px;">© 2026 ROOM Jūrmala</p>
+</footer>
+
+<script>
+const WA_NUMBER = "37127850380";
+const MODES = ["hours", "days", "weeks", "months"];
+let currentLang = "lv";
+const BASE_HOUR_PRICE = 20;
+const DAY_HOURS = 8;
+const WEEK_DAYS = 5;
+const MONTH_WEEKLY_HOURS = 8;
+const MONTH_WEEKS = 4;
+const WEEK_HOURS = WEEK_DAYS * DAY_HOURS;
+const MONTH_HOURS = MONTH_WEEKLY_HOURS * MONTH_WEEKS;
+const WEEK_PRICE = 550;
+const MONTH_PRICE = 460;
+const BOOKING_LIMITS = {
+  name: 80,
+  phone: 20,
+  date: 80,
+  notes: 500,
+  message: 1500
+};
+
+const HOUR_PRICES = {
+  1: 20,
+  2: 38,
+  3: 55,
+  4: 70,
+  5: 85,
+  6: 100,
+  7: 115,
+  8: 130
+};
+
+const DAY_PRICES = {
+  1: 130,
+  2: 250,
+  3: 360,
+  4: 460
+};
+
+const I18N = {
+  lv: {
+    title: "Cenas — ROOM Jūrmala",
+    navCta: "Rezervēt →",
+    heroTitle: "Izvēlies laiku.<br/>Rezervē.",
+    heroText: "Telpa Jūrmalā nodarbībām, darbnīcām un svētkiem.",
+    badges: ["📍 Jūrmala", "👥 Līdz 25 cilvēkiem", "🕐 No 1 stundas"],
+    hourly: {
+      label: "Stundas noma",
+      title: "Maksā tikai par laiku",
+      text: "Izvēlies laiku, kas tev der vislabāk.",
+      cards: ["1 stunda", "2 stundas", "3 stundas", "4 stundas", "6 stundas", "Visa diena"],
+      popular: "Populārākais"
+    },
+    calc: {
+      label: "Kalkulators",
+      title: "Aprēķini savu cenu",
+      text: "Jo vairāk stundu vai dienu, jo izdevīgāka cena.",
+      tabs: { hours: "Stundas", days: "Dienas", weeks: "Nedēļa", months: "Mēnesis" },
+      sliderLabels: { hours: "Stundas", days: "Dienas", weeks: "Nedēļas", months: "Mēneši" },
+      ticks: {
+        hours: ["1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h"],
+        days: ["1d", "2d", "3d", "4d"],
+        weeks: ["1 ned.", "2 ned.", "3 ned.", "4 ned."],
+        months: ["1 mēn.", "3 mēn.", "6 mēn.", "9 mēn.", "12 mēn."]
+      },
+      full: "Pilnā cena",
+      save: "Tu ietaupi",
+      pricePerHour: "Cena par stundu",
+      totalHours: "Stundas kopā",
+      pricePerMonth: "Cena mēnesī",
+      monthRate: "460 €/mēn",
+      tags: {
+        popular: "Populārākais",
+        dayPackage: "Dienas pakete",
+        dayRent: "Dienas noma",
+        better: "Izdevīgāk",
+        best: "Nedēļas pakete",
+        subscription: "Abonements"
+      },
+      ctaReserve: "Rezervēt",
+      ctaApply: "Pieteikties"
+    },
+    packages: {
+      label: "Paketes",
+      title: "Dienas, Nedēļas, Mēneša",
+      text: "Plāno uz priekšu. Ideāli pasniedzējiem, nodarbību vadītājiem un organizatoriem.",
+      cards: [
+        {
+          kicker: "Viena diena",
+          name: "Dienas pakete",
+          sub: "Pilna diena vienreizējam pasākumam vai intensīvam darbam.",
+          per: "/ 8 stundas",
+          saving: "Ietaupi 30 € · 16.25 €/h",
+          button: "Rezervēt dienu"
+        },
+        {
+          kicker: "Nedēļa · 40h kopā",
+          name: "Nedēļas pakete",
+          sub: "5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.",
+          per: "/ 5 dienas",
+          saving: "Ietaupi 250 € · 13.75 €/h",
+          button: "Rezervēt nedēļu"
+        },
+        {
+          kicker: "Regulāri · Mēnesī",
+          name: "Abonements",
+          sub: "Mēneša risinājums nodarbībām un grupām.",
+          per: "/ mēnesī · min. 3 mēneši",
+          saving: "Ietaupi 180 €/mēn · 8h nedēļā",
+          button: "Pieteikties"
+        }
+      ]
+    },
+    calendar: {
+      label: "Pieejamība",
+      titleHtml: "Atrodiet dienu savam <em>pasākumam</em>",
+      text: "Izvēlies datumu kalendārā un aizpildi īsu rezervācijas pieprasījumu.",
+      daysShort: ["P", "O", "T", "C", "Pk", "S", "Sv"],
+      monthsHeader: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
+      monthsDate: ["janvāra", "februāra", "marta", "aprīļa", "maija", "jūnija", "jūlija", "augusta", "septembra", "oktobra", "novembra", "decembra"],
+      freeLabel: "Brīvs",
+      prevLabel: "Iepriekšējais mēnesis",
+      nextLabel: "Nākamais mēnesis"
+    },
+    booking: {
+      title: "Rezervēt telpu",
+      sub: "Aizpildiet formu, un mēs drīz ar Jums sazināsimies.",
+      labels: ["Jūsu vārds", "Tālrunis", "Pasākuma veids", "Datums", "Laiks", "Piezīmes"],
+      placeholders: {
+        name: "Vārds, Uzvārds",
+        phone: "+371 2X XXX XXX",
+        date: "piem. 20. aprīlis",
+        start: "No, piem. 14:00",
+        end: "Līdz, piem. 17:00",
+        notes: "Cik cilvēku? Īpašas vēlmes?"
+      },
+      options: [
+        "Izvēlieties pasākuma veidu...",
+        "🎈 Bērnu dzimšanas diena",
+        "👨‍👩‍👧 Ģimenes svinības",
+        "🎨 Meistarklase",
+        "📸 Fotosesija",
+        "🌿 Joga / vingrošana",
+        "🤲 Fizioterapija",
+        "🧒 Bērnu nodarbība",
+        "☀️ Bērnu nometne",
+        "🎓 Seminārs",
+        "🎉 Privāts pasākums",
+        "✨ Cits"
+      ],
+      button: "Nosūtīt pieprasījumu ✦",
+      buttonSent: "✓ Pieprasījums nosūtīts!",
+      notePrefix: "Rakstiet arī WhatsApp:",
+      startTimeAria: "Sākuma laiks",
+      endTimeAria: "Beigu laiks",
+      messageGreeting: "Sveiki! Vēlos rezervēt ROOM Jūrmala.",
+      messageLabels: {
+        name: "Vārds",
+        phone: "Tālrunis",
+        eventType: "Pasākuma veids",
+        date: "Datums",
+        time: "Laiks",
+        notes: "Piezīmes"
+      },
+      timePrefixes: { from: "No", until: "Līdz" },
+      errors: {
+        required: "Lūdzu aizpildiet vārdu, tālruni, pasākuma veidu, datumu un laiku.",
+        tooLong: "Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz."
+      }
+    },
+    cta: {
+      title: "Gatavs rezervēt?",
+      text: "Uzraksti mums, un kopā piemeklēsim ērtāko laiku.",
+      whatsapp: "💬 WhatsApp",
+      email: "✉️ Rakstīt e-pastu"
+    },
+    footer: "roomjurmala.lv · Jūrmala, Latvija"
+  },
+  en: {
+    title: "Pricing — ROOM Jūrmala",
+    navCta: "Book →",
+    heroTitle: "Choose a time.<br/>Book it.",
+    heroText: "A space in Jūrmala for classes, workshops and celebrations.",
+    badges: ["📍 Jūrmala", "👥 Up to 25 people", "🕐 From 1 hour"],
+    hourly: {
+      label: "Hourly rental",
+      title: "Pay only for the time",
+      text: "Choose the time that suits you best.",
+      cards: ["1 hour", "2 hours", "3 hours", "4 hours", "6 hours", "Full day"],
+      popular: "Most popular"
+    },
+    calc: {
+      label: "Calculator",
+      title: "Calculate your price",
+      text: "The more hours or days you book, the better the price.",
+      tabs: { hours: "Hours", days: "Days", weeks: "Week", months: "Month" },
+      sliderLabels: { hours: "Hours", days: "Days", weeks: "Weeks", months: "Months" },
+      ticks: {
+        hours: ["1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h"],
+        days: ["1d", "2d", "3d", "4d"],
+        weeks: ["1 wk", "2 wk", "3 wk", "4 wk"],
+        months: ["1 mo", "3 mo", "6 mo", "9 mo", "12 mo"]
+      },
+      full: "Standard price",
+      save: "You save",
+      pricePerHour: "Price per hour",
+      totalHours: "Total hours",
+      pricePerMonth: "Price per month",
+      monthRate: "460 €/mo",
+      tags: {
+        popular: "Most popular",
+        dayPackage: "Day package",
+        dayRent: "Day rental",
+        better: "Better value",
+        best: "Week package",
+        subscription: "Subscription"
+      },
+      ctaReserve: "Book",
+      ctaApply: "Apply"
+    },
+    packages: {
+      label: "Packages",
+      title: "Day, Week, Month",
+      text: "Plan ahead. Ideal for teachers, class leaders and organizers.",
+      cards: [
+        {
+          kicker: "One day",
+          name: "Day package",
+          sub: "A full day for a one-time event or focused work.",
+          per: "/ 8 hours",
+          saving: "Save 30 € · 16.25 €/h",
+          button: "Book a day"
+        },
+        {
+          kicker: "Week · 40h total",
+          name: "Week package",
+          sub: "5 workdays in a row. Ideal for summer camps and courses.",
+          per: "/ 5 days",
+          saving: "Save 250 € · 13.75 €/h",
+          button: "Book a week"
+        },
+        {
+          kicker: "Regular · Monthly",
+          name: "Subscription",
+          sub: "A monthly solution for classes and groups.",
+          per: "/ month · min. 3 months",
+          saving: "Save 180 €/mo · 8h/week",
+          button: "Apply"
+        }
+      ]
+    },
+    calendar: {
+      label: "Availability",
+      titleHtml: "Choose a date for <em>your event</em>",
+      text: "Pick a date in the calendar and send a short booking request.",
+      daysShort: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      monthsHeader: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      monthsDate: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      freeLabel: "Available",
+      prevLabel: "Previous month",
+      nextLabel: "Next month"
+    },
+    booking: {
+      title: "Book the space",
+      sub: "Fill in the form and we will get back to you soon.",
+      labels: ["Your name", "Phone", "Event type", "Date", "Time", "Notes"],
+      placeholders: {
+        name: "Name, Surname",
+        phone: "+371 2X XXX XXX",
+        date: "e.g. 20 April",
+        start: "From, e.g. 14:00",
+        end: "Until, e.g. 17:00",
+        notes: "How many guests? Any special requests?"
+      },
+      options: [
+        "Choose event type...",
+        "🎈 Children’s birthday",
+        "👨‍👩‍👧 Family celebration",
+        "🎨 Workshop",
+        "📸 Photoshoot",
+        "🌿 Yoga / exercise",
+        "🤲 Physiotherapy",
+        "🧒 Children’s class",
+        "☀️ Children’s camp",
+        "🎓 Seminar",
+        "🎉 Private event",
+        "✨ Other"
+      ],
+      button: "Send booking request ✦",
+      buttonSent: "✓ Request sent!",
+      notePrefix: "Or message us on WhatsApp:",
+      startTimeAria: "Start time",
+      endTimeAria: "End time",
+      messageGreeting: "Hello! I would like to book ROOM Jūrmala.",
+      messageLabels: {
+        name: "Name",
+        phone: "Phone",
+        eventType: "Event type",
+        date: "Date",
+        time: "Time",
+        notes: "Notes"
+      },
+      timePrefixes: { from: "From", until: "Until" },
+      errors: {
+        required: "Please fill in your name, phone, event type, date and time.",
+        tooLong: "The message is too long. Please shorten the notes and try again."
+      }
+    },
+    cta: {
+      title: "Ready to book?",
+      text: "Message us and we will find the best time together.",
+      whatsapp: "💬 WhatsApp",
+      email: "✉️ Email us"
+    },
+    footer: "roomjurmala.lv · Jūrmala, Latvia"
+  },
+  ru: {
+    title: "Цены — ROOM Jūrmala",
+    navCta: "Бронь →",
+    heroTitle: "Выберите время.<br/>Забронируйте.",
+    heroText: "Пространство в Юрмале для занятий, мастер-классов и праздников.",
+    badges: ["📍 Юрмала", "👥 До 25 человек", "🕐 От 1 часа"],
+    hourly: {
+      label: "Почасовая аренда",
+      title: "Платите только за время",
+      text: "Выберите время, которое подходит вам лучше всего.",
+      cards: ["1 час", "2 часа", "3 часа", "4 часа", "6 часов", "Весь день"],
+      popular: "Популярное"
+    },
+    calc: {
+      label: "Калькулятор",
+      title: "Рассчитайте стоимость",
+      text: "Чем больше часов или дней, тем выгоднее цена.",
+      tabs: { hours: "Часы", days: "Дни", weeks: "Неделя", months: "Месяц" },
+      sliderLabels: { hours: "Часы", days: "Дни", weeks: "Недели", months: "Месяцы" },
+      ticks: {
+        hours: ["1ч", "2ч", "3ч", "4ч", "5ч", "6ч", "7ч", "8ч"],
+        days: ["1д", "2д", "3д", "4д"],
+        weeks: ["1 нед.", "2 нед.", "3 нед.", "4 нед."],
+        months: ["1 мес.", "3 мес.", "6 мес.", "9 мес.", "12 мес."]
+      },
+      full: "Полная цена",
+      save: "Экономия",
+      pricePerHour: "Цена за час",
+      totalHours: "Часов всего",
+      pricePerMonth: "Цена в месяц",
+      monthRate: "460 €/мес.",
+      tags: {
+        popular: "Популярное",
+        dayPackage: "Дневной пакет",
+        dayRent: "Аренда на день",
+        better: "Выгоднее",
+        best: "Недельный пакет",
+        subscription: "Абонемент"
+      },
+      ctaReserve: "Забронировать",
+      ctaApply: "Оставить заявку"
+    },
+    packages: {
+      label: "Пакеты",
+      title: "День, неделя, месяц",
+      text: "Планируйте заранее. Удобно для преподавателей, ведущих занятий и организаторов.",
+      cards: [
+        {
+          kicker: "Один день",
+          name: "Дневной пакет",
+          sub: "Полный день для разового мероприятия или интенсивной работы.",
+          per: "/ 8 часов",
+          saving: "Экономия 30 € · 16.25 €/ч",
+          button: "Забронировать день"
+        },
+        {
+          kicker: "Неделя · 40ч всего",
+          name: "Недельный пакет",
+          sub: "5 рабочих дней подряд. Идеально для летних лагерей и курсов.",
+          per: "/ 5 дней",
+          saving: "Экономия 250 € · 13.75 €/ч",
+          button: "Забронировать неделю"
+        },
+        {
+          kicker: "Регулярно · В месяц",
+          name: "Абонемент",
+          sub: "Месячное решение для занятий и групп.",
+          per: "/ месяц · мин. 3 месяца",
+          saving: "Экономия 180 €/мес. · 8ч/нед.",
+          button: "Оставить заявку"
+        }
+      ]
+    },
+    calendar: {
+      label: "Доступность",
+      titleHtml: "Выберите дату для <em>мероприятия</em>",
+      text: "Выберите дату в календаре и отправьте короткую заявку на бронь.",
+      daysShort: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+      monthsHeader: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+      monthsDate: ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
+      freeLabel: "Свободно",
+      prevLabel: "Предыдущий месяц",
+      nextLabel: "Следующий месяц"
+    },
+    booking: {
+      title: "Забронировать зал",
+      sub: "Заполните форму, и мы скоро свяжемся с вами.",
+      labels: ["Ваше имя", "Телефон", "Формат мероприятия", "Дата", "Время", "Примечания"],
+      placeholders: {
+        name: "Имя, фамилия",
+        phone: "+371 2X XXX XXX",
+        date: "например, 20 апреля",
+        start: "Начало, например 14:00",
+        end: "Окончание, например 17:00",
+        notes: "Сколько гостей? Есть особые пожелания?"
+      },
+      options: [
+        "Выберите тип мероприятия...",
+        "🎈 Детский день рождения",
+        "👨‍👩‍👧 Семейный праздник",
+        "🎨 Мастер-класс",
+        "📸 Фотосессия",
+        "🌿 Йога / гимнастика",
+        "🤲 Физиотерапия",
+        "🧒 Детское занятие",
+        "☀️ Детский лагерь",
+        "🎓 Семинар",
+        "🎉 Частное мероприятие",
+        "✨ Другое"
+      ],
+      button: "Отправить заявку ✦",
+      buttonSent: "✓ Заявка отправлена!",
+      notePrefix: "Или напишите в WhatsApp:",
+      startTimeAria: "Время начала",
+      endTimeAria: "Время окончания",
+      messageGreeting: "Здравствуйте! Хочу забронировать ROOM Jūrmala.",
+      messageLabels: {
+        name: "Имя",
+        phone: "Телефон",
+        eventType: "Формат мероприятия",
+        date: "Дата",
+        time: "Время",
+        notes: "Примечания"
+      },
+      timePrefixes: { from: "С", until: "До" },
+      errors: {
+        required: "Пожалуйста, заполните имя, телефон, формат мероприятия, дату и время.",
+        tooLong: "Сообщение слишком длинное. Сократите примечания и попробуйте снова."
+      }
+    },
+    cta: {
+      title: "Готовы забронировать?",
+      text: "Напишите нам, и мы вместе подберем удобное время.",
+      whatsapp: "💬 WhatsApp",
+      email: "✉️ Написать email"
+    },
+    footer: "roomjurmala.lv · Юрмала, Латвия"
+  }
+};
+
+function setMode(mode) {
+  MODES.forEach((name) => {
+    document.getElementById(`mode-${name}`).classList.toggle("hidden", name !== mode);
+    document.getElementById(`tab-${name}`).classList.toggle("active", name === mode);
+  });
+}
+
+function animPop(id) {
+  const el = document.getElementById(id);
+  el.classList.remove("pop");
+  void el.offsetWidth;
+  el.classList.add("pop");
+}
+
+function formatNumber(value) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(2);
+}
+
+function setText(selector, value) {
+  const el = document.querySelector(selector);
+  if (el) el.textContent = value;
+}
+
+function setHtml(selector, value) {
+  const el = document.querySelector(selector);
+  if (el) el.innerHTML = value;
+}
+
+function setSelectorListText(selector, values) {
+  document.querySelectorAll(selector).forEach((el, index) => {
+    if (values[index] !== undefined) el.textContent = values[index];
+  });
+}
+
+function setPlaceholder(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.placeholder = value;
+}
+
+function setOptionTexts(id, values) {
+  const select = document.getElementById(id);
+  if (!select) return;
+  select.querySelectorAll("option").forEach((option, index) => {
+    if (values[index] !== undefined) option.textContent = values[index];
+  });
+}
+
+function setHeader(index, label, title, text) {
+  const header = document.querySelectorAll(".section-header")[index];
+  if (!header) return;
+  const labelEl = header.querySelector(".section-label");
+  const titleEl = header.querySelector("h2");
+  const textEl = header.querySelector("p");
+  if (labelEl) labelEl.textContent = label;
+  if (titleEl) titleEl.textContent = title;
+  if (textEl) textEl.textContent = text;
+}
+
+function setTickLabels(mode, values) {
+  document.querySelectorAll(`#mode-${mode} .calc-ticks span`).forEach((el, index) => {
+    el.textContent = values[index];
+  });
+}
+
+function ruPlural(value, one, few, many) {
+  const mod10 = value % 10;
+  const mod100 = value % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+  return many;
+}
+
+function unitLabel(mode, value) {
+  if (currentLang === "en") {
+    if (mode === "hours") return value === 8 ? "8 hours (full day)" : `${value} ${value === 1 ? "hour" : "hours"}`;
+    if (mode === "days") return `${value} ${value === 1 ? "day" : "days"}`;
+    if (mode === "weeks") return `${value} ${value === 1 ? "week" : "weeks"}`;
+    return `${value} months`;
+  }
+
+  if (currentLang === "ru") {
+    if (mode === "hours") return value === 8 ? "8 часов (весь день)" : `${value} ${ruPlural(value, "час", "часа", "часов")}`;
+    if (mode === "days") return `${value} ${ruPlural(value, "день", "дня", "дней")}`;
+    if (mode === "weeks") return `${value} ${ruPlural(value, "неделя", "недели", "недель")}`;
+    return `${value} ${ruPlural(value, "месяц", "месяца", "месяцев")}`;
+  }
+
+  if (mode === "hours") return value === 8 ? "8 stundas (visa diena)" : value + (value === 1 ? " stunda" : " stundas");
+  if (mode === "days") return value === 1 ? "1 diena" : `${value} dienas`;
+  if (mode === "weeks") return value === 1 ? "1 nedēļa" : `${value} nedēļas`;
+  return value === 1 ? "1 mēnesis" : `${value} mēneši`;
+}
+
+function bookingMessage(mode, value, price) {
+  if (currentLang === "en") {
+    if (mode === "hours") return `Hello! I would like to book the room for ${value}h — ${price} €. Is there an available time?`;
+    if (mode === "days") return `Hello! I would like to book the room for ${value} ${value === 1 ? "day" : "days"} — ${price} €. Is there an available time?`;
+    if (mode === "weeks") return `Hello! I am interested in the week package (${value} ${value === 1 ? "week" : "weeks"}) — ${price} €. Can we agree on a time?`;
+    return `Hello! I am interested in the monthly subscription for ${value} months — ${price} €. Can we agree on a time?`;
+  }
+
+  if (currentLang === "ru") {
+    if (mode === "hours") return `Здравствуйте! Хочу забронировать помещение на ${value}ч — ${price} €. Есть свободное время?`;
+    if (mode === "days") return `Здравствуйте! Хочу забронировать помещение на ${value} ${ruPlural(value, "день", "дня", "дней")} — ${price} €. Есть свободное время?`;
+    if (mode === "weeks") return `Здравствуйте! Интересует недельный пакет (${value} ${ruPlural(value, "неделя", "недели", "недель")}) — ${price} €. Можем договориться?`;
+    return `Здравствуйте! Интересует месячный абонемент на ${value} ${ruPlural(value, "месяц", "месяца", "месяцев")} — ${price} €. Можем договориться?`;
+  }
+
+  if (mode === "hours") return `Sveiki! Vēlos rezervēt telpu ${value}h — ${price} €. Vai ir brīvs laiks?`;
+  if (mode === "days") return `Sveiki! Vēlos rezervēt telpu uz ${value} ${value === 1 ? "dienu" : "dienām"} — ${price} €. Vai ir brīvs laiks?`;
+  if (mode === "weeks") return `Sveiki! Vēlos rezervēt nedēļas paketi (${value} ${value === 1 ? "nedēļa" : "nedēļas"}) — ${price} €. Vai varam vienoties?`;
+  return `Sveiki! Interesē mēneša abonements uz ${value} mēnešiem — ${price} €. Vai varam vienoties?`;
+}
+
+function getModeData(mode, value) {
+  const v = parseInt(value, 10);
+  const t = I18N[currentLang].calc;
+
+  if (mode === "hours") {
+    const price = HOUR_PRICES[v];
+    const full = v * BASE_HOUR_PRICE;
+    return {
+      label: unitLabel("hours", v),
+      price,
+      full,
+      save: full - price,
+      tag: v === 3 ? t.tags.popular : (v === 8 ? t.tags.dayPackage : (v > 1 ? t.tags.better : "")),
+      metaLabel: t.pricePerHour,
+      meta: `${formatNumber(price / v)} €/h`,
+      ctaPrefix: t.ctaReserve,
+      message: bookingMessage("hours", v, price)
+    };
+  }
+
+  if (mode === "days") {
+    const hours = v * DAY_HOURS;
+    const price = DAY_PRICES[v];
+    const full = hours * BASE_HOUR_PRICE;
+    return {
+      label: unitLabel("days", v),
+      price,
+      full,
+      save: full - price,
+      tag: v === 1 ? t.tags.dayRent : t.tags.better,
+      metaLabel: t.pricePerHour,
+      meta: `${formatNumber(price / hours)} €/h`,
+      ctaPrefix: t.ctaReserve,
+      message: bookingMessage("days", v, price)
+    };
+  }
+
+  if (mode === "weeks") {
+    const hours = v * WEEK_HOURS;
+    const price = v * WEEK_PRICE;
+    const full = hours * BASE_HOUR_PRICE;
+    return {
+      label: unitLabel("weeks", v),
+      price,
+      full,
+      save: full - price,
+      tag: t.tags.best,
+      metaLabel: t.totalHours,
+      meta: `${hours}h`,
+      ctaPrefix: t.ctaReserve,
+      message: bookingMessage("weeks", v, price)
+    };
+  }
+
+  const months = v;
+  const hours = months * MONTH_HOURS;
+  const price = months * MONTH_PRICE;
+  const full = hours * BASE_HOUR_PRICE;
+  return {
+    label: unitLabel("months", months),
+    price,
+    full,
+    save: full - price,
+    tag: t.tags.subscription,
+    metaLabel: t.pricePerMonth,
+    meta: t.monthRate,
+    ctaPrefix: t.ctaApply,
+    message: bookingMessage("months", months, price)
+  };
+}
+
+function calcMode(mode, value) {
+  const data = getModeData(mode, value);
+  const tag = document.getElementById(`${mode}-tag`);
+  const saveRow = document.getElementById(`${mode}-save`).closest(".calc-r-row");
+
+  document.getElementById(`${mode}-label`).textContent = data.label;
+  document.getElementById(`${mode}-price`).textContent = `${data.price} €`;
+  document.getElementById(`${mode}-full`).textContent = `${data.full} €`;
+  document.getElementById(`${mode}-save`).textContent = `${data.save} €`;
+  document.getElementById(`${mode}-meta-label`).textContent = data.metaLabel;
+  document.getElementById(`${mode}-meta`).textContent = data.meta;
+  tag.textContent = data.tag;
+  tag.style.display = data.tag ? "inline-flex" : "none";
+  saveRow.style.display = data.save > 0 ? "flex" : "none";
+
+  const wa = document.getElementById(`${mode}-wa`);
+  wa.href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(data.message);
+  wa.textContent = `💬 ${data.ctaPrefix} — ${data.price} €`;
+  animPop(`${mode}-price`);
+
+  const slider = document.getElementById(`${mode}-slider`);
+  updateSlider(`${mode}-slider`, Number(slider.value), Number(slider.min), Number(slider.max));
+}
+
+function updateSlider(id, val, min, max) {
+  const pct = ((val - min) / (max - min)) * 100;
+  const gold = getComputedStyle(document.documentElement).getPropertyValue("--gold").trim() || "#b07d3a";
+  const brd = getComputedStyle(document.documentElement).getPropertyValue("--border").trim() || "#e5e5e5";
+  document.getElementById(id).style.background =
+    "linear-gradient(to right, " + gold + " 0%, " + gold + " " + pct + "%, " + brd + " " + pct + "%, " + brd + " 100%)";
+}
+
+let selectedDateParts = null;
+let curYear = new Date().getFullYear();
+let curMonth = new Date().getMonth();
+const today = new Date();
+
+function formatSelectedDate(day, monthIndex) {
+  const calendarCopy = I18N[currentLang].calendar;
+  if (currentLang === "lv") return `${day}. ${calendarCopy.monthsDate[monthIndex]}`;
+  return `${day} ${calendarCopy.monthsDate[monthIndex]}`;
+}
+
+function setDateTimeValue(timeSlot) {
+  const input = document.getElementById("desiredDateTime");
+  if (!input) return;
+  const dateLabel = selectedDateParts ? formatSelectedDate(selectedDateParts.day, selectedDateParts.month) : "";
+  if (dateLabel && timeSlot) {
+    input.value = `${dateLabel}, ${timeSlot}`;
+    return;
+  }
+  if (dateLabel) {
+    input.value = dateLabel;
+    return;
+  }
+  if (timeSlot) input.value = timeSlot;
+}
+
+function renderCalendar() {
+  const calendarCopy = I18N[currentLang].calendar;
+  const label = document.getElementById("calMonthLabel");
+  const grid = document.getElementById("calGrid");
+  if (!label || !grid) return;
+
+  label.textContent = `${calendarCopy.monthsHeader[curMonth]} ${curYear}`;
+  grid.innerHTML = "";
+
+  const firstDay = new Date(curYear, curMonth, 1).getDay();
+  const startOffset = firstDay === 0 ? 6 : firstDay - 1;
+  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+  for (let i = 0; i < startOffset; i++) {
+    const empty = document.createElement("div");
+    empty.className = "cal-cell empty";
+    grid.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement("button");
+    const isToday = d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear();
+    const isPast = new Date(curYear, curMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    cell.type = "button";
+    cell.className = "cal-cell" + (isToday ? " today" : "") + (isPast ? " past" : "");
+    cell.textContent = d;
+    cell.setAttribute("aria-label", `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`);
+
+    if (selectedDateParts && selectedDateParts.day === d && selectedDateParts.month === curMonth && selectedDateParts.year === curYear) {
+      cell.classList.add("free-sel");
+    }
+
+    if (isPast) {
+      cell.disabled = true;
+    } else {
+      cell.title = `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`;
+      cell.addEventListener("click", () => {
+        document.querySelectorAll(".cal-cell.free-sel").forEach((node) => node.classList.remove("free-sel"));
+        cell.classList.add("free-sel");
+        selectedDateParts = { day: d, month: curMonth, year: curYear };
+        setDateTimeValue("");
+      });
+    }
+
+    grid.appendChild(cell);
+  }
+}
+
+function formatDesktopTimeInput(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 4);
+  if (digits.length <= 2) return digits;
+  return `${digits.slice(0, 2)}:${digits.slice(2)}`;
+}
+
+function getTimeFieldValue(desktopId, mobileId) {
+  const desktopValue = document.getElementById(desktopId)?.value.trim() || "";
+  const mobileValue = document.getElementById(mobileId)?.value.trim() || "";
+  return mobileValue || desktopValue;
+}
+
+function limitText(value, max) {
+  return (value || "").trim().slice(0, max);
+}
+
+function setBookingError(form, message, focusNode) {
+  const error = form.querySelector(".booking-error") || form.parentElement?.querySelector(".booking-error");
+  if (error) {
+    error.textContent = message;
+    error.hidden = false;
+  }
+  if (focusNode) focusNode.focus({ preventScroll: true });
+}
+
+function clearBookingError(form) {
+  const error = form.querySelector(".booking-error") || form.parentElement?.querySelector(".booking-error");
+  if (error) {
+    error.textContent = "";
+    error.hidden = true;
+  }
+  form.querySelectorAll(".is-invalid").forEach((node) => node.classList.remove("is-invalid"));
+}
+
+function handleBooking(event) {
+  event.preventDefault();
+  const form = event.target;
+  const copy = I18N[currentLang].booking;
+  clearBookingError(form);
+
+  const nameField = document.getElementById("customerName");
+  const phoneField = document.getElementById("customerPhone");
+  const eventField = document.getElementById("eventTypeSelect");
+  const dateField = document.getElementById("desiredDateTime");
+  const notesField = document.getElementById("bookingNotes");
+  const startDesktop = document.getElementById("startTimeDesktop");
+  const endDesktop = document.getElementById("endTimeDesktop");
+  const startMobile = document.getElementById("startTimeMobile");
+  const endMobile = document.getElementById("endTimeMobile");
+
+  const name = limitText(nameField?.value, BOOKING_LIMITS.name);
+  const customerPhone = limitText(phoneField?.value, BOOKING_LIMITS.phone);
+  const eventType = limitText(eventField?.value, 80);
+  const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
+  const startTime = getTimeFieldValue("startTimeDesktop", "startTimeMobile");
+  const endTime = getTimeFieldValue("endTimeDesktop", "endTimeMobile");
+  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes) || "-";
+  let bookingTime = "-";
+
+  if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
+  else if (startTime) bookingTime = `${copy.timePrefixes.from} ${startTime}`;
+  else if (endTime) bookingTime = `${copy.timePrefixes.until} ${endTime}`;
+
+  const requiredFields = [
+    [nameField, name],
+    [phoneField, customerPhone],
+    [eventField, eventType],
+    [dateField, bookingDate]
+  ];
+  const missing = requiredFields.find(([, value]) => !value);
+  if (missing || bookingTime === "-") {
+    requiredFields.forEach(([node, value]) => {
+      if (node && !value) node.classList.add("is-invalid");
+    });
+    const timeFocus = [startDesktop, startMobile, endDesktop, endMobile].find((node) => node && !node.disabled);
+    if (bookingTime === "-") {
+      [startDesktop, endDesktop, startMobile, endMobile].forEach((node) => node?.classList.add("is-invalid"));
+    }
+    setBookingError(form, copy.errors.required, missing?.[0] || timeFocus);
+    return;
+  }
+
+  const button = event.target.querySelector(".booking-btn");
+  const message =
+    copy.messageGreeting + "\n\n" +
+    copy.messageLabels.name + ": " + name + "\n" +
+    copy.messageLabels.phone + ": " + customerPhone + "\n" +
+    copy.messageLabels.eventType + ": " + eventType + "\n" +
+    copy.messageLabels.date + ": " + bookingDate + "\n" +
+    copy.messageLabels.time + ": " + bookingTime + "\n" +
+    copy.messageLabels.notes + ": " + notes;
+
+  if (message.length > BOOKING_LIMITS.message) {
+    notesField?.classList.add("is-invalid");
+    setBookingError(form, copy.errors.tooLong, notesField);
+    return;
+  }
+
+  if (button) {
+    button.textContent = copy.buttonSent;
+    button.disabled = true;
+    setTimeout(() => {
+      button.textContent = copy.button;
+      button.disabled = false;
+    }, 3000);
+  }
+
+  const msg = encodeURIComponent(message);
+
+  setTimeout(() => {
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + msg, "_blank", "noopener,noreferrer");
+  }, 350);
+}
+
+function applyLanguage(lang) {
+  const t = I18N[lang] || I18N.lv;
+
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  setText(".nav-cta", t.navCta);
+  setHtml(".hero h1", t.heroTitle);
+  setText(".hero p", t.heroText);
+
+  document.querySelectorAll(".hero-badges .badge").forEach((el, index) => {
+    el.textContent = t.badges[index];
+  });
+
+  setHeader(0, t.hourly.label, t.hourly.title, t.hourly.text);
+  document.querySelectorAll(".hour-card .hour-label").forEach((el, index) => {
+    el.textContent = t.hourly.cards[index];
+  });
+  setText(".popular-tag", t.hourly.popular);
+
+  setHeader(1, t.calc.label, t.calc.title, t.calc.text);
+  Object.entries(t.calc.tabs).forEach(([mode, label]) => setText(`#tab-${mode}`, label));
+  Object.entries(t.calc.sliderLabels).forEach(([mode, label]) => {
+    const labelEl = document.querySelector(`#mode-${mode} .calc-slider-label span:first-child`);
+    if (labelEl) labelEl.textContent = label;
+  });
+  Object.entries(t.calc.ticks).forEach(([mode, values]) => setTickLabels(mode, values));
+
+  MODES.forEach((mode) => {
+    const rows = document.querySelectorAll(`#mode-${mode} .calc-r-row`);
+    if (rows[0]) rows[0].querySelector("span").textContent = t.calc.full;
+    if (rows[1]) rows[1].querySelector("span").textContent = t.calc.save;
+  });
+
+  setHeader(2, t.packages.label, t.packages.title, t.packages.text);
+  document.querySelectorAll(".pkg-card").forEach((card, index) => {
+    const data = t.packages.cards[index];
+    if (!data) return;
+    const kicker = card.querySelector(".pkg-kicker");
+    const name = card.querySelector(".pkg-name");
+    const sub = card.querySelector(".pkg-sub");
+    const per = card.querySelector(".pkg-per");
+    const saving = card.querySelector(".pkg-saving");
+    const button = card.querySelector(".pkg-btn");
+    if (kicker) kicker.textContent = data.kicker;
+    if (name) name.textContent = data.name;
+    if (sub) sub.textContent = data.sub;
+    if (per) per.textContent = data.per;
+    if (saving) saving.textContent = data.saving;
+    if (button) button.textContent = data.button;
+  });
+
+  setText("#calendar .section-label", t.calendar.label);
+  setHtml("#calendar .calendar-title", t.calendar.titleHtml);
+  setText("#calendar .calendar-sub", t.calendar.text);
+  setSelectorListText(".cal-day-name", t.calendar.daysShort);
+  const prevMonth = document.getElementById("prevMonth");
+  const nextMonth = document.getElementById("nextMonth");
+  if (prevMonth) prevMonth.setAttribute("aria-label", t.calendar.prevLabel);
+  if (nextMonth) nextMonth.setAttribute("aria-label", t.calendar.nextLabel);
+
+  setText(".booking-title", t.booking.title);
+  setText(".booking-sub", t.booking.sub);
+  setSelectorListText(".booking-field label", t.booking.labels);
+  setPlaceholder("customerName", t.booking.placeholders.name);
+  setPlaceholder("customerPhone", t.booking.placeholders.phone);
+  setPlaceholder("desiredDateTime", t.booking.placeholders.date);
+  setPlaceholder("startTimeDesktop", t.booking.placeholders.start);
+  setPlaceholder("endTimeDesktop", t.booking.placeholders.end);
+  setPlaceholder("bookingNotes", t.booking.placeholders.notes);
+  setOptionTexts("eventTypeSelect", t.booking.options);
+  setText(".booking-btn", t.booking.button);
+  const bookingNote = document.querySelector(".booking-note");
+  if (bookingNote) {
+    bookingNote.innerHTML = `${t.booking.notePrefix} <a href="https://wa.me/${WA_NUMBER}"><strong>+371 27850380</strong></a>`;
+  }
+  const startTimeMobile = document.getElementById("startTimeMobile");
+  const endTimeMobile = document.getElementById("endTimeMobile");
+  if (startTimeMobile) startTimeMobile.setAttribute("aria-label", t.booking.startTimeAria);
+  if (endTimeMobile) endTimeMobile.setAttribute("aria-label", t.booking.endTimeAria);
+  renderCalendar();
+  if (selectedDateParts) setDateTimeValue("");
+
+  setHtml(".cta-section h2", t.cta.title);
+  setText(".cta-section p", t.cta.text);
+  setText(".btn-primary", t.cta.whatsapp);
+  setText(".btn-secondary", t.cta.email);
+  setText("footer p", t.footer);
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    const active = btn.dataset.lang === lang;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+function setLanguage(lang) {
+  currentLang = I18N[lang] ? lang : "lv";
+  try {
+    localStorage.setItem("roomjurmala-lang", currentLang);
+  } catch (error) {
+    /* Language persistence is optional. */
+  }
+
+  applyLanguage(currentLang);
+  MODES.forEach((mode) => {
+    const slider = document.getElementById(`${mode}-slider`);
+    calcMode(mode, slider.value);
+  });
+}
+
+function getSavedLanguage() {
+  try {
+    const saved = localStorage.getItem("roomjurmala-lang");
+    return I18N[saved] ? saved : "lv";
+  } catch (error) {
+    return "lv";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  currentLang = getSavedLanguage();
+  applyLanguage(currentLang);
+  MODES.forEach((mode) => {
+    const slider = document.getElementById(`${mode}-slider`);
+    calcMode(mode, slider.value);
+  });
+  setMode("hours");
+
+  const prevMonth = document.getElementById("prevMonth");
+  const nextMonth = document.getElementById("nextMonth");
+  if (prevMonth) {
+    prevMonth.addEventListener("click", () => {
+      curMonth--;
+      if (curMonth < 0) {
+        curMonth = 11;
+        curYear--;
+      }
+      renderCalendar();
+    });
+  }
+  if (nextMonth) {
+    nextMonth.addEventListener("click", () => {
+      curMonth++;
+      if (curMonth > 11) {
+        curMonth = 0;
+        curYear++;
+      }
+      renderCalendar();
+    });
+  }
+
+  ["startTimeDesktop", "endTimeDesktop"].forEach((id) => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.addEventListener("input", (event) => {
+      event.target.value = formatDesktopTimeInput(event.target.value);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
