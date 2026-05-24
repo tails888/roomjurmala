@@ -218,7 +218,7 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'Event venue in Jūrmala <br/><em>for celebrations and classes</em>',
+      titleHtml: 'Space for your <br/><em>events</em>',
       sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
