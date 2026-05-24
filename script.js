@@ -53,28 +53,28 @@ const I18N = {
       titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
       cards: {
         hourly: {
-          type: 'Dienas pakete',
+          type: 'Viena diena',
           amountHtml: '<sup>€</sup>130',
-          period: 'par pilnu dienu',
+          lead: 'Dienas pakete',
+          period: '/ 8 stundas',
           features: [
-            'Līdz 8 stundām',
-            'Laika izvēle 8:00-22:00',
-            'Visa telpa iekļauta',
-            'Virtuve iekļauta',
-            'Bezmaksas autostāvvieta'
+            'Pilna diena vienreizējam pasākumam',
+            'Intensīvam darbam vai nodarbībām',
+            'Ietaupi 30€ · 16.25€/h',
+            'Laika izvēle 8:00-22:00'
           ],
           cta: 'Rezervēt dienu'
         },
         party: {
           popular: 'Populārākais',
-          type: 'Nedēļas pakete',
+          type: 'Nedēļa · 40h kopā',
           amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Izdevīgāk ilgākam periodam',
-          perEvent: 'par 5 dienām',
+          forUpTo: 'Nedēļas pakete',
+          perEvent: '/ 5 dienas',
           featuresPrimary: [
-            '5 × 8h (40h kopā)',
-            'Fiksēts vai mainīgs laiks',
-            'Pilns aprīkojums iekļauts'
+            '5 darba dienas pēc kārtas',
+            'Ideāli nometnēm un kursiem',
+            'Ietaupi 250€ · 13.75€/h'
           ],
           moreThan15: 'Laba izvēle',
           featuresSecondary: [
@@ -84,14 +84,15 @@ const I18N = {
           cta: 'Rezervēt nedēļu'
         },
         custom: {
-          type: 'Abonements',
+          type: 'Regulāri · mēnesī',
           amountHtml: '<sup>€</sup>460',
-          period: 'mēnesī',
+          lead: 'Abonements',
+          period: '/ mēnesī · min. 3 mēneši',
           features: [
+            'Mēneša risinājums nodarbībām un grupām',
+            'Ietaupi 180€/mēn · 8h nedēļā',
             'Regulārs laiks katru nedēļu',
-            'No 8h nedēļā',
             'Mēneša rēķins',
-            'Piemērots jogai, nodarbībām un pulciņiem',
           ],
           cta: 'Pieteikties'
         }
@@ -258,28 +259,28 @@ const I18N = {
       titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
       cards: {
         hourly: {
-          type: 'Day package',
+          type: 'One day',
           amountHtml: '<sup>€</sup>130',
-          period: 'for a full day',
+          lead: 'Day package',
+          period: '/ 8 hours',
           features: [
-            'Up to 8 hours',
-            'Time choice 8:00-22:00',
-            'Full room access included',
-            'Kitchen included',
-            'Free parking'
+            'Full day for a one-off event',
+            'For intensive work or classes',
+            'Save €30 · €16.25/h',
+            'Time choice 8:00-22:00'
           ],
           cta: 'Book a day'
         },
         party: {
           popular: 'Most popular',
-          type: 'Week package',
+          type: 'Week · 40h total',
           amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Better for longer bookings',
-          perEvent: 'for 5 days',
+          forUpTo: 'Week package',
+          perEvent: '/ 5 days',
           featuresPrimary: [
-            '5 × 8h (40h total)',
-            'Fixed or flexible time',
-            'Full equipment included'
+            '5 working days in a row',
+            'Ideal for camps and courses',
+            'Save €250 · €13.75/h'
           ],
           moreThan15: 'Best for',
           featuresSecondary: [
@@ -289,14 +290,15 @@ const I18N = {
           cta: 'Book a week'
         },
         custom: {
-          type: 'Subscription',
+          type: 'Regular · monthly',
           amountHtml: '<sup>€</sup>460',
-          period: 'per month',
+          lead: 'Subscription',
+          period: '/ month · min. 3 months',
           features: [
+            'Monthly solution for classes and groups',
+            'Save €180/month · 8h weekly',
             'Regular time every week',
-            'From 8h per week',
-            'Monthly invoice',
-            'Good for yoga, classes and clubs'
+            'Monthly invoice'
           ],
           cta: 'Apply'
         }
@@ -463,28 +465,28 @@ const I18N = {
       titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
       cards: {
         hourly: {
-          type: 'Пакет на день',
+          type: 'Один день',
           amountHtml: '<sup>€</sup>130',
-          period: 'за полный день',
+          lead: 'Пакет на день',
+          period: '/ 8 часов',
           features: [
-            'До 8 часов',
-            'Выбор времени 8:00-22:00',
-            'Весь зал включён',
-            'Кухня включена',
-            'Бесплатная парковка'
+            'Полный день для разового события',
+            'Для интенсивной работы или занятий',
+            'Экономия 30€ · 16.25€/ч',
+            'Выбор времени 8:00-22:00'
           ],
           cta: 'Забронировать день'
         },
         party: {
           popular: 'Самый популярный',
-          type: 'Пакет на неделю',
+          type: 'Неделя · 40ч всего',
           amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Выгоднее на длинный период',
-          perEvent: 'за 5 дней',
+          forUpTo: 'Пакет на неделю',
+          perEvent: '/ 5 дней',
           featuresPrimary: [
-            '5 × 8ч (40ч всего)',
-            'Фиксированное или гибкое время',
-            'Всё оборудование включено'
+            '5 рабочих дней подряд',
+            'Идеально для лагерей и курсов',
+            'Экономия 250€ · 13.75€/ч'
           ],
           moreThan15: 'Подходит для',
           featuresSecondary: [
@@ -494,14 +496,15 @@ const I18N = {
           cta: 'Забронировать неделю'
         },
         custom: {
-          type: 'Абонемент',
+          type: 'Регулярно · месяц',
           amountHtml: '<sup>€</sup>460',
-          period: 'в месяц',
+          lead: 'Абонемент',
+          period: '/ месяц · мин. 3 месяца',
           features: [
+            'Месячное решение для занятий и групп',
+            'Экономия 180€/мес · 8ч в неделю',
             'Регулярное время каждую неделю',
-            'От 8ч в неделю',
-            'Месячный счёт',
-            'Для йоги, занятий и кружков'
+            'Месячный счёт'
           ],
           cta: 'Записаться'
         }
@@ -982,7 +985,8 @@ function applyLanguage(lang) {
     const pricePeriods = hourlyCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
     if (hourlyAmount) hourlyAmount.innerHTML = copy.pricing.cards.hourly.amountHtml;
-    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
+    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.lead;
+    if (pricePeriods[1]) pricePeriods[1].textContent = copy.pricing.cards.hourly.period;
     setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
     setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
   }
@@ -1007,7 +1011,8 @@ function applyLanguage(lang) {
     const customPeriods = customCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
     if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
-    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.period;
+    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.lead;
+    if (customPeriods[1]) customPeriods[1].textContent = copy.pricing.cards.custom.period;
     setNodeListText(customCard.querySelectorAll('.price-features li'), copy.pricing.cards.custom.features);
     setText('.pricing-grid .price-card:nth-of-type(3) .price-cta', copy.pricing.cards.custom.cta);
   }
