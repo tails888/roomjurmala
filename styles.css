@@ -1646,6 +1646,10 @@ h1, h2, h3,
   padding: 0 28px 24px;
 }
 
+.faq-item:not([open]) > .faq-answer {
+  display: none;
+}
+
 .animal-stage {
   position: absolute;
   inset: auto;
