@@ -56,44 +56,42 @@ const I18N = {
           type: 'Stundas noma',
           period: 'par stundu',
           features: [
-            'Darba dienās līdz 18:00 10€/stundā',
-            'Pēc 18:00 un brīvdienās 20€/stundā',
+            'No 1 stundas',
+            'Vienkārša gala cena',
             'Visa telpa iekļauta',
             'Virtuve iekļauta',
             'Bezmaksas autostāvvieta'
           ],
-          cta: 'Rezervēt'
+          cta: 'Skatīt cenas'
         },
         party: {
           popular: 'Populārākais',
-          type: 'Ballītes pakete',
-          forUpTo: 'Ballītēm līdz 15 viesiem',
-          perEvent: 'par pasākumu',
+          type: '3 stundu noma',
+          forUpTo: 'Populārākais sākums',
+          perEvent: 'par 3 stundām',
           featuresPrimary: [
-            '3 stundas 100€',
-            'Katra nākamā stunda 20€',
+            '3 stundas 55€',
+            '4 stundas 70€',
             'Visa telpa privātam pasākumam'
           ],
-          moreThan15: 'Ja viesu skaits pārsniedz 15 cilvēkus',
+          moreThan15: 'Ja vajag ilgāku laiku',
           featuresSecondary: [
-            '3 stundas 130€',
-            'Katra nākamā stunda 30€'
+            '6 stundas 100€',
+            'Visa diena 130€'
           ],
-          cta: 'Pieprasīt paketi'
+          cta: 'Atvērt cenu lapu'
         },
         custom: {
-          type: 'Individuāls piedāvājums',
-          amountHtml: 'Pēc<br/>vienošanās',
-          period: 'semināri, fotosesijas, treneru nodarbības, nometnes',
+          type: 'Paketes',
+          amountHtml: '<sup>€</sup>130+',
+          period: 'diena, nedēļa, mēnesis',
           features: [
-            'Jogas un fitnesa nodarbības',
-            'Profesionālas fotosesijas',
+            'Dienas pakete 130€',
+            'Nedēļas pakete 550€',
+            'Mēneša abonements 460€',
             'Bērnu nometnes un attīstības grupas',
-            'Korporatīvie pasākumi',
-            'Regulāri nomas līgumi',
-            'Meistarklases no A–Z'
           ],
-          cta: 'Sazināties'
+          cta: 'Salīdzināt paketes'
         }
       }
     },
@@ -109,7 +107,7 @@ const I18N = {
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem; ja viesu ir vairāk, pakete sākas no 130€.'],
+        ['Cik maksā telpu noma ROOM Jūrmala?', 'Stundas noma sākas no 20€ stundā. 3 stundas maksā 55€, visa diena 130€. Pieejamas arī nedēļas un mēneša paketes.'],
         ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
         ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
         ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
@@ -261,43 +259,42 @@ const I18N = {
           type: 'Hourly room rental',
           period: 'per hour',
           features: [
-            'Weekdays until 6:00 PM — €10/hour',
-            'After 6:00 PM and on weekends — €20/hour',
+            'From 1 hour',
+            'Simple final price',
             'Full room access included',
             'Kitchen included',
             'Free parking'
           ],
-          cta: 'Book now'
+          cta: 'See prices'
         },
         party: {
           popular: 'Most popular',
-          type: 'Party package',
-          forUpTo: 'For parties up to 15 guests',
-          perEvent: 'per event',
+          type: '3-hour rental',
+          forUpTo: 'Most popular start',
+          perEvent: 'for 3 hours',
           featuresPrimary: [
-            '3 hours for €100',
-            'Additional hours €20 each',
+            '3 hours 55€',
+            '4 hours 70€',
             'The whole room for your private event'
           ],
-          moreThan15: 'If there are more than 15 guests',
+          moreThan15: 'For longer bookings',
           featuresSecondary: [
-            '3 hours for €130',
-            'Additional hours €30 each'
+            '6 hours 100€',
+            'Full day 130€'
           ],
-          cta: 'Request package'
+          cta: 'Open price page'
         },
         custom: {
-          type: 'Custom offer',
-          amountHtml: 'By<br/>agreement',
-          period: 'seminars, photoshoots, corporate events',
+          type: 'Packages',
+          amountHtml: '<sup>€</sup>130+',
+          period: 'day, week, month',
           features: [
-            'Yoga & fitness sessions',
-            'Professional photoshoots',
-            'Corporate events',
-            'Regular room rental agreements',
-            'Workshops of all kinds'
+            'Day package 130€',
+            'Week package 550€',
+            'Monthly subscription 460€',
+            'Children’s camps and activity groups'
           ],
-          cta: 'Contact us'
+          cta: 'Compare packages'
         }
       }
     },
@@ -313,7 +310,7 @@ const I18N = {
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', 'On weekdays until 6:00 PM the room is €10/hour. After 6:00 PM and on weekends it is €20/hour. The 3-hour party package starts from €100 for up to 15 guests; for larger groups, it starts from €130.'],
+        ['How much does ROOM Jūrmala cost to rent?', 'Hourly rental starts from €20 per hour. 3 hours cost €55 and a full day costs €130. Week and monthly packages are also available.'],
         ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
         ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
         ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
@@ -465,43 +462,42 @@ const I18N = {
           type: 'Почасовая аренда',
           period: 'в час',
           features: [
-            'По будням до 18:00 — 10€/час',
-            'После 18:00 и в выходные — 20€/час',
+            'От 1 часа',
+            'Понятная финальная цена',
             'Весь зал включён',
             'Кухня включена',
             'Бесплатная парковка'
           ],
-          cta: 'Забронировать'
+          cta: 'Смотреть цены'
         },
         party: {
           popular: 'Самый популярный',
-          type: 'Пакет для праздника',
-          forUpTo: 'Для праздников до 15 гостей',
-          perEvent: 'за мероприятие',
+          type: 'Аренда на 3 часа',
+          forUpTo: 'Популярный старт',
+          perEvent: 'за 3 часа',
           featuresPrimary: [
-            '3 часа за 100€',
-            'Каждый следующий час — 20€',
+            '3 часа 55€',
+            '4 часа 70€',
             'Весь зал для вашего частного мероприятия'
           ],
-          moreThan15: 'Если гостей больше 15',
+          moreThan15: 'Для более долгой аренды',
           featuresSecondary: [
-            '3 часа за 130€',
-            'Каждый следующий час — 30€'
+            '6 часов 100€',
+            'Весь день 130€'
           ],
-          cta: 'Запросить пакет'
+          cta: 'Открыть страницу цен'
         },
         custom: {
-          type: 'Индивидуальное предложение',
-          amountHtml: 'По<br/>договорённости',
-          period: 'семинары, фотосессии, корпоративные мероприятия',
+          type: 'Пакеты',
+          amountHtml: '<sup>€</sup>130+',
+          period: 'день, неделя, месяц',
           features: [
-            'Аренда зала для йоги и фитнеса',
-            'Профессиональные фотосессии',
-            'Корпоративные мероприятия',
-            'Регулярная аренда зала',
-            'Мастер-классы от А до Я'
+            'Пакет на день 130€',
+            'Пакет на неделю 550€',
+            'Месячный абонемент 460€',
+            'Детские лагеря и группы занятий'
           ],
-          cta: 'Обсудить условия'
+          cta: 'Сравнить пакеты'
         }
       }
     },
@@ -517,7 +513,7 @@ const I18N = {
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', 'По будням до 18:00 аренда стоит 10€/час. После 18:00 и в выходные — 20€/час. Пакет для праздника на 3 часа начинается от 100€ для компании до 15 гостей; для больших групп — от 130€.'],
+        ['Сколько стоит аренда ROOM Jūrmala?', 'Почасовая аренда начинается от 20€ в час. 3 часа стоят 55€, полный день — 130€. Также доступны пакеты на неделю и месяц.'],
         ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
         ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
         ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
@@ -625,6 +621,11 @@ const SERVICES_PATHS = {
   en: '/en/telpa/',
   ru: '/ru/telpa/'
 };
+const PRICING_PATHS = {
+  lv: '/cenas/',
+  en: '/en/cenas/',
+  ru: '/ru/cenas/'
+};
 const BOOKING_LIMITS = {
   name: 80,
   phone: 20,
@@ -693,6 +694,22 @@ function updateLocalizedServiceLinks(lang) {
   ].forEach((selector) => {
     const node = document.querySelector(selector);
     if (node) node.setAttribute('href', servicePath);
+  });
+}
+
+function updateLocalizedPricingLinks(lang) {
+  const pricingPath = PRICING_PATHS[lang] || PRICING_PATHS.lv;
+  [
+    '.nav-links a:nth-child(2)',
+    '.mobile-menu-links a:nth-child(2)',
+    '.footer-links a:nth-child(2)'
+  ].forEach((selector) => {
+    const node = document.querySelector(selector);
+    if (node) node.setAttribute('href', pricingPath);
+  });
+
+  document.querySelectorAll('#pricing .price-cta').forEach((node) => {
+    node.setAttribute('href', pricingPath);
   });
 }
 
@@ -909,9 +926,10 @@ function applyLanguage(lang) {
 	    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
 	    if (twitterDescription) twitterDescription.setAttribute('content', copy.meta.twitterDescription || copy.meta.ogDescription || copy.meta.description);
 
-	    setSelectorListText('.nav-links a', copy.nav.links);
+  setSelectorListText('.nav-links a', copy.nav.links);
   setSelectorListText('.mobile-menu-links a', copy.nav.links);
   updateLocalizedServiceLinks(currentLang);
+  updateLocalizedPricingLinks(currentLang);
   document.querySelectorAll('.nav-cta').forEach((node) => {
     node.textContent = copy.nav.cta;
   });

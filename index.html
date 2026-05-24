@@ -103,9 +103,9 @@
           },
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "100",
+            "price": "55",
             "priceCurrency": "EUR",
-            "description": "3 stundas, līdz 15 viesiem"
+            "description": "3 stundas"
           }
         },
         {
@@ -149,7 +149,7 @@
           },
           "priceSpecification": {
             "@type": "PriceSpecification",
-            "price": "10",
+            "price": "20",
             "priceCurrency": "EUR",
             "unitText": "stundā"
           }
@@ -176,7 +176,7 @@
         "name": "Cik maksā telpu noma ROOM Jūrmala?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem; ja viesu ir vairāk, pakete sākas no 130€."
+          "text": "Stundas noma sākas no 20€ stundā. 3 stundas maksā 55€, visa diena 130€. Pieejamas arī nedēļas un mēneša paketes."
         }
       },
       {
@@ -267,7 +267,7 @@
   </a>
   <div class="nav-links">
     <a href="/telpa/">Telpa</a>
-    <a href="#pricing">Cenas</a>
+    <a href="/cenas/">Cenas</a>
     <a href="#calendar">Pieejamība</a>
     <a href="#map-section">Atrašanās</a>
     <a href="#contact">Kontakti</a>
@@ -291,7 +291,7 @@
   </div>
   <div class="mobile-menu-links">
     <a href="/telpa/">Telpa</a>
-    <a href="#pricing">Cenas</a>
+    <a href="/cenas/">Cenas</a>
     <a href="#calendar">Pieejamība</a>
     <a href="#map-section">Atrašanās</a>
     <a href="#contact">Kontakti</a>
@@ -488,56 +488,54 @@
       <div class="price-card reveal">
         <span class="price-icon">⏰</span>
         <div class="price-type">Stundas noma</div>
-        <div class="price-amount"><sup>€</sup>10<span style="font-size:1.4rem">–20</span></div>
+        <div class="price-amount"><sup>€</sup>20</div>
         <div class="price-period">par stundu</div>
         <hr class="price-divider"/>
         <ul class="price-features">
-          <li>Darba dienās līdz 18:00 10€/stundā</li>
-          <li>Pēc 18:00 un brīvdienās 20€/stundā</li>
+          <li>No 1 stundas</li>
+          <li>Vienkārša gala cena</li>
           <li>Visa telpa iekļauta</li>
           <li>Virtuve iekļauta</li>
           <li>Bezmaksas autostāvvieta</li>
         </ul>
-        <a href="#calendar" class="price-cta outline">Rezervēt</a>
+        <a href="/cenas/" class="price-cta outline">Skatīt cenas</a>
       </div>
       <!-- Package — featured -->
       <div class="price-card featured reveal">
         <div class="price-popular">Populārākais</div>
         <span class="price-icon">🎉</span>
-        <div class="price-type">Ballītes pakete</div>
-        <div class="price-period">Ballītēm līdz 15 viesiem</div>
-        <div class="price-amount"><sup>€</sup>100<span style="font-size:1.4rem">–130</span></div>
-        <div class="price-period">par pasākumu</div>
+        <div class="price-type">3 stundu noma</div>
+        <div class="price-period">Populārākais sākums</div>
+        <div class="price-amount"><sup>€</sup>55</div>
+        <div class="price-period">par 3 stundām</div>
         <hr class="price-divider" style="border-color:rgba(255,255,255,0.2)"/>
         <ul class="price-features">
-          <li>3 stundas 100€</li>
-          <li>Katra nākamā stunda 20€</li>
+          <li>3 stundas 55€</li>
+          <li>4 stundas 70€</li>
           <li>Pilna telpa privātam pasākumam</li>
         </ul>
         <hr class="price-divider" style="border-color:rgba(255,255,255,0.2); margin-top:18px;"/>
-        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">Ja viesu skaits pārsniedz 15 cilvēkus</div>
+        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">Ja vajag ilgāku laiku</div>
         <ul class="price-features" style="margin-bottom:8px;">
-          <li>3 stundas 130€</li>
-          <li>Katra nākamā stunda 30€</li>
+          <li>6 stundas 100€</li>
+          <li>Visa diena 130€</li>
         </ul>
-        <a href="#calendar" class="price-cta solid">Pieprasīt paketi</a>
+        <a href="/cenas/" class="price-cta solid">Atvērt cenu lapu</a>
       </div>
       <!-- Custom -->
       <div class="price-card reveal">
         <span class="price-icon">✨</span>
-        <div class="price-type">Individuāls piedāvājums</div>
-        <div class="price-amount" style="font-size:2rem;">Pēc<br/>vienošanās</div>
-        <div class="price-period">semināri, fotosesijas, treneru nodarbības, nometnes</div>
+        <div class="price-type">Paketes</div>
+        <div class="price-amount" style="font-size:2rem;"><sup>€</sup>130+</div>
+        <div class="price-period">diena, nedēļa, mēnesis</div>
         <hr class="price-divider"/>
         <ul class="price-features">
-          <li>Jogas un fitnesa nodarbības</li>
-          <li>Profesionālas fotosesijas</li>
+          <li>Dienas pakete 130€</li>
+          <li>Nedēļas pakete 550€</li>
+          <li>Mēneša abonements 460€</li>
           <li>Bērnu nometnes un attīstības grupas</li>
-          <li>Korporatīvie pasākumi</li>
-          <li>Regulāri nomas līgumi</li>
-          <li>Meistarklases no A–Z</li>
         </ul>
-        <a href="tel:+37127850380" class="price-cta outline">Sazināties</a>
+        <a href="/cenas/" class="price-cta outline">Salīdzināt paketes</a>
       </div>
     </div>
   </div>
@@ -639,7 +637,7 @@
       <div class="faq-list reveal">
         <details class="faq-item">
           <summary class="faq-question">Cik maksā telpu noma ROOM Jūrmala?</summary>
-          <p class="faq-answer">Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem; ja viesu ir vairāk, pakete sākas no 130€.</p>
+          <p class="faq-answer">Stundas noma sākas no 20€ stundā. 3 stundas maksā 55€, visa diena 130€. Pieejamas arī nedēļas un mēneša paketes.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Vai telpu var nomāt pa stundām?</summary>
@@ -808,7 +806,7 @@
   </div>
   <div class="footer-links">
     <a href="/telpa/">Telpa</a>
-    <a href="#pricing">Cenas</a>
+    <a href="/cenas/">Cenas</a>
     <a href="#calendar">Rezervēt</a>
     <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok</a>
