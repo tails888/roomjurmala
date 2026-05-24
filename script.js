@@ -157,10 +157,10 @@ const I18N = {
         'Mēneša abonements'
       ],
       packageNotes: {
-        hours: 'Sveiki! Vēlos rezervēt telpu uz dažām stundām. Lūdzu, pastāstiet, kāds laiks ir pieejams izvēlētajā datumā.',
-        day: 'Sveiki! Vēlos rezervēt dienas paketi — 130 €. Vai izvēlētais datums ir pieejams?',
-        week: 'Sveiki! Vēlos rezervēt nedēļas paketi — 550 €. Lūdzu, sazinieties ar mani, lai vienotos par datumiem.',
-        month: 'Sveiki! Interesē mēneša abonements — 460 € mēnesī. Vēlos vienoties par regulāru laiku nodarbībām.'
+        hours: 'Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?',
+        day: 'Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?',
+        week: 'Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?',
+        month: 'Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?'
       },
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
@@ -206,7 +206,7 @@ const I18N = {
       copy: '© 2026 Room Jūrmala. Visas tiesības aizsargātas.'
     },
     whatsapp: {
-      greeting: 'Sveiki! Es vēlos rezervēt ROOM Jūrmala telpu.',
+      greeting: 'Sveiki! Vēlos pieteikt ROOM Jūrmala telpu.',
       labels: {
         name: 'Vārds',
         phone: 'Tālrunis',
@@ -380,10 +380,10 @@ const I18N = {
         'Monthly subscription'
       ],
       packageNotes: {
-        hours: 'Hello! I would like to book the room for a few hours. Please let me know what times are available on my selected date.',
-        day: 'Hello! I would like to book the day package — €130. Is my selected date available?',
-        week: 'Hello! I would like to book the week package — €550. Please contact me so we can agree on the dates.',
-        month: 'Hello! I am interested in the monthly subscription — €460 per month. I would like to agree on a regular time for classes.'
+        hours: 'I am interested in renting the room for a few hours. Is it possible to book the room on this date and time?',
+        day: 'I am interested in the day package for €130. Is it possible to book the room on this date?',
+        week: 'I am interested in the week package for €550. Is it possible to book the room on this date?',
+        month: 'I am interested in the monthly subscription for €460 per month. Is it possible to agree on a regular booking time?'
       },
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
@@ -603,10 +603,10 @@ const I18N = {
         'Месячный абонемент'
       ],
       packageNotes: {
-        hours: 'Здравствуйте! Хочу забронировать зал на несколько часов. Подскажите, пожалуйста, какое время свободно в выбранную дату.',
-        day: 'Здравствуйте! Хочу забронировать пакет на день — 130 €. Свободна ли выбранная дата?',
-        week: 'Здравствуйте! Хочу забронировать пакет на неделю — 550 €. Свяжитесь, пожалуйста, со мной, чтобы согласовать даты.',
-        month: 'Здравствуйте! Интересует месячный абонемент — 460 € в месяц. Хотелось бы согласовать регулярное время для занятий.'
+        hours: 'Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?',
+        day: 'Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?',
+        week: 'Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?',
+        month: 'Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?'
       },
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
@@ -1406,7 +1406,7 @@ function handleBooking(e) {
   const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
   const startTime = getTimeFieldValue('startTimeDesktop', 'startTimeMobile');
   const endTime = getTimeFieldValue('endTimeDesktop', 'endTimeMobile');
-  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes) || '-';
+  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes);
   let bookingTime = '-';
   if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
   else if (startTime) bookingTime = `${copy.whatsapp.timePrefixes.from} ${startTime}`;
@@ -1434,6 +1434,7 @@ function handleBooking(e) {
 
   const btn = e.target.querySelector('.booking-btn');
   const phone = '37127850380';
+  const notesBlock = notes ? '\n\n' + notes : '';
   const message =
     copy.whatsapp.greeting + '\n\n' +
     copy.whatsapp.labels.name + ': ' + name + '\n' +
@@ -1441,8 +1442,8 @@ function handleBooking(e) {
     copy.whatsapp.labels.package + ': ' + bookingPackage + '\n' +
     copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
     copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
-    copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +
-    copy.whatsapp.labels.notes + ': ' + notes;
+    copy.whatsapp.labels.time + ': ' + bookingTime +
+    notesBlock;
 
   if (message.length > BOOKING_LIMITS.message) {
     notesField?.classList.add('is-invalid');

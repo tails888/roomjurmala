@@ -1424,24 +1424,36 @@ const CALC_BOOKING_PACKAGES = {
   months: "month"
 };
 
-const BOOKING_SELECTION_PREFIXES = {
-  lv: "Izvēlēts no cenu lapas",
-  en: "Selected from pricing page",
-  ru: "Выбрано на странице цен"
+const PACKAGE_BOOKING_NOTES = {
+  lv: {
+    day: (price) => `Interesē dienas pakete par ${price || "130 €"}. Vai šajā datumā ir iespējams rezervēt telpu?`,
+    week: (price) => `Interesē nedēļas pakete par ${price || "550 €"}. Vai šajā datumā ir iespējams rezervēt telpu?`,
+    month: (price) => `Interesē mēneša abonements par ${price || "460 €"} mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?`
+  },
+  en: {
+    day: (price) => `I am interested in the day package for ${price || "€130"}. Is it possible to book the room on this date?`,
+    week: (price) => `I am interested in the week package for ${price || "€550"}. Is it possible to book the room on this date?`,
+    month: (price) => `I am interested in the monthly subscription for ${price || "€460"} per month. Is it possible to agree on a regular booking time?`
+  },
+  ru: {
+    day: (price) => `Интересует пакет на день за ${price || "130 €"}. Можно ли забронировать зал на выбранную дату?`,
+    week: (price) => `Интересует пакет на неделю за ${price || "550 €"}. Можно ли забронировать зал на выбранную дату?`,
+    month: (price) => `Интересует месячный абонемент за ${price || "460 €"} в месяц. Можно ли согласовать регулярное время для бронирования?`
+  }
 };
 
-function getBookingSelectionPrefix() {
-  return BOOKING_SELECTION_PREFIXES[currentLang] || BOOKING_SELECTION_PREFIXES.lv;
+function formatPriceForNote(amount) {
+  if (!amount) return "";
+  return currentLang === "en" ? `€${amount}` : `${amount} €`;
 }
 
 function getPackageBookingSummary(link) {
   const card = link.closest(".pkg-card");
   if (!card) return "";
-  const name = card.querySelector(".pkg-name")?.textContent.trim() || "";
+  const packageValue = link.dataset.bookingPackage || "";
   const amount = card.querySelector(".pkg-amount")?.textContent.trim() || "";
-  const price = amount ? `${amount} €` : "";
-  const details = [name, price].filter(Boolean).join(" — ");
-  return details ? `${getBookingSelectionPrefix()}: ${details}` : "";
+  const formatter = PACKAGE_BOOKING_NOTES[currentLang]?.[packageValue] || PACKAGE_BOOKING_NOTES.lv[packageValue];
+  return formatter ? formatter(formatPriceForNote(amount)) : "";
 }
 
 function setBookingSelection(packageValue, summary) {
@@ -1598,7 +1610,7 @@ const I18N = {
       notePrefix: "Rakstiet arī WhatsApp:",
       startTimeAria: "Sākuma laiks",
       endTimeAria: "Beigu laiks",
-      messageGreeting: "Sveiki! Vēlos rezervēt ROOM Jūrmala.",
+      messageGreeting: "Sveiki! Vēlos pieteikt ROOM Jūrmala telpu.",
       messageLabels: {
         name: "Vārds",
         phone: "Tālrunis",
@@ -2017,23 +2029,27 @@ function unitLabel(mode, value) {
 
 function bookingMessage(mode, value, price) {
   if (currentLang === "en") {
-    if (mode === "hours") return `Hello! I would like to book the room for ${value}h — ${price} €. Is there an available time?`;
-    if (mode === "days") return `Hello! I would like to book the room for ${value} ${value === 1 ? "day" : "days"} — ${price} €. Is there an available time?`;
-    if (mode === "weeks") return `Hello! I am interested in the week package (${value} ${value === 1 ? "week" : "weeks"}) — ${price} €. Can we agree on a time?`;
-    return `Hello! I am interested in the monthly subscription for ${value} months — ${price} €. Can we agree on a time?`;
+    if (mode === "hours") return `I am interested in renting the room for ${value}h for €${price}. Is it possible to book the room on this date and time?`;
+    if (mode === "days") return `I am interested in the ${value === 1 ? "day package" : `${value}-day package`} for €${price}. Is it possible to book the room on this date?`;
+    if (mode === "weeks") return `I am interested in the ${value === 1 ? "week package" : `${value}-week package`} for €${price}. Is it possible to book the room on this date?`;
+    return `I am interested in the monthly subscription for ${value} ${value === 1 ? "month" : "months"} for €${price}. Is it possible to agree on a regular booking time?`;
   }
 
   if (currentLang === "ru") {
-    if (mode === "hours") return `Здравствуйте! Хочу забронировать помещение на ${value}ч — ${price} €. Есть свободное время?`;
-    if (mode === "days") return `Здравствуйте! Хочу забронировать помещение на ${value} ${ruPlural(value, "день", "дня", "дней")} — ${price} €. Есть свободное время?`;
-    if (mode === "weeks") return `Здравствуйте! Интересует недельный пакет (${value} ${ruPlural(value, "неделя", "недели", "недель")}) — ${price} €. Можем договориться?`;
-    return `Здравствуйте! Интересует месячный абонемент на ${value} ${ruPlural(value, "месяц", "месяца", "месяцев")} — ${price} €. Можем договориться?`;
+    if (mode === "hours") return `Интересует аренда зала на ${value}ч за ${price} €. Можно ли забронировать зал на выбранную дату и время?`;
+    if (mode === "days") return `Интересует пакет на ${value} ${ruPlural(value, "день", "дня", "дней")} за ${price} €. Можно ли забронировать зал на выбранную дату?`;
+    if (mode === "weeks") return `Интересует пакет на ${value} ${ruPlural(value, "неделю", "недели", "недель")} за ${price} €. Можно ли забронировать зал на выбранную дату?`;
+    return `Интересует месячный абонемент на ${value} ${ruPlural(value, "месяц", "месяца", "месяцев")} за ${price} €. Можно ли согласовать регулярное время для бронирования?`;
   }
 
-  if (mode === "hours") return `Sveiki! Vēlos rezervēt telpu ${value}h — ${price} €. Vai ir brīvs laiks?`;
-  if (mode === "days") return `Sveiki! Vēlos rezervēt telpu uz ${value} ${value === 1 ? "dienu" : "dienām"} — ${price} €. Vai ir brīvs laiks?`;
-  if (mode === "weeks") return `Sveiki! Vēlos rezervēt nedēļas paketi (${value} ${value === 1 ? "nedēļa" : "nedēļas"}) — ${price} €. Vai varam vienoties?`;
-  return `Sveiki! Interesē mēneša abonements uz ${value} mēnešiem — ${price} €. Vai varam vienoties?`;
+  if (mode === "hours") return `Interesē telpas noma uz ${value}h par ${price} €. Vai šajā datumā un laikā ir iespējams rezervēt telpu?`;
+  if (mode === "days") return value === 1
+    ? `Interesē dienas pakete par ${price} €. Vai šajā datumā ir iespējams rezervēt telpu?`
+    : `Interesē ${value} dienu pakete par ${price} €. Vai šajos datumos ir iespējams rezervēt telpu?`;
+  if (mode === "weeks") return value === 1
+    ? `Interesē nedēļas pakete par ${price} €. Vai šajā datumā ir iespējams rezervēt telpu?`
+    : `Interesē ${value} nedēļu pakete par ${price} €. Vai šajos datumos ir iespējams rezervēt telpu?`;
+  return `Interesē mēneša abonements uz ${value} ${value === 1 ? "mēnesi" : "mēnešiem"} par ${price} €. Vai ir iespējams vienoties par regulāru rezervācijas laiku?`;
 }
 
 function getModeData(mode, value) {
@@ -2277,7 +2293,7 @@ function handleBooking(event) {
   const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
   const startTime = getTimeFieldValue("startTimeDesktop", "startTimeMobile");
   const endTime = getTimeFieldValue("endTimeDesktop", "endTimeMobile");
-  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes) || "-";
+  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes);
   let bookingTime = "-";
 
   if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
@@ -2305,6 +2321,7 @@ function handleBooking(event) {
   }
 
   const button = event.target.querySelector(".booking-btn");
+  const notesBlock = notes ? "\n\n" + notes : "";
   const message =
     copy.messageGreeting + "\n\n" +
     copy.messageLabels.name + ": " + name + "\n" +
@@ -2312,8 +2329,8 @@ function handleBooking(event) {
     copy.messageLabels.package + ": " + bookingPackage + "\n" +
     copy.messageLabels.eventType + ": " + eventType + "\n" +
     copy.messageLabels.date + ": " + bookingDate + "\n" +
-    copy.messageLabels.time + ": " + bookingTime + "\n" +
-    copy.messageLabels.notes + ": " + notes;
+    copy.messageLabels.time + ": " + bookingTime +
+    notesBlock;
 
   if (message.length > BOOKING_LIMITS.message) {
     notesField?.classList.add("is-invalid");
