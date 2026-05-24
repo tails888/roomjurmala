@@ -233,7 +233,7 @@
       <span></span>
       <span></span>
     </button>
-    <a href="/en/#calendar" class="nav-cta nav-cta-mobile">Book</a>
+    <a href="#calendar" class="nav-cta nav-cta-mobile">Book</a>
   </div>
   <a href="/en/" class="nav-logo">
     <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
@@ -241,7 +241,7 @@
   <div class="nav-links">
     <a href="/en/telpa/">The space</a>
     <a href="/en/cenas/">Prices</a>
-    <a href="/en/#calendar">Availability</a>
+    <a href="#calendar">Availability</a>
     <a href="/en/#map-section">Location</a>
     <a href="/en/#contact">Contact</a>
   </div>
@@ -251,7 +251,7 @@
       <a class="lang-btn active" href="/en/telpa/">EN</a>
       <a class="lang-btn" href="/ru/telpa/">RU</a>
     </div>
-    <a href="/en/#calendar" class="nav-cta nav-cta-desktop">Book</a>
+    <a href="#calendar" class="nav-cta nav-cta-desktop">Book</a>
   </div>
 </nav>
 <div class="mobile-menu-backdrop"></div>
@@ -265,7 +265,7 @@
   <div class="mobile-menu-links">
     <a href="/en/telpa/">The space</a>
     <a href="/en/cenas/">Prices</a>
-    <a href="/en/#calendar">Availability</a>
+    <a href="#calendar">Availability</a>
     <a href="/en/#map-section">Location</a>
     <a href="/en/#contact">Contact</a>
   </div>
@@ -279,7 +279,7 @@
       <h1 class="services-typewrite" aria-label="What we offer?">What we <em class="hero-accent">offer?</em></h1>
       <p>In one place you can celebrate a child’s birthday, host a workshop, arrange a photoshoot, run trainer classes, hold a seminar or organize children’s camp activities. The space can be adapted to the event type, guest count and mood you want.</p>
       <div class="services-hero-actions">
-        <a class="btn-primary" href="/en/#calendar">Check availability</a>
+        <a class="btn-primary" href="#calendar">Check availability</a>
         <a class="btn-outline" href="tel:+37127850380">Call</a>
       </div>
     </div>
@@ -429,13 +429,94 @@
     </div>
   </section>
 
+  <section id="calendar">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:48px;">
+        <h2 class="section-title">Choose a date for <em style="color:var(--gold);">your event</em></h2>
+        <p class="section-sub">Pick a date in the calendar and send a short booking request.</p>
+      </div>
+      <div class="calendar-layout">
+        <div class="cal-widget reveal">
+          <div class="cal-nav">
+            <button class="cal-arrow" id="prevMonth" type="button" aria-label="Previous month">&#8249;</button>
+            <div class="cal-month" id="calMonthLabel"></div>
+            <button class="cal-arrow" id="nextMonth" type="button" aria-label="Next month">&#8250;</button>
+          </div>
+          <div class="cal-days-header">
+            <div class="cal-day-name">Mo</div>
+            <div class="cal-day-name">Tu</div>
+            <div class="cal-day-name">We</div>
+            <div class="cal-day-name">Th</div>
+            <div class="cal-day-name">Fr</div>
+            <div class="cal-day-name">Sa</div>
+            <div class="cal-day-name">Su</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="booking-card reveal">
+          <div class="booking-title">Book the space</div>
+          <p class="booking-sub">Fill in the form and we will get back to you soon.</p>
+          <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
+          <form onsubmit="handleBooking(event)" novalidate>
+            <div class="booking-field">
+              <label>Your name</label>
+              <input type="text" id="customerName" placeholder="Name, Surname" maxlength="80" autocomplete="name" required />
+            </div>
+            <div class="booking-field">
+              <label>Phone</label>
+              <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+            </div>
+            <div class="booking-field">
+              <label>Event type</label>
+              <select id="eventTypeSelect" required>
+                <option value="">Choose event type...</option>
+                <option>Children's birthday</option>
+                <option>Family celebration</option>
+                <option>Workshop</option>
+                <option>Photoshoot</option>
+                <option>Yoga / exercise</option>
+                <option>Physiotherapy</option>
+                <option>Children's class</option>
+                <option>Children's camp</option>
+                <option>Seminar</option>
+                <option>Private event</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <label>Date</label>
+              <input id="desiredDateTime" type="text" placeholder="e.g. 20 April" maxlength="80" required />
+            </div>
+            <div class="booking-field">
+              <label>Time</label>
+              <div class="booking-time-row">
+                <input class="time-input-desktop" type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="From, e.g. 14:00" />
+                <input class="time-input-desktop" type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Until, e.g. 17:00" />
+                <input class="time-input-mobile" type="time" id="startTimeMobile" aria-label="Start time" step="60" />
+                <input class="time-input-mobile" type="time" id="endTimeMobile" aria-label="End time" step="60" />
+              </div>
+            </div>
+            <div class="booking-field">
+              <label>Notes</label>
+              <textarea id="bookingNotes" placeholder="How many guests? Any special requests?" maxlength="500"></textarea>
+            </div>
+            <div class="booking-submit-wrap">
+              <button type="submit" class="booking-btn">Send booking request</button>
+            </div>
+            <p class="booking-note">Or message us on WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="services-cta">
     <div>
       <span class="section-tag">Booking</span>
       <h2>Tell us what kind of event you are planning</h2>
       <p>We will help you choose the right booking format: hourly rental, party package or an individual offer for a longer event.</p>
     </div>
-    <a class="btn-primary" href="/en/#calendar">Send a booking request</a>
+    <a class="btn-primary" href="#calendar">Send a booking request</a>
   </section>
 </main>
 
@@ -450,7 +531,7 @@
     <a href="/en/">Home</a>
     <a href="/en/telpa/">The space</a>
     <a href="/en/cenas/">Prices</a>
-    <a href="/en/#calendar">Book</a>
+    <a href="#calendar">Book</a>
     <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok</a>
     <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
@@ -458,6 +539,7 @@
   <span class="footer-copy">© 2026 Room Jūrmala. All rights reserved.</span>
 </footer>
 
+<script src="/services-booking.js?v=20260524"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');

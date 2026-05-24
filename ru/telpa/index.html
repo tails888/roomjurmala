@@ -233,7 +233,7 @@
       <span></span>
       <span></span>
     </button>
-    <a href="/ru/#calendar" class="nav-cta nav-cta-mobile">Забронировать</a>
+    <a href="#calendar" class="nav-cta nav-cta-mobile">Забронировать</a>
   </div>
   <a href="/ru/" class="nav-logo">
     <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
@@ -241,7 +241,7 @@
   <div class="nav-links">
     <a href="/ru/telpa/">Зал</a>
     <a href="/ru/cenas/">Цены</a>
-    <a href="/ru/#calendar">Свободные даты</a>
+    <a href="#calendar">Свободные даты</a>
     <a href="/ru/#map-section">Адрес</a>
     <a href="/ru/#contact">Контакты</a>
   </div>
@@ -251,7 +251,7 @@
       <a class="lang-btn" href="/en/telpa/">EN</a>
       <a class="lang-btn active" href="/ru/telpa/">RU</a>
     </div>
-    <a href="/ru/#calendar" class="nav-cta nav-cta-desktop">Забронировать</a>
+    <a href="#calendar" class="nav-cta nav-cta-desktop">Забронировать</a>
   </div>
 </nav>
 <div class="mobile-menu-backdrop"></div>
@@ -265,7 +265,7 @@
   <div class="mobile-menu-links">
     <a href="/ru/telpa/">Зал</a>
     <a href="/ru/cenas/">Цены</a>
-    <a href="/ru/#calendar">Свободные даты</a>
+    <a href="#calendar">Свободные даты</a>
     <a href="/ru/#map-section">Адрес</a>
     <a href="/ru/#contact">Контакты</a>
   </div>
@@ -279,7 +279,7 @@
       <h1 class="services-typewrite" aria-label="Что мы предлагаем?">Что мы <em class="hero-accent">предлагаем?</em></h1>
       <p>В одном месте можно отметить детский день рождения, провести мастер-класс, организовать фотосессию, занятия с тренером, семинар или активности детского лагеря. Зал можно адаптировать под формат мероприятия, количество гостей и желаемую атмосферу.</p>
       <div class="services-hero-actions">
-        <a class="btn-primary" href="/ru/#calendar">Проверить доступность</a>
+        <a class="btn-primary" href="#calendar">Проверить доступность</a>
         <a class="btn-outline" href="tel:+37127850380">Позвонить</a>
       </div>
     </div>
@@ -429,13 +429,94 @@
     </div>
   </section>
 
+  <section id="calendar">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:48px;">
+        <h2 class="section-title">Выберите дату для <em style="color:var(--gold);">мероприятия</em></h2>
+        <p class="section-sub">Выберите дату в календаре и отправьте короткую заявку на бронь.</p>
+      </div>
+      <div class="calendar-layout">
+        <div class="cal-widget reveal">
+          <div class="cal-nav">
+            <button class="cal-arrow" id="prevMonth" type="button" aria-label="Предыдущий месяц">&#8249;</button>
+            <div class="cal-month" id="calMonthLabel"></div>
+            <button class="cal-arrow" id="nextMonth" type="button" aria-label="Следующий месяц">&#8250;</button>
+          </div>
+          <div class="cal-days-header">
+            <div class="cal-day-name">Пн</div>
+            <div class="cal-day-name">Вт</div>
+            <div class="cal-day-name">Ср</div>
+            <div class="cal-day-name">Чт</div>
+            <div class="cal-day-name">Пт</div>
+            <div class="cal-day-name">Сб</div>
+            <div class="cal-day-name">Вс</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="booking-card reveal">
+          <div class="booking-title">Забронировать зал</div>
+          <p class="booking-sub">Заполните форму, и мы скоро свяжемся с вами.</p>
+          <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
+          <form onsubmit="handleBooking(event)" novalidate>
+            <div class="booking-field">
+              <label>Ваше имя</label>
+              <input type="text" id="customerName" placeholder="Имя, фамилия" maxlength="80" autocomplete="name" required />
+            </div>
+            <div class="booking-field">
+              <label>Телефон</label>
+              <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
+            </div>
+            <div class="booking-field">
+              <label>Формат мероприятия</label>
+              <select id="eventTypeSelect" required>
+                <option value="">Выберите тип мероприятия...</option>
+                <option>Детский день рождения</option>
+                <option>Семейный праздник</option>
+                <option>Мастер-класс</option>
+                <option>Фотосессия</option>
+                <option>Йога / гимнастика</option>
+                <option>Физиотерапия</option>
+                <option>Детское занятие</option>
+                <option>Детский лагерь</option>
+                <option>Семинар</option>
+                <option>Частное мероприятие</option>
+                <option>Другое</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <label>Дата</label>
+              <input id="desiredDateTime" type="text" placeholder="например, 20 апреля" maxlength="80" required />
+            </div>
+            <div class="booking-field">
+              <label>Время</label>
+              <div class="booking-time-row">
+                <input class="time-input-desktop" type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Начало, например 14:00" />
+                <input class="time-input-desktop" type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Окончание, например 17:00" />
+                <input class="time-input-mobile" type="time" id="startTimeMobile" aria-label="Время начала" step="60" />
+                <input class="time-input-mobile" type="time" id="endTimeMobile" aria-label="Время окончания" step="60" />
+              </div>
+            </div>
+            <div class="booking-field">
+              <label>Примечания</label>
+              <textarea id="bookingNotes" placeholder="Сколько гостей? Есть особые пожелания?" maxlength="500"></textarea>
+            </div>
+            <div class="booking-submit-wrap">
+              <button type="submit" class="booking-btn">Отправить заявку</button>
+            </div>
+            <p class="booking-note">Или напишите в WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="services-cta">
     <div>
       <span class="section-tag">Бронирование</span>
       <h2>Расскажите, какое мероприятие вы планируете</h2>
       <p>Мы поможем понять, какой формат бронирования подойдет лучше: почасовая аренда, пакет для праздника или индивидуальное предложение для более длительного мероприятия.</p>
     </div>
-    <a class="btn-primary" href="/ru/#calendar">Отправить заявку</a>
+    <a class="btn-primary" href="#calendar">Отправить заявку</a>
   </section>
 </main>
 
@@ -450,7 +531,7 @@
     <a href="/ru/">Главная</a>
     <a href="/ru/telpa/">Зал</a>
     <a href="/ru/cenas/">Цены</a>
-    <a href="/ru/#calendar">Забронировать</a>
+    <a href="#calendar">Забронировать</a>
     <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok</a>
     <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
@@ -458,6 +539,7 @@
   <span class="footer-copy">© 2026 Room Jūrmala. Все права защищены.</span>
 </footer>
 
+<script src="/services-booking.js?v=20260524"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');
