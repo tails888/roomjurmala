@@ -156,6 +156,12 @@ const I18N = {
         'Nedēļas pakete',
         'Mēneša abonements'
       ],
+      packageNotes: {
+        hours: 'Sveiki! Vēlos rezervēt telpu uz dažām stundām. Lūdzu, pastāstiet, kāds laiks ir pieejams izvēlētajā datumā.',
+        day: 'Sveiki! Vēlos rezervēt dienas paketi — 130 €. Vai izvēlētais datums ir pieejams?',
+        week: 'Sveiki! Vēlos rezervēt nedēļas paketi — 550 €. Lūdzu, sazinieties ar mani, lai vienotos par datumiem.',
+        month: 'Sveiki! Interesē mēneša abonements — 460 € mēnesī. Vēlos vienoties par regulāru laiku nodarbībām.'
+      },
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
@@ -373,6 +379,12 @@ const I18N = {
         'Week package',
         'Monthly subscription'
       ],
+      packageNotes: {
+        hours: 'Hello! I would like to book the room for a few hours. Please let me know what times are available on my selected date.',
+        day: 'Hello! I would like to book the day package — €130. Is my selected date available?',
+        week: 'Hello! I would like to book the week package — €550. Please contact me so we can agree on the dates.',
+        month: 'Hello! I am interested in the monthly subscription — €460 per month. I would like to agree on a regular time for classes.'
+      },
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
@@ -590,6 +602,12 @@ const I18N = {
         'Пакет на неделю',
         'Месячный абонемент'
       ],
+      packageNotes: {
+        hours: 'Здравствуйте! Хочу забронировать зал на несколько часов. Подскажите, пожалуйста, какое время свободно в выбранную дату.',
+        day: 'Здравствуйте! Хочу забронировать пакет на день — 130 €. Свободна ли выбранная дата?',
+        week: 'Здравствуйте! Хочу забронировать пакет на неделю — 550 €. Свяжитесь, пожалуйста, со мной, чтобы согласовать даты.',
+        month: 'Здравствуйте! Интересует месячный абонемент — 460 € в месяц. Хотелось бы согласовать регулярное время для занятий.'
+      },
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
@@ -677,6 +695,7 @@ const BOOKING_LIMITS = {
 };
 let currentLang = getInitialLanguage();
 let selectedDateParts = null;
+let lastAutoBookingNote = '';
 
 function getLanguageFromPath() {
   const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
@@ -944,6 +963,45 @@ function setDateTimeValue(timeSlot) {
   }
 }
 
+function normalizeBookingPackage(packageValue) {
+  return (packageValue || '').replace(/^package-/, '');
+}
+
+function getBookingPackageNote(packageValue) {
+  const normalizedPackage = normalizeBookingPackage(packageValue);
+  return I18N[currentLang]?.booking?.packageNotes?.[normalizedPackage] || '';
+}
+
+function setBookingPackageChoice(packageValue, options = {}) {
+  const normalizedPackage = normalizeBookingPackage(packageValue);
+  const packageField = document.getElementById('bookingPackageSelect');
+  const notesField = document.getElementById('bookingNotes');
+  const note = getBookingPackageNote(normalizedPackage);
+
+  if (packageField && normalizedPackage) packageField.value = normalizedPackage;
+  if (!notesField || !note) return;
+
+  const currentNote = notesField.value.trim();
+  const previousAutoNote = lastAutoBookingNote.trim();
+  const canReplaceNote = options.forceNote || !currentNote || currentNote === previousAutoNote;
+  if (!canReplaceNote) return;
+
+  notesField.value = note;
+  lastAutoBookingNote = note;
+}
+
+function refreshAutoBookingNoteLanguage() {
+  const packageField = document.getElementById('bookingPackageSelect');
+  const notesField = document.getElementById('bookingNotes');
+  if (!packageField || !notesField || !lastAutoBookingNote) return;
+  if (notesField.value.trim() !== lastAutoBookingNote.trim()) return;
+
+  const note = getBookingPackageNote(packageField.value);
+  if (!note) return;
+  notesField.value = note;
+  lastAutoBookingNote = note;
+}
+
 function applyLanguage(lang) {
   const copy = I18N[lang] || I18N.lv;
   currentLang = I18N[lang] ? lang : 'lv';
@@ -1076,6 +1134,7 @@ function applyLanguage(lang) {
   setPlaceholder('bookingNotes', copy.booking.placeholders.notes);
   setOptionTexts('bookingPackageSelect', copy.booking.packageOptions);
   setOptionTexts('eventTypeSelect', copy.booking.options);
+  refreshAutoBookingNoteLanguage();
   setText('.booking-btn', copy.booking.button);
   const bookingNote = document.querySelector('.booking-note');
   if (bookingNote) {
@@ -1303,11 +1362,16 @@ document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link
 
 document.querySelectorAll('#pricing .price-cta[data-booking-package]').forEach((link) => {
   link.addEventListener('click', () => {
-    const packageField = document.getElementById('bookingPackageSelect');
-    const packageValue = link.dataset.bookingPackage?.replace('package-', '') || '';
-    if (packageField && packageValue) packageField.value = packageValue;
+    setBookingPackageChoice(link.dataset.bookingPackage, { forceNote: true });
   });
 });
+
+const bookingPackageSelect = document.getElementById('bookingPackageSelect');
+if (bookingPackageSelect) {
+  bookingPackageSelect.addEventListener('change', () => {
+    setBookingPackageChoice(bookingPackageSelect.value);
+  });
+}
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setMobileMenuOpen(false);
