@@ -490,8 +490,8 @@
             <div class="booking-field">
               <label>Время</label>
               <div class="booking-time-row">
-                <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Начало, например 14:00" />
-                <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Окончание, например 17:00" />
+                <input type="text" id="startTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время начала" placeholder="Начало, например 14:00" />
+                <input type="text" id="endTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время окончания" placeholder="Окончание, например 17:00" />
               </div>
             </div>
             <div class="booking-field">
@@ -537,7 +537,7 @@
   <span class="footer-copy">© 2026 Room Jūrmala. Все права защищены.</span>
 </footer>
 
-<script src="/services-booking.js?v=20260524"></script>
+<script src="/services-booking.js?v=20260524-time"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');

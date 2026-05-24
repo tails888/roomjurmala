@@ -23,6 +23,7 @@ const SERVICE_BOOKING_COPY = {
     },
     errors: {
       required: "Lūdzu aizpildiet vārdu, tālruni, pasākuma veidu, datumu un laiku.",
+      invalidTime: "Lūdzu ievadiet laiku formātā 14:00.",
       tooLong: "Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz."
     },
     buttonSent: "Pieprasījums nosūtīts!"
@@ -43,6 +44,7 @@ const SERVICE_BOOKING_COPY = {
     },
     errors: {
       required: "Please fill in your name, phone, event type, date and time.",
+      invalidTime: "Please enter the time in 14:00 format.",
       tooLong: "The message is too long. Please shorten the notes and try again."
     },
     buttonSent: "Request sent!"
@@ -63,6 +65,7 @@ const SERVICE_BOOKING_COPY = {
     },
     errors: {
       required: "Пожалуйста, заполните имя, телефон, формат мероприятия, дату и время.",
+      invalidTime: "Пожалуйста, укажите время в формате 14:00.",
       tooLong: "Сообщение слишком длинное. Сократите примечания и попробуйте снова."
     },
     buttonSent: "Заявка отправлена!"
@@ -155,16 +158,26 @@ function serviceBookingRenderCalendar() {
   }
 }
 
-function serviceBookingFormatDesktopTime(value) {
+function serviceBookingFormatTime(value) {
   const digits = value.replace(/\D/g, "").slice(0, 4);
   if (digits.length <= 2) return digits;
   return `${digits.slice(0, 2)}:${digits.slice(2)}`;
 }
 
-function serviceBookingGetTimeValue(desktopId, mobileId) {
-  const desktopValue = document.getElementById(desktopId)?.value.trim() || "";
-  const mobileValue = document.getElementById(mobileId)?.value.trim() || "";
-  return mobileValue || desktopValue;
+function serviceBookingNormalizeTimeField(field) {
+  if (!field) return "";
+  const formatted = serviceBookingFormatTime(field.value);
+  field.value = formatted;
+  return formatted;
+}
+
+function serviceBookingIsValidTime(value) {
+  if (!value) return true;
+  const match = value.match(/^(\d{2}):(\d{2})$/);
+  if (!match) return false;
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
 }
 
 function serviceBookingLimitText(value, max) {
@@ -189,17 +202,6 @@ function serviceBookingClearError(form) {
   form.querySelectorAll(".is-invalid").forEach((node) => node.classList.remove("is-invalid"));
 }
 
-function serviceBookingSyncTimeInputsForDevice() {
-  ["startTimeDesktop", "endTimeDesktop"].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.disabled = false;
-  });
-  ["startTimeMobile", "endTimeMobile"].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.disabled = true;
-  });
-}
-
 function handleBooking(event) {
   event.preventDefault();
   const form = event.target;
@@ -212,15 +214,13 @@ function handleBooking(event) {
   const notesField = document.getElementById("bookingNotes");
   const startDesktop = document.getElementById("startTimeDesktop");
   const endDesktop = document.getElementById("endTimeDesktop");
-  const startMobile = document.getElementById("startTimeMobile");
-  const endMobile = document.getElementById("endTimeMobile");
 
   const name = serviceBookingLimitText(nameField?.value, SERVICE_BOOKING_LIMITS.name);
   const phone = serviceBookingLimitText(phoneField?.value, SERVICE_BOOKING_LIMITS.phone);
   const eventType = serviceBookingLimitText(eventField?.value, 80);
   const bookingDate = serviceBookingLimitText(dateField?.value, SERVICE_BOOKING_LIMITS.date);
-  const startTime = serviceBookingGetTimeValue("startTimeDesktop", "startTimeMobile");
-  const endTime = serviceBookingGetTimeValue("endTimeDesktop", "endTimeMobile");
+  const startTime = serviceBookingNormalizeTimeField(startDesktop);
+  const endTime = serviceBookingNormalizeTimeField(endDesktop);
   const notes = serviceBookingLimitText(notesField?.value, SERVICE_BOOKING_LIMITS.notes) || "-";
   let bookingTime = "-";
 
@@ -235,16 +235,22 @@ function handleBooking(event) {
     [dateField, bookingDate]
   ];
   const missing = requiredFields.find(([, value]) => !value);
+  const invalidTimeFields = [startDesktop, endDesktop].filter((field) => field && !serviceBookingIsValidTime(field.value.trim()));
 
   if (missing || bookingTime === "-") {
     requiredFields.forEach(([node, value]) => {
       if (node && !value) node.classList.add("is-invalid");
     });
     if (bookingTime === "-") {
-      [startDesktop, endDesktop, startMobile, endMobile].forEach((node) => node?.classList.add("is-invalid"));
+      [startDesktop, endDesktop].forEach((node) => node?.classList.add("is-invalid"));
     }
-    const timeFocus = [startDesktop, startMobile, endDesktop, endMobile].find((node) => node && !node.disabled);
+    const timeFocus = [startDesktop, endDesktop].find((node) => node && !node.disabled);
     serviceBookingSetError(form, serviceBookingCopy.errors.required, missing?.[0] || timeFocus);
+    return;
+  }
+  if (invalidTimeFields.length) {
+    invalidTimeFields.forEach((node) => node.classList.add("is-invalid"));
+    serviceBookingSetError(form, serviceBookingCopy.errors.invalidTime, invalidTimeFields[0]);
     return;
   }
 
@@ -300,12 +306,13 @@ document.getElementById("nextMonth")?.addEventListener("click", () => {
 ["startTimeDesktop", "endTimeDesktop"].forEach((id) => {
   const input = document.getElementById(id);
   input?.addEventListener("input", (event) => {
-    event.target.value = serviceBookingFormatDesktopTime(event.target.value);
+    event.target.value = serviceBookingFormatTime(event.target.value);
+  });
+  input?.addEventListener("blur", (event) => {
+    serviceBookingNormalizeTimeField(event.target);
   });
 });
 
-serviceBookingSyncTimeInputsForDevice();
-window.addEventListener("resize", serviceBookingSyncTimeInputsForDevice);
 serviceBookingRenderCalendar();
 
 const serviceBookingRevealEls = document.querySelectorAll(".reveal");
