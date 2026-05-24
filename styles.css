@@ -713,11 +713,6 @@ html[lang="ru"] .review-cta-text {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-.time-input-desktop { display: block; }
-.time-input-mobile { display: none; }
-.booking-time-row input[type="time"] {
-  color-scheme: dark;
-}
 .booking-btn {
   width: 100%; padding: 15px;
   background: var(--gold); color: var(--brown-dark);
@@ -1101,8 +1096,6 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
-  .time-input-desktop { display: block; }
-  .time-input-mobile { display: none; }
 }
 
 @media (max-width: 380px) {
