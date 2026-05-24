@@ -60,8 +60,7 @@ const I18N = {
           features: [
             'Pilna diena vienreizējam pasākumam',
             'Intensīvam darbam vai nodarbībām',
-            'Ietaupi 30€ · 16.25€/h',
-            'Laika izvēle 8:00-22:00'
+            'Ietaupi 30€ · 16.25€/h'
           ],
           cta: 'Rezervēt dienu'
         },
@@ -266,8 +265,7 @@ const I18N = {
           features: [
             'Full day for a one-off event',
             'For intensive work or classes',
-            'Save €30 · €16.25/h',
-            'Time choice 8:00-22:00'
+            'Save €30 · €16.25/h'
           ],
           cta: 'Book a day'
         },
@@ -472,8 +470,7 @@ const I18N = {
           features: [
             'Полный день для разового события',
             'Для интенсивной работы или занятий',
-            'Экономия 30€ · 16.25€/ч',
-            'Выбор времени 8:00-22:00'
+            'Экономия 30€ · 16.25€/ч'
           ],
           cta: 'Забронировать день'
         },
