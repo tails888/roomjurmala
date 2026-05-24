@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Redirect explicit index.html URLs to the clean canonical directory URL.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ https://roomjurmala.lv/$1 [R=301,L,NE]
+
+# Redirect the www host to the canonical non-www host.
+RewriteCond %{HTTP_HOST} ^www\.roomjurmala\.lv$ [NC]
+RewriteRule ^(.*)$ https://roomjurmala.lv/$1 [R=301,L,NE]

@@ -105,8 +105,8 @@ const I18N = {
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', 'Populārākās paketes ir dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.'],
-        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
+        ['Cik maksā telpu noma ROOM Jūrmala?', 'Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.'],
+        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
         ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
         ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
         ['Cik cilvēkiem telpa ir piemērota?', 'Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.'],
@@ -314,8 +314,8 @@ const I18N = {
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', 'The main packages are the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event.'],
-        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
+        ['How much does ROOM Jūrmala cost to rent?', 'Hourly rental starts from €20. Popular options are 3 hours for €55, 6 hours for €100, the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event.'],
+        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
         ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
         ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
         ['How many guests is the venue suitable for?', 'Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking.'],
@@ -523,8 +523,8 @@ const I18N = {
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', 'Основные пакеты: день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия.'],
-        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
+        ['Сколько стоит аренда ROOM Jūrmala?', 'Почасовая аренда начинается от 20€ в час. Популярные варианты: 3 часа — 55€, 6 часов — 100€, день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия.'],
+        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
         ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
         ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
         ['На сколько гостей рассчитан зал?', 'Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей.'],
