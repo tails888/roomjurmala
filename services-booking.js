@@ -16,7 +16,7 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Vārds",
       phone: "Tālrunis",
-      package: "Rezervācijas veids",
+      package: "Nomas veids",
       eventType: "Pasākuma veids",
       date: "Datums",
       time: "Laiks",
@@ -45,7 +45,7 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Name",
       phone: "Phone",
-      package: "Booking type",
+      package: "Rental type",
       eventType: "Event type",
       date: "Date",
       time: "Time",
@@ -74,7 +74,7 @@ const SERVICE_BOOKING_COPY = {
     labels: {
       name: "Имя",
       phone: "Телефон",
-      package: "Тип бронирования",
+      package: "Тип аренды",
       eventType: "Формат мероприятия",
       date: "Дата",
       time: "Время",

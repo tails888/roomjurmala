@@ -118,7 +118,15 @@ const I18N = {
     booking: {
       title: 'Rezervēt telpu',
       sub: 'Aizpildiet formu, un mēs drīz ar Jums sazināsimies',
-      labels: ['Jūsu vārds', 'Tālrunis', 'Rezervācijas veids', 'Pasākuma veids', 'Datums', 'Laiks', 'Piezīmes'],
+      labels: {
+        name: 'Jūsu vārds',
+        phone: 'Tālrunis',
+        package: 'Nomas veids',
+        eventType: 'Pasākuma veids',
+        date: 'Datums',
+        time: 'Laiks',
+        notes: 'Piezīmes'
+      },
       placeholders: {
         name: 'Vārds, Uzvārds',
         phone: '+371 2X XXX XXX',
@@ -196,7 +204,7 @@ const I18N = {
       labels: {
         name: 'Vārds',
         phone: 'Tālrunis',
-        package: 'Rezervācijas veids',
+        package: 'Nomas veids',
         eventType: 'Pasākuma veids',
         date: 'Datums',
         time: 'Laiks',
@@ -327,7 +335,15 @@ const I18N = {
     booking: {
       title: 'Book your event',
       sub: "Fill in the form and we'll get back to you soon",
-      labels: ['Your name', 'Phone', 'Booking type', 'Event type', 'Date', 'Time', 'Notes'],
+      labels: {
+        name: 'Your name',
+        phone: 'Phone',
+        package: 'Rental type',
+        eventType: 'Event type',
+        date: 'Date',
+        time: 'Time',
+        notes: 'Notes'
+      },
       placeholders: {
         name: 'Name, Surname',
         phone: '+371 2X XXX XXX',
@@ -405,7 +421,7 @@ const I18N = {
       labels: {
         name: 'Name',
         phone: 'Phone',
-        package: 'Booking type',
+        package: 'Rental type',
         eventType: 'Event type',
         date: 'Date',
         time: 'Time',
@@ -536,7 +552,15 @@ const I18N = {
     booking: {
       title: 'Забронировать зал',
       sub: 'Заполните форму, и мы скоро свяжемся с вами',
-      labels: ['Ваше имя', 'Телефон', 'Тип бронирования', 'Формат мероприятия', 'Дата', 'Время', 'Примечания'],
+      labels: {
+        name: 'Ваше имя',
+        phone: 'Телефон',
+        package: 'Тип аренды',
+        eventType: 'Формат мероприятия',
+        date: 'Дата',
+        time: 'Время',
+        notes: 'Примечания'
+      },
       placeholders: {
         name: 'Имя, фамилия',
         phone: '+371 2X XXX XXX',
@@ -614,7 +638,7 @@ const I18N = {
       labels: {
         name: 'Имя',
         phone: 'Телефон',
-        package: 'Тип бронирования',
+        package: 'Тип аренды',
         eventType: 'Формат мероприятия',
         date: 'Дата',
         time: 'Время',
@@ -730,6 +754,12 @@ function updateLocalizedPricingLinks(lang) {
 function setPlaceholder(id, value) {
   const node = document.getElementById(id);
   if (node) node.placeholder = value;
+}
+
+function setFieldLabel(fieldId, value) {
+  const field = document.getElementById(fieldId);
+  const label = field?.closest('.booking-field')?.querySelector('label');
+  if (label) label.textContent = value;
 }
 
   function setOptionTexts(selectId, values) {
@@ -1031,7 +1061,13 @@ function applyLanguage(lang) {
 
   setText('.booking-title', copy.booking.title);
   setText('.booking-sub', copy.booking.sub);
-  setSelectorListText('.booking-field label', copy.booking.labels);
+  setFieldLabel('customerName', copy.booking.labels.name);
+  setFieldLabel('customerPhone', copy.booking.labels.phone);
+  setFieldLabel('bookingPackageSelect', copy.booking.labels.package);
+  setFieldLabel('eventTypeSelect', copy.booking.labels.eventType);
+  setFieldLabel('desiredDateTime', copy.booking.labels.date);
+  setFieldLabel('startTimeDesktop', copy.booking.labels.time);
+  setFieldLabel('bookingNotes', copy.booking.labels.notes);
   setPlaceholder('customerName', copy.booking.placeholders.name);
   setPlaceholder('customerPhone', copy.booking.placeholders.phone);
   setPlaceholder('desiredDateTime', copy.booking.placeholders.date);

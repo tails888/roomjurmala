@@ -1319,7 +1319,7 @@
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
           </div>
           <div class="booking-field">
-            <label>Rezervācijas veids</label>
+            <label>Nomas veids</label>
             <select id="bookingPackageSelect" required>
               <option value="">Izvēlieties nomas veidu...</option>
               <option value="hours">Stundas noma</option>
@@ -1523,7 +1523,7 @@ const I18N = {
     booking: {
       title: "Rezervēt telpu",
       sub: "Aizpildiet formu, un mēs drīz ar Jums sazināsimies.",
-      labels: ["Jūsu vārds", "Tālrunis", "Rezervācijas veids", "Pasākuma veids", "Datums", "Laiks", "Piezīmes"],
+      labels: ["Jūsu vārds", "Tālrunis", "Nomas veids", "Pasākuma veids", "Datums", "Laiks", "Piezīmes"],
       placeholders: {
         name: "Vārds, Uzvārds",
         phone: "+371 2X XXX XXX",
@@ -1562,7 +1562,7 @@ const I18N = {
       messageLabels: {
         name: "Vārds",
         phone: "Tālrunis",
-        package: "Rezervācijas veids",
+        package: "Nomas veids",
         eventType: "Pasākuma veids",
         date: "Datums",
         time: "Laiks",
@@ -1669,7 +1669,7 @@ const I18N = {
     booking: {
       title: "Book the space",
       sub: "Fill in the form and we will get back to you soon.",
-      labels: ["Your name", "Phone", "Booking type", "Event type", "Date", "Time", "Notes"],
+      labels: ["Your name", "Phone", "Rental type", "Event type", "Date", "Time", "Notes"],
       placeholders: {
         name: "Name, Surname",
         phone: "+371 2X XXX XXX",
@@ -1708,7 +1708,7 @@ const I18N = {
       messageLabels: {
         name: "Name",
         phone: "Phone",
-        package: "Booking type",
+        package: "Rental type",
         eventType: "Event type",
         date: "Date",
         time: "Time",
@@ -1815,7 +1815,7 @@ const I18N = {
     booking: {
       title: "Забронировать зал",
       sub: "Заполните форму, и мы скоро свяжемся с вами.",
-      labels: ["Ваше имя", "Телефон", "Тип бронирования", "Формат мероприятия", "Дата", "Время", "Примечания"],
+      labels: ["Ваше имя", "Телефон", "Тип аренды", "Формат мероприятия", "Дата", "Время", "Примечания"],
       placeholders: {
         name: "Имя, фамилия",
         phone: "+371 2X XXX XXX",
@@ -1854,7 +1854,7 @@ const I18N = {
       messageLabels: {
         name: "Имя",
         phone: "Телефон",
-        package: "Тип бронирования",
+        package: "Тип аренды",
         eventType: "Формат мероприятия",
         date: "Дата",
         time: "Время",
@@ -1913,6 +1913,12 @@ function setSelectorListText(selector, values) {
 function setPlaceholder(id, value) {
   const el = document.getElementById(id);
   if (el) el.placeholder = value;
+}
+
+function setFieldLabel(fieldId, value) {
+  const field = document.getElementById(fieldId);
+  const label = field?.closest(".booking-field")?.querySelector("label");
+  if (label) label.textContent = value;
 }
 
 function setOptionTexts(id, values) {
@@ -2353,7 +2359,13 @@ function applyLanguage(lang) {
 
   setText(".booking-title", t.booking.title);
   setText(".booking-sub", t.booking.sub);
-  setSelectorListText(".booking-field label", t.booking.labels);
+  setFieldLabel("customerName", t.booking.labels[0]);
+  setFieldLabel("customerPhone", t.booking.labels[1]);
+  setFieldLabel("bookingPackageSelect", t.booking.labels[2]);
+  setFieldLabel("eventTypeSelect", t.booking.labels[3]);
+  setFieldLabel("desiredDateTime", t.booking.labels[4]);
+  setFieldLabel("startTimeDesktop", t.booking.labels[5]);
+  setFieldLabel("bookingNotes", t.booking.labels[6]);
   setPlaceholder("customerName", t.booking.placeholders.name);
   setPlaceholder("customerPhone", t.booking.placeholders.phone);
   setPlaceholder("desiredDateTime", t.booking.placeholders.date);
