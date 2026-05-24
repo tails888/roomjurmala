@@ -91,7 +91,6 @@ const I18N = {
             'Mēneša risinājums nodarbībām un grupām',
             'Ietaupi 180€/mēn · 8h nedēļā',
             'Regulārs laiks katru nedēļu',
-            'Mēneša rēķins',
           ],
           cta: 'Pieteikties'
         }
@@ -295,8 +294,7 @@ const I18N = {
           features: [
             'Monthly solution for classes and groups',
             'Save €180/month · 8h weekly',
-            'Regular time every week',
-            'Monthly invoice'
+            'Regular time every week'
           ],
           cta: 'Apply'
         }
@@ -500,8 +498,7 @@ const I18N = {
           features: [
             'Месячное решение для занятий и групп',
             'Экономия 180€/мес · 8ч в неделю',
-            'Регулярное время каждую неделю',
-            'Месячный счёт'
+            'Регулярное время каждую неделю'
           ],
           cta: 'Записаться'
         }
