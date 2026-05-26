@@ -79,8 +79,9 @@ nav {
   padding: 118px 24px 86px;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(8, 7, 7, 0.7), rgba(16, 11, 8, 0.96)),
-    url("/assets/images/gallery/space-open.jpeg") center/cover;
+    linear-gradient(180deg, rgba(9, 7, 5, 0.34), rgba(9, 7, 5, 0.82)),
+    linear-gradient(90deg, rgba(8, 7, 6, 0.4), rgba(8, 7, 6, 0.04) 46%, rgba(8, 7, 6, 0.42)),
+    url("/assets/images/gallery/pricing-hero-towels-balls.jpeg") center 58%/cover;
 }
 
 .hero::after {
@@ -88,8 +89,8 @@ nav {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 7, 7, 0.24), rgba(8, 7, 7, 0.82)),
-    radial-gradient(circle at 50% 18%, rgba(216, 137, 76, 0.22), transparent 34%);
+    linear-gradient(180deg, rgba(8, 7, 7, 0.05), rgba(8, 7, 7, 0.58)),
+    radial-gradient(circle at 50% 18%, rgba(216, 137, 76, 0.18), transparent 34%);
   pointer-events: none;
 }
 
@@ -475,4 +476,3 @@ footer p {
     padding: 64px 18px 34px;
   }
 }
-
