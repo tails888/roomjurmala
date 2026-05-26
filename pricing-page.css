@@ -1,0 +1,478 @@
+/* Pricing page brand theme. Loaded after the legacy inline CSS. */
+:root {
+  --black: #080707;
+  --white: #ffffff;
+  --cream: #F7EBDD;
+  --cream-dark: #E8C6A4;
+  --cream-soft: #FFF8EF;
+  --accent: #D8894C;
+  --accent-light: rgba(216, 137, 76, 0.16);
+  --gold: #D8894C;
+  --border: rgba(216, 137, 76, 0.24);
+  --brown-dark: #080707;
+  --brown-mid: #8F5D3D;
+  --text-dark: #22130C;
+  --text-mid: #7D5A44;
+  --gray-100: #FFF8EF;
+  --gray-300: rgba(143, 93, 61, 0.22);
+  --gray-500: #7D5A44;
+  --gray-700: #4C2A1D;
+  --shadow: 0 24px 58px rgba(8, 7, 7, 0.22);
+}
+
+html {
+  background: var(--black);
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(216, 137, 76, 0.18), transparent 32%),
+    linear-gradient(180deg, #060606 0%, #100B08 52%, #F7EBDD 52%, #F7EBDD 100%);
+  color: var(--cream);
+}
+
+nav {
+  background: rgba(8, 7, 7, 0.88);
+  border-bottom: 1px solid rgba(216, 137, 76, 0.18);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.nav-logo img {
+  height: 54px;
+  max-width: 118px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+
+.lang-switch {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(216, 137, 76, 0.22);
+}
+
+.lang-btn {
+  color: var(--cream-dark);
+}
+
+.lang-btn:hover {
+  color: var(--accent);
+}
+
+.lang-btn.active {
+  background: var(--accent);
+  color: var(--brown-dark);
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--brown-dark);
+  font-weight: 700;
+}
+
+.nav-cta:hover {
+  background: #C97942;
+}
+
+.hero {
+  position: relative;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 118px 24px 86px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(8, 7, 7, 0.7), rgba(16, 11, 8, 0.96)),
+    url("/assets/images/gallery/space-open.jpeg") center/cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 7, 7, 0.24), rgba(8, 7, 7, 0.82)),
+    radial-gradient(circle at 50% 18%, rgba(216, 137, 76, 0.22), transparent 34%);
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  color: var(--cream);
+  text-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 br {
+  display: block;
+}
+
+.hero p {
+  color: rgba(247, 235, 221, 0.86);
+  font-weight: 400;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(216, 137, 76, 0.24);
+  color: var(--cream);
+  backdrop-filter: blur(10px);
+}
+
+.section-header {
+  background: var(--black);
+  padding: 78px 24px 42px;
+}
+
+.section-label {
+  color: var(--accent);
+}
+
+.section-header h2 {
+  color: var(--cream);
+}
+
+.section-header p {
+  color: var(--cream-dark);
+}
+
+.hourly-section,
+.calc-section,
+.packages-section {
+  background: var(--black);
+}
+
+.divider {
+  border-top-color: rgba(216, 137, 76, 0.18);
+  background: var(--black);
+}
+
+.hour-card {
+  background: rgba(255, 250, 245, 0.075);
+  border-color: rgba(216, 137, 76, 0.2);
+  color: var(--cream);
+}
+
+.hour-card:hover {
+  border-color: rgba(216, 137, 76, 0.52);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+  background: rgba(216, 137, 76, 0.1);
+}
+
+.hour-card.popular {
+  background: linear-gradient(145deg, #D8894C, #F0A35C);
+  border-color: rgba(232, 198, 164, 0.36);
+  color: var(--brown-dark);
+}
+
+.popular-tag {
+  background: var(--brown-dark);
+  color: var(--cream);
+}
+
+.hour-label,
+.hour-card.popular .hour-label {
+  color: rgba(247, 235, 221, 0.68);
+}
+
+.hour-card.popular .hour-label {
+  color: rgba(34, 19, 12, 0.68);
+}
+
+.hour-price,
+.hour-card.popular .hour-price {
+  color: var(--accent);
+}
+
+.hour-card.popular .hour-price {
+  color: var(--brown-dark);
+}
+
+.calc-box {
+  background: rgba(255, 250, 245, 0.075);
+  border-color: rgba(216, 137, 76, 0.22);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+}
+
+.calc-tabs {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.calc-tab {
+  color: rgba(247, 235, 221, 0.62);
+}
+
+.calc-tab.active {
+  background: var(--accent);
+  color: var(--brown-dark);
+  box-shadow: 0 10px 26px rgba(216, 137, 76, 0.25);
+}
+
+.calc-slider-label,
+.calc-ticks,
+.calc-r-row {
+  color: rgba(247, 235, 221, 0.64);
+}
+
+.calc-val-lbl,
+.calc-r-row span:last-child {
+  color: var(--cream);
+}
+
+.calc-result {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(216, 137, 76, 0.14);
+}
+
+.calc-r-main,
+.calc-r-row {
+  border-color: rgba(216, 137, 76, 0.16);
+}
+
+.calc-r-price {
+  color: var(--cream);
+  font-family: "Inter", sans-serif;
+}
+
+.calc-r-tag {
+  color: var(--accent);
+  background: rgba(216, 137, 76, 0.13);
+  border-color: rgba(216, 137, 76, 0.28);
+}
+
+.calc-r-row.gold,
+.calc-r-row.gold span:last-child {
+  color: var(--accent);
+}
+
+.calc-cta {
+  background: var(--accent);
+  color: var(--brown-dark);
+  border-radius: 999px;
+}
+
+.calc-cta:hover {
+  background: #F0A35C;
+}
+
+.packages-grid {
+  background: transparent;
+  border-color: rgba(216, 137, 76, 0.22);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+.pkg-card {
+  background: rgba(255, 250, 245, 0.075);
+  border-right-color: rgba(216, 137, 76, 0.18);
+  color: var(--cream);
+}
+
+.pkg-card:hover {
+  background: rgba(216, 137, 76, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(216, 137, 76, 0.34);
+}
+
+.pkg-card.featured {
+  background: linear-gradient(145deg, #D8894C, #F0A35C);
+  color: var(--brown-dark);
+}
+
+.pkg-kicker {
+  color: rgba(247, 235, 221, 0.64);
+}
+
+.pkg-card.featured .pkg-kicker {
+  color: rgba(34, 19, 12, 0.68);
+}
+
+.pkg-sub,
+.pkg-per {
+  color: rgba(247, 235, 221, 0.72);
+}
+
+.pkg-card.featured .pkg-sub,
+.pkg-card.featured .pkg-per {
+  color: rgba(34, 19, 12, 0.74);
+}
+
+.pkg-currency,
+.pkg-amount {
+  color: var(--cream);
+}
+
+.pkg-card.featured .pkg-currency,
+.pkg-card.featured .pkg-amount,
+.pkg-card.featured .pkg-saving {
+  color: var(--brown-dark);
+}
+
+.pkg-saving {
+  color: var(--accent);
+}
+
+.pkg-btn-outline {
+  color: var(--cream);
+  border-color: rgba(216, 137, 76, 0.28);
+}
+
+.pkg-btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pkg-card.featured .pkg-btn-outline {
+  color: var(--brown-dark);
+  border-color: rgba(34, 19, 12, 0.22);
+  background: rgba(255, 250, 245, 0.18);
+}
+
+.pkg-card.featured .pkg-btn-outline:hover {
+  background: var(--brown-dark);
+  border-color: var(--brown-dark);
+  color: var(--cream);
+}
+
+#calendar {
+  background:
+    radial-gradient(circle at top, rgba(216, 137, 76, 0.15), transparent 32%),
+    linear-gradient(180deg, #F7EBDD 0%, #FFF8EF 100%);
+  border-top-color: rgba(143, 93, 61, 0.2);
+  color: var(--text-dark);
+}
+
+.calendar-title,
+.cal-month {
+  color: var(--text-dark);
+}
+
+.calendar-title em {
+  color: var(--accent);
+}
+
+.calendar-sub,
+.cal-day-name,
+.cal-cell {
+  color: var(--text-mid);
+}
+
+.cal-widget {
+  background: rgba(255, 250, 245, 0.94);
+  border-color: rgba(143, 93, 61, 0.18);
+}
+
+.cal-arrow {
+  background: #FFF8EF;
+  border-color: rgba(143, 93, 61, 0.2);
+  color: var(--text-dark);
+}
+
+.cal-arrow:hover,
+.cal-cell.free-sel {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--brown-dark);
+}
+
+.cal-cell.today {
+  border-color: var(--accent);
+  color: var(--text-dark);
+  background: rgba(216, 137, 76, 0.14);
+}
+
+.booking-card {
+  background: linear-gradient(180deg, #120D0A 0%, #21150F 100%);
+  box-shadow: 0 24px 48px rgba(8, 7, 7, 0.2);
+}
+
+.booking-title {
+  color: var(--cream);
+}
+
+.booking-sub,
+.booking-field label,
+.booking-note {
+  color: rgba(247, 235, 221, 0.58);
+}
+
+.booking-field input,
+.booking-field select,
+.booking-field textarea {
+  border-color: rgba(216, 137, 76, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--cream);
+}
+
+.booking-field input:focus,
+.booking-field select:focus,
+.booking-field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(216, 137, 76, 0.16);
+}
+
+.booking-field select option {
+  background: var(--brown-dark);
+}
+
+.booking-btn,
+.btn-primary {
+  background: var(--accent);
+  color: var(--brown-dark);
+}
+
+.booking-btn:hover,
+.btn-primary:hover {
+  background: #C97942;
+  color: var(--brown-dark);
+}
+
+.booking-note a {
+  color: var(--accent);
+}
+
+.cta-section {
+  background: var(--black);
+  color: var(--cream);
+}
+
+.cta-section h2 {
+  color: var(--cream);
+}
+
+.cta-section p {
+  color: var(--cream-dark);
+}
+
+.btn-secondary {
+  color: var(--cream);
+  border-color: rgba(216, 137, 76, 0.26);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+footer {
+  background: #050505;
+  border-top-color: rgba(216, 137, 76, 0.16);
+  color: rgba(247, 235, 221, 0.64);
+}
+
+.footer-brand {
+  color: var(--cream);
+}
+
+footer p {
+  color: rgba(247, 235, 221, 0.48);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 94px 18px 72px;
+  }
+
+  .section-header {
+    padding: 64px 18px 34px;
+  }
+}
+
