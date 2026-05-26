@@ -18,6 +18,13 @@
   --gray-500: #7D5A44;
   --gray-700: #4C2A1D;
   --shadow: 0 24px 58px rgba(8, 7, 7, 0.22);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 html {
@@ -50,10 +57,12 @@ nav {
 
 .lang-btn {
   color: var(--cream-dark);
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms var(--ease-out);
 }
 
 .lang-btn:hover {
   color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .lang-btn.active {
@@ -65,10 +74,13 @@ nav {
   background: var(--accent);
   color: var(--brown-dark);
   font-weight: 700;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms var(--ease-out);
 }
 
 .nav-cta:hover {
   background: #C97942;
+  box-shadow: 0 12px 28px rgba(216, 137, 76, 0.2);
+  transform: translateY(-1px);
 }
 
 .hero {
@@ -118,6 +130,13 @@ nav {
   border-color: rgba(216, 137, 76, 0.24);
   color: var(--cream);
   backdrop-filter: blur(10px);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms var(--ease-out);
+}
+
+.badge:hover {
+  background: rgba(216, 137, 76, 0.12);
+  border-color: rgba(216, 137, 76, 0.44);
+  transform: translateY(-2px);
 }
 
 .section-header {
@@ -152,12 +171,14 @@ nav {
   background: rgba(255, 250, 245, 0.075);
   border-color: rgba(216, 137, 76, 0.2);
   color: var(--cream);
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-out);
 }
 
 .hour-card:hover {
   border-color: rgba(216, 137, 76, 0.52);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
   background: rgba(216, 137, 76, 0.1);
+  transform: translateY(-4px);
 }
 
 .hour-card.popular {
@@ -193,6 +214,12 @@ nav {
   background: rgba(255, 250, 245, 0.075);
   border-color: rgba(216, 137, 76, 0.22);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.calc-box:hover {
+  border-color: rgba(216, 137, 76, 0.34);
+  box-shadow: 0 34px 82px rgba(0, 0, 0, 0.34);
 }
 
 .calc-tabs {
@@ -201,6 +228,12 @@ nav {
 
 .calc-tab {
   color: rgba(247, 235, 221, 0.62);
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms var(--ease-out);
+}
+
+.calc-tab:hover {
+  color: var(--cream);
+  transform: translateY(-1px);
 }
 
 .calc-tab.active {
@@ -223,6 +256,12 @@ nav {
 .calc-result {
   background: rgba(0, 0, 0, 0.22);
   border: 1px solid rgba(216, 137, 76, 0.14);
+  transition: border-color 220ms ease, background-color 220ms ease;
+}
+
+.calc-result:hover {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(216, 137, 76, 0.24);
 }
 
 .calc-r-main,
@@ -250,10 +289,13 @@ nav {
   background: var(--accent);
   color: var(--brown-dark);
   border-radius: 999px;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms var(--ease-out);
 }
 
 .calc-cta:hover {
   background: #F0A35C;
+  box-shadow: 0 14px 30px rgba(216, 137, 76, 0.22);
+  transform: translateY(-2px);
 }
 
 .packages-grid {
@@ -266,11 +308,13 @@ nav {
   background: rgba(255, 250, 245, 0.075);
   border-right-color: rgba(216, 137, 76, 0.18);
   color: var(--cream);
+  transition: background-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-out);
 }
 
 .pkg-card:hover {
   background: rgba(216, 137, 76, 0.1);
   box-shadow: inset 0 0 0 1px rgba(216, 137, 76, 0.34);
+  transform: translateY(-3px);
 }
 
 .pkg-card.featured {
@@ -314,11 +358,13 @@ nav {
 .pkg-btn-outline {
   color: var(--cream);
   border-color: rgba(216, 137, 76, 0.28);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms var(--ease-out);
 }
 
 .pkg-btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .pkg-card.featured .pkg-btn-outline {
@@ -365,6 +411,7 @@ nav {
   background: #FFF8EF;
   border-color: rgba(143, 93, 61, 0.2);
   color: var(--text-dark);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms var(--ease-out), box-shadow 180ms ease;
 }
 
 .cal-arrow:hover,
@@ -372,6 +419,19 @@ nav {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--brown-dark);
+}
+
+.cal-arrow:hover {
+  box-shadow: 0 10px 22px rgba(216, 137, 76, 0.18);
+  transform: translateY(-1px);
+}
+
+.cal-cell {
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms var(--ease-out);
+}
+
+.cal-cell:hover {
+  transform: translateY(-1px);
 }
 
 .cal-cell.today {
@@ -401,6 +461,7 @@ nav {
   border-color: rgba(216, 137, 76, 0.16);
   background: rgba(255, 255, 255, 0.05);
   color: var(--cream);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .booking-field input:focus,
@@ -408,6 +469,7 @@ nav {
 .booking-field textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(216, 137, 76, 0.16);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .booking-field select option {
@@ -418,12 +480,15 @@ nav {
 .btn-primary {
   background: var(--accent);
   color: var(--brown-dark);
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms var(--ease-out), color 180ms ease;
 }
 
 .booking-btn:hover,
 .btn-primary:hover {
   background: #C97942;
   color: var(--brown-dark);
+  box-shadow: 0 14px 30px rgba(216, 137, 76, 0.22);
+  transform: translateY(-2px);
 }
 
 .booking-note a {
@@ -446,11 +511,24 @@ nav {
 .btn-secondary {
   color: var(--cream);
   border-color: rgba(216, 137, 76, 0.26);
+  transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease, transform 180ms var(--ease-out);
 }
 
 .btn-secondary:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(216, 137, 76, 0.08);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
 }
 
 footer {
