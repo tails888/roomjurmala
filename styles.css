@@ -717,6 +717,66 @@ html[lang="ru"] .review-cta-text {
 .cal-cell.free-sel {
   background: var(--gold); color: var(--brown-dark);
 }
+.cal-cell.has-events::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal);
+  transform: translateX(-50%);
+}
+.cal-cell.free-sel.has-events::after,
+.cal-cell.has-events:hover::after {
+  background: currentColor;
+}
+.cal-events {
+  margin-top: 24px;
+  border-top: 1px solid rgba(216,137,76,0.16);
+  padding-top: 20px;
+}
+.cal-events-title {
+  color: var(--brown-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.cal-event-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.cal-event-item {
+  border: 1px solid rgba(46,108,116,0.14);
+  border-radius: 12px;
+  background: rgba(46,108,116,0.07);
+  padding: 12px 14px;
+}
+.cal-event-meta {
+  color: var(--teal);
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.cal-event-title {
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.cal-event-description,
+.cal-events-empty {
+  color: var(--text-mid);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.cal-event-description {
+  margin-top: 5px;
+}
 
 /* Booking sidebar */
 .booking-card {
@@ -2127,6 +2187,14 @@ h1, h2, h3,
   }
   .section-title,
   .contact-title { font-size: 2rem; }
+  #calendar .section-title {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  #calendar .section-title em {
+    white-space: normal;
+  }
   .sketch-swoop { width: 72vw; }
   #faq { padding: 64px 24px; }
   .faq-item { padding: 22px 20px; }

@@ -759,6 +759,7 @@
       transition: all 0.16s;
       border: 1px solid transparent;
       background: transparent;
+      position: relative;
     }
     .cal-cell:hover:not(.empty):not(.past) {
       background: var(--accent-light);
@@ -781,6 +782,66 @@
       background: var(--black);
       color: var(--white);
       border-color: var(--black);
+    }
+    .cal-cell.has-events::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: translateX(-50%);
+    }
+    .cal-cell.free-sel.has-events::after,
+    .cal-cell.has-events:hover::after {
+      background: currentColor;
+    }
+    .cal-events {
+      margin-top: 24px;
+      border-top: 1px solid var(--gray-300);
+      padding-top: 20px;
+    }
+    .cal-events-title {
+      color: var(--black);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .cal-event-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .cal-event-item {
+      border: 1px solid rgba(200,169,110,0.28);
+      border-radius: 12px;
+      background: rgba(200,169,110,0.1);
+      padding: 12px 14px;
+    }
+    .cal-event-meta {
+      color: #8a6426;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .cal-event-title {
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .cal-event-description,
+    .cal-events-empty {
+      color: var(--gray-500);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .cal-event-description {
+      margin-top: 5px;
     }
     .booking-card {
       background: var(--black);
@@ -1385,6 +1446,7 @@
   <p style="color: var(--gray-500); font-size: 12px;">© 2026 ROOM Jūrmala</p>
 </footer>
 
+<script src="/calendar-events.js?v=20260528-calendar-events"></script>
 <script>
 const WA_NUMBER = "37127850380";
 const MODES = ["hours", "days", "weeks", "months"];
@@ -2182,6 +2244,20 @@ function setDateTimeValue(timeSlot) {
   if (timeSlot) input.value = timeSlot;
 }
 
+function renderCalendarEventsPanel() {
+  if (!window.RoomJurmalaCalendar) return;
+  const grid = document.getElementById("calGrid");
+  window.RoomJurmalaCalendar.renderPanel({
+    widget: grid?.closest(".cal-widget"),
+    lang: currentLang,
+    selectedDateParts,
+    currentYear: curYear,
+    currentMonth: curMonth,
+    today,
+    formatDate: formatSelectedDate
+  });
+}
+
 function renderCalendar() {
   const calendarCopy = I18N[currentLang].calendar;
   const label = document.getElementById("calMonthLabel");
@@ -2205,11 +2281,17 @@ function renderCalendar() {
     const cell = document.createElement("button");
     const isToday = d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear();
     const isPast = new Date(curYear, curMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const dateLabel = formatSelectedDate(d, curMonth);
+    const dateEvents = window.RoomJurmalaCalendar?.getEventsForDate(curYear, curMonth, d) || [];
+    const eventLabel = window.RoomJurmalaCalendar?.getCellEventLabel(dateEvents, currentLang) || "";
 
     cell.type = "button";
     cell.className = "cal-cell" + (isToday ? " today" : "") + (isPast ? " past" : "");
     cell.textContent = d;
-    cell.setAttribute("aria-label", `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`);
+    cell.setAttribute("aria-label", dateEvents.length ? `${dateLabel}: ${eventLabel}` : `${calendarCopy.freeLabel} — ${dateLabel}`);
+    if (dateEvents.length) {
+      cell.classList.add("has-events");
+    }
 
     if (selectedDateParts && selectedDateParts.day === d && selectedDateParts.month === curMonth && selectedDateParts.year === curYear) {
       cell.classList.add("free-sel");
@@ -2218,17 +2300,20 @@ function renderCalendar() {
     if (isPast) {
       cell.disabled = true;
     } else {
-      cell.title = `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`;
+      cell.title = dateEvents.length ? `${dateLabel}\n${eventLabel}` : `${calendarCopy.freeLabel} — ${dateLabel}`;
       cell.addEventListener("click", () => {
         document.querySelectorAll(".cal-cell.free-sel").forEach((node) => node.classList.remove("free-sel"));
         cell.classList.add("free-sel");
         selectedDateParts = { day: d, month: curMonth, year: curYear };
         setDateTimeValue("");
+        renderCalendarEventsPanel();
       });
     }
 
     grid.appendChild(cell);
   }
+
+  renderCalendarEventsPanel();
 }
 
 function formatDesktopTimeInput(value) {

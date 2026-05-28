@@ -963,6 +963,20 @@ function setDateTimeValue(timeSlot) {
   }
 }
 
+function renderCalendarEventsPanel() {
+  if (!window.RoomJurmalaCalendar) return;
+  const grid = document.getElementById('calGrid');
+  window.RoomJurmalaCalendar.renderPanel({
+    widget: grid?.closest('.cal-widget'),
+    lang: currentLang,
+    selectedDateParts,
+    currentYear: curYear,
+    currentMonth: curMonth,
+    today,
+    formatDate: formatSelectedDate
+  });
+}
+
 function normalizeBookingPackage(packageValue) {
   return (packageValue || '').replace(/^package-/, '');
 }
@@ -1224,24 +1238,34 @@ function renderCalendar() {
     const cell = document.createElement('div');
     const isToday = (d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear());
     const isPast  = new Date(curYear, curMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const dateLabel = formatSelectedDate(d, curMonth);
+    const dateEvents = window.RoomJurmalaCalendar?.getEventsForDate(curYear, curMonth, d) || [];
+    const eventLabel = window.RoomJurmalaCalendar?.getCellEventLabel(dateEvents, currentLang) || "";
 
     cell.className = 'cal-cell' + (isToday ? ' today' : '') + (isPast ? ' past' : '');
+    if (dateEvents.length) {
+      cell.classList.add('has-events');
+      cell.setAttribute('aria-label', `${dateLabel}: ${eventLabel}`);
+    }
     if (selectedDateParts && selectedDateParts.day === d && selectedDateParts.month === curMonth && selectedDateParts.year === curYear) {
       cell.classList.add('free-sel');
     }
     cell.textContent = d;
     if (isPast) cell.style.opacity = '0.3';
     if (!isPast) {
-      cell.title = `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`;
+      cell.title = dateEvents.length ? `${dateLabel}\n${eventLabel}` : `${calendarCopy.freeLabel} — ${dateLabel}`;
       cell.addEventListener('click', () => {
         document.querySelectorAll('.cal-cell.free-sel').forEach(c => c.classList.remove('free-sel'));
         cell.classList.add('free-sel');
         selectedDateParts = { day: d, month: curMonth, year: curYear };
         setDateTimeValue('');
+        renderCalendarEventsPanel();
       });
     }
     grid.appendChild(cell);
   }
+
+  renderCalendarEventsPanel();
 }
 
 document.getElementById('prevMonth').addEventListener('click', () => {
