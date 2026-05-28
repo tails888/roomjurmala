@@ -45,6 +45,66 @@
         en: "Yoga classes",
         ru: "Занятия йогой"
       }
+    },
+    {
+      date: "2026-06-05",
+      time: "17:00-18:00",
+      title: {
+        lv: "Hendlinga nodarbība topošajiem vecākiem",
+        en: "Handling class for expectant parents",
+        ru: "Занятие по хендлингу для будущих родителей"
+      },
+      description: {
+        lv: "Aprūpe sevī ietver sadarbību un attiecību veidošanu.",
+        en: "Care includes cooperation and building relationships.",
+        ru: "Уход включает в себя сотрудничество и выстраивание отношений."
+      }
+    },
+    {
+      date: "2026-06-05",
+      time: "18:10-19:10",
+      title: {
+        lv: "Hendlinga nodarbība topošajiem vecākiem",
+        en: "Handling class for expectant parents",
+        ru: "Занятие по хендлингу для будущих родителей"
+      },
+      description: {
+        lv: "Aprūpe ir brīdis, kurā mēs varam sniegt bērnam cieņpilnu attieksmi.",
+        en: "Care is a moment when we can offer a child a respectful attitude.",
+        ru: "Уход - это момент, когда мы можем проявить к ребенку уважительное отношение."
+      }
+    },
+    {
+      date: "2026-06-12",
+      time: "16:00-17:00",
+      title: {
+        lv: "Hendlinga nodarbība vecākiem ar mazuli līdz 3 mēnešu vecumam",
+        en: "Handling class for parents with a baby up to 3 months old",
+        ru: "Занятие по хендлингу для родителей с малышом до 3 месяцев"
+      }
+    },
+    {
+      date: "2026-06-19",
+      time: "17:00-18:00",
+      title: {
+        lv: "Hendlinga nodarbība vecākiem ar mazuli no 3 līdz 6 mēnešu vecumam",
+        en: "Handling class for parents with a baby from 3 to 6 months old",
+        ru: "Занятие по хендлингу для родителей с малышом от 3 до 6 месяцев"
+      },
+      description: {
+        lv: "Dodot bērnam laiku saprast notiekošo aprūpes brīdī.",
+        en: "Giving the child time to understand what is happening during care.",
+        ru: "Давая ребенку время понять, что происходит во время ухода."
+      }
+    },
+    {
+      date: "2026-06-29",
+      time: "18:00-19:00",
+      title: {
+        lv: "Hendlinga nodarbība vecākiem ar mazuli no 3 līdz 6 mēnešu vecumam",
+        en: "Handling class for parents with a baby from 3 to 6 months old",
+        ru: "Занятие по хендлингу для родителей с малышом от 3 до 6 месяцев"
+      }
     }
   ];
 
