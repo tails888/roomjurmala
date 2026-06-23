@@ -1119,7 +1119,9 @@ footer {
   transform: translateX(-50%);
   background: linear-gradient(90deg, transparent, rgba(216,137,76,0.18), rgba(216,137,76,0.58), rgba(216,137,76,0.18), transparent);
 }
-.footer-credit a {
+footer .footer-credit a,
+footer .footer-credit a:link,
+footer .footer-credit a:visited {
   display: inline-flex;
   align-items: center;
   padding: 0 2px;
@@ -1133,10 +1135,14 @@ footer {
   text-shadow: 0 0 18px rgba(216,137,76,0.16);
   transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
 }
-.footer-credit a:hover {
+footer .footer-credit a:hover {
   color: var(--cream);
   text-shadow: 0 0 22px rgba(216,137,76,0.28);
   transform: translateY(-1px);
+}
+footer .footer-credit a:focus-visible {
+  outline: 1px solid rgba(216,137,76,0.65);
+  outline-offset: 4px;
 }
 
 /* ─── Scroll reveal ─────────────────────────────────── */
