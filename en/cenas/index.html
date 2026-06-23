@@ -1442,8 +1442,9 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-brand">ROOM Jūrmala</span>
-  <p>roomjurmala.lv · Jūrmala, Latvija</p>
+  <p class="footer-meta">roomjurmala.lv · Jūrmala, Latvija</p>
   <p style="color: var(--gray-500); font-size: 12px;">© 2026 ROOM Jūrmala</p>
+  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
 </footer>
 
 <script src="/calendar-events.js?v=20260609-calendar-events"></script>
@@ -2533,7 +2534,7 @@ function applyLanguage(lang) {
   setText(".cta-section p", t.cta.text);
   setText(".btn-primary", t.cta.whatsapp);
   setText(".btn-secondary", t.cta.email);
-  setText("footer p", t.footer);
+  setText(".footer-meta", t.footer);
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     const active = btn.dataset.lang === lang;
