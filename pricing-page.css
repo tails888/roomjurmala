@@ -534,7 +534,7 @@ nav {
 footer {
   background: #050505;
   border-top-color: rgba(216, 137, 76, 0.16);
-  color: rgba(247, 235, 221, 0.64);
+  color: rgba(247, 235, 221, 0.72);
   padding: 36px 32px 28px;
   gap: 16px 24px;
 }
@@ -544,7 +544,7 @@ footer {
 }
 
 footer p {
-  color: rgba(247, 235, 221, 0.48);
+  color: rgba(247, 235, 221, 0.64);
 }
 
 .footer-credit {

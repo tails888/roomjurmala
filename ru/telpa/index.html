@@ -231,8 +231,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&amp;family=Caveat:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Marck+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260623-footer-credit" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="/styles.css?v=20260623-perf-fixes" />
 </head>
 <body class="services-page">
 <nav>
@@ -245,7 +246,7 @@
     <a href="#calendar" class="nav-cta nav-cta-mobile">Забронировать</a>
   </div>
   <a href="/ru/" class="nav-logo">
-    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
   </a>
   <div class="nav-links">
     <a href="/ru/telpa/">Зал</a>
@@ -468,15 +469,15 @@
           <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
           <form onsubmit="handleBooking(event)" novalidate>
             <div class="booking-field">
-              <label>Ваше имя</label>
+              <label for="customerName">Ваше имя</label>
               <input type="text" id="customerName" placeholder="Имя, фамилия" maxlength="80" autocomplete="name" required />
             </div>
             <div class="booking-field">
-              <label>Телефон</label>
+              <label for="customerPhone">Телефон</label>
               <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
             </div>
             <div class="booking-field">
-              <label>Тип аренды</label>
+              <label for="bookingPackageSelect">Тип аренды</label>
               <select id="bookingPackageSelect" required>
                 <option value="">Выберите тип аренды...</option>
                 <option value="hours">Почасовая аренда</option>
@@ -486,7 +487,7 @@
               </select>
             </div>
             <div class="booking-field">
-              <label>Формат мероприятия</label>
+              <label for="eventTypeSelect">Формат мероприятия</label>
               <select id="eventTypeSelect" required>
                 <option value="">Выберите тип мероприятия...</option>
                 <option>Детский день рождения</option>
@@ -503,18 +504,18 @@
               </select>
             </div>
             <div class="booking-field">
-              <label>Дата</label>
+              <label for="desiredDateTime">Дата</label>
               <input id="desiredDateTime" type="text" placeholder="например, 20 апреля" maxlength="80" required />
             </div>
             <div class="booking-field">
-              <label>Время</label>
+              <label for="startTimeDesktop">Время</label>
               <div class="booking-time-row">
                 <input type="text" id="startTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время начала" placeholder="Начало, например 14:00" />
                 <input type="text" id="endTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время окончания" placeholder="Окончание, например 17:00" />
               </div>
             </div>
             <div class="booking-field">
-              <label>Примечания</label>
+              <label for="bookingNotes">Примечания</label>
               <textarea id="bookingNotes" placeholder="Сколько гостей? Есть особые пожелания?" maxlength="500"></textarea>
             </div>
             <div class="booking-submit-wrap">

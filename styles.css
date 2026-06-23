@@ -1091,9 +1091,9 @@ footer {
   font-weight: 600;
 }
 .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-.footer-links a { color: rgba(245,239,230,0.45); font-size: 0.82rem; text-decoration: none; transition: color 0.2s; }
+.footer-links a { color: rgba(245,239,230,0.68); font-size: 0.82rem; text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--gold); }
-.footer-copy { color: rgba(245,239,230,0.3); font-size: 0.78rem; }
+.footer-copy { color: rgba(245,239,230,0.56); font-size: 0.78rem; }
 .footer-credit {
   flex: 1 1 100%;
   position: relative;

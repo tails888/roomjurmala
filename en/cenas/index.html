@@ -102,7 +102,6 @@
   }
   </script>
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1039,7 +1038,9 @@
       color: var(--gray-500);
     }
   </style>
-  <link rel="stylesheet" href="/pricing-page.css?v=20260623-footer-credit" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="/pricing-page.css?v=20260623-perf-fixes" />
 </head>
 <body>
 
@@ -1372,15 +1373,15 @@
         <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
         <form onsubmit="handleBooking(event)" novalidate>
           <div class="booking-field">
-            <label>Jūsu vārds</label>
+            <label for="customerName">Jūsu vārds</label>
             <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
           </div>
           <div class="booking-field">
-            <label>Tālrunis</label>
+            <label for="customerPhone">Tālrunis</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
           </div>
           <div class="booking-field">
-            <label>Nomas veids</label>
+            <label for="bookingPackageSelect">Nomas veids</label>
             <select id="bookingPackageSelect" required>
               <option value="">Izvēlieties nomas veidu...</option>
               <option value="hours">Stundas noma</option>
@@ -1390,7 +1391,7 @@
             </select>
           </div>
           <div class="booking-field">
-            <label>Pasākuma veids</label>
+            <label for="eventTypeSelect">Pasākuma veids</label>
             <select id="eventTypeSelect" required>
               <option value="">Izvēlieties pasākuma veidu...</option>
               <option>🎈 Bērnu dzimšanas diena</option>
@@ -1407,18 +1408,18 @@
             </select>
           </div>
           <div class="booking-field">
-            <label>Datums</label>
+            <label for="desiredDateTime">Datums</label>
             <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
           </div>
           <div class="booking-field">
-            <label>Laiks</label>
+            <label for="startTimeDesktop">Laiks</label>
             <div class="booking-time-row">
               <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
               <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
             </div>
           </div>
           <div class="booking-field">
-            <label>Piezīmes</label>
+            <label for="bookingNotes">Piezīmes</label>
             <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
           </div>
           <button type="submit" class="booking-btn">Nosūtīt pieprasījumu ✦</button>

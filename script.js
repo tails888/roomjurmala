@@ -1488,7 +1488,53 @@ function handleBooking(e) {
   setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank', 'noopener,noreferrer'); }, 500);
 }
 
+function loadLazyVideo(video) {
+  if (!video || video.dataset.loaded === 'true') return;
+  video.querySelectorAll('source[data-src]').forEach((source) => {
+    source.src = source.dataset.src;
+    source.removeAttribute('data-src');
+  });
+  video.dataset.loaded = 'true';
+  video.load();
+  if (video.autoplay) {
+    video.play().catch(() => {});
+  }
+}
+
+function initLazyVideos() {
+  const videos = document.querySelectorAll('video[data-lazy-video]');
+  if (!videos.length) return;
+  const rootMarginPx = 180;
+
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(loadLazyVideo);
+    return;
+  }
+
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      loadLazyVideo(entry.target);
+      videoObserver.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: `${rootMarginPx}px 0px`,
+    threshold: 0
+  });
+
+  videos.forEach((video) => {
+    const rect = video.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewportHeight + rootMarginPx && rect.bottom > -rootMarginPx) {
+      loadLazyVideo(video);
+      return;
+    }
+    videoObserver.observe(video);
+  });
+}
+
 applyLanguage(currentLang);
+initLazyVideos();
 
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
