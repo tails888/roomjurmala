@@ -129,6 +129,4 @@ for (const dir of ['assets/js', 'scripts', 'tests']) {
     assert.equal(result.status, 0, result.stderr);
   }
 }
-assert(fs.existsSync('assets/vendor/three.module.js') && fs.existsSync('assets/vendor/three.core.js'), 'Three.js modules');
-assert(fs.existsSync('assets/vendor/THREE-LICENSE.txt'), 'Three.js license');
 console.log('Verified all 9 routes, SEO metadata, internal links, assets, JSON, IDs, form fallback and JavaScript syntax.');

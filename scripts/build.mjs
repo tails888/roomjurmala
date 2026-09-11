@@ -14,7 +14,6 @@ const clean=s=>s.replace(/<[^>]*>/g,'').replace(/^[^\p{L}\p{N}]+/u,'').trim();
 const json=s=>JSON.stringify(s).replaceAll('<','\\u003c');
 const arrow='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg>';
 const diagonal='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg>';
-const tourButton=lang=>`<button class="tour-launch-button" type="button" data-open-tour><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 10 9-5M12 12 3 7m9 5v10"/></svg>${{lv:'Izstaigā telpu 3D',en:'Walk through in 3D',ru:'Прогулка по залу в 3D'}[lang]}</button>`;
 const plus='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg>';
 const play='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg>';
 const pauseIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2"/></svg>';
@@ -59,7 +58,7 @@ function videoHero(d){
 }
 function paperHero(lang,d){
  const t=paperCopy[lang];
- return `<section class="paper-hero" aria-labelledby="paper-title"><div class="paper-hero-copy"><p class="paper-eyebrow">${t.eyebrow}</p><h1 id="paper-title">${t.title}</h1><p class="paper-tagline">${t.intro}</p><div class="paper-hero-actions"><a class="button paper-book" href="#calendar">${t.book}</a><a class="paper-gallery-link" href="#gallery">${t.gallery}</a></div><p class="paper-location">Skolas iela 50 · Jūrmala</p>${tourButton(lang)}</div><div class="paper-art paper-art-video">${inlineVideo(2,'entry','hero-film',d,true)}</div></section>
+ return `<section class="paper-hero" aria-labelledby="paper-title"><div class="paper-hero-copy"><p class="paper-eyebrow">${t.eyebrow}</p><h1 id="paper-title">${t.title}</h1><p class="paper-tagline">${t.intro}</p><div class="paper-hero-actions"><a class="button paper-book" href="#calendar">${t.book}</a><a class="paper-gallery-link" href="#gallery">${t.gallery}</a></div><p class="paper-location">Skolas iela 50 · Jūrmala</p></div><div class="paper-art paper-art-video">${inlineVideo(2,'entry','hero-film',d,true)}</div></section>
  <section class="paper-activities" id="events" aria-label="${esc(d.eventTitle.replace(/<[^>]*>/g,' '))}">${[4,3,newPhotoIndex(16)].map((n,i)=>`<a class="paper-activity" href="${route(lang,'space')}${i===0?'#bernu-ballites':i===1?'#telpas-nodarbibam':''}"><div><h2>${t.names[i]}</h2><p>${t.descriptions[i]}</p></div><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"></a>`).join('')}</section>`;
 }
 function paperGallery(lang,d){
@@ -137,7 +136,7 @@ function editorialPage(lang,kind,d){
  const entries=p?p.details:t.spaceDetails;
  const related=['space','party','workshops','pricing'].filter(k=>k!==kind);
  const names={space:t.spaceTitle,pricing:t.pricingTitle,party:servicePages[lang].party.name,workshops:servicePages[lang].workshops.name};
- return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p>${kind==='space'?tourButton(lang):''}</header>
+ return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p></header>
  ${isPrice?rentalCalculator(lang,d):''}<div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text],i)=>`<section class="editorial-section"><div class="activity-heading">${kind==='space'?activityArt(['table','play','calendar'][i]):''}<h2>${heading}</h2></div><p>${text}</p>${kind==='space'?i===0?mediaPhotos(lang,[6,15])+venueFilms(lang,[14,18]):i===1?'':mediaPhotos(lang,[4]):''}</section>`).join('')}`}
  ${kind==='space'?consolidatedServices(lang):''}<section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
  <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
@@ -217,12 +216,6 @@ function footer(lang,c,d){
 function dialogs(d){
  return `<dialog id="media-dialog" aria-label="${esc(d.explore)}"><button class="dialog-close circle-button" aria-label="${esc(d.close)}">${plus}</button><div id="dialog-content"></div></dialog>`;
 }
-fs.mkdirSync('assets/vendor',{recursive:true});
-for(const name of ['three.module.js','three.core.js']){
-  const vendor=fs.readFileSync('node_modules/three/build/'+name,'utf8');
-  fs.writeFileSync('assets/vendor/'+name,vendor.replace(/^(\t+) +\t/gm,'$1\t'));
-}
-fs.copyFileSync('node_modules/three/LICENSE','assets/vendor/THREE-LICENSE.txt');
 // Load only the two existing font families used by the new design.
 const faces=fs.readFileSync('assets/fonts/fonts.css','utf8').match(/@font-face\s*\{[^}]*\}/g);
 const seen=new Set();
@@ -253,7 +246,6 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-3d">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  ${kind!=='pricing'?'<script type="module" src="/assets/js/tour-launcher.js?v=blender-1"></script>':''}
   <script type="module" src="/assets/js/app.js?v=20260911-3d"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}

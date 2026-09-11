@@ -2,4 +2,3 @@
 Thumbs.db
 node_modules/
 .qa/
-blender/*.blend[0-9]
