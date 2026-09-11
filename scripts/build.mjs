@@ -99,8 +99,9 @@ function serviceLanding(lang,kind,d){
  <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
  <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
 }
+function activityArt(name){return `<img class="activity-art" src="/assets/images/activities/${name}.png" width="120" height="120" alt="" aria-hidden="true" loading="lazy" decoding="async">`;}
 function consolidatedServices(lang){
- return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><h2>${p.eyebrow}</h2><p>${p.intro}</p>${p.details.map(([heading,text])=>`<h3>${heading}</h3><p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
+ return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><div class="activity-heading">${activityArt(k==='party'?'party':'workshop')}<h2>${p.eyebrow}</h2></div><p>${p.intro}</p>${p.details.map(([heading,text],i)=>`${k==='workshops'&&i===1?`<div class="activity-heading">${activityArt('yoga')}<h3>${heading}</h3></div>`:`<h3>${heading}</h3>`}<p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
 }
 function rentalCalculator(lang,d){
  const t=calculatorCopy[lang];
@@ -128,7 +129,7 @@ function editorialPage(lang,kind,d){
  const related=['space','party','workshops','pricing'].filter(k=>k!==kind);
  const names={space:t.spaceTitle,pricing:t.pricingTitle,party:servicePages[lang].party.name,workshops:servicePages[lang].workshops.name};
  return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p></header>
- ${isPrice?rentalCalculator(lang,d):''}<div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text])=>`<section class="editorial-section"><h2>${heading}</h2><p>${text}</p></section>`).join('')}`}
+ ${isPrice?rentalCalculator(lang,d):''}<div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text],i)=>`<section class="editorial-section"><div class="activity-heading">${kind==='space'?activityArt(['table','play','calendar'][i]):''}<h2>${heading}</h2></div><p>${text}</p></section>`).join('')}`}
  ${kind==='space'?consolidatedServices(lang):''}<section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
  <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
  <nav class="editorial-related" aria-label="${esc(t.related)}"><p>${t.related}</p>${related.map(k=>`<a href="${route(lang,k)}">${names[k]}</a>`).join('')}</nav></article>`;
@@ -236,10 +237,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-iphone-gallery">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-iphone-gallery">
-  <script src="/calendar-events.js?v=20260911-iphone-gallery" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-iphone-gallery"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-activity-art">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-activity-art">
+  <script src="/calendar-events.js?v=20260911-activity-art" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-activity-art"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -247,7 +248,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-iphone-gallery" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-activity-art" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
