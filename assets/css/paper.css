@@ -180,3 +180,17 @@ body{background:var(--paper)}
 .film-scroll-enabled .paper-films{flex:none;scroll-snap-type:none;scroll-behavior:auto;touch-action:pan-y;overflow-x:hidden;padding-bottom:22px}
 .film-scroll-enabled .paper-film{flex-basis:min(75vw,36svh);max-width:none}
 .film-scroll-enabled .paper-film h4{font-size:22px;margin-top:12px}
+
+/* Keep the mobile collage title in its own band, including short Safari viewports. */
+@media(max-width:760px){
+ .gallery-scroll-enabled .memory-photo{width:40%;padding:8px;--angle:-3deg}
+ .gallery-scroll-enabled .memory-photo:nth-child(odd){--angle:3deg}
+ .gallery-scroll-enabled .memory-photo-0,.gallery-scroll-enabled .memory-photo-1{top:4%;bottom:auto}
+ .gallery-scroll-enabled .memory-photo-2,.gallery-scroll-enabled .memory-photo-3{top:auto;bottom:13%}
+ .gallery-scroll-enabled .memory-photo img{height:18svh;min-height:0}
+ .gallery-scroll-enabled .memory-photo span{font-size:11px;line-height:1.3;min-height:36px;padding-top:7px}
+ .gallery-scroll-enabled .memory-center{top:46%;left:5%;right:5%;transform:translateY(-50%)}
+ .gallery-scroll-enabled .memory-center .memory-wordmark{font-size:clamp(54px,15vw,76px);line-height:.9;margin:0}
+ .gallery-scroll-enabled .memory-wordmark span{line-height:1.1;margin-top:5px}
+ .gallery-scroll-enabled .memory-center>p:not(.memory-wordmark){font-size:18px;line-height:1.2;margin:10px 0 0}
+}
