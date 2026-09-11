@@ -234,3 +234,7 @@ body{background:var(--paper)}
 /* Keep the Latvian event heading within the desktop text column. */
 @media(min-width:761px){html[lang="lv"] .paper-hero h1{font-size:clamp(68px,9vw,140px)}}
 @media(max-width:760px){html[lang="lv"] .paper-hero h1{font-size:clamp(60px,15vw,105px)}}
+
+/* Fit the longer Russian event heading without overflowing its column. */
+@media(min-width:761px){html[lang="ru"] .paper-hero h1{font-size:clamp(60px,8vw,120px)}}
+@media(max-width:760px){html[lang="ru"] .paper-hero h1{font-size:clamp(48px,12vw,90px)}}

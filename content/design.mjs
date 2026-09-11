@@ -162,24 +162,24 @@ const minimal = {
   hero: 'Room to be<br><em>together.</em>', venue: 'Event space in Jūrmala', findDate: 'Choose a date',
   eventTitle: 'For your<br><em>occasions.</em>', eventNames: ['Celebrate','Create','Learn','Move'],
   eventDescriptions: ['Celebrations with your favourite people.','Workshops and creative sessions.','Children’s classes and shared discoveries.','Yoga, exercise and time for yourself.'],
-  simplePrice: 'Simply<br><em>get together.</em>', from: 'from', perHour: 'per hour', perDay: 'per day',
+  simplePrice: 'For your moments<br><em>together.</em>', from: 'from', perHour: 'per hour', perDay: 'per day',
   bookingTitle: 'Plan your visit', bookingIntro: 'We’ll confirm availability in our conversation.', approximateTime: 'Approximate time',
   bookWhatsApp: 'Book via WhatsApp', soundOn: 'Enable sound', soundOff: 'Mute sound',
   pauseVideo: 'Pause video', playVideo: 'Play video', filmFallback: 'Open video',
   scroll: 'Explore', schedule: 'Scheduled classes', selectedPlan: 'Selected plan', clearPlan: 'Remove',
-  faqTitle: 'Good to know.', noScript: 'Contact us on WhatsApp to arrange your date.',
+  faqTitle: 'Good to know', noScript: 'Contact us on WhatsApp to arrange your date.',
   invalidRequired: 'Choose a date and an approximate time.', invalidTime: 'Enter a valid time.'
  },
  ru: {
   hero: 'Место для<br><em>встреч.</em>', venue: 'Пространство для мероприятий в Юрмале', findDate: 'Выбрать дату',
   eventTitle: 'Для ваших<br><em>событий.</em>', eventNames: ['Праздновать','Творить','Учиться','Двигаться'],
   eventDescriptions: ['Праздники в кругу близких.','Мастер-классы и творческие встречи.','Детские занятия и новые открытия.','Йога, гимнастика и время для себя.'],
-  simplePrice: 'Просто<br><em>встретиться.</em>', from: 'от', perHour: 'в час', perDay: 'в день',
+  simplePrice: 'Для встреч<br><em>с близкими.</em>', from: 'от', perHour: 'в час', perDay: 'в день',
   bookingTitle: 'Запланируйте визит', bookingIntro: 'Подтвердим доступность в переписке.', approximateTime: 'Примерное время',
   bookWhatsApp: 'Написать в WhatsApp', soundOn: 'Включить звук', soundOff: 'Выключить звук',
   pauseVideo: 'Остановить видео', playVideo: 'Воспроизвести видео', filmFallback: 'Открыть видео',
   scroll: 'Далее', schedule: 'Запланированные занятия', selectedPlan: 'Выбранный план', clearPlan: 'Убрать',
-  faqTitle: 'Частые вопросы.', noScript: 'Напишите нам в WhatsApp, чтобы выбрать дату.',
+  faqTitle: 'Полезно знать', noScript: 'Напишите нам в WhatsApp, чтобы выбрать дату.',
   invalidRequired: 'Выберите дату и примерное время.', invalidTime: 'Введите корректное время.'
  }
 };

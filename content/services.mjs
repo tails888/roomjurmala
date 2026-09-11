@@ -21,13 +21,265 @@ export const servicePages={
   }
  },
  en:{
-  party:{name:'Children’s parties',title:'Children’s Party Venue in Jūrmala | ROOM Jūrmala',description:'Hire a space for children’s birthdays and family celebrations in Kauguri, Jūrmala. Play area, kitchenette and free parking. Room hire from €20 per hour.',heading:'Little parties.<br><em>Big smiles.</em>',eyebrow:'Children’s party venue in Jūrmala',intro:'For birthdays and family celebrations with your favourite people. A space in Kauguri for games, a shared table and birthday cake.',image:4,detailImage:2,video:0,poster:'celebrate',caption:'Family and friends celebrating at ROOM Jūrmala.',detailTitle:'A celebration<br><em>of your own.</em>',details:[['Room for play','Soft carpet, play equipment and space for children’s activities. We will discuss the table and chair layout to suit your celebration.'],['Cake and refreshments','Use the kitchenette to prepare and serve food and drinks. Agree on food, decorations and preparation of the space before your event.'],['Easy for the family to reach','Find us at Skolas iela 50 in Kauguri, Jūrmala, with free parking outside. You can arrange a viewing before booking.']],priceTitle:'Time to<br><em>celebrate.</em>',rates:[['€20','1 hour'],['€55','3 hours'],['€130','8 hours']],priceNote:'Prices are for room hire. We will discuss the event format and any additional requirements in our conversation.',faq:[['Can we hold a child’s birthday party here?','Yes. ROOM Jūrmala welcomes children’s birthdays and family celebrations. Tell us the children’s ages and your guest count so we can discuss a suitable layout.'],['How many guests can attend?','The suitable group size depends on the furniture layout, children’s ages and planned activities. We will agree on a format for your group before booking.'],['Is a party entertainer included?','The prices on this page cover room hire. If you need an entertainer or an activity programme, discuss this separately before booking.'],['How do I request a date?','Choose a date in the calendar, enter an approximate start time and open the prepared WhatsApp message. We will confirm availability and your booking in the conversation.']],related:'Planning a workshop instead?',request:'Children’s party or family celebration'},
-  workshops:{name:'Classes and workshops',title:'Class & Workshop Space in Jūrmala | ROOM Jūrmala',description:'Hire a space for workshops, yoga, exercise and children’s classes in Jūrmala. Tables, chairs, kitchenette and recurring hire options. From €20 per hour.',heading:'Room for<br><em>your ideas.</em>',eyebrow:'Space for classes and workshops in Jūrmala',intro:'Run a creative workshop, movement class or small seminar. A bright space in Kauguri for one-off sessions and regular groups.',image:0,detailImage:3,video:3,poster:'create',caption:'A children’s creative workshop at ROOM Jūrmala.',detailTitle:'From a shared table<br><em>to room to move.</em>',details:[['Creative workshops','Tables and chairs for drawing, crafts and shared activities. The instructor plans the session; discuss materials and the layout with us in advance.'],['Yoga and group classes','The space can be arranged for yoga, exercise and children’s movement activities. Tell us your group size and equipment needs so we can agree on a suitable setup.'],['A regular meeting place','Choose hourly hire or a membership for recurring sessions. A kitchenette supports breaks, and free parking outside makes arrival easier.']],priceTitle:'One session.<br><em>Or a regular rhythm.</em>',rates:[['€20','1 hour'],['€130','8 hours'],['€460','per month · 8 h a week']],priceNote:'Membership requires at least 3 months. Recurring class days and times are agreed before booking.',faq:[['Can I hire the space for regular classes?','Yes. Membership costs €460 per month and includes 8 hours a week, with a minimum term of 3 months. Specific days and times are agreed individually.'],['What equipment is available?','Tables, chairs, a kitchenette and an activity area are available. Discuss sports equipment, workshop materials and any special technical needs before your session.'],['Can I join an existing class in the calendar?','Yes. Choose a marked date and use the booking button beside the class. Its name, date and start time will be included in your WhatsApp message. We will confirm your place in the conversation.'],['Does room hire include an instructor?','No. These prices cover the space. Joining a scheduled class is a separate request; ask about its fee and format when contacting us.']],related:'Planning a child’s birthday?',request:'Room hire for a class or workshop'}
- },
+  "party": {
+    "name": "Children’s parties",
+    "title": "Children’s Party Venue in Jūrmala | ROOM Jūrmala",
+    "description": "Hire a space for children’s birthdays and family celebrations in Kauguri, Jūrmala. Play area, kitchenette and free parking. Room hire from €20 per hour.",
+    "heading": "Little parties.<br><em>Big smiles.</em>",
+    "eyebrow": "Children’s party venue in Jūrmala",
+    "intro": "Invite family and friends to your child’s birthday. We have room for play, a celebration table and cake.",
+    "image": 4,
+    "detailImage": 2,
+    "video": 0,
+    "poster": "celebrate",
+    "caption": "Family and friends celebrating at ROOM Jūrmala.",
+    "detailTitle": "A celebration<br><em>of your own.</em>",
+    "details": [
+      [
+        "Room for children to play",
+        "Children can play in the play area and enjoy activities on the soft carpet. We’ll arrange the tables and chairs to leave room for the games you have planned."
+      ],
+      [
+        "Cake and snacks",
+        "The kitchenette makes it easy to prepare and serve refreshments. Before the celebration, we’ll discuss what you are bringing and how much time you need to decorate."
+      ],
+      [
+        "Easy to get here",
+        "You’ll find us at Skolas iela 50 in Kauguri. Free parking is available outside the building."
+      ]
+    ],
+    "priceTitle": "Time to<br><em>celebrate.</em>",
+    "rates": [
+      [
+        "€20",
+        "1 hour"
+      ],
+      [
+        "€55",
+        "3 hours"
+      ],
+      [
+        "€130",
+        "8 hours"
+      ]
+    ],
+    "priceNote": "If you need something special for your celebration, tell us when requesting your date.",
+    "faq": [
+      [
+        "Can we hold a child’s birthday party here?",
+        "Yes. ROOM Jūrmala welcomes children’s birthdays and family celebrations. Tell us the children’s ages and your guest count so we can discuss a suitable layout."
+      ],
+      [
+        "How many guests can attend?",
+        "The suitable group size depends on the furniture layout, children’s ages and planned activities. We will agree on a format for your group before booking."
+      ],
+      [
+        "Is a party entertainer included?",
+        "The prices on this page cover room hire. If you need an entertainer or an activity programme, discuss this separately before booking."
+      ],
+      [
+        "How do I request a date?",
+        "Choose your date and approximate start time on the homepage, then open the prepared WhatsApp message. We will confirm availability and your booking in the conversation."
+      ]
+    ],
+    "related": "Planning a workshop instead?",
+    "request": "Children’s party or family celebration"
+  },
+  "workshops": {
+    "name": "Classes and workshops",
+    "title": "Class & Workshop Space in Jūrmala | ROOM Jūrmala",
+    "description": "Hire a space for workshops, yoga, exercise and children’s classes in Jūrmala. Tables, chairs, kitchenette and recurring hire options. From €20 per hour.",
+    "heading": "Room for<br><em>your ideas.</em>",
+    "eyebrow": "For classes and workshops",
+    "intro": "Looking for a place to run your class? You can hold a workshop, yoga or exercise class, or a small seminar here. Book the room for a single session or for regular classes.",
+    "image": 0,
+    "detailImage": 3,
+    "video": 3,
+    "poster": "create",
+    "caption": "A children’s creative workshop at ROOM Jūrmala.",
+    "detailTitle": "From a shared table<br><em>to room to move.</em>",
+    "details": [
+      [
+        "Drawing and crafts",
+        "Use the tables for drawing, crafts and working together. The instructor plans the session. We’ll agree on materials and the table layout in advance."
+      ],
+      [
+        "Yoga and exercise",
+        "We can clear space for yoga mats, exercise and children’s movement classes. Tell us how many people will be in your group and what equipment you need."
+      ],
+      [
+        "A place for your group every week",
+        "If you run regular classes, we can agree on specific weekdays and times. Both hourly hire and membership are available."
+      ]
+    ],
+    "priceTitle": "One session.<br><em>Or a regular rhythm.</em>",
+    "rates": [
+      [
+        "€20",
+        "1 hour"
+      ],
+      [
+        "€130",
+        "8 hours"
+      ],
+      [
+        "€460",
+        "per month · 8 h a week"
+      ]
+    ],
+    "priceNote": "Membership requires a minimum of 3 months. We’ll agree on available times before booking.",
+    "faq": [
+      [
+        "Can I hire the space for regular classes?",
+        "Yes. Membership costs €460 per month and includes 8 hours a week, with a minimum term of 3 months. Specific days and times are agreed individually."
+      ],
+      [
+        "What equipment is available?",
+        "Tables, chairs, a kitchenette and an activity area are available. Discuss sports equipment, workshop materials and any special technical needs before your session."
+      ],
+      [
+        "How do I arrange hire for my class?",
+        "Tell us the class type, group size, duration and preferred date. For a regular group, include your preferred weekdays. We will agree on availability and the room layout in our conversation."
+      ],
+      [
+        "Does room hire include an instructor?",
+        "No. These prices cover the space. Joining a scheduled class is a separate request; ask about its fee and format when contacting us."
+      ]
+    ],
+    "related": "Planning a child’s birthday?",
+    "request": "Room hire for a class or workshop"
+  }
+},
  ru:{
-  party:{name:'Детские праздники',title:'Помещение для детского праздника в Юрмале | ROOM Jūrmala',description:'Помещение для детского дня рождения и семейного праздника в Каугури, Юрмала. Игровая зона, мини-кухня и парковка. Аренда от 20 € в час.',heading:'Маленький праздник.<br><em>Большая радость.</em>',eyebrow:'Помещение для детского праздника в Юрмале',intro:'Для дня рождения ребёнка и семейного праздника в кругу близких. Место в Каугури для игр, общего стола и праздничного торта.',image:4,detailImage:2,video:0,poster:'celebrate',caption:'Семейный праздник в ROOM Jūrmala.',detailTitle:'Праздник<br><em>по вашему замыслу.</em>',details:[['Место для игр','Мягкий ковёр, игровые элементы и зона для детских занятий. Расстановку столов и стульев обсудим с учётом вашего праздника.'],['Для торта и угощений','На мини-кухне можно подготовить и подать еду и напитки. Продукты, украшения и подготовку помещения согласуем заранее.'],['Удобно добраться всей семьёй','Skolas iela 50, Каугури, Юрмала. У здания есть бесплатная парковка. Осмотреть помещение можно по предварительной договорённости.']],priceTitle:'Время<br><em>праздновать.</em>',rates:[['20 €','1 час'],['55 €','3 часа'],['130 €','8 часов']],priceNote:'Указана стоимость аренды помещения. Формат праздника и дополнительные пожелания обсудим в переписке.',faq:[['Можно ли провести день рождения ребёнка?','Да. ROOM Jūrmala подходит для детских дней рождения и семейных встреч. Сообщите возраст детей и количество гостей, чтобы обсудить удобную расстановку.'],['Сколько гостей можно пригласить?','Подходящее число гостей зависит от расстановки мебели, возраста детей и запланированных игр. До бронирования согласуем формат для вашей группы.'],['Входит ли аниматор в стоимость?','На этой странице указаны цены аренды помещения. Если нужен аниматор или программа, обсудите это отдельно до бронирования.'],['Как выбрать дату?','Выберите дату в календаре, укажите примерное время начала и откройте подготовленное сообщение в WhatsApp. Доступность и бронирование подтвердим в переписке.']],related:'Нужно помещение для мастер-класса?',request:'Детский или семейный праздник'},
-  workshops:{name:'Занятия и мастер-классы',title:'Аренда зала для занятий в Юрмале | ROOM Jūrmala',description:'Помещение для мастер-классов, йоги, гимнастики и детских занятий в Юрмале. Столы, стулья, мини-кухня и регулярная аренда. От 20 € в час.',heading:'Место для<br><em>ваших знаний.</em>',eyebrow:'Аренда помещения для занятий и мастер-классов в Юрмале',intro:'Проводите творческие встречи, занятия движением или небольшие семинары. Светлое помещение в Каугури для разовых и регулярных групп.',image:0,detailImage:3,video:3,poster:'create',caption:'Творческий мастер-класс для детей в ROOM Jūrmala.',detailTitle:'От общего стола<br><em>к движению.</em>',details:[['Творческие мастер-классы','Столы и стулья для рисования, рукоделия и совместных заданий. Программу составляет преподаватель; материалы и расстановку обсудим заранее.'],['Йога и групповые занятия','Помещение можно подготовить для йоги, гимнастики и детских подвижных занятий. Сообщите размер группы и необходимое оборудование, чтобы согласовать расстановку.'],['Регулярные встречи','Можно выбрать почасовую аренду или абонемент. Мини-кухня пригодится для перерывов, а бесплатная парковка у здания упростит приезд.']],priceTitle:'Одна встреча.<br><em>Или свой ритм.</em>',rates:[['20 €','1 час'],['130 €','8 часов'],['460 €','в месяц · 8 ч в неделю']],priceNote:'Абонемент оформляется минимум на 3 месяца. Дни и время регулярных занятий согласуем до бронирования.',faq:[['Можно ли арендовать зал регулярно?','Да. Абонемент стоит 460 € в месяц и включает 8 часов в неделю, минимальный срок составляет 3 месяца. Дни и время согласуем индивидуально.'],['Какое оборудование есть в помещении?','Есть столы, стулья, мини-кухня и зона для занятий. Спортивный инвентарь, материалы для мастер-класса и особые технические потребности обсудите заранее.'],['Можно ли записаться на занятие из календаря?','Да. Выберите отмеченную дату и нажмите кнопку записи у занятия. В сообщении WhatsApp будут его название, дата и время начала. Участие подтвердим в переписке.'],['Включена ли работа преподавателя в аренду?','Нет. Эти цены относятся к аренде помещения. Участие в занятии из календаря оформляется отдельно; стоимость и программу уточняйте в переписке.']],related:'Планируете детский день рождения?',request:'Аренда помещения для занятия или мастер-класса'}
- }
+  "party": {
+    "name": "Детские праздники",
+    "title": "Помещение для детского праздника в Юрмале | ROOM Jūrmala",
+    "description": "Помещение для детского дня рождения и семейного праздника в Каугури, Юрмала. Игровая зона, мини-кухня и парковка. Аренда от 20 € в час.",
+    "heading": "Маленький праздник.<br><em>Большая радость.</em>",
+    "eyebrow": "Помещение для детского праздника в Юрмале",
+    "intro": "Пригласите семью и друзей на день рождения ребёнка. У нас есть место для игр, праздничного стола и торта.",
+    "image": 4,
+    "detailImage": 2,
+    "video": 0,
+    "poster": "celebrate",
+    "caption": "Семейный праздник в ROOM Jūrmala.",
+    "detailTitle": "Праздник<br><em>по вашему замыслу.</em>",
+    "details": [
+      [
+        "Место для детских игр",
+        "Дети могут играть в игровой зоне и заниматься на мягком ковре. Столы и стулья расставим так, чтобы осталось место и для запланированных игр."
+      ],
+      [
+        "Для торта и закусок",
+        "На мини-кухне удобно подготовить и подать угощения. До праздника обсудим, что вы принесёте с собой и сколько времени понадобится для украшения помещения."
+      ],
+      [
+        "Удобно добраться",
+        "Мы находимся на Skolas iela 50 в Каугури. Машину можно бесплатно припарковать у здания."
+      ]
+    ],
+    "priceTitle": "Время<br><em>праздновать.</em>",
+    "rates": [
+      [
+        "20 €",
+        "1 час"
+      ],
+      [
+        "55 €",
+        "3 часа"
+      ],
+      [
+        "130 €",
+        "8 часов"
+      ]
+    ],
+    "priceNote": "Если для праздника нужно что-то особенное, расскажите об этом, когда будете выбирать дату.",
+    "faq": [
+      [
+        "Можно ли провести день рождения ребёнка?",
+        "Да. ROOM Jūrmala подходит для детских дней рождения и семейных встреч. Сообщите возраст детей и количество гостей, чтобы обсудить удобную расстановку."
+      ],
+      [
+        "Сколько гостей можно пригласить?",
+        "Подходящее число гостей зависит от расстановки мебели, возраста детей и запланированных игр. До бронирования согласуем формат для вашей группы."
+      ],
+      [
+        "Входит ли аниматор в стоимость?",
+        "На этой странице указаны цены аренды помещения. Если нужен аниматор или программа, обсудите это отдельно до бронирования."
+      ],
+      [
+        "Как выбрать дату?",
+        "Выберите дату и примерное время начала на главной странице, затем откройте подготовленное сообщение в WhatsApp. Доступность и бронирование подтвердим в переписке."
+      ]
+    ],
+    "related": "Нужно помещение для мастер-класса?",
+    "request": "Детский или семейный праздник"
+  },
+  "workshops": {
+    "name": "Занятия и мастер-классы",
+    "title": "Аренда зала для занятий в Юрмале | ROOM Jūrmala",
+    "description": "Помещение для мастер-классов, йоги, гимнастики и детских занятий в Юрмале. Столы, стулья, мини-кухня и регулярная аренда. От 20 € в час.",
+    "heading": "Место для<br><em>ваших знаний.</em>",
+    "eyebrow": "Для занятий и мастер-классов",
+    "intro": "Ищете место для своего занятия? Здесь можно провести мастер-класс, занятие йогой или гимнастикой, а также небольшой семинар. Помещение можно забронировать как на один раз, так и для регулярных занятий.",
+    "image": 0,
+    "detailImage": 3,
+    "video": 3,
+    "poster": "create",
+    "caption": "Творческий мастер-класс для детей в ROOM Jūrmala.",
+    "detailTitle": "От общего стола<br><em>к движению.</em>",
+    "details": [
+      [
+        "Для рисования и рукоделия",
+        "За столами можно рисовать, заниматься рукоделием и работать вместе. Занятие планирует преподаватель. Материалы и расстановку столов согласуем заранее."
+      ],
+      [
+        "Для йоги и гимнастики",
+        "В помещении можно освободить место для ковриков, гимнастики и детских подвижных занятий. Расскажите, сколько человек будет в группе и какой инвентарь нужен."
+      ],
+      [
+        "Для вашей группы каждую неделю",
+        "Если вы ведёте занятия регулярно, можем договориться об определённых днях недели и времени. Доступны почасовая аренда и абонемент."
+      ]
+    ],
+    "priceTitle": "Одна встреча.<br><em>Или свой ритм.</em>",
+    "rates": [
+      [
+        "20 €",
+        "1 час"
+      ],
+      [
+        "130 €",
+        "8 часов"
+      ],
+      [
+        "460 €",
+        "в месяц · 8 ч в неделю"
+      ]
+    ],
+    "priceNote": "Минимальный срок абонемента составляет 3 месяца. Свободное время согласуем до бронирования.",
+    "faq": [
+      [
+        "Можно ли арендовать зал регулярно?",
+        "Да. Абонемент стоит 460 € в месяц и включает 8 часов в неделю, минимальный срок составляет 3 месяца. Дни и время согласуем индивидуально."
+      ],
+      [
+        "Какое оборудование есть в помещении?",
+        "Есть столы, стулья, мини-кухня и зона для занятий. Спортивный инвентарь, материалы для мастер-класса и особые технические потребности обсудите заранее."
+      ],
+      [
+        "Как договориться об аренде для своего занятия?",
+        "Укажите формат занятия, число участников, длительность и желаемую дату. Для регулярной группы добавьте предпочтительные дни недели. Доступность и расстановку согласуем в переписке."
+      ],
+      [
+        "Включена ли работа преподавателя в аренду?",
+        "Нет. Эти цены относятся к аренде помещения. Участие в занятии из календаря оформляется отдельно; стоимость и программу уточняйте в переписке."
+      ]
+    ],
+    "related": "Планируете детский день рождения?",
+    "request": "Аренда помещения для занятия или мастер-класса"
+  }
+}
 };
 
 // Booking is handled from the homepage; these pages describe the hire itself.
