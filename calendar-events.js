@@ -211,12 +211,18 @@
       body.appendChild(description);
     }
 
-    if (options.onSelect && (!options.canSelect || options.canSelect(event, day))) {
-      const button = document.createElement("button");
-      button.type = "button";
+    if ((options.bookingUrl || options.onSelect) && (!options.canSelect || options.canSelect(event, day))) {
+      const button = document.createElement(options.bookingUrl ? "a" : "button");
+      if (options.bookingUrl) {
+        button.href = options.bookingUrl(event, day);
+        button.target = "_blank";
+        button.rel = "noopener noreferrer";
+      } else {
+        button.type = "button";
+        button.addEventListener("click", () => options.onSelect(event, day));
+      }
       button.className = "cal-event-book";
       button.textContent = options.bookLabel;
-      button.addEventListener("click", () => options.onSelect(event, day));
       button.setAttribute("aria-label", options.bookLabel + " · " + title.textContent + " · " + dateLabel + " · " + event.time);
       body.appendChild(button);
     }

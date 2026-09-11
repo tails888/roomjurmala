@@ -241,12 +241,10 @@ function renderSchedule(){
     selectedDateParts:chosen?{year:chosen[0],month:chosen[1]-1,day:chosen[2]}:null,
     formatDate:(day,month)=>new Intl.DateTimeFormat(lang,{day:'numeric',month:'long'}).format(new Date(calendarYear,month,day)),
     bookLabel:classCopy.book,
-    onSelect:(event,day)=>{
-      dateInput.value=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-      timeInput.value=event.time.split('-')[0];selectedClass=calendarApi.resolveLocalized(event.title,lang);
-      selectedPlan='';$('#selected-plan').hidden=false;$('#selected-plan span').textContent=selectedClass;$('#booking-error').hidden=true;
-      Object.values(fields).forEach(el=>el.removeAttribute('aria-invalid'));
-      updateMessage();renderSchedule();form.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});form.querySelector('[type="submit"]').focus({preventScroll:true});
+    bookingUrl:(event,day)=>{
+      const date=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      const message=requestMessage({date,time:event.time},{...config.whatsapp,greeting:classCopy.greeting},calendarApi.resolveLocalized(event.title,lang));
+      return 'https://wa.me/37127850380?text='+encodeURIComponent(message);
     },
     canSelect:(event,day)=>{
       const key=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
