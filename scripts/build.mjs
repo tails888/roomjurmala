@@ -35,8 +35,8 @@ function header(lang,kind,c,d){
 }
 function inlineVideo(index,poster,id,d,hero=false){
  return `<div class="film-media" data-film>
-  <video id="${id}" class="ambient-video" ${hero?'data-hero-video data-loop-start="13"':''} muted playsinline loop controls preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${videos[index]}" type="video/mp4"></video>
-  <div class="film-controls" hidden><button class="circle-button video-play" type="button" aria-controls="${id}" aria-label="${esc(d.pauseVideo)}">${pauseIcon}</button><button class="circle-button video-sound" type="button" aria-controls="${id}" aria-label="${esc(d.soundOn)}" aria-pressed="false">${soundIcon}</button></div>
+  <video id="${id}" class="ambient-video" ${hero?'data-hero-video data-loop-start="13"':''} muted playsinline loop ${hero?'':'controls'} preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${videos[index]}" type="video/mp4"></video>
+  ${hero?'':`<div class="film-controls" hidden><button class="circle-button video-play" type="button" aria-controls="${id}" aria-label="${esc(d.pauseVideo)}">${pauseIcon}</button><button class="circle-button video-sound" type="button" aria-controls="${id}" aria-label="${esc(d.soundOn)}" aria-pressed="false">${soundIcon}</button></div>`}
   <a class="film-error" href="/assets/videos/${videos[index]}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
 }
@@ -70,7 +70,7 @@ function hero(lang,kind,c,d){
 function events(lang,c,d){
  const indexes=[0,3,1,4],posters=['celebrate','create','learn','move'];
  return `<section id="events" class="film-story"><div class="story-stage">
-  <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}><span>0${i+1}</span>${name}${diagonal}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
+  <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}>${name}${diagonal}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
   <div class="story-films">${d.eventNames.map((name,i)=>`<article class="film-panel" id="activity-${i}" data-film-index="${i}">${inlineVideo(indexes[i],posters[i],'activity-film-'+i,d)}<div class="film-caption"><h3>${name}</h3><p>${d.eventDescriptions[i]}</p></div></article>`).join('')}</div>
   <div class="story-progress" aria-hidden="true"><span></span></div>
  </div></section>${serviceLinks(lang)}`;
@@ -146,8 +146,8 @@ function footer(lang,c,d){
  };
  const socials=[['Instagram','instagram','https://www.instagram.com/room.jurmala/'],['Facebook','facebook','https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/'],['TikTok','tiktok','https://www.tiktok.com/@room.jurmala']];
  return `<footer class="site-footer" id="contact"><div class="footer-map"><iframe title="${esc(c.map.iframeTitle)}" src="https://maps.google.com/maps?q=ROOM%20J%C5%ABrmala%2C%20Skolas%20iela%2050%2C%20J%C5%ABrmala&amp;z=16&amp;output=embed&amp;hl=${lang}" width="1200" height="360" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="footer-main"><div class="footer-identity"><a class="brand" href="${route(lang)}"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala" loading="lazy"></a><div id="map-section"><address>Skolas iela 50, Jūrmala</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">${c.map.buttons[0]}${diagonal}</a></div></div><div class="footer-contact"><p class="footer-label">${labels.contact}</p><a class="footer-phone" href="tel:+37127850380">+371 27 850 380</a><a class="footer-email" href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a></div></div>
- <nav class="footer-socials" aria-label="${esc(labels.social)}">${socials.map(([name,key,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="social-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${socialIcons[key]}</svg></span><span>${name}</span>${diagonal}</a>`).join('')}</nav>
- <div class="footer-bottom"><span>${c.footer.copy}</span><a class="site-credit" href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer"><span>${labels.credit}</span><strong>SEO Latvija</strong><span class="credit-arrow">${diagonal}</span></a></div></footer>
+ <nav class="footer-socials" aria-label="${esc(labels.social)}">${socials.map(([name,key,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="social-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${socialIcons[key]}</svg></span><span>${name}</span></a>`).join('')}</nav>
+ <div class="footer-bottom"><span>${c.footer.copy}</span><a class="site-credit" href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer"><span>${labels.credit}</span><strong>SEO Latvija</strong></a></div></footer>
  <a class="mobile-book button button-orange" href="#calendar" aria-hidden="true" tabindex="-1">${d.findDate}${arrow}</a>`;
 }
 function dialogs(d){

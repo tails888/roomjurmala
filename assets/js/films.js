@@ -17,18 +17,18 @@ export function mountFilms(copy,reduced){
         }
       }else{
         state.video.pause();
-        if(!state.visible||!active(state)){state.video.muted=true;state.manual=false;state.host.querySelector('.video-sound').setAttribute('aria-pressed','false');state.host.querySelector('.video-sound').setAttribute('aria-label',copy.soundOn);}
+        if(!state.visible||!active(state)){state.video.muted=true;state.manual=false;state.host.querySelector('.video-sound')?.setAttribute('aria-pressed','false');state.host.querySelector('.video-sound')?.setAttribute('aria-label',copy.soundOn);}
       }
     }
   }
   for(const state of states){
     const {host,video}=state,play=host.querySelector('.video-play'),sound=host.querySelector('.video-sound');
-    video.controls=false;video.muted=true;host.querySelector('.film-controls').hidden=false;
-    function update(){play.innerHTML=video.paused?playIcon:pauseIcon;play.setAttribute('aria-label',video.paused?copy.playVideo:copy.pauseVideo);}
+    video.controls=false;video.muted=true;if(host.querySelector('.film-controls'))host.querySelector('.film-controls').hidden=false;
+    function update(){if(!play)return;play.innerHTML=video.paused?playIcon:pauseIcon;play.setAttribute('aria-label',video.paused?copy.playVideo:copy.pauseVideo);}
     video.addEventListener('play',update);video.addEventListener('pause',update);update();
-    play.addEventListener('click',()=>{state.userPaused=!video.paused;state.manual=!state.userPaused;refresh();});
-    sound.addEventListener('click',()=>{video.muted=!video.muted;sound.setAttribute('aria-pressed',String(!video.muted));sound.setAttribute('aria-label',video.muted?copy.soundOn:copy.soundOff);});
-    video.addEventListener('error',()=>{host.classList.add('film-failed');host.querySelector('.film-error').hidden=false;host.querySelector('.film-controls').hidden=true;});
+    play?.addEventListener('click',()=>{state.userPaused=!video.paused;state.manual=!state.userPaused;refresh();});
+    sound?.addEventListener('click',()=>{video.muted=!video.muted;sound.setAttribute('aria-pressed',String(!video.muted));sound.setAttribute('aria-label',video.muted?copy.soundOn:copy.soundOff);});
+    video.addEventListener('error',()=>{host.classList.add('film-failed');host.querySelector('.film-error').hidden=false;if(host.querySelector('.film-controls'))host.querySelector('.film-controls').hidden=true;});
     const loopStart=Number(video.dataset.loopStart||0);
     if(loopStart){
       const start=()=>{if(video.duration>loopStart&&video.currentTime<loopStart)video.currentTime=loopStart;};
