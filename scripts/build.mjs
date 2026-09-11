@@ -253,7 +253,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-3d">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  ${kind!=='pricing'?'<script type="module" src="/assets/js/tour-launcher.js?v=1"></script>':''}
+  ${kind!=='pricing'?'<script type="module" src="/assets/js/tour-launcher.js?v=blender-1"></script>':''}
   <script type="module" src="/assets/js/app.js?v=20260911-3d"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}

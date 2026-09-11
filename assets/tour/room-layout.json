@@ -1,0 +1,320 @@
+{
+  "bounds": {
+    "minX": -4.58,
+    "maxX": 4.72,
+    "minZ": -4.52,
+    "maxZ": 4.52
+  },
+  "obstacles": [
+    {
+      "name": "Unsurveyed service block",
+      "minX": 0.72,
+      "maxX": 5.0,
+      "minZ": -4.84,
+      "maxZ": -2.78
+    },
+    {
+      "name": "Column",
+      "minX": 0.5,
+      "maxX": 0.96,
+      "minZ": 1.13,
+      "maxZ": 1.63
+    },
+    {
+      "name": "Window curtain boundary",
+      "minX": -5.0,
+      "maxX": -4.76,
+      "minZ": -4.77,
+      "maxZ": 1.05
+    },
+    {
+      "name": "Window curtain boundary",
+      "minX": -5.0,
+      "maxX": -4.76,
+      "minZ": 1.85,
+      "maxZ": 4.77
+    },
+    {
+      "name": "Entry bench",
+      "minX": -4.485,
+      "maxX": -3.815,
+      "minZ": 1.23,
+      "maxZ": 1.69
+    },
+    {
+      "name": "Brick wall cubbies",
+      "minX": -4.75,
+      "maxX": 0.05,
+      "minZ": -4.735,
+      "maxZ": -4.345
+    },
+    {
+      "name": "Divider storage",
+      "minX": 0.535,
+      "maxX": 0.925,
+      "minZ": -2.32,
+      "maxZ": 1.28
+    },
+    {
+      "name": "Toy kitchen",
+      "minX": -0.185,
+      "maxX": 0.445,
+      "minZ": -4.635,
+      "maxZ": -4.285
+    },
+    {
+      "name": "Soft play",
+      "minX": -3.42,
+      "maxX": -1.24,
+      "minZ": -3.685,
+      "maxZ": -2.015
+    },
+    {
+      "name": "Ramp",
+      "minX": -1.545,
+      "maxX": -0.695,
+      "minZ": -3.95,
+      "maxZ": -2.35
+    },
+    {
+      "name": "Foam steps",
+      "minX": -3.745,
+      "maxX": -3.195,
+      "minZ": -3.785,
+      "maxZ": -2.835
+    },
+    {
+      "name": "Play sofa",
+      "minX": -2.9,
+      "maxX": -1.6,
+      "minZ": -4.19,
+      "maxZ": -3.73
+    },
+    {
+      "name": "Beanbag",
+      "minX": -0.87,
+      "maxX": 0.17,
+      "minZ": -2.91,
+      "maxZ": -1.87
+    },
+    {
+      "name": "Activity block",
+      "minX": -1.35,
+      "maxX": -0.91,
+      "minZ": -1.68,
+      "maxZ": -1.24
+    },
+    {
+      "name": "Table football",
+      "minX": -4.14,
+      "maxX": -2.96,
+      "minZ": -0.97,
+      "maxZ": 0.27
+    },
+    {
+      "name": "Kitchen cabinets",
+      "minX": 0.735,
+      "maxX": 3.965,
+      "minZ": -2.77,
+      "maxZ": -2.03
+    },
+    {
+      "name": "Fridge",
+      "minX": 3.915,
+      "maxX": 4.585,
+      "minZ": -2.785,
+      "maxZ": -2.055
+    },
+    {
+      "name": "Joined dining table",
+      "minX": 2.595,
+      "maxX": 3.565,
+      "minZ": 0.01,
+      "maxZ": 1.79
+    },
+    {
+      "name": "Joined dining table",
+      "minX": 2.595,
+      "maxX": 3.565,
+      "minZ": 1.81,
+      "maxZ": 3.59
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": -0.02,
+      "maxZ": 0.42
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": -0.02,
+      "maxZ": 0.42
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": 0.59,
+      "maxZ": 1.03
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": 0.59,
+      "maxZ": 1.03
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": 1.2,
+      "maxZ": 1.64
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": 1.2,
+      "maxZ": 1.64
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": 1.81,
+      "maxZ": 2.25
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": 1.81,
+      "maxZ": 2.25
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": 2.42,
+      "maxZ": 2.86
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": 2.42,
+      "maxZ": 2.86
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 2.05,
+      "maxX": 2.49,
+      "minZ": 3.03,
+      "maxZ": 3.47
+    },
+    {
+      "name": "Black dining chair",
+      "minX": 3.67,
+      "maxX": 4.11,
+      "minZ": 3.03,
+      "maxZ": 3.47
+    },
+    {
+      "name": "End dining chair",
+      "minX": 2.86,
+      "maxX": 3.3,
+      "minZ": 3.65,
+      "maxZ": 4.09
+    },
+    {
+      "name": "Children table",
+      "minX": 1.025,
+      "maxX": 2.295,
+      "minZ": -1.52,
+      "maxZ": -0.9
+    },
+    {
+      "name": "Children table",
+      "minX": 2.315,
+      "maxX": 3.585,
+      "minZ": -1.52,
+      "maxZ": -0.9
+    },
+    {
+      "name": "Green child chair",
+      "minX": 1.066,
+      "maxX": 1.374,
+      "minZ": -0.794,
+      "maxZ": -0.486
+    },
+    {
+      "name": "Green child chair",
+      "minX": 1.066,
+      "maxX": 1.374,
+      "minZ": -1.954,
+      "maxZ": -1.646
+    },
+    {
+      "name": "Green child chair",
+      "minX": 1.686,
+      "maxX": 1.994,
+      "minZ": -0.794,
+      "maxZ": -0.486
+    },
+    {
+      "name": "Green child chair",
+      "minX": 1.686,
+      "maxX": 1.994,
+      "minZ": -1.954,
+      "maxZ": -1.646
+    },
+    {
+      "name": "Green child chair",
+      "minX": 2.326,
+      "maxX": 2.634,
+      "minZ": -0.794,
+      "maxZ": -0.486
+    },
+    {
+      "name": "Green child chair",
+      "minX": 2.326,
+      "maxX": 2.634,
+      "minZ": -1.954,
+      "maxZ": -1.646
+    },
+    {
+      "name": "Green child chair",
+      "minX": 2.966,
+      "maxX": 3.274,
+      "minZ": -0.794,
+      "maxZ": -0.486
+    },
+    {
+      "name": "Green child chair",
+      "minX": 2.966,
+      "maxX": 3.274,
+      "minZ": -1.954,
+      "maxZ": -1.646
+    },
+    {
+      "name": "Green child chair",
+      "minX": 3.486,
+      "maxX": 3.794,
+      "minZ": -0.794,
+      "maxZ": -0.486
+    },
+    {
+      "name": "Green child chair",
+      "minX": 3.486,
+      "maxX": 3.794,
+      "minZ": -1.954,
+      "maxZ": -1.646
+    }
+  ],
+  "source": "blender/build_room.py",
+  "approximate": true
+}

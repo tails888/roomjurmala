@@ -1,4 +1,4 @@
-export const bounds={minX:-4.72,maxX:4.72,minZ:-6.22,maxZ:6.22};
+export const bounds={minX:-4.58,maxX:4.72,minZ:-4.52,maxZ:4.52};
 export const playerRadius=.23;
 export function canStand(x,z,obstacles){
   if(x<bounds.minX||x>bounds.maxX||z<bounds.minZ||z>bounds.maxZ)return false;
@@ -18,8 +18,8 @@ export function movePlayer(position,dx,dz,obstacles){
   return position;
 }
 export const stops=[
-  {x:-.8,z:5.3,yaw:-.03,pitch:-.08},
-  {x:-.9,z:-1.85,yaw:.5,pitch:-.2},
-  {x:1.15,z:4.7,yaw:-.45,pitch:-.16},
-  {x:3.7,z:-3.05,yaw:.12,pitch:-.15},
+  {x:-3.45,z:3.4,yaw:-.42,pitch:-.04},
+  {x:-2.7,z:.92,yaw:-.20,pitch:-.12},
+  {x:1.4,z:3.5,yaw:-.62,pitch:-.09},
+  {x:4.65,z:-.8,yaw:.73,pitch:-.10},
 ];

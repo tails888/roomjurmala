@@ -8,13 +8,13 @@ const icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 async function openTour(trigger){
   if(active)return;active=true;
   const lang=document.documentElement.lang,c=copy[lang]||copy.lv;
-  if(!sheet){sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='/assets/css/tour.css?v=1';stylesReady=new Promise(resolve=>{sheet.onload=resolve;sheet.onerror=resolve;});document.head.append(sheet);}
+  if(!sheet){sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='/assets/css/tour.css?v=blender-1';stylesReady=new Promise(resolve=>{sheet.onload=resolve;sheet.onerror=resolve;});document.head.append(sheet);}
   await stylesReady;
   const dialog=document.createElement('dialog');dialog.className='room-tour';dialog.setAttribute('aria-label',c.title);
   const space=(lang==='lv'?'':'/'+lang)+'/telpa/';
   dialog.innerHTML=`<div class="tour-stage"><canvas class="tour-canvas" tabindex="0" aria-label="${c.title}"></canvas></div>
     <header class="tour-top"><div class="tour-brand" title="${c.note}"><strong>ROOM Jūrmala</strong><span>${c.title}</span></div><div class="tour-tools"><button class="tour-help tour-icon" aria-label="${c.help}">?</button><button class="tour-close tour-icon" aria-label="${c.close}">${icon}</button></div></header>
-    <div class="tour-map" role="img" aria-label="${c.map}"><svg viewBox="0 0 100 130"><path d="M2 2H98V128H2Z" fill="#e8e5da" stroke="#526957" stroke-width="2"/><path d="M6 7h57v39H6z" fill="#c7c6b9"/><path d="M67 3v25h27M68 36h22M68 62h16v30H68z" fill="none" stroke="#526957" stroke-width="3"/><path d="M7 3v125" stroke="#b4d4d6" stroke-width="3"/><g class="tour-position"><path d="M0 0 -13 -23Q0 -30 13 -23Z" fill="#d58a4770"/><circle r="4" fill="#173f34" stroke="#fff" stroke-width="1.5"/></g></svg></div>
+    <div class="tour-map" role="img" aria-label="${c.map}"><svg viewBox="0 0 100 96"><path d="M2 2H98V94H2Z" fill="#e8e5da" stroke="#526957" stroke-width="2"/><path d="M4 3h52v60H4z" fill="#c7c6b9"/><path d="M57 2h41v20H57z" fill="#bac4b3"/><path d="M56 23v37M75 30h12v54H75z" fill="none" stroke="#526957" stroke-width="3"/><path d="M3 3v91" stroke="#b4d4d6" stroke-width="3"/><g class="tour-position"><path d="M0 0 -13 -23Q0 -30 13 -23Z" fill="#d58a4770"/><circle r="4" fill="#173f34" stroke="#fff" stroke-width="1.5"/></g></svg></div>
     <div class="tour-loading" role="status"><span class="tour-spinner"></span><p>${c.loading}</p></div>
     <div class="tour-hints"><p><kbd>W A S D</kbd> ${c.move}</p><p>${c.look}</p><button class="tour-mouse">${c.mouse}</button></div>
     <div class="tour-stick" aria-label="${c.move}" role="group"><span></span><button class="tour-forward" data-dir="forward" aria-label="${c.move}">↑</button><button data-dir="left" aria-label="Left">←</button><button data-dir="right" aria-label="Right">→</button><button data-dir="back" aria-label="Back">↓</button></div><p class="tour-touch-hint">${c.touch}</p>
@@ -27,8 +27,8 @@ async function openTour(trigger){
   dialog.showModal();dialog.querySelector('.tour-close').focus();
   function close(){if(closed)return;closed=true;dispose?.();dialog.remove();document.body.style.overflow=priorOverflow;document.body.classList.remove('tour-open');document.dispatchEvent(new Event('visibilitychange'));active=false;trigger.focus({preventScroll:true});}
   dialog.addEventListener('close',close,{once:true});dialog.querySelector('.tour-close').onclick=()=>dialog.close();
-  dialog.querySelector('.tour-retry').onclick=()=>{dialog.close();openTour(trigger);};
-  try{const module=await import('./tour-runtime.js?v=1');if(!closed)dispose=module.mountTour(dialog,c);}
+  dialog.querySelector('.tour-retry').onclick=()=>{dialog.close();close();openTour(trigger);};
+  try{const module=await import('./tour-runtime.js?v=blender-1');if(!closed)dispose=module.mountTour(dialog,c);}
   catch(error){if(!closed){dialog.querySelector('.tour-loading').hidden=true;dialog.querySelector('.tour-error').hidden=false;dialog.classList.add('tour-unavailable');}console.error('ROOM tour unavailable',error);}
 }
 document.querySelectorAll('[data-open-tour]').forEach(button=>button.addEventListener('click',()=>openTour(button)));
