@@ -230,3 +230,7 @@ body{background:var(--paper)}
  .hero-tour-enabled .paper-art-video .film-media{width:calc(100% - var(--gutter)*2*(1 - var(--tour-open)));height:calc(52svh + 40svh*var(--tour-open));border-radius:calc(160px - 144px*var(--tour-open)) calc(160px - 144px*var(--tour-open)) 8px 8px;box-shadow:0 16px 30px #173f3417;will-change:width,height,border-radius}
  .hero-tour-enabled .paper-art-video video{display:block;object-fit:cover;object-position:center}
 }
+
+/* Keep the Latvian event heading within the desktop text column. */
+@media(min-width:761px){html[lang="lv"] .paper-hero h1{font-size:clamp(68px,9vw,140px)}}
+@media(max-width:760px){html[lang="lv"] .paper-hero h1{font-size:clamp(60px,15vw,105px)}}
