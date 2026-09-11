@@ -71,7 +71,7 @@ function hero(lang,kind,c,d){
 function events(lang,c,d){
  const indexes=[0,3,1,4],posters=['celebrate','create','learn','move'];
  return `<section id="events" class="film-story"><div class="story-stage">
-  <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}>${name}${diagonal}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
+  <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}>${name}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
   <div class="story-films">${d.eventNames.map((name,i)=>`<article class="film-panel" id="activity-${i}" data-film-index="${i}">${inlineVideo(indexes[i],posters[i],'activity-film-'+i,d)}<div class="film-caption"><h3>${name}</h3><p>${d.eventDescriptions[i]}</p></div></article>`).join('')}</div>
   <div class="story-progress" aria-hidden="true"><span></span></div>
  </div></section>${serviceLinks(lang)}`;
