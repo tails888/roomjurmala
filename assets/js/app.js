@@ -1,7 +1,7 @@
 import {mountScroll} from './scroll.js?v=20260911-scroll';
 import {mountPaper} from './paper.js?v=20260911-3d';
 import {mountFilms,mountStory} from './films.js?v=20260911-3d';
-import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.mjs';
+import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.js?v=20260911-mobile-fix';
 const config=JSON.parse(document.getElementById('site-data').textContent);
 const {lang,d,photos}=config;
 const $=selector=>document.querySelector(selector);

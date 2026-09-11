@@ -1,3 +1,8 @@
+# Serve ES modules with a JavaScript MIME type on Apache hosts.
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+</IfModule>
+
 RewriteEngine On
 
 # Consolidated service pages now live under the existing space page.

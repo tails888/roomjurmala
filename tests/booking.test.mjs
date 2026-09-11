@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {getQuote,validateBooking,rigaNow,formatDuration,requestMessage,whatsappUrl,validDate} from '../assets/js/booking-core.mjs';
+import {getQuote,validateBooking,rigaNow,formatDuration,requestMessage,whatsappUrl,validDate} from '../assets/js/booking-core.js';
 const data={date:'2026-09-18',time:'14:00'};
 const now={date:'2026-09-11',time:'13:00'};
 test('all retained hourly and daily price breaks',()=>{

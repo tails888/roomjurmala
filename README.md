@@ -72,6 +72,6 @@ GA4 is initialized once by `assets/js/analytics.js`, only on HTTPS `roomjurmala.
 
 The website prepares a WhatsApp request with a chosen date and approximate time. Customers send it themselves; availability is confirmed in conversation. The calendar shows scheduled classes, not live room availability.
 
-Pricing uses `assets/js/booking-core.mjs`. Memberships have a three-month minimum. Update visible prices and related FAQ answers together.
+Pricing uses `assets/js/booking-core.js`. Memberships have a three-month minimum. Update visible prices and related FAQ answers together.
 
 Google reviews in `content/reviews.mjs` are a manual snapshot. Refresh the rating, count and quotations together after checking the business profile. No self-serving review rating schema is emitted.
