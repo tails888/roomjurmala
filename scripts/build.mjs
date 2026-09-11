@@ -40,7 +40,7 @@ function header(lang,kind,c,d){
   </dialog>`;
 }
 function inlineVideo(index,poster,id,d,hero=false){
- const file=hero?'room-june-17.mp4':videos[index];
+ const file=hero?'room-hero-tour.mp4':videos[index];
  if(hero)poster='june-17';
  return `<div class="film-media" data-film>
   <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
@@ -245,10 +245,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-new-media">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-new-media">
-  <script src="/calendar-events.js?v=20260911-new-media" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-new-media"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-tour">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-tour">
+  <script src="/calendar-events.js?v=20260911-tour" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-tour"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -256,7 +256,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-new-media" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-tour" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }

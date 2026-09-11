@@ -1,4 +1,6 @@
+import {mountHeroTour} from './hero-tour.js?v=20260911-tour';
 export function mountPaper(reduced){
+  mountHeroTour(reduced);
   mountTypewriter(document.querySelector('#paper-title'),reduced);
   mountGalleryScroll(reduced);
   mountMobileFilms(reduced);

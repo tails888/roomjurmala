@@ -7,7 +7,7 @@ export function mountFilms(copy,reduced){
     const story=state.host.closest('.film-story');
     return !story?.classList.contains('is-pinned')||state.host.closest('.film-panel').classList.contains('is-active');
   }
-  function wanted(state){return state.visible&&active(state)&&!state.userPaused&&!document.hidden&&(!reduced.matches||state.manual);}
+  function wanted(state){return !state.video.hasAttribute('data-scroll-scrub')&&state.visible&&active(state)&&!state.userPaused&&!document.hidden&&(!reduced.matches||state.manual);}
   function refresh(){
     for(const state of states){
       if(wanted(state)){
@@ -41,6 +41,7 @@ export function mountFilms(copy,reduced){
   },{threshold:[0,.2,.6]});
   states.forEach(state=>observer.observe(state.video));
   document.addEventListener('visibilitychange',refresh);
+  document.addEventListener('hero-tour-change',refresh);
   reduced.addEventListener('change',()=>{states.forEach(s=>{s.manual=false;});refresh();});
   return {refresh};
 }
