@@ -54,3 +54,9 @@ Original logo, real venue media, functional language navigation and existing boo
 - [x] Preserve original logo, nine routes and booking functionality.
 - [x] Verify desktop/mobile, translations and reduced motion.
 - [x] Commit and push only the updates branch after final checks.
+
+## Follow-up annotation changes
+
+The user requested replacing the decorative arch with the existing venue video and a clearer class list. Hero now contains the muted entry film in a rounded arch crop; that film was removed from the gallery strip so all five unique videos remain once each. Upcoming classes span the section width in three columns on desktop, two on tablet and one on mobile, with date badges, separate time labels, clear booking buttons and a started-class state.
+
+Browser checked at 1234 × 994 and 390 × 844. Video plays muted when visible and pauses offscreen. Selecting the September 15 yoga class fills September 15 and 19:00 in the booking form. Mobile cards have no horizontal overflow. Browser error log empty. Build, nine-route validation and six tests pass.

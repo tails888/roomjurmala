@@ -60,3 +60,25 @@ body{background:var(--paper)}
 @media(max-width:374px){.paper-hero-copy{padding-top:28px}.paper-hero h1{font-size:72px}.paper-hero-actions{gap:16px}.paper-book{padding-inline:22px}.paper-gallery-link{font-size:10px}.paper-art{height:auto}.paper-activity{padding:18px;gap:12px}.paper-activity h2{font-size:39px}.paper-activity img{height:135px}.memory-board{gap:15px}.memory-photo img{height:145px}.paper-gallery-heading h2{font-size:48px}}
 @media(prefers-reduced-motion:reduce){.paper-art img,.memory-photo,.paper-activity{transform:none!important;transition:none!important;will-change:auto}.paper-films{scroll-behavior:auto}}
 @media(max-width:760px){html:not([lang=lv]) .paper-activity{grid-template-columns:minmax(0,1fr);gap:18px}html:not([lang=lv]) .paper-activity h2{font-size:42px}html:not([lang=lv]) .paper-activity img{height:200px;max-width:100%}html:not([lang=lv]) .paper-activity p{max-width:none}}
+.paper-art-video{padding:18px var(--gutter) 42px 22px;perspective:none}
+.paper-art-video .film-media{height:100%;width:100%;border-radius:220px 220px 8px 8px;background:var(--green);box-shadow:0 18px 32px #173f341a}
+.paper-art-video video{object-position:center 48%}
+.quick-booking>.cal-widget{grid-column:1/-1;width:100%;margin-top:4px}
+.quick-booking .cal-events{border-top:1px solid var(--line);padding-top:36px;margin-top:0}
+.quick-booking .cal-events-title{font:500 40px/1.1 var(--serif);letter-spacing:-.025em;margin:0 0 25px;color:var(--green)}
+.quick-booking .cal-event-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:0;margin:0;list-style:none}
+.quick-booking .cal-event-item{display:flex;align-items:flex-start;gap:16px;min-width:0;padding:23px 20px;background:var(--paper);border:1px solid #173f3420;border-radius:8px;box-shadow:0 5px 16px #173f3405}
+.cal-date-badge{display:flex;flex-direction:column;align-items:center;flex:none;min-width:52px;padding:10px 6px;background:#e3e8de;border-radius:5px;color:var(--green)}
+.cal-date-day{font:500 36px/1 var(--serif);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.04em}
+.cal-date-month{font:10px/1.4 var(--sans);margin-top:5px;text-transform:uppercase;letter-spacing:.04em}
+.cal-event-body{min-width:0;display:flex;flex-direction:column;align-items:flex-start;height:100%;flex:1}
+.quick-booking .cal-event-meta{font-size:10px;letter-spacing:.035em;color:var(--muted);text-transform:capitalize;margin:0 0 7px}
+.quick-booking .cal-event-title{font:500 17px/1.45 var(--sans);margin:0;color:var(--ink);overflow-wrap:anywhere}
+.cal-event-time{font-size:12px;color:#9a4616;display:block;margin-top:10px;font-variant-numeric:tabular-nums}
+.quick-booking .cal-event-book{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:var(--paper);font:11px/1.4 var(--sans);border:1px solid var(--green);border-radius:100px;padding:11px 17px;margin-top:20px;min-height:40px;text-decoration:none;text-align:center;transition:background .2s}
+.quick-booking .cal-event-book:hover{background:#285343}.cal-event-status{display:block;margin-top:17px;font-size:10px;color:var(--muted)}
+.quick-booking .cal-event-item.is-past{background:#eeeae1;box-shadow:none}.cal-event-item.is-past .cal-date-badge{background:#e4dfd4;color:#66695f}
+.quick-booking .cal-events-empty{background:var(--paper);border:1px solid var(--line);padding:24px;border-radius:8px;font-size:14px}
+.quick-booking>.cal-widget{margin-top:30px}.quick-booking .cal-event-item{align-items:stretch}.cal-date-badge{align-self:flex-start}.cal-event-body{height:auto}.quick-booking .cal-event-time{margin-bottom:20px}.quick-booking .cal-event-book{margin-top:auto}.cal-event-status{margin-top:auto}
+@media(max-width:1100px){.quick-booking .cal-event-list{grid-template-columns:repeat(2,minmax(0,1fr))}.paper-art-video{padding-right:var(--gutter);padding-left:10px}}
+@media(max-width:760px){.paper-art.paper-art-video{height:430px;aspect-ratio:auto;padding:0 var(--gutter) 32px;margin-top:30px}.paper-art-video .film-media{border-radius:160px 160px 6px 6px}.quick-booking .cal-event-list{grid-template-columns:1fr;gap:14px}.quick-booking .cal-events{padding-top:28px}.quick-booking .cal-events-title{font-size:34px;margin-bottom:22px}.quick-booking .cal-event-item{padding:20px;gap:17px}.quick-booking .cal-event-title{font-size:15px}.cal-date-badge{min-width:54px}.quick-booking>.cal-widget{margin-top:6px}}

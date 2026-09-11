@@ -185,12 +185,30 @@
     title.className = "cal-event-title";
     title.textContent = resolveLocalized(event.title, lang);
 
-    item.append(meta, title);
+    const date = new Date(options.currentYear, options.currentMonth, day);
+    const badge = document.createElement("div");
+    badge.className = "cal-date-badge";
+    badge.setAttribute("aria-label", dateLabel);
+    const number = document.createElement("span");
+    number.className = "cal-date-day";
+    number.textContent = String(day).padStart(2, "0");
+    const month = document.createElement("span");
+    month.className = "cal-date-month";
+    month.textContent = new Intl.DateTimeFormat(lang, {month:"short"}).format(date);
+    badge.append(number, month);
+    const body = document.createElement("div");
+    body.className = "cal-event-body";
+    meta.textContent = new Intl.DateTimeFormat(lang, {weekday:"long"}).format(date);
+    const time = document.createElement("span");
+    time.className = "cal-event-time";
+    time.textContent = event.time.replace("-", "–");
+    body.append(meta, title, time);
+    item.append(badge, body);
     if (event.description) {
       const description = document.createElement("p");
       description.className = "cal-event-description";
       description.textContent = resolveLocalized(event.description, lang);
-      item.appendChild(description);
+      body.appendChild(description);
     }
 
     if (options.onSelect && (!options.canSelect || options.canSelect(event, day))) {
@@ -199,7 +217,15 @@
       button.className = "cal-event-book";
       button.textContent = options.bookLabel;
       button.addEventListener("click", () => options.onSelect(event, day));
-      item.appendChild(button);
+      button.setAttribute("aria-label", options.bookLabel + " · " + title.textContent + " · " + dateLabel + " · " + event.time);
+      body.appendChild(button);
+    }
+    if (options.canSelect && !options.canSelect(event, day)) {
+      item.classList.add("is-past");
+      const status = document.createElement("span");
+      status.className = "cal-event-status";
+      status.textContent = {lv:"Nodarbība jau sākusies",en:"Class has already started",ru:"Занятие уже началось"}[lang] || "Class has already started";
+      body.appendChild(status);
     }
     return item;
   }
@@ -215,7 +241,7 @@
 
     panel.innerHTML = "";
 
-    const title = document.createElement("div");
+    const title = document.createElement("h3");
     title.className = "cal-events-title";
     title.textContent = hasSelectedDate ? copy.selectedTitle : copy.upcomingTitle;
     panel.appendChild(title);
