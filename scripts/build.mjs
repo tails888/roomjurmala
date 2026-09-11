@@ -39,8 +39,8 @@ function header(lang,kind,c,d){
 }
 function inlineVideo(index,poster,id,d,hero=false){
  return `<div class="film-media" data-film>
-  <video id="${id}" class="ambient-video" ${hero?'data-hero-video data-loop-start="13"':''} muted playsinline loop ${hero?'':'controls'} preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${videos[index]}" type="video/mp4"></video>
-  ${hero?'':`<div class="film-controls" hidden><button class="circle-button video-play" type="button" aria-controls="${id}" aria-label="${esc(d.pauseVideo)}">${pauseIcon}</button><button class="circle-button video-sound" type="button" aria-controls="${id}" aria-label="${esc(d.soundOn)}" aria-pressed="false">${soundIcon}</button></div>`}
+  <video id="${id}" class="ambient-video" ${hero?'data-hero-video data-loop-start="13"':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${videos[index]}" type="video/mp4"></video>
+
   <a class="film-error" href="/assets/videos/${videos[index]}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
 }
@@ -223,10 +223,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-menu">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-menu">
-  <script src="/calendar-events.js?v=20260911-menu" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-menu"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-clean-video">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-clean-video">
+  <script src="/calendar-events.js?v=20260911-clean-video" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-clean-video"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -234,7 +234,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-menu" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-clean-video" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
