@@ -1,3 +1,4 @@
+import {mountScroll} from './scroll.js?v=20260911-scroll';
 import {mountPaper} from './paper.js?v=20260911-typing';
 import {mountFilms,mountStory} from './films.js';
 import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.mjs';
@@ -6,6 +7,7 @@ const {lang,d,photos}=config;
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+mountScroll(reduced);
 const arrow='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg>';
 const money=n=>new Intl.NumberFormat(lang,{maximumFractionDigits:0}).format(n)+' €';
 let motionPaused=reduced.matches;
