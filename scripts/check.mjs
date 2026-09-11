@@ -60,11 +60,11 @@ for (const [route, { html, ids }] of pages) {
   const data = JSON.parse(html.match(/<script id="site-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
   for (const photo of data.photos) {
     checkUrl(photo.src, base);
-    checkUrl(photo.video, base);
+    if (photo.video) checkUrl(photo.video, base);
   }
   if (['/','/en/','/ru/'].includes(route)) {
-    assert.equal([...html.matchAll(/<video\b/g)].length,5,`${route} must embed all five real videos`);
-    assert.equal([...html.matchAll(/class="ambient-video"/g)].length,5,`${route} visibility-controlled media`);
+    assert.equal([...html.matchAll(/<video\b/g)].length,7,`${route} must embed all seven home videos`);
+    assert.equal([...html.matchAll(/class="ambient-video"/g)].length,7,`${route} visibility-controlled media`);
     assert(html.includes('"@type":"FAQPage"')&&html.includes('id="faq"'),`${route} must include visible FAQs and matching schema`);
   }
   assert(!/id="customerName"|id="customerPhone"|id="bookingNotes"/.test(html),`${route} booking should stay simple`);

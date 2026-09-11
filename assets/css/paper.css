@@ -218,3 +218,6 @@ body{background:var(--paper)}
  .page-space .editorial-section p{font-size:15px;line-height:1.8}
  .page-space .activity-heading{gap:14px;margin-bottom:20px}
 }
+.venue-film-grid .paper-film .film-media{width:100%;min-width:0;aspect-ratio:auto;border-radius:14px;height:360px}
+.venue-film-grid .paper-film h4{font-size:23px;margin-top:14px}
+@media(max-width:600px){.venue-film-grid .paper-film .film-media{height:240px}.venue-film-grid .paper-film h4{font-size:19px}}

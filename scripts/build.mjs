@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import {newPhotos} from '../content/new-media.mjs';
+for (const item of newPhotos) { photoFiles.push(item.file); for (const lang of ['lv','en','ru']) { design[lang].photoNames.push(item.names[lang]); design[lang].photoDescriptions.push(''); } }
 import { design, photoFiles, videos } from '../content/design.mjs';
 import {servicePages,serviceSlugs} from '../content/services.mjs';
 import {customerReviews,reviewSource,reviewCopy} from '../content/reviews.mjs';
@@ -55,11 +57,11 @@ function videoHero(d){
 function paperHero(lang,d){
  const t=paperCopy[lang];
  return `<section class="paper-hero" aria-labelledby="paper-title"><div class="paper-hero-copy"><p class="paper-eyebrow">${t.eyebrow}</p><h1 id="paper-title">${t.title}</h1><p class="paper-tagline">${t.intro}</p><div class="paper-hero-actions"><a class="button paper-book" href="#calendar">${t.book}</a><a class="paper-gallery-link" href="#gallery">${t.gallery}</a></div><p class="paper-location">Skolas iela 50 · Jūrmala</p></div><div class="paper-art paper-art-video">${inlineVideo(2,'entry','hero-film',d,true)}</div></section>
- <section class="paper-activities" id="events" aria-label="${esc(d.eventTitle.replace(/<[^>]*>/g,' '))}">${[4,3,1].map((n,i)=>`<a class="paper-activity" href="${route(lang,'space')}${i===0?'#bernu-ballites':i===1?'#telpas-nodarbibam':''}"><div><h2>${t.names[i]}</h2><p>${t.descriptions[i]}</p></div><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"></a>`).join('')}</section>`;
+ <section class="paper-activities" id="events" aria-label="${esc(d.eventTitle.replace(/<[^>]*>/g,' '))}">${[4,3,newPhotoIndex(16)].map((n,i)=>`<a class="paper-activity" href="${route(lang,'space')}${i===0?'#bernu-ballites':i===1?'#telpas-nodarbibam':''}"><div><h2>${t.names[i]}</h2><p>${t.descriptions[i]}</p></div><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"></a>`).join('')}</section>`;
 }
 function paperGallery(lang,d){
  const t=paperCopy[lang];
- return `<section class="paper-gallery" id="gallery" aria-labelledby="paper-gallery-title"><div class="paper-gallery-heading"><p class="paper-eyebrow">ROOM Jūrmala</p><h2 id="paper-gallery-title">${t.galleryTitle}</h2><p>${t.galleryIntro}</p></div><div class="memory-board"><div class="memory-center"><p class="memory-wordmark">ROOM<span>Jūrmala</span></p><p>${d.together}</p><a class="button paper-book" href="#calendar">${t.book}</a></div>${[2,4,1,3].map((n,i)=>`<button class="memory-photo memory-photo-${i}" type="button" data-photo-detail="${n}" aria-label="${esc(t.photo+' · '+d.photoNames[n])}"><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"><span>${d.photoNames[n]}</span></button>`).join('')}</div><div class="paper-film-heading"><div><h3>${t.videoTitle}</h3><p>${t.videoIntro}</p></div><p>${t.filmHint}</p></div><div class="paper-films" tabindex="0" role="region" aria-label="${esc(t.videoTitle)}">${[0,1,3,4].map((n)=>`<article class="paper-film">${inlineVideo(n,['celebrate','learn','entry','create','move'][n],'gallery-film-'+n,d).replace(/aria-label="[^"]*"/, 'aria-label="'+esc(t.filmNames[n])+'"')}<h4>${t.filmNames[n]}</h4></article>`).join('')}</div><a class="text-link paper-more" href="${route(lang,'space')}">${t.detail}</a></section>`;
+ return `<section class="paper-gallery" id="gallery" aria-labelledby="paper-gallery-title"><div class="paper-gallery-heading"><p class="paper-eyebrow">ROOM Jūrmala</p><h2 id="paper-gallery-title">${t.galleryTitle}</h2><p>${t.galleryIntro}</p></div><div class="memory-board"><div class="memory-center"><p class="memory-wordmark">ROOM<span>Jūrmala</span></p><p>${d.together}</p><a class="button paper-book" href="#calendar">${t.book}</a></div>${[2,4,1,3].map((n,i)=>`<button class="memory-photo memory-photo-${i}" type="button" data-photo-detail="${n}" aria-label="${esc(t.photo+' · '+d.photoNames[n])}"><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"><span>${d.photoNames[n]}</span></button>`).join('')}</div><div class="paper-film-heading"><div><h3>${t.videoTitle}</h3><p>${t.videoIntro}</p></div><p>${t.filmHint}</p></div><div class="paper-films" tabindex="0" role="region" aria-label="${esc(t.videoTitle)}">${[0,1,3,4].map((n)=>`<article class="paper-film">${inlineVideo(n,['celebrate','learn','entry','create','move'][n],'gallery-film-'+n,d).replace(/aria-label="[^"]*"/, 'aria-label="'+esc(t.filmNames[n])+'"')}<h4>${t.filmNames[n]}</h4></article>`).join('')}${newFilm(lang,11,{lv:'Telpa svinībām',en:'Room to celebrate',ru:'Место для праздника'}[lang])}${newFilm(lang,20,{lv:'Joga kopā',en:'Yoga together',ru:'Йога вместе'}[lang])}</div><a class="text-link paper-more" href="${route(lang,'space')}">${t.detail}</a></section>`;
 }
 function hero(lang,kind,c,d){
   return `<section class="hero ${kind==='space'?'hero-space':''}">
@@ -99,9 +101,13 @@ function serviceLanding(lang,kind,d){
  <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
  <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
 }
+function newPhotoIndex(id){return 5+newPhotos.findIndex(p=>p.id===id);}
+function mediaPhotos(lang,ids){return `<div class="venue-photo-strip" tabindex="0" role="region" aria-label="${design[lang].allPhotos}">${ids.map(id=>{const n=newPhotoIndex(id);return `<button type="button" class="venue-photo" data-photo-detail="${n}" aria-label="${esc(design[lang].photo+' · '+design[lang].photoNames[n])}"><img src="${photo(n)}" alt="${esc(design[lang].photoNames[n])}" width="960" height="1280" loading="lazy" decoding="async"><span>${design[lang].photoNames[n]}</span></button>`;}).join('')}</div>`;}
+function newFilm(lang,id,title){return `<article class="paper-film"><div class="film-media" data-film><video class="ambient-video" muted playsinline loop preload="none" poster="/assets/images/video-posters/june-${id}.jpg" width="576" height="1024" aria-label="${esc(title)}"><source src="/assets/videos/room-june-${id}.mp4" type="video/mp4"></video><a class="film-error" href="/assets/videos/room-june-${id}.mp4" target="_blank" rel="noopener" hidden>${design[lang].filmFallback}</a></div><h4>${title}</h4></article>`;}
+function venueFilms(lang,ids){const labels={lv:{14:'Pie kopīga galda',17:'Vieta rotaļām',18:'Ieskaties telpā',19:'Galda futbols'},en:{14:'Around the table',17:'Room to play',18:'A look inside',19:'Table football'},ru:{14:'За общим столом',17:'Место для игр',18:'Взгляд внутрь',19:'Настольный футбол'}};return `<div class="venue-film-grid">${ids.map(id=>newFilm(lang,id,labels[lang][id])).join('')}</div>`;}
 function activityArt(name){return `<img class="activity-art" src="/assets/images/activities/${name}.png" width="120" height="120" alt="" aria-hidden="true" loading="lazy" decoding="async">`;}
 function consolidatedServices(lang){
- return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><div class="activity-heading">${activityArt(k==='party'?'party':'workshop')}<h2>${p.eyebrow}</h2></div><p>${p.intro}</p>${p.details.map(([heading,text],i)=>`<h3>${heading}</h3><p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
+ return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><div class="activity-heading">${activityArt(k==='party'?'party':'workshop')}<h2>${p.eyebrow}</h2></div><p>${p.intro}</p>${p.details.map(([heading,text],i)=>`<h3>${heading}</h3><p>${text}</p>`).join('')}<p>${p.priceNote}</p>${k==='party'?venueFilms(lang,[17,19]):mediaPhotos(lang,[21,16,2,3,5,7,8,12,13])}</section>`;}).join('');
 }
 function rentalCalculator(lang,d){
  const t=calculatorCopy[lang];
@@ -124,12 +130,12 @@ function editorialPage(lang,kind,d){
  const t=sideCopy[lang],p=servicePages[lang][kind],isPrice=kind==='pricing';
  const title=p?clean(p.eyebrow):isPrice?t.pricingTitle:t.spaceTitle;
  const intro=p?p.intro:isPrice?t.priceIntro:t.description;
- const picture=kind==='party'?4:kind==='workshops'?3:1;
+ const picture=kind==='party'?4:kind==='workshops'?3:newPhotoIndex(1);
  const entries=p?p.details:t.spaceDetails;
  const related=['space','party','workshops','pricing'].filter(k=>k!==kind);
  const names={space:t.spaceTitle,pricing:t.pricingTitle,party:servicePages[lang].party.name,workshops:servicePages[lang].workshops.name};
  return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p></header>
- ${isPrice?rentalCalculator(lang,d):''}<div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text],i)=>`<section class="editorial-section"><div class="activity-heading">${kind==='space'?activityArt(['table','play','calendar'][i]):''}<h2>${heading}</h2></div><p>${text}</p></section>`).join('')}`}
+ ${isPrice?rentalCalculator(lang,d):''}<div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text],i)=>`<section class="editorial-section"><div class="activity-heading">${kind==='space'?activityArt(['table','play','calendar'][i]):''}<h2>${heading}</h2></div><p>${text}</p>${kind==='space'?i===0?mediaPhotos(lang,[6,15])+venueFilms(lang,[14,18]):i===1?mediaPhotos(lang,[9,10]):mediaPhotos(lang,[4]):''}</section>`).join('')}`}
  ${kind==='space'?consolidatedServices(lang):''}<section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
  <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
  <nav class="editorial-related" aria-label="${esc(t.related)}"><p>${t.related}</p>${related.map(k=>`<a href="${route(lang,k)}">${names[k]}</a>`).join('')}</nav></article>`;
@@ -231,16 +237,16 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });
  const body=kind==='home'?paperHero(lang,d)+paperGallery(lang,d)+priceStrip(lang,d)+reviews(lang):editorialPage(lang,kind,d);
- const data={lang,d,calculator:calculatorCopy[lang],serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
+ const data={lang,d,calculator:calculatorCopy[lang],serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:i<videos.length?'/assets/videos/'+videos[i]:null})),mapTitle:c.map.iframeTitle};
  let html=`<!DOCTYPE html>
 <html lang="${lang}">
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-smooth-typing">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-smooth-typing">
-  <script src="/calendar-events.js?v=20260911-smooth-typing" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-smooth-typing"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-new-media">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-new-media">
+  <script src="/calendar-events.js?v=20260911-new-media" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-new-media"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -248,7 +254,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-smooth-typing" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-new-media" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
