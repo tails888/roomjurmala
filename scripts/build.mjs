@@ -177,7 +177,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',.
  });
  const body=servicePages[lang][kind]?serviceLanding(lang,kind,d):kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d)+reviews(lang):kind==='space'?hero(lang,kind,c,d)+serviceLinks(lang)+gallery(c,d)+services(lang):pricing(lang,kind,c,d);
  const data={lang,d,serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
- const html=`<!DOCTYPE html>
+ let html=`<!DOCTYPE html>
 <html lang="${lang}">
 <head>${head}
   <meta name="theme-color" content="#ef782f">
@@ -186,10 +186,14 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',.
   <script src="/calendar-events.js" defer></script>
   <script type="module" src="/assets/js/app.js?v=20260911-video"></script>
 </head>
-<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${booking(c,d)}${faq(lang,kind,c,d)}</main>${footer(lang,c,d)}${dialogs(d)}
+<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${footer(lang,c,d)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
 </body></html>
 `;
+ if(kind!=='home'){
+  const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js" defer></script>','');
+ }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
 console.log('Built 15 static pages in LV, EN and RU with existing assets.');

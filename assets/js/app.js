@@ -147,22 +147,29 @@ function chooseMode(button){
 const modeTabs=$$('[data-mode]');
 modeTabs.forEach(b=>b.addEventListener('click',()=>chooseMode(b)));tabKeyboard(modeTabs,chooseMode);
 $('#duration-slider')?.addEventListener('input',renderQuote);
+let updateMessage=()=>{};
 function choosePackage(plan=''){
+  if(!$('#booking-form'))return;
   selectedClass='';selectedPlan=plan;
   $('#selected-plan').hidden=!plan;
   $('#selected-plan span').textContent=plan;
   updateMessage();
 }
-$('#calculator-book')?.addEventListener('click',()=>choosePackage(formatDuration(quote,lang,d.units)+' · '+money(quote.price)));
+function selectBookingLink(link,plan){
+ if($('#booking-form'))choosePackage(plan);
+ else{const url=new URL(link.href);url.searchParams.set('plan',plan);link.href=url.href;}
+}
+$('#calculator-book')?.addEventListener('click',e=>selectBookingLink(e.currentTarget,formatDuration(quote,lang,d.units)+' · '+money(quote.price)));
 $$('[data-package]').forEach(b=>b.addEventListener('click',()=>{
   const m={day:'days',week:'weeks',month:'months'}[b.dataset.package],q=getQuote(m,m==='months'?3:1);
-  choosePackage(formatDuration(q,lang,d.units)+' · '+money(q.price));
+  selectBookingLink(b,formatDuration(q,lang,d.units)+' · '+money(q.price));
 }));
+if($('#booking-form')){
 $('#clear-plan').addEventListener('click',()=>choosePackage(''));
 const dateInput=$('#booking-date'),timeInput=$('#booking-time'),form=$('#booking-form');
 dateInput.min=rigaNow().date;
 const fields={date:dateInput,time:timeInput};
-function updateMessage(){
+updateMessage=function(){
   $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},selectedClass?{...config.whatsapp,greeting:classCopy.greeting}:config.whatsapp,[selectedPlan,selectedClass||config.serviceRequest].filter(Boolean).join('\n'));
 }
 const calendarApi=window.RoomJurmalaCalendar;
@@ -223,7 +230,11 @@ form.addEventListener('submit',e=>{
   $('#booking-error').hidden=true;updateMessage();
   // Native form navigation opens WhatsApp with the prepared text. The visitor sends it there.
 });
+const bookingParams=new URLSearchParams(location.search);
+config.serviceRequest=bookingParams.get('service')||config.serviceRequest;
+if(bookingParams.get('plan'))choosePackage(bookingParams.get('plan'));
 renderSchedule();updateMessage();form.hidden=false;
+}
 const films=mountFilms(d,reduced);
 mountStory($('.film-story'),films,reduced);
 const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero')||$('.service-hero');
@@ -232,7 +243,7 @@ const bookingObserver=new IntersectionObserver(entries=>{
   for(const entry of entries){if(entry.target===$('#calendar'))bookingVisible=entry.isIntersecting;if(entry.target===hero)heroVisible=entry.isIntersecting;if(entry.target===$('#contact'))contactVisible=entry.isIntersecting;}
   const show=!bookingVisible&&!heroVisible&&!contactVisible;mobileBook.classList.toggle('is-visible',show);mobileBook.setAttribute('aria-hidden',String(!show));mobileBook.tabIndex=show?0:-1;
 },{threshold:0});
-bookingObserver.observe($('#calendar'));bookingObserver.observe($('#contact'));if(hero)bookingObserver.observe(hero);
+if($('#calendar'))bookingObserver.observe($('#calendar'));bookingObserver.observe($('#contact'));if(hero)bookingObserver.observe(hero);
 // Keep preview traffic out of the existing production analytics property.
 if(location.hostname==='roomjurmala.lv'||location.hostname==='www.roomjurmala.lv'){
   window.dataLayer=window.dataLayer||[];

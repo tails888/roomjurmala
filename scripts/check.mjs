@@ -68,9 +68,14 @@ for (const [route, { html, ids }] of pages) {
     assert(html.includes('"@type":"FAQPage"')&&html.includes('id="faq"'),`${route} must include visible FAQs and matching schema`);
   }
   assert(!/id="customerName"|id="customerPhone"|id="bookingNotes"/.test(html),`${route} booking should stay simple`);
+  if (['/','/en/','/ru/'].includes(route)) {
   assert.equal([...html.matchAll(/<input[^>]*type="(?:date|time)"/g)].length,2,`${route} has two booking fields`);
   assert(/action="https:\/\/wa.me\/37127850380" method="get"/.test(html),`${route} native WhatsApp handoff`);
   assert(/data-booking-ui hidden/.test(html), `${route} must not expose an unhandled form before JS is ready`);
+  } else {
+    assert(!ids.has('calendar')&&!ids.has('booking-form'),route+' must use the homepage calendar');
+    assert(html.includes('#calendar'),route+' needs a homepage booking link');
+  }
 }
 
 const sitemap=read('sitemap.xml');
