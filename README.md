@@ -69,3 +69,9 @@ Video sources and posters are present in the generated HTML for discovery, follo
 The repository root remains a ready-to-serve static website. Generated HTML and the vendored runtime are committed, so an existing static host does not need a build server. To rebuild in a hosting pipeline, use `npm ci && npm run build` and publish the repository root, excluding development files and `node_modules`.
 
 Analytics retain the existing property and load only on `roomjurmala.lv` or `www.roomjurmala.lv`. Local previews do not send analytics. Publishing to `updates` does not itself authorize changes to `main` or a new production deployment.
+
+### Homepage Google reviews
+
+content/reviews.mjs stores three original Latvian quotations and direct Google Maps review links, checked on 11 September 2026. Google displayed 5.0 from 12 reviews. This is a manual snapshot, not a live feed. Refresh the rating, count and quotations together after checking the profile. English and Russian homepages identify quotations as Latvian originals.
+
+The section renders in static HTML with a heading, blockquotes and author/source links. No Review or AggregateRating structured data is added for these self-serving business reviews, following https://developers.google.com/search/docs/appearance/structured-data/review-snippet.
