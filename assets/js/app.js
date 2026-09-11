@@ -22,13 +22,29 @@ function modalClosed(){
   if(!$$('dialog[open]').length)document.body.classList.remove('modal-open');
   lastFocused?.focus({preventScroll:true});
 }
-function closeMenu(){menu.close();$('.menu-toggle').setAttribute('aria-expanded','false');}
-$('.menu-toggle').addEventListener('click',()=>{modalOpen(menu);$('.menu-toggle').setAttribute('aria-expanded','true');});
+let menuClosing=false;
+function closeMenu(){
+  if(menuClosing||!menu.open)return;
+  if(reduced.matches){menu.close();return;}
+  menuClosing=true;
+  menu.classList.add('is-closing');
+  const exit=menu.animate([{opacity:1,transform:'translateX(0)'},{opacity:0,transform:'translateX(38px)'}],{duration:220,easing:'ease-in',fill:'forwards'});
+  exit.finished.catch(()=>{}).then(()=>{menu.close();exit.cancel();menu.classList.remove('is-closing');menuClosing=false;});
+}
+$('.menu-toggle').addEventListener('click',()=>{
+  modalOpen(menu);$('.menu-toggle').setAttribute('aria-expanded','true');
+  if(!reduced.matches)menu.animate([{opacity:0,transform:'translateX(55px)'},{opacity:1,transform:'translateX(0)'}],{duration:440,easing:'cubic-bezier(.2,.75,.2,1)'});
+});
+menu.addEventListener('cancel',event=>{event.preventDefault();closeMenu();});
+menu.querySelectorAll('.menu-links a').forEach(link=>{
+  const url=new URL(link.href);
+  if(url.pathname===location.pathname&&!url.hash)link.setAttribute('aria-current','page');
+});
 $('.menu-close').addEventListener('click',closeMenu);
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
 menu.addEventListener('close',()=>{$('.menu-toggle').setAttribute('aria-expanded','false');modalClosed();});
 for(const dialog of [menu,mediaDialog]){
-  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)(dialog===menu?closeMenu():dialog.close());}});
 }
 mediaDialog.addEventListener('close',()=>{mediaDialog.querySelector('video')?.pause();$('#dialog-content').replaceChildren();modalClosed();});
 $('.dialog-close').addEventListener('click',()=>mediaDialog.close());

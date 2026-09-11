@@ -34,7 +34,7 @@ function header(lang,kind,c,d){
   <dialog id="mobile-menu" aria-label="${esc(d.menu)}">
     <div class="menu-top"><span>ROOM Jūrmala</span><button class="circle-button menu-close" aria-label="${esc(d.close)}">${plus}</button></div>
     <nav class="menu-links"><a href="${route(lang)}">${d.home}</a><a href="${route(lang,'space')}">${c.nav.links[0]}</a><a href="${route(lang,'pricing')}">${c.nav.links[1]}</a><a href="#calendar">${c.nav.links[2]}</a><a href="#contact">${c.nav.links[4]}</a></nav>
-    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp ${arrow}</a>
+    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp</a><p class="menu-address">Skolas iela 50 · Jūrmala</p>
   </dialog>`;
 }
 function inlineVideo(index,poster,id,d,hero=false){
@@ -223,10 +223,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-scroll">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-scroll">
-  <script src="/calendar-events.js?v=20260911-scroll" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-scroll"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-menu">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-menu">
+  <script src="/calendar-events.js?v=20260911-menu" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-menu"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -234,7 +234,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-scroll" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-menu" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
