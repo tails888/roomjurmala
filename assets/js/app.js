@@ -227,12 +227,12 @@ renderSchedule();updateMessage();form.hidden=false;
 const films=mountFilms(d,reduced);
 mountStory($('.film-story'),films,reduced);
 const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero');
-let bookingVisible=false,heroVisible=Boolean(hero);
+let bookingVisible=false,heroVisible=Boolean(hero),contactVisible=false;
 const bookingObserver=new IntersectionObserver(entries=>{
-  for(const entry of entries){if(entry.target===$('#calendar'))bookingVisible=entry.isIntersecting;if(entry.target===hero)heroVisible=entry.isIntersecting;}
-  const show=!bookingVisible&&!heroVisible;mobileBook.classList.toggle('is-visible',show);mobileBook.setAttribute('aria-hidden',String(!show));mobileBook.tabIndex=show?0:-1;
+  for(const entry of entries){if(entry.target===$('#calendar'))bookingVisible=entry.isIntersecting;if(entry.target===hero)heroVisible=entry.isIntersecting;if(entry.target===$('#contact'))contactVisible=entry.isIntersecting;}
+  const show=!bookingVisible&&!heroVisible&&!contactVisible;mobileBook.classList.toggle('is-visible',show);mobileBook.setAttribute('aria-hidden',String(!show));mobileBook.tabIndex=show?0:-1;
 },{threshold:0});
-bookingObserver.observe($('#calendar'));if(hero)bookingObserver.observe(hero);
+bookingObserver.observe($('#calendar'));bookingObserver.observe($('#contact'));if(hero)bookingObserver.observe(hero);
 // Keep preview traffic out of the existing production analytics property.
 if(location.hostname==='roomjurmala.lv'||location.hostname==='www.roomjurmala.lv'){
   window.dataLayer=window.dataLayer||[];
