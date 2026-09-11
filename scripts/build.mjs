@@ -40,10 +40,12 @@ function header(lang,kind,c,d){
   </dialog>`;
 }
 function inlineVideo(index,poster,id,d,hero=false){
+ const file=hero?'room-june-17.mp4':videos[index];
+ if(hero)poster='june-17';
  return `<div class="film-media" data-film>
-  <video id="${id}" class="ambient-video" ${hero?'data-hero-video data-loop-start="13"':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${videos[index]}" type="video/mp4"></video>
+  <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
 
-  <a class="film-error" href="/assets/videos/${videos[index]}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
+  <a class="film-error" href="/assets/videos/${file}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
 }
 function videoHero(d){
