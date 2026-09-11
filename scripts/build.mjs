@@ -136,7 +136,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
  // Schema describes the content still visible on each page.
  head=head.replace(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,(tag,raw)=>{
    const data=JSON.parse(raw);
-   if(kind==='home'&&data['@type']==='FAQPage')return '';
+   if(kind==='home'&&data['@type']==='FAQPage'){data.mainEntity=c.faq.items.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}));}
    delete data.aggregateRating;
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });
@@ -151,7 +151,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <script src="/calendar-events.js" defer></script>
   <script type="module" src="/assets/js/app.js?v=20260911-video"></script>
 </head>
-<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${booking(c,d)}${kind!=='home'?faq(lang,kind,c,d):''}</main>${footer(lang,c,d)}${dialogs(d)}
+<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${booking(c,d)}${faq(lang,kind,c,d)}</main>${footer(lang,c,d)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
 </body></html>
 `;

@@ -29,7 +29,7 @@ Open http://127.0.0.1:4174. The local server supports video range requests. Run 
 - `assets/js/booking-core.mjs` contains prices, date validation and WhatsApp message formatting.
 - `calendar-events.js` remains the source of the venue's scheduled activities.
 
-The generated routes are `/`, `/telpa/`, `/cenas/` and their `/en/` and `/ru/` equivalents. Edit the source files and rebuild rather than editing generated HTML directly. Existing titles, descriptions, canonical URLs and language alternates are retained. Detailed service and FAQ text remains in static HTML on the inner pages. Homepage FAQ markup was removed with its visible FAQ section, and unshown aggregate ratings were removed. The sitemap includes all nine routes with updated modification dates.
+The generated routes are `/`, `/telpa/`, `/cenas/` and their `/en/` and `/ru/` equivalents. Edit the source files and rebuild rather than editing generated HTML directly. Existing titles, descriptions, canonical URLs and language alternates are retained. Detailed service and FAQ text remains in static HTML on the inner pages. The homepage includes expandable FAQs with matching FAQ structured data. Unshown aggregate ratings were removed. The sitemap includes all nine routes with updated modification dates.
 
 ## Motion and media
 

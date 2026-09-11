@@ -65,7 +65,7 @@ for (const [route, { html, ids }] of pages) {
   if (!route.includes('/telpa/') && !route.includes('/cenas/')) {
     assert.equal([...html.matchAll(/<video\b/g)].length,5,`${route} must embed all five real videos`);
     assert.equal([...html.matchAll(/class="ambient-video"/g)].length,5,`${route} visibility-controlled media`);
-    assert(!html.includes('"@type":"FAQPage"'),`${route} must not describe removed FAQs`);
+    assert(html.includes('"@type":"FAQPage"')&&html.includes('id="faq"'),`${route} must include visible FAQs and matching schema`);
   }
   assert(!/id="customerName"|id="customerPhone"|id="bookingNotes"/.test(html),`${route} booking should stay simple`);
   assert.equal([...html.matchAll(/<input[^>]*type="(?:date|time)"/g)].length,2,`${route} has two booking fields`);
