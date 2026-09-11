@@ -98,25 +98,6 @@ assert.equal(submitted.length,pages.size,'Sitemap must contain every page once')
 assert.deepEqual(new Set(submitted),new Set(pages.keys()),'Sitemap and built routes must match');
 const titles=[...pages.values()].map(p=>p.html.match(/<title>([^<]+)<\/title>/)[1]);
 assert.equal(new Set(titles).size,titles.length,'Page titles must be distinct');
-for(const [route,{html}] of pages){
- if(!/bernu-ballites|telpas-nodarbibam/.test(route))continue;
- const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
- assert(schemas.some(s=>s['@type']==='Service'),'Service schema missing');
- const breadcrumbs=schemas.find(s=>s['@type']==='BreadcrumbList');
- assert.equal(breadcrumbs.itemListElement.at(-1).item,origin+route,'Breadcrumb must name the canonical page');
- for(const question of schemas.find(s=>s['@type']==='FAQPage').mainEntity){
-  assert(html.includes('<summary>'+question.name),'FAQ question must be visible');
-  assert(html.includes('<p>'+question.acceptedAnswer.text+'</p>'),'FAQ answer must match visible copy');
- }
- assert([...pages.entries()].some(([other,p])=>other!==route&&p.html.includes('href="'+route+'"')),'Service page needs an internal link');
- const language=route.startsWith('/en/')?'en':route.startsWith('/ru/')?'ru':'lv';
- const suffix=route.replace(/^\/(?:en|ru)\//,'/');
- const links=[...html.matchAll(/<link\b[^>]*>/g)].map(m=>attrs(m[0])).filter(a=>a.rel==='alternate');
- for(const locale of ['lv','en','ru']){
-  const expected=origin+(locale==='lv'?'':'/'+locale)+suffix;
-  assert(links.some(a=>a.hreflang===locale&&a.href===expected),'Language link must stay on the same service');
- }
-}
 
 for (const file of ['assets/css/site.css', 'assets/css/paper.css', 'assets/fonts/site-fonts.css']) {
   for (const match of read(file).matchAll(/url\(['"]?([^)'"\s]+)['"]?\)/g)) {

@@ -1,3 +1,5 @@
+> Historical design notes. These describe an earlier iteration, not the current implementation.
+
 # Paper direction implementation review
 
 final result: passed

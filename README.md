@@ -1,10 +1,8 @@
 # ROOM Jūrmala
 
-A multilingual static website for the event space at Skolas iela 50, Jūrmala. A fullscreen venue video opens the short homepage, followed by four activity films, an orange pricing section and a two-field WhatsApp booking request. Detailed space and pricing pages retain the gallery, interactive Three.js photo installation, calculator and FAQs.
+Static venue website in Latvian, English and Russian. The repository contains the source and generated HTML for nine pages.
 
-All redesign work belongs to the `updates` branch. Do not merge or push these changes to `main` as part of this work.
-
-## Local development
+## Development
 
 Requires Node.js 20 or newer.
 
@@ -14,43 +12,33 @@ npm run build
 npm run dev
 ```
 
-Open http://127.0.0.1:4174. The local server supports video range requests. Run the build again after changing the generator or content files. CSS and JavaScript edits are served directly.
+Open http://127.0.0.1:4174. Rebuild after changing content or templates. The preview server supports video range requests and redirects retired service URLs.
 
-## Sources
+## Project structure
 
-- `scripts/build.mjs` generates all fifteen static HTML pages and copies the pinned Three.js modules into `assets/vendor`.
-- `content/services.mjs` contains the two service pages in all three languages.
-- `content/design.mjs` contains new interface copy in Latvian, English and Russian, plus references to existing media.
-- `content/copy.json` retains the original multilingual business and booking copy.
-- `content/pages.json` retains each original page's metadata, detailed service copy and FAQs.
-- `assets/css/site.css` defines the responsive visual system.
-- `assets/js/app.js` handles navigation, galleries, calculator, activity schedule and booking requests.
-- `assets/js/films.js` handles visible-only video playback and the desktop scrolling story.
-- `assets/js/scene.js` renders the photographic 3D installation. It represents photographs of the venue, not a measured floor plan.
-- `assets/js/booking-core.mjs` contains prices, date validation and WhatsApp message formatting.
-- `calendar-events.js` remains the source of the venue's scheduled activities.
+| Path | Purpose |
+| --- | --- |
+| `content/` | Translations, metadata, FAQs, prices, reviews and media catalogues |
+| `scripts/build.mjs` | Generates the nine pages and sitemap |
+| `scripts/check.mjs` | Checks routes, links, metadata, forms and syntax |
+| `scripts/audit-assets.mjs` | Checks asset references and exact duplicates |
+| `scripts/serve.mjs` | Local preview server |
+| `assets/css/` | Shared layout and homepage styling |
+| `assets/fonts/` | Inter and Cormorant Garamond, including Latvian and Cyrillic glyphs |
+| `assets/images/` | Venue photos, illustrations, logo, icons and video posters |
+| `assets/videos/` | Videos used by pages or the media viewer |
+| `assets/js/` | Navigation, galleries, video playback, motion, booking and analytics |
+| `calendar-events.js` | Scheduled classes |
+| `tests/` | Booking, pricing, date and analytics tests |
+| `docs/` | Historical design notes |
 
-The generated routes are `/`, `/telpa/`, `/cenas/`, `/bernu-ballites/`, `/telpas-nodarbibam/` and their `/en/` and `/ru/` equivalents. The two service pages have distinct copy, descriptive headings, existing venue photos/video, prices, custom FAQs and contextual booking requests. They are linked from the homepage and space overview, and link to each other. Edit the source files and rebuild rather than editing generated HTML directly. Existing titles, descriptions, canonical URLs and language alternates are retained. Detailed service and FAQ text remains in static HTML on the inner pages. The homepage includes expandable FAQs with matching FAQ structured data. Unshown aggregate ratings were removed. The sitemap includes all fifteen routes with updated modification dates.
+## Pages and editing
 
-## Motion and media
+The routes are `/`, `/telpa/` and `/cenas/`, with matching `/en/` and `/ru/` versions. Party and workshop content lives in sections of the venue page. The former standalone service URLs redirect to that page.
 
-The homepage uses all five existing videos. The venue-entry film fills the first screen and loops its room segment from 13 seconds onward. The private event, creative workshop, children's class and exercise films appear beside their respective activities. Original files remain untouched. Their portrait resolution limits detail when cropped across a desktop screen; activity films retain their portrait framing. Poster images are frames extracted from those same files.
+Edit source files and rebuild instead of editing generated HTML. Homepage wording is in `content/paper.mjs`; venue copy is in `content/sidepages.mjs` and `content/services.mjs`. The image catalogue also powers the media viewer, so a photo without its own page thumbnail may still be in use.
 
-Videos autoplay muted only while visible, and inactive desktop panels pause. Playback also pauses in hidden tabs. Each film has pause and sound controls. Reduced-motion mode starts films paused and allows manual playback. Without JavaScript, native video controls and source URLs remain available.
-
-Above 900 pixels, the activity section stays in place while scrolling switches its four films. Activity labels also navigate directly, including with arrow keys. Phones, tablets and reduced-motion mode use a normal flowing layout. Scrolling uses browser behavior without wheel interception.
-
-The space page uses locally vendored Three.js on desktop. Phones, reduced-motion preferences and WebGL failures use existing photos in a CSS perspective layout with manual gallery controls. Motion can be paused, and rendering stops outside the viewport and in hidden tabs.
-
-Only existing venue assets are shipped. No generated room imagery or replacement logo is included.
-
-## Booking behavior
-
-Customers choose a date and approximate start time, then open a prepared WhatsApp message to the existing venue number. The customer sends the message in WhatsApp; availability is confirmed in that conversation. No name, phone number or account is required on the website. The pricing calculator can optionally attach a selected package, which can also be removed. The site does not store the request. A mobile booking button appears between the hero and booking sections.
-
-Every booking section includes a month calendar with scheduled-class markers and localized class details from the existing calendar data. Selecting a day fills the date field; selecting a class also fills its start time and adds its name to the WhatsApp request. Past dates and already-started classes cannot be booked through the calendar. Editing the date or time clears the selected class. This is an activity schedule, not a live reservation database.
-
-Hourly and package prices remain unchanged. Memberships have a three-month minimum. Date validation uses Europe/Riga time. Without JavaScript the booking section provides a direct WhatsApp contact link.
+The homepage contains a room video, activity cards, photo gallery, films, prices, manually maintained Google reviews, a class calendar and FAQs. The venue and pricing pages contain detailed information and booking links. There is no Blender or Three.js tour.
 
 ## Verification
 
@@ -60,34 +48,30 @@ npm run check
 npm test
 ```
 
-The static check verifies the fifteen routes, local links and assets, metadata, JSON, IDs, five homepage films, two-field forms, fallback links and JavaScript syntax. Tests cover price breaks, membership terms, booking validation, Riga dates and message encoding. Browser verification should also cover all three languages, desktop and phone layouts, keyboard navigation, visible-only playback, reduced motion, the no-JavaScript fallback and the prepared WhatsApp payload without sending a message.
+Checks cover all nine routes, local assets, metadata, structured data, links, fonts, JavaScript imports, duplicate files and booking fallbacks. Tests cover pricing, membership minimums, Riga dates, WhatsApp messages and the analytics hostname gate.
 
-Video sources and posters are present in the generated HTML for discovery, following [Google's video guidance](https://developers.google.com/search/docs/appearance/video). These are venue pages rather than dedicated watch pages; no video-rich-result eligibility or ranking is promised. Video upload dates are not invented for structured data.
+For layout or interaction changes, also check phone and desktop widths, the menu, media viewer, reduced motion and booking handoff. Do not send test WhatsApp messages.
+
+## Media maintenance
+
+Keep public assets in their existing folders and use descriptive filenames. Before removing a file, check both page references and the media viewer catalogue. Run `npm run audit:assets` after changes. It follows references from generated pages through local stylesheets and JavaScript modules, checks that referenced files exist, and reports unused files and byte-identical duplicates.
+
+Video posters, the optimized hero video, font language subsets and different icon sizes serve distinct purposes. Similar appearance alone is not evidence that a file is redundant. Original versions remain recoverable from Git history.
 
 ## Publishing
 
-The repository root remains a ready-to-serve static website. Generated HTML and the vendored runtime are committed, so an existing static host does not need a build server. To rebuild in a hosting pipeline, use `npm ci && npm run build` and publish the repository root, excluding development files and `node_modules`.
+`main` contains the approved version; `updates` is the working branch. The previous main version is preserved in `backup/main-before-updates-2026-09-11`.
 
-Analytics retain the existing property and load only on `roomjurmala.lv` or `www.roomjurmala.lv`. Local previews do not send analytics. Publishing to `updates` does not itself authorize changes to `main` or a new production deployment.
+The repository root remains ready for the existing static host. Publish the generated route directories, `assets/`, `calendar-events.js`, `favicon.ico`, `robots.txt`, `sitemap.xml` and `.htaccess`. Source files, tests, documentation, local design concepts and `.git/` are not public website assets.
 
-### Homepage Google reviews
+A Git push and a hosting deployment are separate operations. The private Sites preview uses its own checkout and publishing process.
 
-content/reviews.mjs stores three original Latvian quotations and direct Google Maps review links, checked on 11 September 2026. Google displayed 5.0 from 12 reviews. This is a manual snapshot, not a live feed. Refresh the rating, count and quotations together after checking the profile. English and Russian homepages identify quotations as Latvian originals.
+GA4 is initialized once by `assets/js/analytics.js`, only on HTTPS `roomjurmala.lv` and `www.roomjurmala.lv`. Local and Sites previews do not send analytics. Change the script or stylesheet version in the generator when modifying cached runtime files.
 
-The section renders in static HTML with a heading, blockquotes and author/source links. No Review or AggregateRating structured data is added for these self-serving business reviews, following https://developers.google.com/search/docs/appearance/structured-data/review-snippet.
+## Booking and business data
 
-### Minimal secondary pages
+The website prepares a WhatsApp request with a chosen date and approximate time. Customers send it themselves; availability is confirmed in conversation. The calendar shows scheduled classes, not live room availability.
 
-All twelve LV, EN and RU secondary pages now use the article layout in editorialPage, copy in content/sidepages.mjs, and the existing service descriptions. They contain static descriptive content, native FAQs, compact hire information and phone/email contacts. Calendar, map embeds, social profile rows, reviews and floating booking widgets appear only on the homepage. Existing canonical routes, hreflang alternatives and sitemap entries are preserved. Booking links retain the service context and lead to the same language homepage.
+Pricing uses `assets/js/booking-core.mjs`. Memberships have a three-month minimum. Update visible prices and related FAQ answers together.
 
-
-### Canonical page consolidation
-
-The current build produces exactly 9 pages: home, space and pricing in LV, EN and RU. Party and workshop content is now in anchored sections of the space pages. Their six former URLs have 301 redirects in .htaccess and in the local preview server. The sitemap and internal links use the remaining nine pages. This changes repository routing, not Search Console indexing state; production redirects take effect when deployed.
-
-
-### Interactive hire calculator
-
-The three pricing pages include a responsive calculator for hours, days, weeks and membership, using the existing booking-core price tables. Native range controls, increment/decrement buttons and quick duration presets update the quote and per-hour cost immediately. Membership shows 460 EUR per month and the full selected term cost, with a three-month minimum. Monthly savings are not compared against an assumed month length. Booking links pass the chosen period and total to the homepage form. The static price tables remain available without JavaScript. No calendars, maps or social widgets were added to secondary pages.
-
-Validated the original price-break tests, keyboard range control, all four mode maximum prices, membership minimum, mobile 320/390px layouts, LV/EN/RU labels, and the calculator-to-homepage booking handoff.
+Google reviews in `content/reviews.mjs` are a manual snapshot. Refresh the rating, count and quotations together after checking the business profile. No self-serving review rating schema is emitted.

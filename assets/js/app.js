@@ -11,7 +11,7 @@ mountScroll(reduced);
 const arrow='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg>';
 const money=n=>new Intl.NumberFormat(lang,{maximumFractionDigits:0}).format(n)+' €';
 let motionPaused=reduced.matches;
-let currentHero=0,currentGallery=0,lastFocused;
+let currentGallery=0,lastFocused;
 const mediaDialog=$('#media-dialog'),menu=$('#mobile-menu');
 function modalOpen(dialog){
   lastFocused=document.activeElement;
@@ -99,30 +99,6 @@ function setGallery(index){
 }
 $$('[data-gallery-step]').forEach(b=>b.addEventListener('click',()=>setGallery(currentGallery+Number(b.dataset.galleryStep))));
 $$('[data-gallery-index]').forEach(b=>b.addEventListener('click',()=>setGallery(Number(b.dataset.galleryIndex))));
-function setHero(index){
-  currentHero=(index+photos.length)%photos.length;
-  $('.scene-photo-main').src=photos[currentHero].src;
-  $('.scene-photo-side').src=photos[(currentHero+1)%photos.length].src;
-  $('.hero-hotspot').dataset.photoDetail=String(currentHero);
-  $('.hero-hotspot').setAttribute('aria-label',photos[currentHero].name);
-  $('.scene-caption').textContent=(currentHero+1)+' / '+photos.length+' · '+d.explore;
-  document.dispatchEvent(new CustomEvent('room:scene-index',{detail:currentHero}));
-}
-const scene=$('#hero-scene');
-if(scene){
-  scene.tabIndex=0;scene.setAttribute('role','group');scene.setAttribute('aria-label',d.drag);
-  $$('[data-scene-step]').forEach(b=>b.addEventListener('click',()=>setHero(currentHero+Number(b.dataset.sceneStep))));
-  let dragStart=null,dragY=0;
-  scene.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragStart=e.clientX;dragY=e.clientY;});
-  scene.addEventListener('pointerup',e=>{if(dragStart!==null&&Math.abs(e.clientX-dragStart)>45&&Math.abs(e.clientX-dragStart)>Math.abs(e.clientY-dragY))setHero(currentHero+(e.clientX<dragStart?1:-1));dragStart=null;});
-  scene.addEventListener('pointercancel',()=>dragStart=null);
-  scene.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();setHero(currentHero+(e.key==='ArrowRight'?1:-1));}});
-  scene.addEventListener('room:photo-click',()=>showPhoto(currentHero));
-  $('#motion-toggle').addEventListener('click',()=>setMotion(!motionPaused));
-  if(matchMedia('(min-width:681px)').matches&&!reduced.matches){
-    import('./scene.js').then(m=>m.mountScene(scene,photos)).catch(()=>{scene.dataset.renderer='fallback';});
-  }
-}
 function setMotion(paused){
   motionPaused=paused;document.body.classList.toggle('motion-paused',paused);
   const control=$('#motion-toggle');

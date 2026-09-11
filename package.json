@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "check": "node scripts/check.mjs && node scripts/audit-assets.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "audit:assets": "node scripts/audit-assets.mjs"
   }
 }

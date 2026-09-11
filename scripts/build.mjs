@@ -48,14 +48,6 @@ function inlineVideo(index,poster,id,d,hero=false){
   <a class="film-error" href="/assets/videos/${file}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
 }
-function videoHero(d){
- return `<section class="video-hero" aria-label="${esc(d.venue)}">
-  ${inlineVideo(2,'entry','hero-film',d,true)}
-  <div class="video-hero-shade"></div>
-  <div class="video-hero-copy"><p>${d.venue}</p><h1>${d.hero}</h1><a class="button button-orange" href="#calendar">${d.findDate}${arrow}</a></div>
-  <div class="video-hero-bottom"><span>Skolas iela 50 · Jūrmala</span><a href="#events" aria-label="${esc(d.scroll)}"><span class="turn-down">${arrow}</span></a></div>
- </section>`;
-}
 function paperHero(lang,d){
  const t=paperCopy[lang];
  return `<section class="paper-hero" aria-labelledby="paper-title"><div class="paper-hero-copy"><p class="paper-eyebrow">${t.eyebrow}</p><h1 id="paper-title">${t.title}</h1><p class="paper-tagline">${t.intro}</p><div class="paper-hero-actions"><a class="button paper-book" href="#calendar">${t.book}</a><a class="paper-gallery-link" href="#gallery">${t.gallery}</a></div></div><div class="paper-art paper-art-video">${inlineVideo(2,'entry','hero-film',d,true)}</div></section>
@@ -64,44 +56,6 @@ function paperHero(lang,d){
 function paperGallery(lang,d){
  const t=paperCopy[lang];
  return `<section class="paper-gallery" id="gallery" aria-labelledby="paper-gallery-title"><div class="paper-gallery-heading"><p class="paper-eyebrow">ROOM Jūrmala</p><h2 id="paper-gallery-title">${t.galleryTitle}</h2><p>${t.galleryIntro}</p></div><div class="memory-board"><div class="memory-center"><p class="memory-wordmark">ROOM<span>Jūrmala</span></p><p>${d.together}</p><a class="button paper-book" href="#calendar">${t.book}</a></div>${[2,4,1,3].map((n,i)=>`<button class="memory-photo memory-photo-${i}" type="button" data-photo-detail="${n}" aria-label="${esc(t.photo+' · '+d.photoNames[n])}"><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"><span>${d.photoNames[n]}</span></button>`).join('')}</div><div class="paper-film-heading"><div><h3>${t.videoTitle}</h3><p>${t.videoIntro}</p></div><p>${t.filmHint}</p></div><div class="paper-films" tabindex="0" role="region" aria-label="${esc(t.videoTitle)}">${[0,1,3,4].map((n)=>`<article class="paper-film">${inlineVideo(n,['celebrate','learn','entry','create','move'][n],'gallery-film-'+n,d).replace(/aria-label="[^"]*"/, 'aria-label="'+esc(t.filmNames[n])+'"')}<h4>${t.filmNames[n]}</h4></article>`).join('')}${newFilm(lang,20,{lv:'Joga kopā',en:'Yoga together',ru:'Йога вместе'}[lang])}</div><a class="text-link paper-more" href="${route(lang,'space')}">${t.detail}</a></section>`;
-}
-function hero(lang,kind,c,d){
-  return `<section class="hero ${kind==='space'?'hero-space':''}">
-    <div class="hero-main"><div class="hero-copy">
-      <h1>${kind==='space'?d.spaceHero:d.hero}</h1><p>${kind==='space'?d.spaceIntro:d.intro}</p>
-      <a class="button button-light" href="#calendar">${d.findDate}${arrow}</a>
-    </div>
-    <div class="hero-gallery" aria-label="${esc(d.explore)}">
-      <div class="scene" id="hero-scene">
-        <div class="scene-fallback" aria-hidden="true"><img class="scene-photo-main" src="${photo(0)}" alt="" width="2048" height="1536" fetchpriority="high"><img class="scene-photo-side" src="${photo(1)}" alt="" width="1536" height="2048"></div>
-        <button class="hotspot hero-hotspot" data-photo-detail="0" aria-label="${esc(d.details)}">${plus}</button>
-      </div>
-      <div class="scene-controls"><button type="button" class="circle-button" data-scene-step="-1" aria-label="${esc(d.previous)}"><span class="turn-back">${arrow}</span></button>
-        <span class="scene-caption" aria-live="polite">${d.explore}</span>
-        <button type="button" class="circle-button" data-scene-step="1" aria-label="${esc(d.next)}">${arrow}</button>
-      </div><div class="scene-hints"><span>${d.drag}</span><button id="motion-toggle" type="button" aria-pressed="false">${d.pause}</button></div>
-    </div></div>
-    <div class="hero-bottom"><span>Skolas iela 50 · Kauguri, Jūrmala</span><a href="#${kind==='space'?'gallery':'events'}">${d.together}<span class="turn-down">${arrow}</span></a></div>
-  </section>`;
-}
-function events(lang,c,d){
- const indexes=[0,3,1,4],posters=['celebrate','create','learn','move'];
- return `<section id="events" class="film-story"><div class="story-stage">
-  <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}>${name}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
-  <div class="story-films">${d.eventNames.map((name,i)=>`<article class="film-panel" id="activity-${i}" data-film-index="${i}">${inlineVideo(indexes[i],posters[i],'activity-film-'+i,d)}<div class="film-caption"><h3>${name}</h3><p>${d.eventDescriptions[i]}</p></div></article>`).join('')}</div>
-  <div class="story-progress" aria-hidden="true"><span></span></div>
- </div></section>${serviceLinks(lang)}`;
-}
-function serviceLinks(lang){
- return `<nav class="service-links" aria-label="${lang==='lv'?'Telpas izmantošana':lang==='en'?'Ways to use the space':'Варианты аренды'}">${Object.keys(serviceSlugs).map(kind=>`<a class="text-link" href="${route(lang,kind)}">${servicePages[lang][kind].name}${diagonal}</a>`).join('')}</nav>`;
-}
-function serviceLanding(lang,kind,d){
- const p=servicePages[lang][kind],other=kind==='party'?'workshops':'party';
- const headings={lv:{party:'Bērnu ballītes<br><em>Jūrmalā.</em>',workshops:'Telpa nodarbībām<br><em>Jūrmalā.</em>'},en:{party:'Children’s parties<br><em>in Jūrmala.</em>',workshops:'Classes & workshops<br><em>in Jūrmala.</em>'},ru:{party:'Детские праздники<br><em>в Юрмале.</em>',workshops:'Зал для занятий<br><em>в Юрмале.</em>'}};
- return `<section class="service-hero ${p.image===0?'service-hero-text':''}"><div class="service-hero-copy"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигационная цепочка'}"><a href="${route(lang)}">${d.home}</a><span>/</span><span>${p.name}</span></nav><p class="service-eyebrow">${p.eyebrow}</p><h1>${headings[lang][kind]}</h1><p class="service-intro">${p.intro}</p><a class="button button-orange" href="#calendar">${d.findDate}${arrow}</a></div>${p.image===0?'':`<figure class="service-hero-photo"><img src="${photo(p.image)}" width="${p.image===4?1536:2048}" height="${p.image===4?2048:1536}" alt="${esc(d.photoNames[p.image])}" fetchpriority="high"><figcaption>Skolas iela 50 · Kauguri, Jūrmala</figcaption></figure>`}</section>
- <section class="section service-overview"><figure class="service-film">${inlineVideo(p.video,p.poster,'service-film',d)}<figcaption>${p.caption}</figcaption></figure><div class="service-information"><h2>${p.detailTitle}</h2>${p.details.map(([title,text])=>`<article><h3>${title}</h3><p>${text}</p></article>`).join('')}<a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div></section>
- <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
- <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
 }
 function newPhotoIndex(id){return 5+newPhotos.findIndex(p=>p.id===id);}
 function mediaPhotos(lang,ids){return `<div class="venue-photo-strip" tabindex="0" role="region" aria-label="${design[lang].allPhotos}">${ids.map(id=>{const n=newPhotoIndex(id);return `<button type="button" class="venue-photo" data-photo-detail="${n}" aria-label="${esc(design[lang].photo+' · '+design[lang].photoNames[n])}"><img src="${photo(n)}" alt="${esc(design[lang].photoNames[n])}" width="960" height="1280" loading="lazy" decoding="async"><span>${design[lang].photoNames[n]}</span></button>`;}).join('')}</div>`;}
@@ -160,27 +114,6 @@ function reviews(lang){
  return `<section class="section reviews-section" id="reviews" aria-labelledby="reviews-title"><div class="reviews-heading"><div><p class="reviews-eyebrow">${t.eyebrow}</p><h2 id="reviews-title">${t.title}</h2></div><a class="reviews-score" href="${esc(reviewSource)}" target="_blank" rel="noopener noreferrer"><strong>${lang==='en'?'5.0':'5,0'}<span>/ 5</span></strong><span>${stars}<span class="reviews-count">${t.count}</span></span></a></div>
  <div class="reviews-grid">${customerReviews.map(r=>`<figure class="review-card"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote cite="${esc(r.url)}" lang="lv"><p>${esc(r.quote)}</p></blockquote><figcaption><img class="review-avatar" src="${esc(r.avatar)}" width="40" height="40" alt="" loading="lazy" referrerpolicy="no-referrer"><span><span class="review-author" lang="lv">${esc(r.author)}</span><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t.original+' · '+r.author)}">${t.original}</a></span></figcaption></figure>`).join('')}</div><div class="reviews-bottom"><div class="review-actions"><a class="text-link" href="${esc(reviewSource)}" target="_blank" rel="noopener noreferrer">${t.all}</a><a class="button review-write" href="https://search.google.com/local/writereview?placeid=ChIJRx5g737n7kYRPc4miG_Jw1o" target="_blank" rel="noopener noreferrer">${t.write}</a></div></div></section>`;
 }
-function gallery(c,d){
-  return `<section id="gallery" class="section gallery-section"><div class="section-heading reveal"><h2>${d.enter}</h2><p>${d.galleryIntro}</p></div>
-    <div class="gallery-view reveal"><button class="gallery-open" type="button" data-open-gallery aria-label="${esc(d.photo)}"><img id="gallery-image" src="${photo(0)}" width="2048" height="1536" alt="${esc(d.photoNames[0])}" loading="lazy"></button><button class="hotspot gallery-hotspot" type="button" data-photo-detail="0" aria-label="${esc(c.features.items[1][0])}">${plus}</button></div>
-    <div class="gallery-toolbar"><p id="gallery-caption" aria-live="polite">${d.photoNames[0]}</p><div class="gallery-arrows"><button class="circle-button" type="button" data-gallery-step="-1" aria-label="${esc(d.previous)}"><span class="turn-back">${arrow}</span></button><button class="circle-button" type="button" data-gallery-step="1" aria-label="${esc(d.next)}">${arrow}</button></div><button class="text-link" type="button" data-video="0">${play}${d.video}</button></div>
-    <div class="gallery-thumbs" aria-label="${esc(d.allPhotos)}">${[0,2,1].map((i,j)=>`<button type="button" data-gallery-index="${i}" aria-label="${esc(d.photoNames[i])}" aria-pressed="${j===0}"><img src="${photo(i)}" width="480" height="240" alt="" loading="lazy"></button>`).join('')}</div>
-    <div class="amenities">${d.amenities.map(x=>`<span>${x}</span>`).join('')}</div>
-  </section>`;
-}
-function services(lang){
-  const articles=source[lang+'-space'].articles;
-  return `<section class="section services-section">${articles.map((html,i)=>`<article class="service-story reveal" id="service-${i+1}"><div class="service-picture"><img src="${photo([4,3,0,1,2][i])}" alt="${esc(design[lang].photoNames[[4,3,0,1,2][i]])}" width="1200" height="1000" loading="lazy"><span class="service-number">0${i+1}</span></div><div class="service-copy">${html.replace(/<span class="section-tag">[\s\S]*?<\/span>/,'')}<a class="text-link" href="#calendar" data-event-book="${[1,3,4,5,8][i]}">${design[lang].findDate}${diagonal}</a></div></article>`).join('')}</section>`;
-}
-function pricing(lang,kind,c,d){
- return `<section class="section pricing-section ${kind==='pricing'?'pricing-page-intro':''}" id="pricing">
-    <div class="section-heading reveal"><${kind==='pricing'?'h1':'h2'}>${d.priceTitle}</${kind==='pricing'?'h1':'h2'}><p>${d.priceIntro}</p></div>
-    <div class="calculator reveal" id="calculator"><div class="calc-controls"><div class="calc-tabs" role="tablist" aria-label="${esc(d.duration)}">${['hours','days','weeks','months'].map((m,i)=>`<button role="tab" type="button" data-mode="${m}" id="mode-${m}" aria-controls="calc-panel" aria-selected="${i===0}" tabindex="${i===0?'0':'-1'}">${d.modes[i]}</button>`).join('')}</div><div id="calc-panel" role="tabpanel" aria-labelledby="mode-hours"><label for="duration-slider" id="duration-label">3 ${d.units[0][1]}</label><input id="duration-slider" type="range" min="1" max="8" value="3" step="1" aria-describedby="plan-note"><div class="range-ends"><span id="range-min">1 ${d.units[0][0]}</span><span id="range-max">8 ${d.units[0][2]}</span></div><p id="plan-note"></p></div></div>
-    <div class="calc-result" aria-live="polite" aria-atomic="true"><strong id="calc-price">55 €</strong><p>${d.forTime}</p><span class="calc-saving">${d.saved} <span id="calc-saving">5 €</span></span><a class="button button-light" id="calculator-book" href="#calendar">${d.selectDate}${arrow}</a></div></div>
-    <div class="packages">${d.packageNames.map((n,i)=>`<article class="package reveal"><h3>${n}</h3><p class="package-price">${[130,550,460][i]} €</p><p class="package-term">${d.packageTerms[i]}</p><a class="text-link" href="#calendar" data-package="${['day','week','month'][i]}">${d.selectDate}${diagonal}</a></article>`).join('')}</div>
-    ${kind==='pricing'?`<div class="hourly-rates"><h2>${d.hourlyTitle}</h2><dl>${[20,38,55,70,85,100,115,130].map((p,i)=>`<div><dt>${i+1} h</dt><dd>${p} €</dd></div>`).join('')}</dl></div>`:`<a class="text-link all-prices" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a>`}
-  </section>`;
-}
 function booking(c,d){
  return `<section id="calendar" class="section quick-booking"><div><h2>${d.bookingTitle}</h2><p>${d.bookingIntro}</p></div>
  <div class="booking-calendar" hidden><div class="cal-nav"><button type="button" class="circle-button" id="prevMonth" aria-label="${esc(d.prevMonth)}"><span class="turn-back">${arrow}</span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button type="button" class="circle-button" id="nextMonth" aria-label="${esc(d.nextMonth)}">${arrow}</button></div><div class="cal-weekdays" aria-hidden="true">${c.calendar.daysShort.map(day=>`<span>${day}</span>`).join('')}</div><div id="calGrid" class="cal-grid" role="group" aria-labelledby="calMonthLabel"></div><p class="cal-legend"><span></span>${d.scheduled}</p></div><div class="quick-booking-content"><noscript><p class="notice">${d.noScript} <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
@@ -214,10 +147,6 @@ function footer(lang,c,d){
 function dialogs(d){
  return `<dialog id="media-dialog" aria-label="${esc(d.explore)}"><button class="dialog-close circle-button" aria-label="${esc(d.close)}">${plus}</button><div id="dialog-content"></div></dialog>`;
 }
-// Load only the two existing font families used by the new design.
-const faces=fs.readFileSync('assets/fonts/fonts.css','utf8').match(/@font-face\s*\{[^}]*\}/g);
-const seen=new Set();
-fs.writeFileSync('assets/fonts/site-fonts.css',faces.filter(x=>/font-family: '(Inter|Cormorant Garamond)'/.test(x)).filter(x=>{const key=x.replace(/font-weight:[^;]+;/,'');if(seen.has(key))return false;seen.add(key);return true;}).map(x=>x.includes("'Inter'")?x.replace(/font-weight:[^;]+;/,'font-weight: 100 900;'):x).join('\n'));
 for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing']){
  const c=copy[lang], d=design[lang], page=source[lang+'-'+kind]||{head:serviceHead(lang,kind)};
  let head=page.head.replace(/<!-- Google tag[\s\S]*?<\/script>\s*<script>[\s\S]*?<\/script>/,'');
@@ -244,7 +173,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-3d">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-ga4"></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-cleanup"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
