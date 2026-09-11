@@ -17,11 +17,12 @@ const route=(lang,kind='home')=>(lang==='lv'?'/':'/'+lang+'/')+(kind==='home'?''
 const photo=i=>'/assets/images/gallery/'+photoFiles[i];
 function header(lang,kind,c,d){
   return `<a class="skip-link" href="#main">${esc(d.skip)}</a>
-  <header class="site-header ${kind==='home'?'over-video':''}">
+  <header class="site-header">
     <a class="brand" href="${route(lang)}" aria-label="ROOM Jūrmala"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala"></a>
     <nav class="desktop-nav" aria-label="${esc(d.menu)}">
       <a href="${route(lang,'space')}" ${kind==='space'?'aria-current="page"':''}>${c.nav.links[0]}</a>
       <a href="${route(lang,'pricing')}" ${kind==='pricing'?'aria-current="page"':''}>${c.nav.links[1]}</a>
+      <a href="#contact">${c.nav.links[4]}</a>
     </nav>
     <div class="header-actions"><nav class="languages" aria-label="Language">${['lv','en','ru'].map(l=>`<a href="${route(l,kind)}" hreflang="${l}" lang="${l}" class="language-link" ${l===lang?'aria-current="true"':''}>${l.toUpperCase()}</a>`).join('')}</nav>
     <a class="button button-outline header-book" href="#calendar">${c.nav.cta}</a>
