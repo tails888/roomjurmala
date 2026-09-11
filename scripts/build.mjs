@@ -114,9 +114,9 @@ function simplePricing(lang,d){
  return `<article class="simple-price-page"><header class="simple-price-heading"><nav class="breadcrumbs"><a href="${route(lang)}">${side.home}</a><span>/</span><span>${side.pricingTitle}</span></nav><p class="paper-eyebrow">ROOM Jūrmala</p><h1>${side.pricingTitle}</h1><p>${t.intro}</p></header>
  <section class="simple-rental" data-simple-calculator data-greeting="${esc(t.greeting)}" aria-labelledby="simple-title"><div class="simple-rental-options"><h2 id="simple-title">${t.title}</h2><div class="hour-choices">${[2,3,4,8].map(choice).join('')}</div><details class="other-hours"><summary>${t.other}</summary><div class="hour-choices">${[1,5,6,7].map(choice).join('')}</div></details></div>
  <div class="simple-rental-result"><div aria-live="polite" aria-atomic="true"><p>${t.total}</p><strong class="simple-total" data-simple-total>55 €</strong><p class="simple-duration" data-simple-duration>${duration(3)}</p></div><a class="button" data-simple-book href="${wa(t.greeting+' '+duration(3)+' · 55 €')}" target="_blank" rel="noopener noreferrer">${t.book}</a><p class="simple-confirmation">${t.note}</p><noscript><p>${t.intro} <a href="${wa(t.greeting)}">WhatsApp</a></p></noscript></div></section>
- <section class="price-included"><h2>${t.included}</h2><ul>${t.features.map(x=>`<li><span aria-hidden="true">✓</span>${x}</li>`).join('')}</ul><p>${t.terms}</p></section>
+
  <details class="regular-rental"><summary>${t.regular}</summary><div class="regular-plans"><article><h3>${t.days}</h3><p>${t.daysNote}</p><dl>${[250,360,460].map((v,i)=>`<div><dt>${i+2} ${d.units[1][2]}</dt><dd>${v} €</dd></div>`).join('')}</dl><a href="${wa(t.greeting+' '+t.days)}">${t.ask}</a></article><article><h3>${t.week}</h3><strong>550 €</strong><p>${t.weekNote}</p><a href="${wa(t.greeting+' '+t.week+' · 550 €')}">${t.ask}</a></article><article><h3>${t.month}</h3><strong>460 €</strong><p>${t.monthNote}</p><a href="${wa(t.greeting+' '+t.month+' · '+t.monthNote)}">${t.ask}</a></article></div></details>
- <a class="text-link simple-space-link" href="${route(lang,'space')}">${side.related}</a></article>`;
+</article>`;
 }
 function editorialPage(lang,kind,d){
  if(kind==='pricing')return simplePricing(lang,d);
