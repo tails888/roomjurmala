@@ -163,7 +163,7 @@ const dateInput=$('#booking-date'),timeInput=$('#booking-time'),form=$('#booking
 dateInput.min=rigaNow().date;
 const fields={date:dateInput,time:timeInput};
 function updateMessage(){
-  $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},selectedClass?{...config.whatsapp,greeting:classCopy.greeting}:config.whatsapp,[selectedPlan,selectedClass].filter(Boolean).join('\n'));
+  $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},selectedClass?{...config.whatsapp,greeting:classCopy.greeting}:config.whatsapp,[selectedPlan,selectedClass||config.serviceRequest].filter(Boolean).join('\n'));
 }
 const calendarApi=window.RoomJurmalaCalendar;
 const todayParts=rigaNow().date.split('-').map(Number);
@@ -226,7 +226,7 @@ form.addEventListener('submit',e=>{
 renderSchedule();updateMessage();form.hidden=false;
 const films=mountFilms(d,reduced);
 mountStory($('.film-story'),films,reduced);
-const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero');
+const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero')||$('.service-hero');
 let bookingVisible=false,heroVisible=Boolean(hero),contactVisible=false;
 const bookingObserver=new IntersectionObserver(entries=>{
   for(const entry of entries){if(entry.target===$('#calendar'))bookingVisible=entry.isIntersecting;if(entry.target===hero)heroVisible=entry.isIntersecting;if(entry.target===$('#contact'))contactVisible=entry.isIntersecting;}

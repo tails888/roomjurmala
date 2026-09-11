@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const origin = 'https://roomjurmala.lv';
-const routes = ['', 'telpa/', 'cenas/', 'en/', 'en/telpa/', 'en/cenas/', 'ru/', 'ru/telpa/', 'ru/cenas/'];
+const routes = ['bernu-ballites/','telpas-nodarbibam/','en/bernu-ballites/','en/telpas-nodarbibam/','ru/bernu-ballites/','ru/telpas-nodarbibam/','', 'telpa/', 'cenas/', 'en/', 'en/telpa/', 'en/cenas/', 'ru/', 'ru/telpa/', 'ru/cenas/'];
 const pages = new Map();
 const read = file => fs.readFileSync(file, 'utf8');
 const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
@@ -62,7 +62,7 @@ for (const [route, { html, ids }] of pages) {
     checkUrl(photo.src, base);
     checkUrl(photo.video, base);
   }
-  if (!route.includes('/telpa/') && !route.includes('/cenas/')) {
+  if (['/','/en/','/ru/'].includes(route)) {
     assert.equal([...html.matchAll(/<video\b/g)].length,5,`${route} must embed all five real videos`);
     assert.equal([...html.matchAll(/class="ambient-video"/g)].length,5,`${route} visibility-controlled media`);
     assert(html.includes('"@type":"FAQPage"')&&html.includes('id="faq"'),`${route} must include visible FAQs and matching schema`);
@@ -71,6 +71,32 @@ for (const [route, { html, ids }] of pages) {
   assert.equal([...html.matchAll(/<input[^>]*type="(?:date|time)"/g)].length,2,`${route} has two booking fields`);
   assert(/action="https:\/\/wa.me\/37127850380" method="get"/.test(html),`${route} native WhatsApp handoff`);
   assert(/data-booking-ui hidden/.test(html), `${route} must not expose an unhandled form before JS is ready`);
+}
+
+const sitemap=read('sitemap.xml');
+const submitted=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+assert.equal(submitted.length,pages.size,'Sitemap must contain every page once');
+assert.deepEqual(new Set(submitted),new Set(pages.keys()),'Sitemap and built routes must match');
+const titles=[...pages.values()].map(p=>p.html.match(/<title>([^<]+)<\/title>/)[1]);
+assert.equal(new Set(titles).size,titles.length,'Page titles must be distinct');
+for(const [route,{html}] of pages){
+ if(!/bernu-ballites|telpas-nodarbibam/.test(route))continue;
+ const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+ assert(schemas.some(s=>s['@type']==='Service'),'Service schema missing');
+ const breadcrumbs=schemas.find(s=>s['@type']==='BreadcrumbList');
+ assert.equal(breadcrumbs.itemListElement.at(-1).item,origin+route,'Breadcrumb must name the canonical page');
+ for(const question of schemas.find(s=>s['@type']==='FAQPage').mainEntity){
+  assert(html.includes('<summary>'+question.name),'FAQ question must be visible');
+  assert(html.includes('<p>'+question.acceptedAnswer.text+'</p>'),'FAQ answer must match visible copy');
+ }
+ assert([...pages.entries()].some(([other,p])=>other!==route&&p.html.includes('href="'+route+'"')),'Service page needs an internal link');
+ const language=route.startsWith('/en/')?'en':route.startsWith('/ru/')?'ru':'lv';
+ const suffix=route.replace(/^\/(?:en|ru)\//,'/');
+ const links=[...html.matchAll(/<link\b[^>]*>/g)].map(m=>attrs(m[0])).filter(a=>a.rel==='alternate');
+ for(const locale of ['lv','en','ru']){
+  const expected=origin+(locale==='lv'?'':'/'+locale)+suffix;
+  assert(links.some(a=>a.hreflang===locale&&a.href===expected),'Language link must stay on the same service');
+ }
 }
 
 for (const file of ['assets/css/site.css', 'assets/fonts/site-fonts.css']) {
@@ -86,4 +112,4 @@ for (const dir of ['assets/js', 'scripts', 'tests']) {
 }
 assert(fs.existsSync('assets/vendor/three.module.js') && fs.existsSync('assets/vendor/three.core.js'), 'Three.js modules');
 assert(fs.existsSync('assets/vendor/THREE-LICENSE.txt'), 'Three.js license');
-console.log('Verified all 9 routes, SEO metadata, internal links, assets, JSON, IDs, form fallback and JavaScript syntax.');
+console.log('Verified all 15 routes, SEO metadata, internal links, assets, JSON, IDs, form fallback and JavaScript syntax.');

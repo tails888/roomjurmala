@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { design, photoFiles, videos } from '../content/design.mjs';
+import {servicePages,serviceSlugs} from '../content/services.mjs';
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -11,7 +12,7 @@ const plus='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 
 const play='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg>';
 const pauseIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2"/></svg>';
 const soundIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9ZM17 8c2 2 2 6 0 8M20 5c4 4 4 10 0 14" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
-const route=(lang,kind='home')=>(lang==='lv'?'/':'/'+lang+'/')+(kind==='home'?'':kind==='space'?'telpa/':'cenas/');
+const route=(lang,kind='home')=>(lang==='lv'?'/':'/'+lang+'/')+(kind==='home'?'':kind==='space'?'telpa/':kind==='pricing'?'cenas/':serviceSlugs[kind]+'/');
 const photo=i=>'/assets/images/gallery/'+photoFiles[i];
 function header(lang,kind,c,d){
   return `<a class="skip-link" href="#main">${esc(d.skip)}</a>
@@ -71,7 +72,25 @@ function events(lang,c,d){
   <div class="story-copy"><h2>${d.eventTitle}</h2><nav class="story-nav" aria-label="${esc(c.categories.tag)}">${d.eventNames.map((name,i)=>`<button type="button" data-story-step="${i}" aria-controls="activity-${i}" ${i===0?'aria-current="true"':''}><span>0${i+1}</span>${name}${diagonal}</button>`).join('')}</nav><a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div>
   <div class="story-films">${d.eventNames.map((name,i)=>`<article class="film-panel" id="activity-${i}" data-film-index="${i}">${inlineVideo(indexes[i],posters[i],'activity-film-'+i,d)}<div class="film-caption"><h3>${name}</h3><p>${d.eventDescriptions[i]}</p></div></article>`).join('')}</div>
   <div class="story-progress" aria-hidden="true"><span></span></div>
- </div></section>`;
+ </div></section>${serviceLinks(lang)}`;
+}
+function serviceLinks(lang){
+ return `<nav class="service-links" aria-label="${lang==='lv'?'Telpas izmantošana':lang==='en'?'Ways to use the space':'Варианты аренды'}">${Object.keys(serviceSlugs).map(kind=>`<a class="text-link" href="${route(lang,kind)}">${servicePages[lang][kind].name}${diagonal}</a>`).join('')}</nav>`;
+}
+function serviceLanding(lang,kind,d){
+ const p=servicePages[lang][kind],other=kind==='party'?'workshops':'party';
+ const headings={lv:{party:'Bērnu ballītes<br><em>Jūrmalā.</em>',workshops:'Telpa nodarbībām<br><em>Jūrmalā.</em>'},en:{party:'Children’s parties<br><em>in Jūrmala.</em>',workshops:'Classes & workshops<br><em>in Jūrmala.</em>'},ru:{party:'Детские праздники<br><em>в Юрмале.</em>',workshops:'Зал для занятий<br><em>в Юрмале.</em>'}};
+ return `<section class="service-hero"><div class="service-hero-copy"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигационная цепочка'}"><a href="${route(lang)}">${d.home}</a><span>/</span><span>${p.name}</span></nav><p class="service-eyebrow">${p.eyebrow}</p><h1>${headings[lang][kind]}</h1><p class="service-intro">${p.intro}</p><a class="button button-orange" href="#calendar">${d.findDate}${arrow}</a></div><figure class="service-hero-photo"><img src="${photo(p.image)}" width="${p.image===4?1536:2048}" height="${p.image===4?2048:1536}" alt="${esc(d.photoNames[p.image])}" fetchpriority="high"><figcaption>Skolas iela 50 · Kauguri, Jūrmala</figcaption></figure></section>
+ <section class="section service-overview"><figure class="service-film">${inlineVideo(p.video,p.poster,'service-film',d)}<figcaption>${p.caption}</figcaption></figure><div class="service-information"><h2>${p.detailTitle}</h2>${p.details.map(([title,text])=>`<article><h3>${title}</h3><p>${text}</p></article>`).join('')}<a class="text-link" href="${route(lang,'space')}">${d.moreSpace}${diagonal}</a></div></section>
+ <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
+ <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
+}
+function serviceHead(lang,kind){
+ const p=servicePages[lang][kind],url='https://roomjurmala.lv'+route(lang,kind),image='https://roomjurmala.lv'+photo(p.image);
+ const schemas=[{'@context':'https://schema.org','@type':'Service',name:p.eyebrow,description:p.description,url,serviceType:p.name,areaServed:{'@type':'City',name:'Jūrmala'},provider:{'@type':'LocalBusiness','@id':'https://roomjurmala.lv/#business',name:'ROOM Jūrmala',url:'https://roomjurmala.lv/',telephone:'+37127850380',image,address:{'@type':'PostalAddress',streetAddress:'Skolas iela 50',addressLocality:'Jūrmala',postalCode:'LV-2016',addressCountry:'LV'}}},
+ {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:design[lang].home,item:'https://roomjurmala.lv'+route(lang)},{'@type':'ListItem',position:2,name:p.name,item:url}]},
+ {'@context':'https://schema.org','@type':'FAQPage',mainEntity:p.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))}];
+ return `<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(p.title)}</title><meta name="description" content="${esc(p.description)}"><link rel="canonical" href="${url}">${['lv','en','ru','x-default'].map(l=>`<link rel="alternate" hreflang="${l}" href="https://roomjurmala.lv${route(l==='x-default'?'lv':l,kind)}">`).join('')}<meta property="og:type" content="website"><meta property="og:site_name" content="ROOM Jūrmala"><meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image">${schemas.map(data=>`<script type="application/ld+json">${json(data)}</script>`).join('')}`;
 }
 function priceStrip(lang,d){
  return `<section class="price-strip" id="pricing"><h2>${d.simplePrice}</h2><div class="strip-rates"><p><span>${d.from}</span> 20 € <small>/ ${d.perHour}</small></p><p>130 € <small>/ ${d.perDay}</small></p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>`;
@@ -108,7 +127,7 @@ function booking(c,d){
  </form></div></section>`;
 }
 function faq(lang,kind,c,d){
- const items=kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
+ const items=servicePages[lang][kind]?servicePages[lang][kind].faq.map(([q,a])=>({q,a})):kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
  return `<section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>${d.faqTitle}</h2><p>${c.faq.sub}</p></div><div class="faq-list">${items.map(x=>`<details><summary>${x.q}${plus}</summary><p>${x.a}</p></details>`).join('')}</div></section>`;
 }
 function footer(lang,c,d){
@@ -137,8 +156,8 @@ fs.copyFileSync('node_modules/three/LICENSE','assets/vendor/THREE-LICENSE.txt');
 const faces=fs.readFileSync('assets/fonts/fonts.css','utf8').match(/@font-face\s*\{[^}]*\}/g);
 const seen=new Set();
 fs.writeFileSync('assets/fonts/site-fonts.css',faces.filter(x=>/font-family: '(Inter|Cormorant Garamond)'/.test(x)).filter(x=>{const key=x.replace(/font-weight:[^;]+;/,'');if(seen.has(key))return false;seen.add(key);return true;}).map(x=>x.includes("'Inter'")?x.replace(/font-weight:[^;]+;/,'font-weight: 100 900;'):x).join('\n'));
-for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing']){
- const c=copy[lang], d=design[lang], page=source[lang+'-'+kind];
+for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',...Object.keys(serviceSlugs)]){
+ const c=copy[lang], d=design[lang], page=source[lang+'-'+kind]||{head:serviceHead(lang,kind)};
  let head=page.head.replace(/<!-- Google tag[\s\S]*?<\/script>\s*<script>[\s\S]*?<\/script>/,'');
  head=head.replace(/\s*<!--[^]*?-->/g,'');
  // Schema describes the content still visible on each page.
@@ -148,8 +167,8 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
    delete data.aggregateRating;
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });
- const body=kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d):kind==='space'?hero(lang,kind,c,d)+gallery(c,d)+services(lang):pricing(lang,kind,c,d);
- const data={lang,d,booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
+ const body=servicePages[lang][kind]?serviceLanding(lang,kind,d):kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d):kind==='space'?hero(lang,kind,c,d)+serviceLinks(lang)+gallery(c,d)+services(lang):pricing(lang,kind,c,d);
+ const data={lang,d,serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
  const html=`<!DOCTYPE html>
 <html lang="${lang}">
 <head>${head}
@@ -165,4 +184,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
-console.log('Built 9 static pages in LV, EN and RU with existing assets.');
+console.log('Built 15 static pages in LV, EN and RU with existing assets.');
+
+const sitemapRoutes=['home','space','pricing',...Object.keys(serviceSlugs)];
+fs.writeFileSync('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+sitemapRoutes.flatMap(kind=>['lv','en','ru'].map(lang=>`  <url><loc>https://roomjurmala.lv${route(lang,kind)}</loc>${['lv','en','ru','x-default'].map(l=>`<xhtml:link rel="alternate" hreflang="${l}" href="https://roomjurmala.lv${route(l==='x-default'?'lv':l,kind)}" />`).join('')}<lastmod>2026-09-11</lastmod></url>`)).join('\n')+'\n</urlset>\n');
