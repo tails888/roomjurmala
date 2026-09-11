@@ -44,7 +44,7 @@ dialog{padding:0;border:0;max-width:none;max-height:none;color:var(--ink)}dialog
 /* Separate navigation from the full-width hero film. */
 .site-header{height:112px;min-height:112px;padding:12px var(--gutter);gap:42px;background:var(--paper);color:var(--ink);align-items:center;border-bottom:1px solid #22282412}
 .site-header .brand{width:120px;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
-.site-header .brand img{display:block;filter:brightness(0) saturate(100%) invert(30%) sepia(88%) saturate(1152%) hue-rotate(351deg) brightness(88%) contrast(95%)}
+.site-header .brand img{display:block;filter:none}
 .site-header .desktop-nav{gap:32px}.site-header .desktop-nav a{font-size:15px}.site-header .header-actions{gap:30px}.site-header .languages{gap:19px}.site-header .languages a{font-size:11px}.site-header .header-book{min-height:50px;padding:13px 28px}
 .page-home .video-hero{height:calc(100svh - 112px);min-height:600px}
 @media(max-width:1100px){.site-header{gap:28px}.site-header .desktop-nav{gap:24px}.site-header .header-actions{gap:24px}}
