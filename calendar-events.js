@@ -173,7 +173,7 @@
     return panel;
   }
 
-  function createEventItem(event, dateLabel, lang) {
+  function createEventItem(event, dateLabel, lang, options, day) {
     const item = document.createElement("li");
     item.className = "cal-event-item";
 
@@ -193,6 +193,14 @@
       item.appendChild(description);
     }
 
+    if (options.onSelect && (!options.canSelect || options.canSelect(event, day))) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cal-event-book";
+      button.textContent = options.bookLabel;
+      button.addEventListener("click", () => options.onSelect(event, day));
+      item.appendChild(button);
+    }
     return item;
   }
 
@@ -227,7 +235,7 @@
       }
 
       const dateLabel = options.formatDate(day, options.currentMonth);
-      events.forEach((event) => list.appendChild(createEventItem(event, dateLabel, options.lang)));
+      events.forEach((event) => list.appendChild(createEventItem(event, dateLabel, options.lang, options, day)));
       panel.appendChild(list);
       return;
     }
@@ -242,7 +250,7 @@
     }
 
     monthEvents.forEach(({ day, event }) => {
-      list.appendChild(createEventItem(event, options.formatDate(day, options.currentMonth), options.lang));
+      list.appendChild(createEventItem(event, options.formatDate(day, options.currentMonth), options.lang, options, day));
     });
     panel.appendChild(list);
   }

@@ -47,7 +47,7 @@ Only existing venue assets are shipped. No generated room imagery or replacement
 
 Customers choose a date and approximate start time, then open a prepared WhatsApp message to the existing venue number. The customer sends the message in WhatsApp; availability is confirmed in that conversation. No name, phone number or account is required on the website. The pricing calculator can optionally attach a selected package, which can also be removed. The site does not store the request. A mobile booking button appears between the hero and booking sections.
 
-The space page includes a collapsible schedule from the existing calendar data. It is an activity schedule, not a live reservation database.
+Every booking section includes a month calendar with scheduled-class markers and localized class details from the existing calendar data. Selecting a day fills the date field; selecting a class also fills its start time and adds its name to the WhatsApp request. Past dates and already-started classes cannot be booked through the calendar. Editing the date or time clears the selected class. This is an activity schedule, not a live reservation database.
 
 Hourly and package prices remain unchanged. Memberships have a three-month minimum. Date validation uses Europe/Riga time. Without JavaScript the booking section provides a direct WhatsApp contact link.
 

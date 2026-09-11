@@ -99,16 +99,13 @@ function pricing(lang,kind,c,d){
 }
 function booking(c,d){
  return `<section id="calendar" class="section quick-booking"><div><h2>${d.bookingTitle}</h2><p>${d.bookingIntro}</p></div>
- <div class="quick-booking-content"><noscript><p class="notice">${d.noScript} <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
+ <div class="booking-calendar" hidden><div class="cal-nav"><button type="button" class="circle-button" id="prevMonth" aria-label="${esc(d.prevMonth)}"><span class="turn-back">${arrow}</span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button type="button" class="circle-button" id="nextMonth" aria-label="${esc(d.nextMonth)}">${arrow}</button></div><div class="cal-weekdays" aria-hidden="true">${c.calendar.daysShort.map(day=>`<span>${day}</span>`).join('')}</div><div id="calGrid" class="cal-grid" role="group" aria-labelledby="calMonthLabel"></div><p class="cal-legend"><span></span>${d.scheduled}</p><p class="cal-note">${d.bookingNote}</p><div class="cal-widget" aria-live="polite"></div></div><div class="quick-booking-content"><noscript><p class="notice">${d.noScript} <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
  <form id="booking-form" action="https://wa.me/37127850380" method="get" target="_blank" rel="noopener noreferrer" novalidate data-booking-ui hidden>
   <p id="booking-error" class="form-error" role="alert" hidden></p>
   <div class="quick-fields"><div class="field"><label for="booking-date">${c.booking.labels.date}</label><input id="booking-date" type="date" required></div><div class="field"><label for="booking-time">${d.approximateTime}</label><input id="booking-time" type="time" required></div></div>
   <input type="hidden" name="text" id="whatsapp-message"><p id="selected-plan" class="selected-plan" hidden><span></span><button type="button" id="clear-plan">${d.clearPlan}</button></p>
   <button class="button button-orange form-submit" type="submit">${d.bookWhatsApp}${arrow}</button>
  </form></div></section>`;
-}
-function schedule(d){
- return `<section class="section schedule-section"><details><summary>${d.schedule}${plus}</summary><div class="cal-widget"></div></details></section>`;
 }
 function faq(lang,kind,c,d){
  const items=kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
@@ -154,7 +151,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <script src="/calendar-events.js" defer></script>
   <script type="module" src="/assets/js/app.js?v=20260911-video"></script>
 </head>
-<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${booking(c,d)}${kind==='space'?schedule(d):''}${kind!=='home'?faq(lang,kind,c,d):''}</main>${footer(lang,c,d)}${dialogs(d)}
+<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${booking(c,d)}${kind!=='home'?faq(lang,kind,c,d):''}</main>${footer(lang,c,d)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
 </body></html>
 `;

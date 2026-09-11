@@ -126,7 +126,7 @@ function tabKeyboard(buttons,activate){
     if(next!==undefined){e.preventDefault();activate(buttons[next]);buttons[next].focus();}
   }));
 }
-let mode='hours',quote=getQuote('hours',3),selectedPlan='';
+let mode='hours',quote=getQuote('hours',3),selectedPlan='',selectedClass='';
 function renderQuote(){
   quote=getQuote(mode,$('#duration-slider').value);
   $('#duration-label').textContent=formatDuration(quote,lang,d.units);
@@ -148,7 +148,7 @@ const modeTabs=$$('[data-mode]');
 modeTabs.forEach(b=>b.addEventListener('click',()=>chooseMode(b)));tabKeyboard(modeTabs,chooseMode);
 $('#duration-slider')?.addEventListener('input',renderQuote);
 function choosePackage(plan=''){
-  selectedPlan=plan;
+  selectedClass='';selectedPlan=plan;
   $('#selected-plan').hidden=!plan;
   $('#selected-plan span').textContent=plan;
   updateMessage();
@@ -163,18 +163,56 @@ const dateInput=$('#booking-date'),timeInput=$('#booking-time'),form=$('#booking
 dateInput.min=rigaNow().date;
 const fields={date:dateInput,time:timeInput};
 function updateMessage(){
-  $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},config.whatsapp,selectedPlan);
+  $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},selectedClass?{...config.whatsapp,greeting:classCopy.greeting}:config.whatsapp,[selectedPlan,selectedClass].filter(Boolean).join('\n'));
 }
+const calendarApi=window.RoomJurmalaCalendar;
+const todayParts=rigaNow().date.split('-').map(Number);
+let calendarYear=todayParts[0],calendarMonth=todayParts[1]-1;
+const classCopy={lv:{book:'Pieteikties nodarbībai',greeting:'Sveiki! Vēlos pieteikties nodarbībai.',past:'Nodarbība jau sākusies'},en:{book:'Book this class',greeting:'Hello! I would like to join a class.',past:'Class has already started'},ru:{book:'Записаться на занятие',greeting:'Здравствуйте! Хочу записаться на занятие.',past:'Занятие уже началось'}}[lang];
 function renderSchedule(){
-  const widget=$('.cal-widget');if(!widget)return;
+  if(!calendarApi)return;
   const now=rigaNow(),today=new Date(now.date+'T12:00:00');
-  const date=validDate(dateInput.value)?new Date(dateInput.value+'T12:00:00'):today;
-  window.RoomJurmalaCalendar?.renderPanel({widget,lang,currentYear:date.getFullYear(),currentMonth:date.getMonth(),today,
-    selectedDateParts:dateInput.value?{year:date.getFullYear(),month:date.getMonth(),day:date.getDate()}:null,
-    formatDate:(day,month)=>new Intl.DateTimeFormat(lang,{day:'numeric',month:'long'}).format(new Date(date.getFullYear(),month,day))});
+  const chosen=validDate(dateInput.value)?dateInput.value.split('-').map(Number):null;
+  $('#calMonthLabel').textContent=new Intl.DateTimeFormat(lang,{month:'long',year:'numeric'}).format(new Date(calendarYear,calendarMonth,1));
+  $('#prevMonth').disabled=calendarYear*12+calendarMonth<=Number(now.date.slice(0,4))*12+Number(now.date.slice(5,7))-1;
+  const grid=$('#calGrid');grid.replaceChildren();
+  const offset=(new Date(calendarYear,calendarMonth,1).getDay()+6)%7;
+  for(let i=0;i<offset;i++)grid.append(makeEl('span'));
+  const days=new Date(calendarYear,calendarMonth+1,0).getDate();
+  for(let day=1;day<=days;day++){
+    const key=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    const events=calendarApi.getEventsForDate(calendarYear,calendarMonth,day);
+    const button=makeEl('button','cal-day',String(day));button.type='button';button.disabled=key<now.date;
+    button.dataset.date=key;button.classList.toggle('has-events',events.length>0);button.classList.toggle('is-today',key===now.date);
+    button.setAttribute('aria-pressed',String(key===dateInput.value));
+    if(key===now.date)button.setAttribute('aria-current','date');
+    button.setAttribute('aria-label',new Intl.DateTimeFormat(lang,{dateStyle:'full'}).format(new Date(calendarYear,calendarMonth,day))+(events.length?' · '+calendarApi.getCellEventLabel(events,lang):''));
+    button.addEventListener('click',()=>{dateInput.value=key;selectedClass='';dateInput.dispatchEvent(new Event('input',{bubbles:true}));renderSchedule();grid.querySelector('[data-date="'+key+'"]').focus({preventScroll:true});});
+    grid.append(button);
+  }
+  calendarApi.renderPanel({widget:$('.cal-widget'),lang,currentYear:calendarYear,currentMonth:calendarMonth,today,
+    selectedDateParts:chosen?{year:chosen[0],month:chosen[1]-1,day:chosen[2]}:null,
+    formatDate:(day,month)=>new Intl.DateTimeFormat(lang,{day:'numeric',month:'long'}).format(new Date(calendarYear,month,day)),
+    bookLabel:classCopy.book,
+    onSelect:(event,day)=>{
+      dateInput.value=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      timeInput.value=event.time.split('-')[0];selectedClass=calendarApi.resolveLocalized(event.title,lang);
+      selectedPlan='';$('#selected-plan').hidden=false;$('#selected-plan span').textContent=selectedClass;$('#booking-error').hidden=true;
+      Object.values(fields).forEach(el=>el.removeAttribute('aria-invalid'));
+      updateMessage();renderSchedule();form.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});form.querySelector('[type="submit"]').focus({preventScroll:true});
+    },
+    canSelect:(event,day)=>{
+      const key=calendarYear+'-'+String(calendarMonth+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      return key>now.date||(key===now.date&&event.time.split('-')[0]>now.time);
+    }
+  });
+  $('.booking-calendar').hidden=false;
 }
-form.addEventListener('input',e=>{e.target.removeAttribute('aria-invalid');$('#booking-error').hidden=true;updateMessage();});
-dateInput.addEventListener('change',renderSchedule);
+for(const [id,step] of [['prevMonth',-1],['nextMonth',1]])$('#'+id).addEventListener('click',()=>{
+  const date=new Date(calendarYear,calendarMonth+step,1);calendarYear=date.getFullYear();calendarMonth=date.getMonth();renderSchedule();
+});
+form.addEventListener('input',e=>{if(e.target===dateInput||e.target===timeInput){selectedClass='';$('#selected-plan').hidden=!selectedPlan;$('#selected-plan span').textContent=selectedPlan;}e.target.removeAttribute('aria-invalid');$('#booking-error').hidden=true;updateMessage();});
+dateInput.addEventListener('change',()=>{if(validDate(dateInput.value)){const parts=dateInput.value.split('-').map(Number);calendarYear=parts[0];calendarMonth=parts[1]-1;}renderSchedule();});
 form.addEventListener('submit',e=>{
   const error=validateBooking({date:dateInput.value,time:timeInput.value});
   Object.values(fields).forEach(el=>el.removeAttribute('aria-invalid'));
