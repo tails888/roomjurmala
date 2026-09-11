@@ -17,7 +17,7 @@ export function mountHeroTour(reduced){
   if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(reveal);
   else video.addEventListener('loadeddata',reveal,{once:true});
   function prime(){
-    if(!enabled||priming||decoded)return;
+    if(!enabled||priming||decoded||document.body.classList.contains('tour-open'))return;
     priming=true;video.dataset.heroPriming='';video.muted=true;video.playsInline=true;
     // iOS may ignore preload until playback is requested, even for a paused scrubber.
     video.play().then(()=>{video.pause();schedule();}).catch(()=>{}).finally(()=>{
