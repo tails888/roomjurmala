@@ -150,7 +150,7 @@ const minimal = {
   hero: 'Vieta būt<br><em>kopā.</em>', venue: 'Pasākumu telpa Jūrmalā', findDate: 'Izvēlēties datumu',
   eventTitle: 'Jūsu<br><em>notikumiem.</em>', eventNames: ['Svinēt','Radīt','Mācīties','Kustēties'],
   eventDescriptions: ['Svinības savā lokā.','Meistarklases un radošās darbnīcas.','Nodarbības bērniem un kopā būšanas prieks.','Joga, vingrošana un laiks sev.'],
-  simplePrice: 'Vienkārši<br><em>satikties.</em>', from: 'no', perHour: 'stundā', perDay: 'dienā',
+  simplePrice: 'Jūsu mirkļiem<br><em>kopā.</em>', from: 'no', perHour: 'stundā', perDay: 'dienā',
   bookingTitle: 'Tiekamies?', bookingIntro: 'Pieejamību apstiprināsim sarakstē.', approximateTime: 'Aptuvenais laiks',
   bookWhatsApp: 'Pieteikties WhatsApp', soundOn: 'Ieslēgt skaņu', soundOff: 'Izslēgt skaņu',
   pauseVideo: 'Apturēt video', playVideo: 'Atskaņot video', filmFallback: 'Atvērt video',
