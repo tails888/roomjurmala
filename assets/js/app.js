@@ -1,3 +1,4 @@
+import {mountPaper} from './paper.js';
 import {mountFilms,mountStory} from './films.js';
 import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.mjs';
 const config=JSON.parse(document.getElementById('site-data').textContent);
@@ -256,9 +257,10 @@ config.serviceRequest=bookingParams.get('service')||config.serviceRequest;
 if(bookingParams.get('plan'))choosePackage(bookingParams.get('plan'));
 renderSchedule();updateMessage();form.hidden=false;
 }
+mountPaper(reduced);
 const films=mountFilms(d,reduced);
 mountStory($('.film-story'),films,reduced);
-const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero')||$('.service-hero');
+const mobileBook=$('.mobile-book'),hero=$('.paper-hero')||$('.video-hero')||$('.hero')||$('.service-hero');
 if(mobileBook){
 let bookingVisible=false,heroVisible=Boolean(hero),contactVisible=false;
 const bookingObserver=new IntersectionObserver(entries=>{

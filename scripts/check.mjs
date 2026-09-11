@@ -118,7 +118,7 @@ for(const [route,{html}] of pages){
  }
 }
 
-for (const file of ['assets/css/site.css', 'assets/fonts/site-fonts.css']) {
+for (const file of ['assets/css/site.css', 'assets/css/paper.css', 'assets/fonts/site-fonts.css']) {
   for (const match of read(file).matchAll(/url\(['"]?([^)'"\s]+)['"]?\)/g)) {
     checkUrl(match[1], origin + '/' + file);
   }

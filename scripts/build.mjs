@@ -3,6 +3,7 @@ import { design, photoFiles, videos } from '../content/design.mjs';
 import {servicePages,serviceSlugs} from '../content/services.mjs';
 import {customerReviews,reviewSource,reviewCopy} from '../content/reviews.mjs';
 import {sideCopy} from '../content/sidepages.mjs';
+import {paperCopy} from '../content/paper.mjs';
 import {calculatorCopy} from '../content/calculator.mjs';
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
@@ -50,6 +51,15 @@ function videoHero(d){
   <div class="video-hero-copy"><p>${d.venue}</p><h1>${d.hero}</h1><a class="button button-orange" href="#calendar">${d.findDate}${arrow}</a></div>
   <div class="video-hero-bottom"><span>Skolas iela 50 · Jūrmala</span><a href="#events" aria-label="${esc(d.scroll)}"><span class="turn-down">${arrow}</span></a></div>
  </section>`;
+}
+function paperHero(lang,d){
+ const t=paperCopy[lang];
+ return `<section class="paper-hero" aria-labelledby="paper-title"><div class="paper-hero-copy"><p class="paper-eyebrow">${t.eyebrow}</p><h1 id="paper-title">${t.title}</h1><p class="paper-tagline">${t.intro}</p><div class="paper-hero-actions"><a class="button paper-book" href="#calendar">${t.book}</a><a class="paper-gallery-link" href="#gallery">${t.gallery}</a></div><p class="paper-location">Skolas iela 50 · Jūrmala</p></div><div class="paper-art" aria-hidden="true"><img src="/assets/images/design/paper-arch.webp" width="1536" height="1024" alt="" fetchpriority="high"><p class="paper-art-note">${t.note}</p></div></section>
+ <section class="paper-activities" id="events" aria-label="${esc(d.eventTitle.replace(/<[^>]*>/g,' '))}">${[4,3,1].map((n,i)=>`<a class="paper-activity" href="${route(lang,'space')}${i===0?'#bernu-ballites':i===1?'#telpas-nodarbibam':''}"><div><h2>${t.names[i]}</h2><p>${t.descriptions[i]}</p></div><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"></a>`).join('')}</section>`;
+}
+function paperGallery(lang,d){
+ const t=paperCopy[lang];
+ return `<section class="paper-gallery" id="gallery" aria-labelledby="paper-gallery-title"><div class="paper-gallery-heading"><p class="paper-eyebrow">ROOM Jūrmala</p><h2 id="paper-gallery-title">${t.galleryTitle}</h2><p>${t.galleryIntro}</p></div><div class="memory-board"><div class="memory-center"><p class="memory-wordmark">ROOM<span>Jūrmala</span></p><p>${d.together}</p><a class="button paper-book" href="#calendar">${t.book}</a></div>${[2,4,1,3].map((n,i)=>`<button class="memory-photo memory-photo-${i}" type="button" data-photo-detail="${n}" aria-label="${esc(t.photo+' · '+d.photoNames[n])}"><img src="${photo(n)}" width="1536" height="2048" alt="${esc(d.photoNames[n])}" loading="lazy"><span>${d.photoNames[n]}</span></button>`).join('')}</div><div class="paper-film-heading"><div><h3>${t.videoTitle}</h3><p>${t.videoIntro}</p></div><p>${t.filmHint}</p></div><div class="paper-films" tabindex="0" role="region" aria-label="${esc(t.videoTitle)}">${[0,1,2,3,4].map((n)=>`<article class="paper-film">${inlineVideo(n,['celebrate','learn','entry','create','move'][n],'gallery-film-'+n,d).replace(/aria-label="[^"]*"/, 'aria-label="'+esc(t.filmNames[n])+'"')}<h4>${t.filmNames[n]}</h4></article>`).join('')}</div><a class="text-link paper-more" href="${route(lang,'space')}">${t.detail}</a></section>`;
 }
 function hero(lang,kind,c,d){
   return `<section class="hero ${kind==='space'?'hero-space':''}">
@@ -206,16 +216,17 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
    delete data.aggregateRating;
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });
- const body=kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d)+reviews(lang):editorialPage(lang,kind,d);
+ const body=kind==='home'?paperHero(lang,d)+paperGallery(lang,d)+priceStrip(lang,d)+reviews(lang):editorialPage(lang,kind,d);
  const data={lang,d,calculator:calculatorCopy[lang],serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
  let html=`<!DOCTYPE html>
 <html lang="${lang}">
 <head>${head}
-  <meta name="theme-color" content="#ef782f">
+  <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-video">
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-paper">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-paper">
   <script src="/calendar-events.js" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-video"></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-paper"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
