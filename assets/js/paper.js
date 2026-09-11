@@ -73,15 +73,6 @@ function mountGalleryScroll(reduced){
   const cards=[...board.querySelectorAll('.memory-photo')];
   const track=document.createElement('div');track.className='gallery-scroll-track';
   board.before(track);track.append(board);
-  const stage=document.createElement('div');stage.className='gallery-scroll-stage';
-  stage.setAttribute('aria-hidden','true');
-  const frames=cards.map(card=>{
-    const figure=document.createElement('figure');figure.className='gallery-scroll-photo';
-    const img=card.querySelector('img').cloneNode();img.alt='';img.loading='eager';
-    const caption=document.createElement('figcaption');caption.textContent=card.querySelector('span').textContent;
-    figure.append(img,caption);stage.append(figure);return figure;
-  });
-  board.append(stage);
   const meter=document.createElement('div');meter.className='gallery-scroll-meter';meter.setAttribute('aria-hidden','true');
   cards.forEach(()=>meter.append(document.createElement('span')));board.append(meter);
   let raf=0;
@@ -93,12 +84,23 @@ function mountGalleryScroll(reduced){
     const progress=Math.max(0,Math.min(1,-rect.top/distance));
     const timeline=progress*(cards.length+1);
     let strongest=0,active=-1;
-    frames.forEach((frame,i)=>{
-      const local=timeline-i-.45;
-      const strength=smooth(local/.28)*(1-smooth((local-.95)/.28));
-      frame.style.opacity=strength;
-      frame.style.transform=`translateY(${(1-strength)*36}px) scale(${.92+strength*.08})`;
+    const poses=cards.map((card,i)=>{
+      const local=timeline-i-.15;
+      const enter=smooth(local/.65);
+      const leave=smooth((local-1.05)/.65);
+      const strength=enter*(1-leave);
+      const scale=Math.min(board.clientWidth*.84/card.offsetWidth,board.clientHeight*.76/card.offsetHeight);
+      const x=board.clientWidth/2-card.offsetLeft-card.offsetWidth/2;
+      const y=board.clientHeight*.47-card.offsetTop-card.offsetHeight/2;
+      const angle=parseFloat(getComputedStyle(card).getPropertyValue('--angle'))||0;
       if(strength>strongest){strongest=strength;active=i;}
+      return {card,strength,scale,x,y,angle};
+    });
+    poses.forEach(({card,strength,scale,x,y,angle},i)=>{
+      card.style.setProperty('--card-transform',`translate(${x*strength}px,${y*strength}px) rotate(${angle*(1-strength)}deg) scale(${1+(scale-1)*strength})`);
+      card.style.opacity=1-strongest*.88*(1-strength);
+      card.style.zIndex=i===active?'6':strength>.01?'5':'2';
+      card.style.boxShadow=`0 ${15+strength*12}px ${32+strength*20}px #242a1b${strength>.4?'35':'20'}`;
     });
     board.style.setProperty('--gallery-focus',strongest);
     [...meter.children].forEach((dot,i)=>dot.classList.toggle('is-active',i===active));
@@ -108,6 +110,7 @@ function mountGalleryScroll(reduced){
   function configure(){
     track.classList.toggle('gallery-scroll-enabled',!reduced.matches);
     board.style.removeProperty('--gallery-focus');
+    cards.forEach(card=>{card.style.removeProperty('--card-transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.style.removeProperty('box-shadow');});
     schedule();
   }
   addEventListener('scroll',schedule,{passive:true});
