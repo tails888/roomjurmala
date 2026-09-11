@@ -3,15 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLD7392ML2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-QLD7392ML2');
-  </script>
   <title>Telpa pasākumiem Jūrmalā | ROOM Jūrmala</title>
   <meta name="description" content="Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma." />
   <meta name="robots" content="index, follow" />
@@ -20,8 +12,6 @@
   <link rel="alternate" hreflang="en" href="https://roomjurmala.lv/en/" />
   <link rel="alternate" hreflang="ru" href="https://roomjurmala.lv/ru/" />
   <link rel="alternate" hreflang="x-default" href="https://roomjurmala.lv/" />
-
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Telpa pasākumiem Jūrmalā | ROOM Jūrmala" />
   <meta property="og:description" content="Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma." />
@@ -39,20 +29,14 @@
   <meta property="business:contact_data:country_name" content="Latvia" />
   <meta property="business:contact_data:phone_number" content="+371 27 850 380" />
   <meta property="business:contact_data:website" content="https://roomjurmala.lv" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Telpa pasākumiem Jūrmalā | ROOM Jūrmala" />
   <meta name="twitter:description" content="Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma." />
   <meta name="twitter:image" content="https://roomjurmala.lv/assets/images/social/og-image.jpg" />
-
-  <!-- Geo Meta Tags (Local SEO) -->
   <meta name="geo.region" content="LV-JUR" />
   <meta name="geo.placename" content="Jūrmala" />
   <meta name="geo.position" content="56.9619657;23.6038606" />
   <meta name="ICBM" content="56.9619657, 23.6038606" />
-
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -173,8 +157,6 @@
     }
   }
   </script>
-
-  <!-- FAQ Structured Data for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -257,571 +239,77 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=20260623-perf-fixes" />
+
+  <meta name="theme-color" content="#112f32">
+  <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911">
+  <script src="/calendar-events.js" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911"></script>
 </head>
-<body>
-<!-- ══════════════════════════ NAV ══════════════════════════ -->
-<nav>
-  <div class="nav-mobile-left">
-    <button type="button" class="nav-toggle" aria-label="Atvērt izvēlni" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <a href="#calendar" class="nav-cta nav-cta-mobile">Rezervēt</a>
-  </div>
-  <a href="#" class="nav-logo">
-    <img src="assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
-  </a>
-  <div class="nav-links">
-    <a href="/telpa/">Telpa</a>
-    <a href="/cenas/">Cenas</a>
-    <a href="#calendar">Pieejamība</a>
-    <a href="#map-section">Atrašanās</a>
-    <a href="#contact">Kontakti</a>
-  </div>
-  <div class="nav-right">
-    <div class="lang-switcher" aria-label="Language switcher">
-      <button type="button" class="lang-btn active" data-lang="lv">LV</button>
-      <button type="button" class="lang-btn" data-lang="en">EN</button>
-      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+<body class="page-home"><a class="skip-link" href="#main">Pāriet uz saturu</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="ROOM Jūrmala"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala"></a>
+    <nav class="desktop-nav" aria-label="Izvēlne">
+      <a href="/telpa/" >Telpa</a>
+      <a href="/cenas/" >Cenas</a>
+      <a href="#calendar">Pieejamība</a>
+    </nav>
+    <div class="header-actions"><nav class="languages" aria-label="Language"><a href="/" hreflang="lv" lang="lv" class="language-link" aria-current="true">LV</a><a href="/en/" hreflang="en" lang="en" class="language-link" >EN</a><a href="/ru/" hreflang="ru" lang="ru" class="language-link" >RU</a></nav>
+    <a class="button button-outline header-book" href="#calendar">Rezervēt</a>
+    <button class="menu-toggle circle-button" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Atvērt izvēlni"><span></span><span></span></button></div>
+  </header>
+  <dialog id="mobile-menu" aria-label="Izvēlne">
+    <div class="menu-top"><span>ROOM Jūrmala</span><button class="circle-button menu-close" aria-label="Aizvērt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+    <nav class="menu-links"><a href="/">Sākums</a><a href="/telpa/">Telpa</a><a href="/cenas/">Cenas</a><a href="#calendar">Pieejamība</a><a href="#contact">Kontakti</a></nav>
+    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
+  </dialog><main id="main"><section class="hero ">
+    <div class="hero-main"><div class="hero-copy">
+      <h1>Vieta jūsu<br><em>kopā būšanai.</em></h1><p>Svinībām, idejām un satikšanās priekam. Mājīga pasākumu telpa Jūrmalā.</p>
+      <a class="button button-light" href="#calendar">Atrast savu datumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
     </div>
-    <a href="#calendar" class="nav-cta nav-cta-desktop">Rezervēt</a>
-  </div>
-</nav>
-<div class="mobile-menu-backdrop"></div>
-<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <button type="button" class="mobile-menu-close" aria-label="Aizvērt izvēlni">×</button>
-  <div class="lang-switcher" aria-label="Language switcher">
-    <button type="button" class="lang-btn active" data-lang="lv">LV</button>
-    <button type="button" class="lang-btn" data-lang="en">EN</button>
-    <button type="button" class="lang-btn" data-lang="ru">RU</button>
-  </div>
-  <div class="mobile-menu-links">
-    <a href="/telpa/">Telpa</a>
-    <a href="/cenas/">Cenas</a>
-    <a href="#calendar">Pieejamība</a>
-    <a href="#map-section">Atrašanās</a>
-    <a href="#contact">Kontakti</a>
-  </div>
-</aside>
-
-<!-- ══════════════════════════ HERO ══════════════════════════ -->
-<section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline  poster="assets/images/gallery/space-open.jpeg" preload="none" data-lazy-video>
-    <source data-src="assets/videos/room-jurmala-privats-pasakums.mp4" type="video/mp4" />
-  </video>
-  <div class="hero-overlay"></div>
-  <span class="paw-trail" aria-hidden="true"></span>
-  <div class="hero-content">
-    <h1>Telpa jūsu <br/><em>pasākumiem</em></h1>
-    <span class="sketch-swoop" aria-hidden="true"></span>
-    <p class="hero-sub">Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm</p>
-    <div class="hero-actions">
-      <a href="#calendar" class="btn-primary">Rezervēt</a>
-      <a href="/telpa/" class="btn-outline">Uzzināt vairāk</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ CATEGORIES ════════════════════════ -->
-<section id="categories">
-  <div class="container">
-    <div class="cat-header reveal">
-      <div class="section-tag">Mūsu telpa</div>
-      <h2 class="section-title" style="color:var(--cream);">Atrodiet vietu savam <em style="color:var(--gold);">pasākumam</em></h2>
-      <p class="section-sub" style="color:var(--cream-dark);">Pie mums var svinēt, radīt, mācīties un satikties. Telpu pielāgojam Jūsu pasākuma formātam, viesu skaitam un noskaņai.</p>
-    </div>
-    <div class="cat-grid">
-      <!-- Card 1 — with video -->
-      <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/soft-play.jpeg" preload="none" data-lazy-video>
-          <source data-src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
-        </video>
-        <div class="cat-overlay"></div>
-        <div class="cat-content">
-          <span class="cat-icon">🎈</span>
-          <div class="cat-title">Bērnu ballītes un dzimšanas dienas</div>
-          <p class="cat-desc">Mājīga telpa bērnu svinībām, ģimenes pasākumiem un nelielām ballītēm Jūrmalā</p>
-        </div>
+    <div class="hero-gallery" aria-label="Ieskatieties telpā">
+      <div class="scene" id="hero-scene">
+        <div class="scene-fallback" aria-hidden="true"><img class="scene-photo-main" src="/assets/images/gallery/space-open.jpeg" alt="" width="2048" height="1536" fetchpriority="high"><img class="scene-photo-side" src="/assets/images/gallery/activity-room.jpeg" alt="" width="1536" height="2048"></div>
+        <button class="hotspot hero-hotspot" data-photo-detail="0" aria-label="Vairāk par šo vietu"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button>
       </div>
-      <!-- Card 2 — with video -->
-      <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/creative-table.jpeg" preload="none" data-lazy-video>
-          <source data-src="assets/videos/room-jurmala-radosa-darbnica-berniem.mp4" type="video/mp4" />
-        </video>
-        <div class="cat-overlay"></div>
-        <div class="cat-content">
-          <span class="cat-icon">🎨</span>
-          <div class="cat-title">Meistarklases un radošās darbnīcas</div>
-          <p class="cat-desc">Liels galds, ērta vieta darbam un mierīga atmosfēra radošām nodarbībām</p>
-        </div>
-      </div>
-      <!-- Card 3 — with video -->
-      <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/activity-room.jpeg" preload="none" data-lazy-video>
-          <source data-src="assets/videos/room-jurmala-telpas-ieeja.mp4" type="video/mp4" />
-        </video>
-        <div class="cat-overlay"></div>
-        <div class="cat-content">
-          <span class="cat-icon">📸</span>
-          <div class="cat-title">Fotosesijas un satura veidošana</div>
-          <p class="cat-desc">Gaiša telpa ar dabisko gaismu, ķieģeļu sienu un mājīgu interjeru</p>
-        </div>
-      </div>
-      <!-- Card 4 — with video -->
-      <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/kitchen-dining.jpeg" preload="none" data-lazy-video>
-          <source data-src="assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4" type="video/mp4" />
-        </video>
-        <div class="cat-overlay"></div>
-        <div class="cat-content">
-          <span class="cat-icon">🌿</span>
-          <div class="cat-title">Telpa treneriem un nodarbībām</div>
-          <p class="cat-desc">Vieta jogai, vingrošanai, bērnu kustību nodarbībām, semināriem un nometnēm</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ FEATURES ══════════════════════════ -->
-<section id="features">
-  <div class="container">
-    <div class="feat-layout">
-      <div class="feat-visual reveal">
-        <video class="feat-video" autoplay muted loop playsinline preload="none" data-lazy-video>
-          <source data-src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="reveal">
-        <div class="section-tag">Pie mums ir</div>
-        <h2 class="section-title">Mājīga vieta <em>nodarbībām</em></h2>
-        <ul class="feat-list">
-          <li>
-            <div class="feat-icon">🏠</div>
-            <div class="feat-txt">
-              <h3>Silti un mājīgi</h3>
-              <p>Gaiša telpa ar mīkstu paklāju, ķieģeļu sienu un mierīgu sajūtu jau ienākot.</p>
-            </div>
-          </li>
-          <li>
-            <div class="feat-icon gold-bg">🎪</div>
-            <div class="feat-txt">
-              <h3>Viss pa rokai</h3>
-              <p>Galdi, krēsli un ērta telpa ballītēm, darbnīcām, semināriem un grupu nodarbībām.</p>
-            </div>
-          </li>
-          <li>
-            <div class="feat-icon">⚡</div>
-            <div class="feat-txt">
-              <h3>Pielāgojam Jums</h3>
-              <p>Sakārtojam telpu tā, lai tā derētu pasākuma formātam, viesiem un bērnu vecumam.</p>
-            </div>
-          </li>
-          <li>
-            <div class="feat-icon gold-bg">🍽️</div>
-            <div class="feat-txt">
-              <h3>Virtuve pa rokai</h3>
-              <p>Kūku, uzkodas un dzērienus varat ērti sagatavot un pasniegt uz vietas.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ TESTIMONIALS ════════════════════════ -->
-<section id="testimonials">
-  <div class="container">
-    <div class="testimonials-header reveal">
-      <div class="section-tag">Atsauksmes</div>
-      <h2 class="section-title">Ko saka mūsu <em>viesi</em></h2>
-      <p class="section-sub" style="margin:0 auto;">5.0 ★ vidējais vērtējums Google</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">„Plašas, gaišas telpas. Lieliska vieta dažādām aktivitātēm — gan rotaļām bērniem, gan sportiskām nodarbībām, gan svinību organizēšanai!”</p>
-        <div class="testimonial-author">Marita Paegle</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">„Omulīga un jauka atmosfēra. Labi pārdomāta un aprīkota telpa. Lieliska vieta maziem bērniem 😊”</p>
-        <div class="testimonial-author">Renāte France</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-author">Evija Civkule</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-author">Signija MIndere</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">„Lieliska vieta, kur mamma var pabūt ar savu bērnu. Profesionāla un atsaucīga fizioterapeite Inta lietderīgi aizņems jūsu bērnu! Mierīga gaisotne, kur bērniem ir interesanti un kur viņi var iemācīties ko jaunu. Iesaku šo vietu!”</p>
-        <div class="testimonial-author">Aleksandra Kerimova</div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">„Brīnišķīgas telpas. Gaišas, plašas, omulīgas ar burvīgu virtuvīti un jauku rotaļu stūrīti mazajiem. Vienmēr tīra un sakopta.”</p>
-        <div class="testimonial-author">Edīte Grunde</div>
-      </div>
-    </div>
-    <div class="testimonials-cta">
-      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener noreferrer" class="review-cta" aria-label="Pastāsti kā mums izdevās">
-        <img class="review-cta-image" src="assets/images/reviews/review-cta-imagegen-transparent.png" alt="" loading="lazy" decoding="async">
-        <span class="review-cta-text">Pastāsti kā mums izdevās</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ PRICING ════════════════════════════ -->
-<section id="pricing" style="position:relative;">
-  <span class="paw-trail" aria-hidden="true"></span>
-  <span class="animal-stage pricing-cat-stage" aria-hidden="true">
-    <span class="animal-cat-ball">
-      <img class="hero-cat-img" src="assets/images/hero/hero-cat-cutout.png" alt="" loading="eager" decoding="async" />
-    </span>
-  </span>
-  <div class="container">
-    <div class="pricing-header reveal">
-      <span class="section-tag">Paketes</span>
-      <h2 class="section-title">Dienas, nedēļas, mēneša</h2>
-    </div>
-    <div class="pricing-grid">
-      <!-- Day package -->
-      <div class="price-card reveal">
-        <div class="price-type">Viena diena</div>
-        <div class="price-period">Dienas pakete</div>
-        <p class="price-summary">Pilna diena vienreizējam pasākumam vai intensīvam darbam.</p>
-        <div class="price-amount"><sup>€</sup>130</div>
-        <div class="price-period">/ 8 stundas</div>
-        <ul class="price-features">
-          <li>Ietaupi 30€ · 16.25€/h</li>
-        </ul>
-        <a href="#calendar" data-booking-package="package-day" class="price-cta outline">Rezervēt dienu</a>
-      </div>
-      <!-- Week package — featured -->
-      <div class="price-card featured reveal">
-        <div class="price-type">Nedēļa · 40h kopā</div>
-        <div class="price-period">Nedēļas pakete</div>
-        <p class="price-summary">5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.</p>
-        <div class="price-amount"><sup>€</sup>550</div>
-        <div class="price-period">/ 5 dienas</div>
-        <ul class="price-features">
-          <li>Ietaupi 250€ · 13.75€/h</li>
-        </ul>
-        <a href="#calendar" data-booking-package="package-week" class="price-cta solid">Rezervēt nedēļu</a>
-      </div>
-      <!-- Monthly package -->
-      <div class="price-card reveal">
-        <div class="price-type">Regulāri · mēnesī</div>
-        <div class="price-period">Abonements</div>
-        <p class="price-summary">Mēneša risinājums nodarbībām un grupām.</p>
-        <div class="price-amount"><sup>€</sup>460</div>
-        <div class="price-period">/ mēnesī · min. 3 mēneši</div>
-        <ul class="price-features">
-          <li>Ietaupi 180€/mēn · 8h nedēļā</li>
-        </ul>
-        <a href="#calendar" data-booking-package="package-month" class="price-cta outline">Pieteikties</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ CALENDAR ══════════════════════════ -->
-<section id="calendar">
-  <div class="container">
-    <div class="reveal" style="margin-bottom:48px;">
-      <h2 class="section-title">Atrodiet dienu savam <em style="color:var(--gold);">pasākumam</em></h2>
-    </div>
-    <div class="calendar-layout">
-      <!-- Calendar widget -->
-      <div class="cal-widget reveal">
-        <div class="cal-nav">
-          <button class="cal-arrow" id="prevMonth">&#8249;</button>
-          <div class="cal-month" id="calMonthLabel"></div>
-          <button class="cal-arrow" id="nextMonth">&#8250;</button>
-        </div>
-        <div class="cal-days-header">
-          <div class="cal-day-name">P</div>
-          <div class="cal-day-name">O</div>
-          <div class="cal-day-name">T</div>
-          <div class="cal-day-name">C</div>
-          <div class="cal-day-name">Pk</div>
-          <div class="cal-day-name">S</div>
-          <div class="cal-day-name">Sv</div>
-        </div>
-        <div class="cal-grid" id="calGrid"></div>
-      </div>
-      <!-- Booking form -->
-      <div class="booking-card reveal">
-        <div class="booking-title">Rezervēt telpu</div>
-        <p class="booking-sub">Aizpildiet formu, un mēs drīz ar Jums sazināsimies</p>
-        <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
-        <form onsubmit="handleBooking(event)" novalidate>
-          <div class="booking-field">
-            <label for="customerName">Jūsu vārds</label>
-            <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
-          </div>
-          <div class="booking-field">
-            <label for="customerPhone">Tālrunis</label>
-            <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
-          </div>
-          <div class="booking-field">
-            <label for="bookingPackageSelect">Nomas veids</label>
-            <select id="bookingPackageSelect" required>
-              <option value="">Izvēlieties nomas veidu...</option>
-              <option value="hours">Stundas noma</option>
-              <option value="day">Dienas pakete</option>
-              <option value="week">Nedēļas pakete</option>
-              <option value="month">Mēneša abonements</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="eventTypeSelect">Pasākuma veids</label>
-            <select id="eventTypeSelect" required>
-              <option value="">Izvēlieties pasākuma veidu...</option>
-              <option>🎈 Bērnu dzimšanas diena</option>
-              <option>👨‍👩‍👧 Ģimenes svinības</option>
-              <option>🎨 Meistarklase</option>
-              <option>📸 Fotosesija</option>
-              <option>🌿 Joga / vingrošana</option>
-              <option>🤲 Fizioterapija</option>
-              <option>🧒 Bērnu nodarbība</option>
-              <option>☀️ Bērnu nometne</option>
-              <option>🎓 Seminārs</option>
-              <option>🎉 Privāts pasākums</option>
-              <option>✨ Cits</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="desiredDateTime">Datums</label>
-            <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
-          </div>
-          <div class="booking-field">
-            <label for="startTimeDesktop">Laiks</label>
-            <div class="booking-time-row">
-              <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
-              <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
-            </div>
-          </div>
-          <div class="booking-field">
-            <label for="bookingNotes">Piezīmes</label>
-            <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
-          </div>
-          <div class="booking-submit-wrap">
-            <button type="submit" class="booking-btn">Nosūtīt pieprasījumu ✦</button>
-          </div>
-          <p class="booking-note">Rakstiet arī WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ FAQ ═══════════════════════════════ -->
-<section id="faq">
-  <span class="paw-trail" aria-hidden="true"></span>
-  <div class="container">
-    <div class="faq-wrap">
-      <div class="faq-copy reveal">
-        <div class="section-tag">Biežākie jautājumi</div>
-        <h2 class="section-title">Pirms rezervācijas <em>mazie jautājumi</em></h2>
-        <p class="section-sub">Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.</p>
-      </div>
-      <div class="faq-list reveal">
-        <details class="faq-item">
-          <summary class="faq-question">Cik maksā telpu noma ROOM Jūrmala?</summary>
-          <p class="faq-answer">Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Vai telpu var nomāt pa stundām?</summary>
-          <p class="faq-answer">Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Kādus pasākumus var rīkot ROOM Jūrmala?</summary>
-          <p class="faq-answer">ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Kur nosvinēt bērna dzimšanas dienu Jūrmalā?</summary>
-          <p class="faq-answer">ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Cik cilvēkiem telpa ir piemērota?</summary>
-          <p class="faq-answer">Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Vai telpā ir virtuve un vai drīkst atnest ēdienu?</summary>
-          <p class="faq-answer">Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?</summary>
-          <p class="faq-answer">ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.</p>
-        </details>
-        <details class="faq-item">
-          <summary class="faq-question">Kā rezervēt vai apskatīt telpu pirms pasākuma?</summary>
-          <p class="faq-answer">Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku.</p>
-        </details>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ MAP ════════════════════════════════ -->
-<section id="map-section">
-  <div class="container">
-    <div class="map-layout">
-      <div class="reveal">
-        <div class="section-tag">Atrašanās</div>
-        <h2 class="map-info-title">Kā mūs atrast?</h2>
-        <p class="map-info-sub"></p>
-        <ul class="map-details">
-          <li>
-            <div class="map-ico teal">📍</div>
-            <div class="map-txt">
-              <strong>Adrese</strong>
-              <span>Skolas iela 50, Jūrmala, LV-2016</span>
-            </div>
-          </li>
-          <li>
-            <div class="map-ico">🚗</div>
-            <div class="map-txt">
-              <strong>Ar automašīnu</strong>
-              <span>Bezmaksas autostāvvieta pie ēkas</span>
-            </div>
-          </li>
-          <li>
-            <div class="map-ico">📞</div>
-            <div class="map-txt">
-              <strong>Tālrunis</strong>
-              <span>+371 27 850 380</span>
-            </div>
-          </li>
-        </ul>
-        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://www.google.com/maps/place/ROOM+J%C5%ABrmala/@56.9619668,23.6028556,18z/data=!4m14!1m7!3m6!1s0x46eee77eef601e47:0x5ac3c96f8826ce3d!2sROOM+J%C5%ABrmala!8m2!3d56.9619657!4d23.6038606!16s%2Fg%2F11yqcg_q_z!3m5!1s0x46eee77eef601e47:0x5ac3c96f8826ce3d!8m2!3d56.9619657!4d23.6038606!16s%2Fg%2F11yqcg_q_z?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:0.88rem;padding:11px 24px;">
-            Atvērt Google Maps
-          </a>
-        </div>
-      </div>
-      <div class="map-frame reveal">
-        <iframe
-          src="https://www.google.com/maps?q=56.9619657,23.6038606+(ROOM%20J%C5%ABrmala)&z=18&hl=lv&output=embed"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Room Jūrmala atrašanās vieta">
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ CONTACT ════════════════════════════ -->
-<section id="contact">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-tag" style="background:var(--gold); margin-bottom:16px; display:inline-block;">Sazinieties ar mums</div>
-      <h2 class="contact-title">Plānojat savu <em>pasākumu?</em></h2>
-      <p class="contact-sub">Sazinieties ar mums Jums ērtā veidā</p>
-    </div>
-    <div class="contact-cards reveal">
-      <a href="tel:+37127850380" class="contact-card">
-        <span class="contact-card-icon">📞</span>
-        <span class="contact-card-label">Tālrunis</span>
-        <span class="contact-card-val">+371 27 850 380</span>
-      </a>
-      <a href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer" class="contact-card">
-        <span class="contact-card-icon whatsapp-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="36" height="36" focusable="false" role="img" aria-label="WhatsApp">
-            <path fill="#25D366" d="M16 3.5A12.3 12.3 0 0 0 5.5 22.2L4 28l6-1.5A12.3 12.3 0 1 0 16 3.5Z"></path>
-            <path fill="#ffffff" d="M11.4 9.8c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.8.1-1.2.6s-1.6 1.5-1.6 3.7 1.6 4.3 1.8 4.6c.2.3 3.1 4.9 7.6 6.6 3.8 1.5 4.6 1.2 5.4 1.1.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6s-2.7-1.3-3.1-1.5c-.4-.1-.7-.2-1 .2-.3.5-1.1 1.5-1.4 1.8-.3.3-.5.3-1 .1-.5-.2-2-.7-3.8-2.4-1.4-1.2-2.4-2.8-2.6-3.3-.3-.5 0-.7.2-1 .2-.2.5-.6.7-.8.2-.3.3-.5.5-.8.1-.3.1-.6 0-.8-.1-.2-1-2.5-1.3-3.3Z"></path>
-          </svg>
-        </span>
-        <span class="contact-card-label">WhatsApp</span>
-        <span class="contact-card-val">Rakstiet mums</span>
-      </a>
-      <a href="mailto:welcome@roomjurmala.lv" class="contact-card">
-        <span class="contact-card-icon">✉️</span>
-        <span class="contact-card-label">E-pasts</span>
-        <span class="contact-card-val">welcome@roomjurmala.lv</span>
-      </a>
-      <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener noreferrer" class="contact-card contact-card-review">
-        <span class="contact-card-icon">⭐</span>
-        <span class="contact-card-label">Atsauksme</span>
-        <span class="contact-card-val">Pastāsti kā mums izdevās</span>
-      </a>
-    </div>
-    <div class="social-section reveal" aria-label="Seko mums">
-      <p class="social-title">Seko mums</p>
-      <div class="social-links">
-        <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-          <span class="social-icon instagram" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" focusable="false">
-              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-              <circle cx="12" cy="12" r="4"></circle>
-              <circle cx="17.2" cy="6.8" r="1.1"></circle>
-            </svg>
-          </span>
-          <span class="social-name">Instagram</span>
-        </a>
-        <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
-          <span class="social-icon tiktok" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" focusable="false">
-              <path d="M15 4c.4 2.2 1.7 3.8 4 4.2v3.3c-1.5 0-2.8-.4-4-1.2v5.4c0 3.1-2.1 5.3-5.2 5.3-2.8 0-4.8-1.9-4.8-4.5 0-2.8 2.2-4.7 5.3-4.7.4 0 .8 0 1.1.1v3.4c-.3-.1-.7-.2-1.1-.2-1.1 0-1.8.6-1.8 1.5s.7 1.5 1.7 1.5c1.1 0 1.8-.7 1.8-2V4h3z"></path>
-            </svg>
-          </span>
-          <span class="social-name">TikTok</span>
-        </a>
-        <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/?locale=lv_LV" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-          <span class="social-icon facebook" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" focusable="false">
-              <path d="M14 8.2V6.7c0-.8.3-1.2 1.3-1.2h1.9V2.4c-.9-.1-1.8-.2-2.7-.2-2.8 0-4.6 1.7-4.6 4.7v1.3H7v3.5h2.9V22H14V11.7h3l.5-3.5H14z"></path>
-            </svg>
-          </span>
-          <span class="social-name">Facebook</span>
-        </a>
-      </div>
-    </div>
-    <div class="reveal">
-      <p style="color:rgba(245,239,230,0.35); font-size:0.85rem; margin-top: 12px;">
-        📍 Skolas iela 50, Jūrmala, LV-2016, Latvija
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ FOOTER ═════════════════════════════ -->
-<footer>
-  <div class="footer-nap" aria-label="ROOM Jūrmala kontaktinformācija">
-    <strong class="footer-business">ROOM Jūrmala</strong>
-    <span class="footer-address">Skolas iela 50, Jūrmala, LV-2016, Latvija</span>
-    <a class="footer-phone" href="tel:+37127850380" aria-label="Tālrunis: +371 27 850 380">+371 27 850 380</a>
-    <span class="footer-hours-line"><span class="footer-hours-label">Pēc pieraksta</span>: <span class="footer-hours">P-Pk 10:00-20:00 · S-Sv 10:00-21:00</span></span>
-  </div>
-  <div class="footer-links">
-    <a href="/telpa/">Telpa</a>
-    <a href="/cenas/">Cenas</a>
-    <a href="#calendar">Rezervēt</a>
-    <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok</a>
-    <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
-    <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener noreferrer">Atsauksme</a>
-  </div>
-  <span class="footer-copy">© 2026 Room Jūrmala. Visas tiesības aizsargātas.</span>
-  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
-</footer>
-
-<!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
-<script>window.ROOM_PAGE_LANG = "lv";</script>
-<script src="calendar-events.js?v=20260609-calendar-events"></script>
-<script src="script.js?v=20260623-perf-fixes"></script>
-</body>
-</html>
+      <div class="scene-controls"><button type="button" class="circle-button" data-scene-step="-1" aria-label="Iepriekšējais skats"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button>
+        <span class="scene-caption" aria-live="polite">Ieskatieties telpā</span>
+        <button type="button" class="circle-button" data-scene-step="1" aria-label="Nākamais skats"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button>
+      </div><div class="scene-hints"><span>Velciet, lai apskatītu</span><button id="motion-toggle" type="button" aria-pressed="false">Apturēt kustību</button></div>
+    </div></div>
+    <div class="hero-bottom"><span>Skolas iela 50 · Kauguri, Jūrmala</span><a href="#events">Vieta būt kopā<span class="turn-down"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></a></div>
+  </section><section id="events" class="section events-section"><div class="section-heading reveal"><h2>Katram savs iemesls<br><em>būt kopā.</em></h2></div>
+    <div class="events-layout"><div class="event-image-wrap reveal" id="event-visual" role="tabpanel" aria-labelledby="event-0"><img id="event-image" src="/assets/images/gallery/activity-room.jpeg" alt="Vieta rotaļām un kustībai" width="1536" height="2048" loading="lazy"><button class="image-play circle-button" data-video="1" aria-label="Skatīties video"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+    <div class="events-list reveal"><div role="tablist" aria-orientation="vertical" aria-label="Mūsu telpa">
+      <div class="event-item is-active"><button role="tab" type="button" id="event-0" data-event="0" aria-controls="event-visual" aria-selected="true" tabindex="0"><span class="event-number">01</span><span class="event-name">Svinēt</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></button><p >Bērnu ballītes, dzimšanas dienas un ģimenes svinības savā lokā.</p></div><div class="event-item "><button role="tab" type="button" id="event-1" data-event="1" aria-controls="event-visual" aria-selected="false" tabindex="-1"><span class="event-number">02</span><span class="event-name">Radīt</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></button><p hidden>Meistarklases un radošās darbnīcas pie kopīga galda.</p></div><div class="event-item "><button role="tab" type="button" id="event-2" data-event="2" aria-controls="event-visual" aria-selected="false" tabindex="-1"><span class="event-number">03</span><span class="event-name">Iemūžināt</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></button><p hidden>Fotosesijas un video dabiskā gaismā, ar ķieģeļu sienu fonā.</p></div><div class="event-item "><button role="tab" type="button" id="event-3" data-event="3" aria-controls="event-visual" aria-selected="false" tabindex="-1"><span class="event-number">04</span><span class="event-name">Kustēties</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></button><p hidden>Joga, vingrošana un nodarbības mazām un lielām idejām.</p></div>
+    </div><a class="text-link" href="/telpa/">Vairāk par telpu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></div></section><section id="gallery" class="section gallery-section"><div class="section-heading reveal"><h2>Ienāciet.</h2><p>Gaiša telpa, silta atmosfēra un vieta jūsu idejām.</p></div>
+    <div class="gallery-view reveal"><button class="gallery-open" type="button" data-open-gallery aria-label="Atvērt foto"><img id="gallery-image" src="/assets/images/gallery/space-open.jpeg" width="2048" height="1536" alt="Telpa, kas pielāgojas jums" loading="lazy"></button><button class="hotspot gallery-hotspot" type="button" data-photo-detail="0" aria-label="Viss pa rokai"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+    <div class="gallery-toolbar"><p id="gallery-caption" aria-live="polite">Telpa, kas pielāgojas jums</p><div class="gallery-arrows"><button class="circle-button" type="button" data-gallery-step="-1" aria-label="Iepriekšējais skats"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button><button class="circle-button" type="button" data-gallery-step="1" aria-label="Nākamais skats"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div><button class="text-link" type="button" data-video="0"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg>Skatīties video</button></div>
+    <div class="gallery-thumbs" aria-label="Visi telpas skati"><button type="button" data-gallery-index="0" aria-label="Telpa, kas pielāgojas jums" aria-pressed="true"><img src="/assets/images/gallery/space-open.jpeg" width="480" height="240" alt="" loading="lazy"></button><button type="button" data-gallery-index="2" aria-label="Virtuvīte un kopīgs galds" aria-pressed="false"><img src="/assets/images/gallery/kitchen-dining.jpeg" width="480" height="240" alt="" loading="lazy"></button><button type="button" data-gallery-index="1" aria-label="Vieta rotaļām un kustībai" aria-pressed="false"><img src="/assets/images/gallery/activity-room.jpeg" width="480" height="240" alt="" loading="lazy"></button></div>
+    <div class="amenities"><span>Galdi un krēsli</span><span>Virtuvīte</span><span>Bezmaksas autostāvvieta</span></div>
+  </section><section class="section review-section"><p class="review-label">Mūsu viesu vārdi</p><blockquote lang="lv">“Brīnišķīgas telpas. Gaišas, plašas, omulīgas ar burvīgu virtuvīti un jauku rotaļu stūrīti mazajiem. Vienmēr tīra un sakopta.”</blockquote><div class="review-bottom"><cite>Edīte Grunde</cite><a class="text-link" href="https://g.page/r/CT3OJohvycNaEBM" target="_blank" rel="noopener noreferrer">Atsauksmes Google<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></section><section class="section pricing-section " id="pricing">
+    <div class="section-heading reveal"><h2>Jūsu laiks.<br><em>Jūsu plāni.</em></h2><p>No stundas līdz regulārām tikšanās reizēm.</p></div>
+    <div class="calculator reveal" id="calculator"><div class="calc-controls"><div class="calc-tabs" role="tablist" aria-label="Ilgums"><button role="tab" type="button" data-mode="hours" id="mode-hours" aria-controls="calc-panel" aria-selected="true" tabindex="0">Stundas</button><button role="tab" type="button" data-mode="days" id="mode-days" aria-controls="calc-panel" aria-selected="false" tabindex="-1">Dienas</button><button role="tab" type="button" data-mode="weeks" id="mode-weeks" aria-controls="calc-panel" aria-selected="false" tabindex="-1">Nedēļas</button><button role="tab" type="button" data-mode="months" id="mode-months" aria-controls="calc-panel" aria-selected="false" tabindex="-1">Mēneši</button></div><div id="calc-panel" role="tabpanel" aria-labelledby="mode-hours"><label for="duration-slider" id="duration-label">3 stundas</label><input id="duration-slider" type="range" min="1" max="8" value="3" step="1" aria-describedby="plan-note"><div class="range-ends"><span id="range-min">1 stunda</span><span id="range-max">8 stundas</span></div><p id="plan-note"></p></div></div>
+    <div class="calc-result" aria-live="polite" aria-atomic="true"><strong id="calc-price">55 €</strong><p>Par izvēlēto laiku</p><span class="calc-saving">Ietaupījums <span id="calc-saving">5 €</span></span><a class="button button-light" id="calculator-book" href="#calendar">Izvēlēties datumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a></div></div>
+    <div class="packages"><article class="package reveal"><h3>Diena</h3><p class="package-price">130 €</p><p class="package-term">8 stundas</p><a class="text-link" href="#calendar" data-package="day">Izvēlēties datumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></article><article class="package reveal"><h3>Nedēļa</h3><p class="package-price">550 €</p><p class="package-term">5 darba dienas · 40 stundas</p><a class="text-link" href="#calendar" data-package="week">Izvēlēties datumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></article><article class="package reveal"><h3>Abonements</h3><p class="package-price">460 €</p><p class="package-term">Mēnesī · 8 stundas nedēļā · vismaz 3 mēneši</p><a class="text-link" href="#calendar" data-package="month">Izvēlēties datumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></article></div>
+    <a class="text-link all-prices" href="/cenas/">Visas cenas<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a>
+  </section><section id="calendar" class="section booking-section"><div class="section-heading reveal"><h2>Sāksim ar<br><em>jūsu datumu.</em></h2><p>Izvēlieties datumu. Mēs apstiprināsim pieejamību personīgi.</p></div><noscript><p class="notice">Lai izmantotu kalendāru un kalkulatoru, ieslēdziet JavaScript vai sazinieties ar mums WhatsApp. <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
+  <div class="booking-layout" data-booking-ui hidden><div class="cal-widget"><div class="cal-nav"><button class="circle-button" id="prevMonth" aria-label="Iepriekšējais mēnesis"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button class="circle-button" id="nextMonth" aria-label="Nākamais mēnesis"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+  <div class="cal-days-header" aria-hidden="true"><span>P</span><span>O</span><span>T</span><span>C</span><span>Pk</span><span>S</span><span>Sv</span></div><div id="calGrid" class="cal-grid" role="group" aria-label="Datums"></div><p class="calendar-note"><span class="event-dot"></span>Kalendārā redzamas plānotās nodarbības. Telpas pieejamību apstiprinām pēc pieprasījuma.</p></div>
+  <div class="booking-form-wrap"><form id="booking-form" novalidate>
+  <p class="form-error" id="booking-error" role="alert" hidden></p>
+  <div class="form-grid">
+  <div class="field"><label for="customerName">Jūsu vārds</label><input id="customerName" name="name" autocomplete="name" maxlength="80" placeholder="Vārds, Uzvārds" required></div>
+  <div class="field"><label for="customerPhone">Tālrunis</label><input id="customerPhone" name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="+371 2X XXX XXX" required></div>
+  <div class="field"><label for="bookingPackageSelect">Nomas veids</label><select id="bookingPackageSelect" name="package" required><option value="">Izvēlieties nomas veidu...</option><option value="hours">Stundas noma</option><option value="day">Dienas pakete</option><option value="week">Nedēļas pakete</option><option value="month">Mēneša abonements</option></select></div>
+  <div class="field"><label for="eventTypeSelect">Pasākuma veids</label><select id="eventTypeSelect" name="eventType" required><option value="">Izvēlieties pasākuma veidu...</option><option value="Bērnu dzimšanas diena">Bērnu dzimšanas diena</option><option value="Ģimenes svinības">Ģimenes svinības</option><option value="Meistarklase">Meistarklase</option><option value="Fotosesija">Fotosesija</option><option value="Joga / vingrošana">Joga / vingrošana</option><option value="Fizioterapija">Fizioterapija</option><option value="Bērnu nodarbība">Bērnu nodarbība</option><option value="Bērnu nometne">Bērnu nometne</option><option value="Seminārs">Seminārs</option><option value="Privāts pasākums">Privāts pasākums</option><option value="Cits">Cits</option></select></div>
+  <div class="field full"><label for="desiredDateTime">Datums</label><input id="desiredDateTime" name="date" type="date" required></div>
+  <div class="field"><label for="startTimeDesktop">Sākums</label><input id="startTimeDesktop" name="start" type="time" required></div>
+  <div class="field"><label for="endTimeDesktop">Beigas</label><input id="endTimeDesktop" name="end" type="time" required></div>
+  <div class="field full"><label for="bookingNotes">Piezīmes</label><textarea id="bookingNotes" name="notes" maxlength="500" rows="2" placeholder="Cik cilvēku? Īpašas vēlmes?"></textarea></div></div>
+  <p id="selected-plan" class="selected-plan" hidden></p>
+  <button class="button button-dark form-submit" type="submit">Sagatavot pieprasījumu<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button><p class="form-note">Nākamajā solī varēsiet pārskatīt un nosūtīt ziņu WhatsApp.</p>
+  </form><div id="request-review" tabindex="-1" hidden><h3>Jūsu pieprasījums ir gatavs.</h3><p>Pārskatiet ziņu un atveriet WhatsApp, lai to nosūtītu. Rezervāciju apstiprināsim sarakstē.</p><pre id="request-message"></pre><a id="request-whatsapp" class="button button-dark" target="_blank" rel="noopener noreferrer">Atvērt WhatsApp<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a><button type="button" class="text-link" id="edit-request">Labot pieprasījumu</button></div></div></div></section><section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>Noderīgi zināt<br><em>pirms tikšanās.</em></h2><p>Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.</p></div><div class="faq-list"><details><summary>Cik maksā telpu noma ROOM Jūrmala?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.</p></details><details><summary>Vai telpu var nomāt pa stundām?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.</p></details><details><summary>Kādus pasākumus var rīkot ROOM Jūrmala?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.</p></details><details><summary>Kur nosvinēt bērna dzimšanas dienu Jūrmalā?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem.</p></details><details><summary>Cik cilvēkiem telpa ir piemērota?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.</p></details><details><summary>Vai telpā ir virtuve un vai drīkst atnest ēdienu?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī.</p></details><details><summary>Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.</p></details><details><summary>Kā rezervēt vai apskatīt telpu pirms pasākuma?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku.</p></details></div></section><section class="section location-section" id="map-section"><div><h2>Mēs esam tepat.</h2><address>Skolas iela 50<br>Jūrmala, LV-2016</address><p>Bezmaksas autostāvvieta pie ēkas.</p><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">Atvērt Google Maps<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div class="map-panel"><div class="map-placeholder"><span class="map-location">Jūrmala</span><span class="map-pin">ROOM</span><button type="button" class="button button-dark" id="load-map">Parādīt karti<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div></div></section>
+ <footer class="site-footer" id="contact"><div class="footer-top"><h2>Līdz drīzai<br><em>tikšanās reizei.</em></h2><a class="footer-arrow" href="#calendar" aria-label="Atrast savu datumu"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div class="footer-details"><a class="brand footer-brand" href="/"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala" loading="lazy"></a><div><a href="tel:+37127850380">+371 27 850 380</a><a href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a><a href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div><span>Pēc pieraksta</span><span>P-Pk 10:00-20:00 · S-Sv 10:00-21:00</span><a href="#map-section">Skolas iela 50, Jūrmala</a></div><div><a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a><a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a><a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></div><div class="footer-bottom"><span>© 2026 Room Jūrmala. Visas tiesības aizsargātas.</span><a href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer">SEO Latvija</a><a href="#main" aria-label="Sākums"><span class="turn-up"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></a></div></footer></main><dialog id="media-dialog" aria-label="Ieskatieties telpā"><button class="dialog-close circle-button" aria-label="Aizvērt"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button><div id="dialog-content"></div></dialog>
+<script id="site-data" type="application/json">{"lang":"lv","d":{"hero":"Vieta jūsu\u003cbr>\u003cem>kopā būšanai.\u003c/em>","intro":"Svinībām, idejām un satikšanās priekam. Mājīga pasākumu telpa Jūrmalā.","findDate":"Atrast savu datumu","together":"Vieta būt kopā","explore":"Ieskatieties telpā","drag":"Velciet, lai apskatītu","previous":"Iepriekšējais skats","next":"Nākamais skats","details":"Vairāk par šo vietu","close":"Aizvērt","pause":"Apturēt kustību","resume":"Ieslēgt kustību","eventTitle":"Katram savs iemesls\u003cbr>\u003cem>būt kopā.\u003c/em>","eventNames":["Svinēt","Radīt","Iemūžināt","Kustēties"],"eventDescriptions":["Bērnu ballītes, dzimšanas dienas un ģimenes svinības savā lokā.","Meistarklases un radošās darbnīcas pie kopīga galda.","Fotosesijas un video dabiskā gaismā, ar ķieģeļu sienu fonā.","Joga, vingrošana un nodarbības mazām un lielām idejām."],"moreSpace":"Vairāk par telpu","enter":"Ienāciet.","galleryIntro":"Gaiša telpa, silta atmosfēra un vieta jūsu idejām.","photoNames":["Telpa, kas pielāgojas jums","Vieta rotaļām un kustībai","Virtuvīte un kopīgs galds","Radošo nodarbību stūrītis","Mājīgi arī pašiem mazākajiem"],"photoDescriptions":["Galdi, krēsli un brīva zona aktivitātēm. Telpas iekārtojumu var pielāgot jūsu pasākumam.","Mīksts paklājs, rotaļu elementi un vieta grupas nodarbībām.","Virtuvītē var sagatavot un pasniegt kūku, uzkodas un dzērienus.","Vieta kopīgām spēlēm, radošiem uzdevumiem un jaunām prasmēm.","Telpa bērnu svinībām, ģimeņu tikšanās reizēm un nodarbībām."],"amenities":["Galdi un krēsli","Virtuvīte","Bezmaksas autostāvvieta"],"video":"Skatīties video","allPhotos":"Visi telpas skati","reviewLabel":"Mūsu viesu vārdi","readReviews":"Atsauksmes Google","priceTitle":"Jūsu laiks.\u003cbr>\u003cem>Jūsu plāni.\u003c/em>","priceIntro":"No stundas līdz regulārām tikšanās reizēm.","modes":["Stundas","Dienas","Nedēļas","Mēneši"],"units":[["stunda","stundas","stundas"],["diena","dienas","dienas"],["nedēļa","nedēļas","nedēļas"],["mēnesis","mēneši","mēneši"]],"forTime":"Par izvēlēto laiku","selectDate":"Izvēlēties datumu","saved":"Ietaupījums","duration":"Ilgums","packageNames":["Diena","Nedēļa","Abonements"],"packageTerms":["8 stundas","5 darba dienas · 40 stundas","Mēnesī · 8 stundas nedēļā · vismaz 3 mēneši"],"allPrices":"Visas cenas","hourlyTitle":"Katru stundu savā ritmā.","minTerm":"Abonements uz vismaz 3 mēnešiem.","bookingTitle":"Sāksim ar\u003cbr>\u003cem>jūsu datumu.\u003c/em>","bookingIntro":"Izvēlieties datumu. Mēs apstiprināsim pieejamību personīgi.","bookingNote":"Kalendārā redzamas plānotās nodarbības. Telpas pieejamību apstiprinām pēc pieprasījuma.","prevMonth":"Iepriekšējais mēnesis","nextMonth":"Nākamais mēnesis","scheduled":"Plānota nodarbība","start":"Sākums","end":"Beigas","prepare":"Sagatavot pieprasījumu","requestNote":"Nākamajā solī varēsiet pārskatīt un nosūtīt ziņu WhatsApp.","reviewRequest":"Jūsu pieprasījums ir gatavs.","reviewNote":"Pārskatiet ziņu un atveriet WhatsApp, lai to nosūtītu. Rezervāciju apstiprināsim sarakstē.","openWhatsApp":"Atvērt WhatsApp","editRequest":"Labot pieprasījumu","invalidRequired":"Lūdzu aizpildiet visus obligātos laukus.","invalidPhone":"Lūdzu ievadiet derīgu tālruņa numuru.","invalidDate":"Izvēlieties šodienas vai nākotnes datumu.","invalidTime":"Beigu laikam jābūt vēlākam par sākuma laiku.","pastTime":"Izvēlieties laiku, kas vēl nav pagājis.","tooLong":"Lūdzu saīsiniet piezīmes.","selectedPlan":"Izvēlētais plāns","noScript":"Lai izmantotu kalendāru un kalkulatoru, ieslēdziet JavaScript vai sazinieties ar mums WhatsApp.","faqTitle":"Noderīgi zināt\u003cbr>\u003cem>pirms tikšanās.\u003c/em>","footerTitle":"Līdz drīzai\u003cbr>\u003cem>tikšanās reizei.\u003c/em>","location":"Mēs esam tepat.","mapLoad":"Parādīt karti","parking":"Bezmaksas autostāvvieta pie ēkas.","spaceHero":"Telpa jūsu\u003cbr>\u003cem>iecerēm.\u003c/em>","spaceIntro":"Sviniet, radiet, mācieties un satiecieties. Iekārtojumu pielāgosim jūsu pasākumam.","skip":"Pāriet uz saturu","home":"Sākums","menu":"Izvēlne","photo":"Atvērt foto","videoError":"Video nevar atskaņot šajā pārlūkā.","videoDownload":"Atvērt video failu"},"booking":{"title":"Rezervēt telpu","sub":"Aizpildiet formu, un mēs drīz ar Jums sazināsimies","labels":{"name":"Jūsu vārds","phone":"Tālrunis","package":"Nomas veids","eventType":"Pasākuma veids","date":"Datums","time":"Laiks","notes":"Piezīmes"},"placeholders":{"name":"Vārds, Uzvārds","phone":"+371 2X XXX XXX","date":"piem. 20. aprīlis","start":"No, piem. 14:00","end":"Līdz, piem. 17:00","notes":"Cik cilvēku? Īpašas vēlmes?"},"options":["Izvēlieties pasākuma veidu...","🎈 Bērnu dzimšanas diena","👨‍👩‍👧 Ģimenes svinības","🎨 Meistarklase","📸 Fotosesija","🌿 Joga / vingrošana","🤲 Fizioterapija","🧒 Bērnu nodarbība","☀️ Bērnu nometne","🎓 Seminārs","🎉 Privāts pasākums","✨ Cits"],"packageOptions":["Izvēlieties nomas veidu...","Stundas noma","Dienas pakete","Nedēļas pakete","Mēneša abonements"],"packageNotes":{"hours":"Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?","day":"Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?","week":"Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?","month":"Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?"},"button":"Nosūtīt pieprasījumu ✦","buttonSent":"✓ Pieprasījums nosūtīts!","notePrefix":"Rakstiet arī WhatsApp:","startTimeAria":"Sākuma laiks","endTimeAria":"Beigu laiks","errors":{"required":"Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.","tooLong":"Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz."}},"calendar":{"titleHtml":"Atrodiet dienu savam \u003cem style=\"color:var(--gold);\">pasākumam\u003c/em>","daysShort":["P","O","T","C","Pk","S","Sv"],"monthsHeader":["Janvāris","Februāris","Marts","Aprīlis","Maijs","Jūnijs","Jūlijs","Augusts","Septembris","Oktobris","Novembris","Decembris"],"monthsDate":["janvāra","februāra","marta","aprīļa","maija","jūnija","jūlija","augusta","septembra","oktobra","novembra","decembra"],"freeLabel":"Brīvs"},"whatsapp":{"greeting":"Sveiki! Vēlos pieteikt ROOM Jūrmala telpu.","labels":{"name":"Vārds","phone":"Tālrunis","package":"Nomas veids","eventType":"Pasākuma veids","date":"Datums","time":"Laiks","notes":"Piezīmes"},"timePrefixes":{"from":"No","until":"Līdz"}},"photos":[{"src":"/assets/images/gallery/space-open.jpeg","name":"Telpa, kas pielāgojas jums","description":"Galdi, krēsli un brīva zona aktivitātēm. Telpas iekārtojumu var pielāgot jūsu pasākumam.","video":"/assets/videos/room-jurmala-privats-pasakums.mp4"},{"src":"/assets/images/gallery/activity-room.jpeg","name":"Vieta rotaļām un kustībai","description":"Mīksts paklājs, rotaļu elementi un vieta grupas nodarbībām.","video":"/assets/videos/room-jurmala-bernu-nodarbiba.mp4"},{"src":"/assets/images/gallery/kitchen-dining.jpeg","name":"Virtuvīte un kopīgs galds","description":"Virtuvītē var sagatavot un pasniegt kūku, uzkodas un dzērienus.","video":"/assets/videos/room-jurmala-telpas-ieeja.mp4"},{"src":"/assets/images/gallery/creative-table.jpeg","name":"Radošo nodarbību stūrītis","description":"Vieta kopīgām spēlēm, radošiem uzdevumiem un jaunām prasmēm.","video":"/assets/videos/room-jurmala-radosa-darbnica-berniem.mp4"},{"src":"/assets/images/gallery/soft-play.jpeg","name":"Mājīgi arī pašiem mazākajiem","description":"Telpa bērnu svinībām, ģimeņu tikšanās reizēm un nodarbībām.","video":"/assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4"}],"mapTitle":"Room Jūrmala atrašanās vieta"}</script>
+</body></html>

@@ -3,15 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLD7392ML2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-QLD7392ML2');
-  </script>
   <title>Зал для мероприятий и занятий в Юрмале | ROOM Jūrmala</title>
   <meta name="description" content="ROOM Jūrmala подходит для детских дней рождения, семейных праздников, мастер-классов, фотосессий, семинаров, тренировок и детских лагерей." />
   <meta name="robots" content="index, follow" />
@@ -231,106 +223,67 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
-  <link rel="stylesheet" href="/styles.css?v=20260623-perf-fixes" />
+
+  <meta name="theme-color" content="#112f32">
+  <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911">
+  <script src="/calendar-events.js" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911"></script>
 </head>
-<body class="services-page">
-<nav>
-  <div class="nav-mobile-left">
-    <button type="button" class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <a href="#calendar" class="nav-cta nav-cta-mobile">Забронировать</a>
-  </div>
-  <a href="/ru/" class="nav-logo">
-    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
-  </a>
-  <div class="nav-links">
-    <a href="/ru/telpa/">Зал</a>
-    <a href="/ru/cenas/">Цены</a>
-    <a href="#calendar">Свободные даты</a>
-    <a href="/ru/#map-section">Адрес</a>
-    <a href="/ru/#contact">Контакты</a>
-  </div>
-  <div class="nav-right">
-    <div class="lang-switcher" aria-label="Language switcher">
-      <a class="lang-btn" href="/telpa/">LV</a>
-      <a class="lang-btn" href="/en/telpa/">EN</a>
-      <a class="lang-btn active" href="/ru/telpa/">RU</a>
+<body class="page-space"><a class="skip-link" href="#main">Перейти к содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="/ru/" aria-label="ROOM Jūrmala"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala"></a>
+    <nav class="desktop-nav" aria-label="Меню">
+      <a href="/ru/telpa/" aria-current="page">Зал</a>
+      <a href="/ru/cenas/" >Цены</a>
+      <a href="#calendar">Свободные даты</a>
+    </nav>
+    <div class="header-actions"><nav class="languages" aria-label="Language"><a href="/telpa/" hreflang="lv" lang="lv" class="language-link" >LV</a><a href="/en/telpa/" hreflang="en" lang="en" class="language-link" >EN</a><a href="/ru/telpa/" hreflang="ru" lang="ru" class="language-link" aria-current="true">RU</a></nav>
+    <a class="button button-outline header-book" href="#calendar">Забронировать</a>
+    <button class="menu-toggle circle-button" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть меню"><span></span><span></span></button></div>
+  </header>
+  <dialog id="mobile-menu" aria-label="Меню">
+    <div class="menu-top"><span>ROOM Jūrmala</span><button class="circle-button menu-close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+    <nav class="menu-links"><a href="/ru/">Главная</a><a href="/ru/telpa/">Зал</a><a href="/ru/cenas/">Цены</a><a href="#calendar">Свободные даты</a><a href="#contact">Контакты</a></nav>
+    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
+  </dialog><main id="main"><section class="hero hero-space">
+    <div class="hero-main"><div class="hero-copy">
+      <h1>Место для<br><em>ваших идей.</em></h1><p>Празднуйте, творите, учитесь и встречайтесь. Подготовим пространство к вашему мероприятию.</p>
+      <a class="button button-light" href="#calendar">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a>
     </div>
-    <a href="#calendar" class="nav-cta nav-cta-desktop">Забронировать</a>
-  </div>
-</nav>
-<div class="mobile-menu-backdrop"></div>
-<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <button type="button" class="mobile-menu-close" aria-label="Закрыть меню">×</button>
-  <div class="lang-switcher" aria-label="Language switcher">
-    <a class="lang-btn" href="/telpa/">LV</a>
-    <a class="lang-btn" href="/en/telpa/">EN</a>
-    <a class="lang-btn active" href="/ru/telpa/">RU</a>
-  </div>
-  <div class="mobile-menu-links">
-    <a href="/ru/telpa/">Зал</a>
-    <a href="/ru/cenas/">Цены</a>
-    <a href="#calendar">Свободные даты</a>
-    <a href="/ru/#map-section">Адрес</a>
-    <a href="/ru/#contact">Контакты</a>
-  </div>
-</aside>
-
-<main>
-  <section class="services-hero">
-    <img class="services-hero-image" src="/assets/images/services/telpa-hero-sketch.jpg" alt="Sketch style иллюстрация зала ROOM Jūrmala для мероприятий, занятий и творческих идей" loading="eager" decoding="async" />
-    <div class="services-hero-overlay"></div>
-    <div class="services-hero-content">
-      <h1 class="services-typewrite" aria-label="Что мы предлагаем?">Что мы <em class="hero-accent">предлагаем?</em></h1>
-      <p>В одном месте можно отметить детский день рождения, провести мастер-класс, организовать фотосессию, занятия с тренером, семинар или активности детского лагеря. Зал можно адаптировать под формат мероприятия, количество гостей и желаемую атмосферу.</p>
-      <div class="services-hero-actions">
-        <a class="btn-primary" href="#calendar">Проверить доступность</a>
-        <a class="btn-outline" href="tel:+37127850380">Позвонить</a>
+    <div class="hero-gallery" aria-label="Загляните внутрь">
+      <div class="scene" id="hero-scene">
+        <div class="scene-fallback" aria-hidden="true"><img class="scene-photo-main" src="/assets/images/gallery/space-open.jpeg" alt="" width="2048" height="1536" fetchpriority="high"><img class="scene-photo-side" src="/assets/images/gallery/activity-room.jpeg" alt="" width="1536" height="2048"></div>
+        <button class="hotspot hero-hotspot" data-photo-detail="0" aria-label="Об этом пространстве"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button>
       </div>
-    </div>
-  </section>
+      <div class="scene-controls"><button type="button" class="circle-button" data-scene-step="-1" aria-label="Предыдущий вид"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button>
+        <span class="scene-caption" aria-live="polite">Загляните внутрь</span>
+        <button type="button" class="circle-button" data-scene-step="1" aria-label="Следующий вид"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button>
+      </div><div class="scene-hints"><span>Перетаскивайте, чтобы посмотреть</span><button id="motion-toggle" type="button" aria-pressed="false">Остановить анимацию</button></div>
+    </div></div>
+    <div class="hero-bottom"><span>Skolas iela 50 · Kauguri, Jūrmala</span><a href="#gallery">Место для встреч<span class="turn-down"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></a></div>
+  </section><section id="gallery" class="section gallery-section"><div class="section-heading reveal"><h2>Заходите.</h2><p>Светлое помещение, тёплая атмосфера и место для ваших идей.</p></div>
+    <div class="gallery-view reveal"><button class="gallery-open" type="button" data-open-gallery aria-label="Открыть фото"><img id="gallery-image" src="/assets/images/gallery/space-open.jpeg" width="2048" height="1536" alt="Пространство под ваши планы" loading="lazy"></button><button class="hotspot gallery-hotspot" type="button" data-photo-detail="0" aria-label="Все под рукой"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+    <div class="gallery-toolbar"><p id="gallery-caption" aria-live="polite">Пространство под ваши планы</p><div class="gallery-arrows"><button class="circle-button" type="button" data-gallery-step="-1" aria-label="Предыдущий вид"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button><button class="circle-button" type="button" data-gallery-step="1" aria-label="Следующий вид"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div><button class="text-link" type="button" data-video="0"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg>Посмотреть видео</button></div>
+    <div class="gallery-thumbs" aria-label="Все виды пространства"><button type="button" data-gallery-index="0" aria-label="Пространство под ваши планы" aria-pressed="true"><img src="/assets/images/gallery/space-open.jpeg" width="480" height="240" alt="" loading="lazy"></button><button type="button" data-gallery-index="2" aria-label="Кухня и общий стол" aria-pressed="false"><img src="/assets/images/gallery/kitchen-dining.jpeg" width="480" height="240" alt="" loading="lazy"></button><button type="button" data-gallery-index="1" aria-label="Место для игр и движения" aria-pressed="false"><img src="/assets/images/gallery/activity-room.jpeg" width="480" height="240" alt="" loading="lazy"></button></div>
+    <div class="amenities"><span>Столы и стулья</span><span>Мини-кухня</span><span>Бесплатная парковка</span></div>
+  </section><section class="section services-section"><article class="service-story reveal" id="service-1"><div class="service-picture"><img src="/assets/images/gallery/soft-play.jpeg" alt="Уютно и самым маленьким" width="1200" height="1000" loading="lazy"><span class="service-number">01</span></div><div class="service-copy">
 
-  <section class="service-detail-list" aria-label="Описание услуг ROOM Jūrmala">
-    <article class="service-detail-card">
-      <div class="service-detail-media">
-        <img src="/assets/images/services/bernu-ballites-sketch.jpg?v=20260512b" alt="Sketch style иллюстрация детского праздника в ROOM Jūrmala" loading="eager" decoding="sync" />
-      </div>
-      <div class="service-detail-copy">
-        <span class="section-tag">Праздники</span>
         <h2>Детские праздники и дни рождения в Юрмале</h2>
         <p>Уютный зал для детских дней рождения, семейных торжеств и небольших частных праздников. Пространство подходит и для спокойного застолья, и для более активных детских игр и общих занятий.</p>
         <ul>
           <li>Подходит для детских праздников, семейных торжеств и небольших встреч с друзьями.</li>
         </ul>
-      </div>
-    </article>
+      <a class="text-link" href="#calendar" data-event-book="1">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></article><article class="service-story reveal" id="service-2"><div class="service-picture"><img src="/assets/images/gallery/creative-table.jpeg" alt="Уголок для творчества" width="1200" height="1000" loading="lazy"><span class="service-number">02</span></div><div class="service-copy">
 
-    <article class="service-detail-card">
-      <div class="service-detail-media">
-        <img src="/assets/images/services/meistarklases-sketch.jpg?v=20260512b" alt="Sketch style иллюстрация творческого мастер-класса для детей" loading="eager" decoding="sync" />
-      </div>
-      <div class="service-detail-copy">
-        <span class="section-tag">Мастер-классы</span>
         <h2>Для рукоделия и занятий рисованием</h2>
         <p>Зал подходит для рисования, живописи, рукоделия, изготовления праздничного декора, тематических детских мастер-классов и небольших групповых занятий. Большой стол помогает удобно разместить материалы, а уютная атмосфера дает детям чувство свободы и безопасности.</p>
         <ul>
           <li>Подходит для художественных, рукодельных, праздничных и тематических мастер-классов.</li>
           <li>Можно совместить с детским праздником или активностью лагеря.</li>
         </ul>
-      </div>
-    </article>
+      <a class="text-link" href="#calendar" data-event-book="3">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></article><article class="service-story reveal" id="service-3"><div class="service-picture"><img src="/assets/images/gallery/space-open.jpeg" alt="Пространство под ваши планы" width="1200" height="1000" loading="lazy"><span class="service-number">03</span></div><div class="service-copy">
 
-    <article class="service-detail-card">
-      <div class="service-detail-media">
-        <img src="/assets/images/services/fotosesijas-sketch.jpg?v=20260512b" alt="Sketch style иллюстрация фотосессии в светлом зале ROOM Jūrmala" loading="eager" decoding="sync" />
-      </div>
-      <div class="service-detail-copy">
-        <span class="section-tag">Фотосессии</span>
         <h2>Для фотосессий и видеосъемок</h2>
         <p>Подходит для семейных фотосессий, детских портретов, праздничных кадров, контента для небольших брендов и видео для социальных сетей. В зале есть естественный свет, кирпичная стена, теплый интерьер и достаточно места, чтобы менять кадры без сложной перестановки.</p>
         <p>Для фотосессий важно, чтобы среда выглядела чистой, спокойной и не перегруженной. Этот зал дает уютный фон, который можно дополнить своими реквизитами, шарами, цветами или сезонным декором.</p>
@@ -339,15 +292,8 @@
           <li>Хорошее решение для съемки контента, reels и небольших брендовых фотосессий.</li>
           <li>Зал можно забронировать по часам.</li>
         </ul>
-      </div>
-    </article>
+      <a class="text-link" href="#calendar" data-event-book="4">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></article><article class="service-story reveal" id="service-4"><div class="service-picture"><img src="/assets/images/gallery/activity-room.jpeg" alt="Место для игр и движения" width="1200" height="1000" loading="lazy"><span class="service-number">04</span></div><div class="service-copy">
 
-    <article class="service-detail-card">
-      <div class="service-detail-media">
-        <img src="/assets/images/services/joga-vingrosana-sketch.jpg?v=20260512b" alt="Sketch style иллюстрация занятия с тренером и группы движения" loading="eager" decoding="sync" />
-      </div>
-      <div class="service-detail-copy">
-        <span class="section-tag">Занятия</span>
         <h2>Для йоги и фитнес-занятий</h2>
         <p>Зал подходит тренерам, физиотерапевтам, ведущим детских двигательных занятий, группам йоги или фитнеса. Он достаточно компактный, чтобы группа чувствовала личный подход, и достаточно просторный для работы с детьми или небольшой взрослой группой.</p>
         <ul>
@@ -355,15 +301,8 @@
           <li>Можно использовать для регулярных занятий или разового мероприятия.</li>
           <li>Удобное пространство для инструкторов, которым нужна приватная и уютная среда.</li>
         </ul>
-      </div>
-    </article>
+      <a class="text-link" href="#calendar" data-event-book="5">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></article><article class="service-story reveal" id="service-5"><div class="service-picture"><img src="/assets/images/gallery/kitchen-dining.jpeg" alt="Кухня и общий стол" width="1200" height="1000" loading="lazy"><span class="service-number">05</span></div><div class="service-copy">
 
-    <article class="service-detail-card">
-      <div class="service-detail-media">
-        <img src="/assets/images/services/nometnes-seminari-sketch.jpg?v=20260512b" alt="Sketch style иллюстрация детского лагеря, развивающего занятия и семинара" loading="eager" decoding="sync" />
-      </div>
-      <div class="service-detail-copy">
-        <span class="section-tag">Лагеря и семинары</span>
         <h2>Детские лагеря, развивающие занятия и семинары</h2>
         <p>Зал можно использовать для активностей детского лагеря, образовательных занятий, встреч родителей и детей, небольших лекций или семинаров. Он подходит форматам, где важны спокойная среда, общий стол, понятная группа и быстрый переход от разговора к практике.</p>
         <p>Это хорошее решение для небольших команд, педагогов и ведущих занятий, которым нужно место в Юрмале без затрат на большой зал и без лишней формальности.</p>
@@ -372,255 +311,23 @@
           <li>Подходит для небольших семинаров, лекций и практических занятий.</li>
           <li>Длительную бронь можно согласовать индивидуально.</li>
         </ul>
-      </div>
-    </article>
-  </section>
-
-  <section id="faq">
-    <span class="paw-trail" aria-hidden="true"></span>
-    <div class="container">
-      <div class="faq-wrap">
-        <div class="faq-copy reveal">
-          <div class="section-tag">Частые вопросы</div>
-          <h2 class="section-title">Ответы об <em>аренде зала</em></h2>
-          <p class="section-sub">Главное о форматах мероприятий, почасовой аренде, количестве гостей, оборудовании и бронировании.</p>
-        </div>
-        <div class="faq-list reveal">
-          <details class="faq-item">
-            <summary class="faq-question">Для каких мероприятий подходит ROOM Jūrmala?</summary>
-            <p class="faq-answer">Зал подходит для детских дней рождения, семейных праздников, творческих мастер-классов, фотосессий, йоги и гимнастики, семинаров, занятий с тренером и детских лагерей в Каугури, Юрмале.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли арендовать зал по часам?</summary>
-            <p class="faq-answer">Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для занятий, фотосессий, мастер-классов, семинаров и коротких мероприятий, когда зал нужен на конкретное время.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли адаптировать зал под разные мероприятия?</summary>
-            <p class="faq-answer">Да, зал можно подготовить для праздника, занятия, мастер-класса, фотосессии или небольшого семинара. Доступны столы, стулья, небольшая кухня и свободная зона для активностей.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Где отметить день рождения ребенка в Юрмале?</summary>
-            <p class="faq-answer">ROOM Jūrmala — хорошее место для детского дня рождения в Юрмале, если хочется праздника в своем кругу. Зал можно оформить по своему вкусу, принести еду и спокойно отметить с семьей и друзьями.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли проводить семейные праздники и частные мероприятия?</summary>
-            <p class="faq-answer">Да, ROOM Jūrmala можно использовать для семейных праздников, небольших встреч и частных мероприятий. Это не формальный банкетный зал, поэтому пространство хорошо подходит для теплой и уютной атмосферы.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли проводить мастер-классы и творческие занятия?</summary>
-            <p class="faq-answer">Да, зал подходит для рисования, рукоделия, кулинарных, художественных и других творческих мастер-классов. Есть общий стол, место для материалов и возможность расставить зал для групповой работы.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Подходит ли ROOM Jūrmala для фотосессий и видеосъемки?</summary>
-            <p class="faq-answer">Да, зал подходит для семейных фотосессий, детских фотосессий, небольшой видеосъемки и создания контента. Кирпичная стена, игровая зона и уютный интерьер дают несколько визуальных зон.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Подходит ли зал для йоги, гимнастики и занятий с тренером?</summary>
-            <p class="faq-answer">Да, зал можно использовать для йоги, гимнастики, физиотерапии, детских двигательных занятий и небольших тренировочных групп. Расстановку можно адаптировать под размер группы и формат занятия.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли проводить семинары и обучение?</summary>
-            <p class="faq-answer">Да, зал подходит для небольших семинаров, лекций, занятий для родителей, корпоративного обучения и презентаций. Он удобен, когда нужна спокойная среда и практичная рабочая зона.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Можно ли использовать зал для детских лагерей и развивающих занятий?</summary>
-            <p class="faq-answer">Да, зал можно использовать для дней детского лагеря, развивающих занятий, кружков и активностей с малышами или молодыми родителями. Более длительную аренду можно обсудить индивидуально.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">На сколько человек рассчитан зал?</summary>
-            <p class="faq-answer">Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Комфортное количество зависит от типа мероприятия, расстановки столов и запланированных активностей.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Где находится ROOM Jūrmala и как забронировать зал?</summary>
-            <p class="faq-answer">ROOM Jūrmala находится по адресу Skolas iela 50, Каугури, Юрмала. У здания есть бесплатная парковка; заявку на бронирование можно отправить на сайте, в WhatsApp или по телефону +371 27 850 380.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="calendar">
-    <div class="container">
-      <div class="reveal" style="margin-bottom:48px;">
-        <h2 class="section-title">Выберите дату для <em style="color:var(--gold);">мероприятия</em></h2>
-        <p class="section-sub">Выберите дату в календаре и отправьте короткую заявку на бронь.</p>
-      </div>
-      <div class="calendar-layout">
-        <div class="cal-widget reveal">
-          <div class="cal-nav">
-            <button class="cal-arrow" id="prevMonth" type="button" aria-label="Предыдущий месяц">&#8249;</button>
-            <div class="cal-month" id="calMonthLabel"></div>
-            <button class="cal-arrow" id="nextMonth" type="button" aria-label="Следующий месяц">&#8250;</button>
-          </div>
-          <div class="cal-days-header">
-            <div class="cal-day-name">Пн</div>
-            <div class="cal-day-name">Вт</div>
-            <div class="cal-day-name">Ср</div>
-            <div class="cal-day-name">Чт</div>
-            <div class="cal-day-name">Пт</div>
-            <div class="cal-day-name">Сб</div>
-            <div class="cal-day-name">Вс</div>
-          </div>
-          <div class="cal-grid" id="calGrid"></div>
-        </div>
-        <div class="booking-card reveal">
-          <div class="booking-title">Забронировать зал</div>
-          <p class="booking-sub">Заполните форму, и мы скоро свяжемся с вами.</p>
-          <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
-          <form onsubmit="handleBooking(event)" novalidate>
-            <div class="booking-field">
-              <label for="customerName">Ваше имя</label>
-              <input type="text" id="customerName" placeholder="Имя, фамилия" maxlength="80" autocomplete="name" required />
-            </div>
-            <div class="booking-field">
-              <label for="customerPhone">Телефон</label>
-              <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
-            </div>
-            <div class="booking-field">
-              <label for="bookingPackageSelect">Тип аренды</label>
-              <select id="bookingPackageSelect" required>
-                <option value="">Выберите тип аренды...</option>
-                <option value="hours">Почасовая аренда</option>
-                <option value="day">Пакет на день</option>
-                <option value="week">Пакет на неделю</option>
-                <option value="month">Месячный абонемент</option>
-              </select>
-            </div>
-            <div class="booking-field">
-              <label for="eventTypeSelect">Формат мероприятия</label>
-              <select id="eventTypeSelect" required>
-                <option value="">Выберите тип мероприятия...</option>
-                <option>Детский день рождения</option>
-                <option>Семейный праздник</option>
-                <option>Мастер-класс</option>
-                <option>Фотосессия</option>
-                <option>Йога / гимнастика</option>
-                <option>Физиотерапия</option>
-                <option>Детское занятие</option>
-                <option>Детский лагерь</option>
-                <option>Семинар</option>
-                <option>Частное мероприятие</option>
-                <option>Другое</option>
-              </select>
-            </div>
-            <div class="booking-field">
-              <label for="desiredDateTime">Дата</label>
-              <input id="desiredDateTime" type="text" placeholder="например, 20 апреля" maxlength="80" required />
-            </div>
-            <div class="booking-field">
-              <label for="startTimeDesktop">Время</label>
-              <div class="booking-time-row">
-                <input type="text" id="startTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время начала" placeholder="Начало, например 14:00" />
-                <input type="text" id="endTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Время окончания" placeholder="Окончание, например 17:00" />
-              </div>
-            </div>
-            <div class="booking-field">
-              <label for="bookingNotes">Примечания</label>
-              <textarea id="bookingNotes" placeholder="Сколько гостей? Есть особые пожелания?" maxlength="500"></textarea>
-            </div>
-            <div class="booking-submit-wrap">
-              <button type="submit" class="booking-btn">Отправить заявку</button>
-            </div>
-            <p class="booking-note">Или напишите в WhatsApp: <a href="https://wa.me/37127850380"><strong>+371 27850380</strong></a></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="services-cta">
-    <div>
-      <span class="section-tag">Бронирование</span>
-      <h2>Расскажите, какое мероприятие вы планируете</h2>
-      <p>Мы поможем понять, какой формат бронирования подойдет лучше: почасовая аренда, пакет для праздника или индивидуальное предложение для более длительного мероприятия.</p>
-    </div>
-    <a class="btn-primary" href="#calendar">Отправить заявку</a>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-nap" aria-label="Контактная информация ROOM Jūrmala">
-    <strong class="footer-business">ROOM Jūrmala</strong>
-    <span class="footer-address">Skolas iela 50, Jūrmala, LV-2016, Latvia</span>
-    <a class="footer-phone" href="tel:+37127850380" aria-label="Телефон: +371 27 850 380">+371 27 850 380</a>
-    <span class="footer-hours-line"><span class="footer-hours-label">По записи</span>: <span class="footer-hours">Пн-Пт 10:00-20:00 · Сб-Вс 10:00-21:00</span></span>
-  </div>
-  <div class="footer-links">
-    <a href="/ru/">Главная</a>
-    <a href="/ru/telpa/">Зал</a>
-    <a href="/ru/cenas/">Цены</a>
-    <a href="#calendar">Забронировать</a>
-    <a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok</a>
-    <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
-  </div>
-  <span class="footer-copy">© 2026 Room Jūrmala. Все права защищены.</span>
-  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
-</footer>
-
-<script src="/calendar-events.js?v=20260609-calendar-events"></script>
-<script src="/services-booking.js?v=20260528-calendar-events"></script>
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileMenuBackdrop = document.querySelector('.mobile-menu-backdrop');
-  const mobileMenuClose = document.querySelector('.mobile-menu-close');
-
-  function setMobileMenuOpen(isOpen) {
-    if (!navToggle || !mobileMenu || !mobileMenuBackdrop) return;
-    navToggle.classList.toggle('active', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-    mobileMenu.classList.toggle('open', isOpen);
-    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-    mobileMenuBackdrop.classList.toggle('open', isOpen);
-    document.body.classList.toggle('menu-open', isOpen);
-  }
-
-  navToggle?.addEventListener('click', () => setMobileMenuOpen(!mobileMenu.classList.contains('open')));
-  [mobileMenuBackdrop, mobileMenuClose].forEach((element) => {
-    element?.addEventListener('click', () => setMobileMenuOpen(false));
-  });
-  document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link) => {
-    link.addEventListener('click', () => setMobileMenuOpen(false));
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setMobileMenuOpen(false);
-  });
-
-  const typewriteTitle = document.querySelector('.services-typewrite');
-  if (typewriteTitle && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let charIndex = 0;
-
-    function wrapTypewriteText(node) {
-      Array.from(node.childNodes).forEach((child) => {
-        if (child.nodeType === Node.TEXT_NODE) {
-          const fragment = document.createDocumentFragment();
-          Array.from(child.textContent).forEach((char) => {
-            if (/\s/.test(char)) {
-              fragment.appendChild(document.createTextNode(char));
-              return;
-            }
-
-            const span = document.createElement('span');
-            span.className = 'write-char';
-            span.textContent = char;
-            span.style.setProperty('--char-index', charIndex);
-            charIndex += 1;
-            fragment.appendChild(span);
-          });
-          child.replaceWith(fragment);
-          return;
-        }
-
-        if (child.nodeType === Node.ELEMENT_NODE) {
-          wrapTypewriteText(child);
-        }
-      });
-    }
-
-    wrapTypewriteText(typewriteTitle);
-  }
-</script>
-</body>
-</html>
+      <a class="text-link" href="#calendar" data-event-book="8">Выбрать дату<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></article></section><section id="calendar" class="section booking-section"><div class="section-heading reveal"><h2>Начнём<br><em>с вашей даты.</em></h2><p>Выберите дату. Мы лично подтвердим доступность.</p></div><noscript><p class="notice">Включите JavaScript для календаря и калькулятора или напишите нам в WhatsApp. <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
+  <div class="booking-layout" data-booking-ui hidden><div class="cal-widget"><div class="cal-nav"><button class="circle-button" id="prevMonth" aria-label="Предыдущий месяц"><span class="turn-back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button class="circle-button" id="nextMonth" aria-label="Следующий месяц"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div>
+  <div class="cal-days-header" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div><div id="calGrid" class="cal-grid" role="group" aria-label="Дата"></div><p class="calendar-note"><span class="event-dot"></span>В календаре указаны запланированные занятия. Доступность помещения подтвердим после запроса.</p></div>
+  <div class="booking-form-wrap"><form id="booking-form" novalidate>
+  <p class="form-error" id="booking-error" role="alert" hidden></p>
+  <div class="form-grid">
+  <div class="field"><label for="customerName">Ваше имя</label><input id="customerName" name="name" autocomplete="name" maxlength="80" placeholder="Имя, фамилия" required></div>
+  <div class="field"><label for="customerPhone">Телефон</label><input id="customerPhone" name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="+371 2X XXX XXX" required></div>
+  <div class="field"><label for="bookingPackageSelect">Тип аренды</label><select id="bookingPackageSelect" name="package" required><option value="">Выберите тип аренды...</option><option value="hours">Почасовая аренда</option><option value="day">Пакет на день</option><option value="week">Пакет на неделю</option><option value="month">Месячный абонемент</option></select></div>
+  <div class="field"><label for="eventTypeSelect">Формат мероприятия</label><select id="eventTypeSelect" name="eventType" required><option value="">Выберите тип мероприятия...</option><option value="Детский день рождения">Детский день рождения</option><option value="Семейный праздник">Семейный праздник</option><option value="Мастер-класс">Мастер-класс</option><option value="Фотосессия">Фотосессия</option><option value="Йога / гимнастика">Йога / гимнастика</option><option value="Физиотерапия">Физиотерапия</option><option value="Детское занятие">Детское занятие</option><option value="Детский лагерь">Детский лагерь</option><option value="Семинар">Семинар</option><option value="Частное мероприятие">Частное мероприятие</option><option value="Другое">Другое</option></select></div>
+  <div class="field full"><label for="desiredDateTime">Дата</label><input id="desiredDateTime" name="date" type="date" required></div>
+  <div class="field"><label for="startTimeDesktop">Начало</label><input id="startTimeDesktop" name="start" type="time" required></div>
+  <div class="field"><label for="endTimeDesktop">Окончание</label><input id="endTimeDesktop" name="end" type="time" required></div>
+  <div class="field full"><label for="bookingNotes">Примечания</label><textarea id="bookingNotes" name="notes" maxlength="500" rows="2" placeholder="Сколько гостей? Есть особые пожелания?"></textarea></div></div>
+  <p id="selected-plan" class="selected-plan" hidden></p>
+  <button class="button button-dark form-submit" type="submit">Подготовить запрос<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button><p class="form-note">На следующем шаге можно проверить сообщение и отправить его через WhatsApp.</p>
+  </form><div id="request-review" tabindex="-1" hidden><h3>Ваш запрос готов.</h3><p>Проверьте сообщение и откройте WhatsApp, чтобы отправить его. Бронирование подтвердим в переписке.</p><pre id="request-message"></pre><a id="request-whatsapp" class="button button-dark" target="_blank" rel="noopener noreferrer">Открыть WhatsApp<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></a><button type="button" class="text-link" id="edit-request">Изменить запрос</button></div></div></div></section><section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>Полезно знать<br><em>перед встречей.</em></h2><p>Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.</p></div><div class="faq-list"><details><summary>Для каких мероприятий подходит ROOM Jūrmala?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Зал подходит для детских дней рождения, семейных праздников, творческих мастер-классов, фотосессий, йоги и гимнастики, семинаров, занятий с тренером и детских лагерей в Каугури, Юрмале.</p></details><details><summary>Можно ли арендовать зал по часам?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для занятий, фотосессий, мастер-классов, семинаров и коротких мероприятий, когда зал нужен на конкретное время.</p></details><details><summary>Можно ли адаптировать зал под разные мероприятия?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал можно подготовить для праздника, занятия, мастер-класса, фотосессии или небольшого семинара. Доступны столы, стулья, небольшая кухня и свободная зона для активностей.</p></details><details><summary>Где отметить день рождения ребенка в Юрмале?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>ROOM Jūrmala — хорошее место для детского дня рождения в Юрмале, если хочется праздника в своем кругу. Зал можно оформить по своему вкусу, принести еду и спокойно отметить с семьей и друзьями.</p></details><details><summary>Можно ли проводить семейные праздники и частные мероприятия?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, ROOM Jūrmala можно использовать для семейных праздников, небольших встреч и частных мероприятий. Это не формальный банкетный зал, поэтому пространство хорошо подходит для теплой и уютной атмосферы.</p></details><details><summary>Можно ли проводить мастер-классы и творческие занятия?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал подходит для рисования, рукоделия, кулинарных, художественных и других творческих мастер-классов. Есть общий стол, место для материалов и возможность расставить зал для групповой работы.</p></details><details><summary>Подходит ли ROOM Jūrmala для фотосессий и видеосъемки?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал подходит для семейных фотосессий, детских фотосессий, небольшой видеосъемки и создания контента. Кирпичная стена, игровая зона и уютный интерьер дают несколько визуальных зон.</p></details><details><summary>Подходит ли зал для йоги, гимнастики и занятий с тренером?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал можно использовать для йоги, гимнастики, физиотерапии, детских двигательных занятий и небольших тренировочных групп. Расстановку можно адаптировать под размер группы и формат занятия.</p></details><details><summary>Можно ли проводить семинары и обучение?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал подходит для небольших семинаров, лекций, занятий для родителей, корпоративного обучения и презентаций. Он удобен, когда нужна спокойная среда и практичная рабочая зона.</p></details><details><summary>Можно ли использовать зал для детских лагерей и развивающих занятий?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Да, зал можно использовать для дней детского лагеря, развивающих занятий, кружков и активностей с малышами или молодыми родителями. Более длительную аренду можно обсудить индивидуально.</p></details><details><summary>На сколько человек рассчитан зал?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Комфортное количество зависит от типа мероприятия, расстановки столов и запланированных активностей.</p></details><details><summary>Где находится ROOM Jūrmala и как забронировать зал?<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></summary><p>ROOM Jūrmala находится по адресу Skolas iela 50, Каугури, Юрмала. У здания есть бесплатная парковка; заявку на бронирование можно отправить на сайте, в WhatsApp или по телефону +371 27 850 380.</p></details></div></section><section class="section location-section" id="map-section"><div><h2>Мы совсем рядом.</h2><address>Skolas iela 50<br>Jūrmala, LV-2016</address><p>Бесплатная парковка у здания.</p><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">Открыть в Google Maps<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div class="map-panel"><div class="map-placeholder"><span class="map-location">Jūrmala</span><span class="map-pin">ROOM</span><button type="button" class="button button-dark" id="load-map">Показать карту<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></button></div></div></section>
+ <footer class="site-footer" id="contact"><div class="footer-top"><h2>До скорой<br><em>встречи.</em></h2><a class="footer-arrow" href="#calendar" aria-label="Выбрать дату"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div class="footer-details"><a class="brand footer-brand" href="/ru/"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala" loading="lazy"></a><div><a href="tel:+37127850380">+371 27 850 380</a><a href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a><a href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div><div><span>По записи</span><span>Пн-Пт 10:00-20:00 · Сб-Вс 10:00-21:00</span><a href="#map-section">Skolas iela 50, Jūrmala</a></div><div><a href="https://www.instagram.com/room.jurmala/" target="_blank" rel="noopener noreferrer">Instagram <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a><a href="https://www.tiktok.com/@room.jurmala" target="_blank" rel="noopener noreferrer">TikTok <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a><a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.25"/></svg></a></div></div><div class="footer-bottom"><span>© 2026 Room Jūrmala. Все права защищены.</span><a href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer">SEO Latvija</a><a href="#main" aria-label="Главная"><span class="turn-up"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.25"/></svg></span></a></div></footer></main><dialog id="media-dialog" aria-label="Загляните внутрь"><button class="dialog-close circle-button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.25"/></svg></button><div id="dialog-content"></div></dialog>
+<script id="site-data" type="application/json">{"lang":"ru","d":{"hero":"Место, чтобы\u003cbr>\u003cem>быть вместе.\u003c/em>","intro":"Для праздников, идей и радости встреч. Уютное пространство для мероприятий в Юрмале.","findDate":"Выбрать дату","together":"Место для встреч","explore":"Загляните внутрь","drag":"Перетаскивайте, чтобы посмотреть","previous":"Предыдущий вид","next":"Следующий вид","details":"Об этом пространстве","close":"Закрыть","pause":"Остановить анимацию","resume":"Включить анимацию","eventTitle":"Свой повод\u003cbr>\u003cem>собраться вместе.\u003c/em>","eventNames":["Праздновать","Создавать","Снимать","Двигаться"],"eventDescriptions":["Детские дни рождения, семейные события и праздники в кругу близких.","Мастер-классы, творческие занятия и новые идеи за общим столом.","Фото и видео при естественном свете на фоне кирпичной стены.","Йога, гимнастика и групповые занятия с пространством для движения."],"moreSpace":"Подробнее о пространстве","enter":"Заходите.","galleryIntro":"Светлое помещение, тёплая атмосфера и место для ваших идей.","photoNames":["Пространство под ваши планы","Место для игр и движения","Кухня и общий стол","Уголок для творчества","Уютно и самым маленьким"],"photoDescriptions":["Столы, стулья и свободная зона для занятий. Расстановку можно изменить под ваше мероприятие.","Мягкий ковёр, игровые элементы и место для групповых занятий.","На кухне можно подготовить и подать торт, закуски и напитки.","Место для общих игр, творческих заданий и новых навыков.","Уютное пространство для детских праздников, семейных встреч и занятий."],"amenities":["Столы и стулья","Мини-кухня","Бесплатная парковка"],"video":"Посмотреть видео","allPhotos":"Все виды пространства","reviewLabel":"Слова наших гостей","readReviews":"Отзывы в Google","priceTitle":"Ваше время.\u003cbr>\u003cem>Ваши планы.\u003c/em>","priceIntro":"От одного часа до регулярных встреч.","modes":["Часы","Дни","Недели","Месяцы"],"units":[["час","часа","часов"],["день","дня","дней"],["неделя","недели","недель"],["месяц","месяца","месяцев"]],"forTime":"За выбранное время","selectDate":"Выбрать дату","saved":"Экономия","duration":"Продолжительность","packageNames":["День","Неделя","Абонемент"],"packageTerms":["8 часов","5 рабочих дней · 40 часов","В месяц · 8 часов в неделю · минимум 3 месяца"],"allPrices":"Все цены","hourlyTitle":"Каждый час в вашем ритме.","minTerm":"Абонемент оформляется минимум на 3 месяца.","bookingTitle":"Начнём\u003cbr>\u003cem>с вашей даты.\u003c/em>","bookingIntro":"Выберите дату. Мы лично подтвердим доступность.","bookingNote":"В календаре указаны запланированные занятия. Доступность помещения подтвердим после запроса.","prevMonth":"Предыдущий месяц","nextMonth":"Следующий месяц","scheduled":"Запланированное занятие","start":"Начало","end":"Окончание","prepare":"Подготовить запрос","requestNote":"На следующем шаге можно проверить сообщение и отправить его через WhatsApp.","reviewRequest":"Ваш запрос готов.","reviewNote":"Проверьте сообщение и откройте WhatsApp, чтобы отправить его. Бронирование подтвердим в переписке.","openWhatsApp":"Открыть WhatsApp","editRequest":"Изменить запрос","invalidRequired":"Заполните все обязательные поля.","invalidPhone":"Введите корректный номер телефона.","invalidDate":"Выберите сегодняшнюю или будущую дату.","invalidTime":"Время окончания должно быть позже начала.","pastTime":"Выберите время, которое ещё не прошло.","tooLong":"Сократите примечания.","selectedPlan":"Выбранный план","noScript":"Включите JavaScript для календаря и калькулятора или напишите нам в WhatsApp.","faqTitle":"Полезно знать\u003cbr>\u003cem>перед встречей.\u003c/em>","footerTitle":"До скорой\u003cbr>\u003cem>встречи.\u003c/em>","location":"Мы совсем рядом.","mapLoad":"Показать карту","parking":"Бесплатная парковка у здания.","spaceHero":"Место для\u003cbr>\u003cem>ваших идей.\u003c/em>","spaceIntro":"Празднуйте, творите, учитесь и встречайтесь. Подготовим пространство к вашему мероприятию.","skip":"Перейти к содержанию","home":"Главная","menu":"Меню","photo":"Открыть фото","videoError":"Браузер не может воспроизвести видео.","videoDownload":"Открыть видеофайл"},"booking":{"title":"Забронировать зал","sub":"Заполните форму, и мы скоро свяжемся с вами","labels":{"name":"Ваше имя","phone":"Телефон","package":"Тип аренды","eventType":"Формат мероприятия","date":"Дата","time":"Время","notes":"Примечания"},"placeholders":{"name":"Имя, фамилия","phone":"+371 2X XXX XXX","date":"например, 20 апреля","start":"Начало, например 14:00","end":"Окончание, например 17:00","notes":"Сколько гостей? Есть особые пожелания?"},"options":["Выберите тип мероприятия...","🎈 Детский день рождения","👨‍👩‍👧 Семейный праздник","🎨 Мастер-класс","📸 Фотосессия","🌿 Йога / гимнастика","🤲 Физиотерапия","🧒 Детское занятие","☀️ Детский лагерь","🎓 Семинар","🎉 Частное мероприятие","✨ Другое"],"packageOptions":["Выберите тип аренды...","Почасовая аренда","Пакет на день","Пакет на неделю","Месячный абонемент"],"packageNotes":{"hours":"Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?","day":"Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?","week":"Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?","month":"Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?"},"button":"Отправить заявку ✦","buttonSent":"✓ Заявка отправлена!","notePrefix":"Или напишите в WhatsApp:","startTimeAria":"Время начала","endTimeAria":"Время окончания","errors":{"required":"Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.","tooLong":"Сообщение слишком длинное. Сократите примечания и попробуйте снова."}},"calendar":{"titleHtml":"Выберите дату для вашего \u003cem style=\"color:var(--gold);\">мероприятия\u003c/em>","daysShort":["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],"monthsHeader":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"monthsDate":["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"],"freeLabel":"Свободно"},"whatsapp":{"greeting":"Здравствуйте! Хочу забронировать зал ROOM Jūrmala.","labels":{"name":"Имя","phone":"Телефон","package":"Тип аренды","eventType":"Формат мероприятия","date":"Дата","time":"Время","notes":"Примечания"},"timePrefixes":{"from":"С","until":"До"}},"photos":[{"src":"/assets/images/gallery/space-open.jpeg","name":"Пространство под ваши планы","description":"Столы, стулья и свободная зона для занятий. Расстановку можно изменить под ваше мероприятие.","video":"/assets/videos/room-jurmala-privats-pasakums.mp4"},{"src":"/assets/images/gallery/activity-room.jpeg","name":"Место для игр и движения","description":"Мягкий ковёр, игровые элементы и место для групповых занятий.","video":"/assets/videos/room-jurmala-bernu-nodarbiba.mp4"},{"src":"/assets/images/gallery/kitchen-dining.jpeg","name":"Кухня и общий стол","description":"На кухне можно подготовить и подать торт, закуски и напитки.","video":"/assets/videos/room-jurmala-telpas-ieeja.mp4"},{"src":"/assets/images/gallery/creative-table.jpeg","name":"Уголок для творчества","description":"Место для общих игр, творческих заданий и новых навыков.","video":"/assets/videos/room-jurmala-radosa-darbnica-berniem.mp4"},{"src":"/assets/images/gallery/soft-play.jpeg","name":"Уютно и самым маленьким","description":"Уютное пространство для детских праздников, семейных встреч и занятий.","video":"/assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4"}],"mapTitle":"Местоположение Room Jūrmala"}</script>
+</body></html>

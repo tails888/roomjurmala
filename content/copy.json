@@ -1,0 +1,1043 @@
+{
+  "lv": {
+    "meta": {
+      "title": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "description": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
+      "url": "https://roomjurmala.lv/",
+      "ogTitle": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "ogDescription": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
+      "twitterTitle": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "twitterDescription": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
+      "locale": "lv_LV"
+    },
+    "nav": {
+      "links": [
+        "Telpa",
+        "Cenas",
+        "Pieejamība",
+        "Atrašanās",
+        "Kontakti"
+      ],
+      "cta": "Rezervēt",
+      "menuOpen": "Atvērt izvēlni",
+      "menuClose": "Aizvērt izvēlni"
+    },
+    "hero": {
+      "titleHtml": "Telpa jūsu <br/><em>pasākumiem</em>",
+      "sub": "Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm",
+      "actions": [
+        "Rezervēt",
+        "Uzzināt vairāk"
+      ]
+    },
+    "categories": {
+      "tag": "Mūsu telpa",
+      "titleHtml": "Atrodiet vietu savam <em style=\"color:var(--gold);\">pasākumam</em>",
+      "sub": "Pie mums var svinēt, radīt, mācīties un satikties. Telpu pielāgojam Jūsu pasākuma formātam, viesu skaitam un noskaņai.",
+      "cards": [
+        [
+          "Bērnu ballītes un dzimšanas dienas",
+          "Mājīga telpa bērnu svinībām, ģimenes pasākumiem un nelielām ballītēm Jūrmalā"
+        ],
+        [
+          "Meistarklases un radošās darbnīcas",
+          "Liels galds, ērta vieta darbam un mierīga atmosfēra radošām nodarbībām"
+        ],
+        [
+          "Fotosesijas un satura veidošana",
+          "Gaiša telpa ar dabisko gaismu, ķieģeļu sienu un mājīgu interjeru"
+        ],
+        [
+          "Telpa treneriem un nodarbībām",
+          "Vieta jogai, vingrošanai, bērnu kustību nodarbībām, semināriem un nometnēm"
+        ]
+      ]
+    },
+    "features": {
+      "tag": "Pie mums ir",
+      "titleHtml": "Mājīga vieta <em>nodarbībām</em>",
+      "items": [
+        [
+          "Silti un mājīgi",
+          "Gaiša telpa ar mīkstu paklāju, ķieģeļu sienu un mierīgu sajūtu jau ienākot."
+        ],
+        [
+          "Viss pa rokai",
+          "Galdi, krēsli un ērta telpa ballītēm, darbnīcām, semināriem un grupu nodarbībām."
+        ],
+        [
+          "Pielāgojam Jums",
+          "Sakārtojam telpu tā, lai tā derētu pasākuma formātam, viesiem un bērnu vecumam."
+        ],
+        [
+          "Virtuve pa rokai",
+          "Kūku, uzkodas un dzērienus varat ērti sagatavot un pasniegt uz vietas."
+        ]
+      ]
+    },
+    "testimonials": {
+      "tag": "Atsauksmes",
+      "titleHtml": "Ko saka mūsu <em>viesi</em>",
+      "sub": "5.0 ★ vidējais vērtējums Google",
+      "cta": "Pastāsti kā mums izdevās"
+    },
+    "pricing": {
+      "tag": "Paketes",
+      "titleHtml": "Dienas, nedēļas, mēneša",
+      "cards": {
+        "hourly": {
+          "type": "Viena diena",
+          "amountHtml": "<sup>€</sup>130",
+          "lead": "Dienas pakete",
+          "summary": "Pilna diena vienreizējam pasākumam vai intensīvam darbam.",
+          "period": "/ 8 stundas",
+          "features": [
+            "Ietaupi 30€ · 16.25€/h"
+          ],
+          "cta": "Rezervēt dienu"
+        },
+        "party": {
+          "popular": "Populārākais",
+          "type": "Nedēļa · 40h kopā",
+          "amountHtml": "<sup>€</sup>550",
+          "forUpTo": "Nedēļas pakete",
+          "summary": "5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.",
+          "perEvent": "/ 5 dienas",
+          "featuresPrimary": [
+            "Ietaupi 250€ · 13.75€/h"
+          ],
+          "moreThan15": "Laba izvēle",
+          "featuresSecondary": [
+            "Bērnu nometnēm",
+            "Kursiem un meistarklasēm"
+          ],
+          "cta": "Rezervēt nedēļu"
+        },
+        "custom": {
+          "type": "Regulāri · mēnesī",
+          "amountHtml": "<sup>€</sup>460",
+          "lead": "Abonements",
+          "summary": "Mēneša risinājums nodarbībām un grupām.",
+          "period": "/ mēnesī · min. 3 mēneši",
+          "features": [
+            "Ietaupi 180€/mēn · 8h nedēļā"
+          ],
+          "cta": "Pieteikties"
+        }
+      }
+    },
+    "calendar": {
+      "titleHtml": "Atrodiet dienu savam <em style=\"color:var(--gold);\">pasākumam</em>",
+      "daysShort": [
+        "P",
+        "O",
+        "T",
+        "C",
+        "Pk",
+        "S",
+        "Sv"
+      ],
+      "monthsHeader": [
+        "Janvāris",
+        "Februāris",
+        "Marts",
+        "Aprīlis",
+        "Maijs",
+        "Jūnijs",
+        "Jūlijs",
+        "Augusts",
+        "Septembris",
+        "Oktobris",
+        "Novembris",
+        "Decembris"
+      ],
+      "monthsDate": [
+        "janvāra",
+        "februāra",
+        "marta",
+        "aprīļa",
+        "maija",
+        "jūnija",
+        "jūlija",
+        "augusta",
+        "septembra",
+        "oktobra",
+        "novembra",
+        "decembra"
+      ],
+      "freeLabel": "Brīvs"
+    },
+    "faq": {
+      "tag": "Biežākie jautājumi",
+      "titleHtml": "Pirms rezervācijas <em>mazie jautājumi</em>",
+      "sub": "Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.",
+      "items": [
+        [
+          "Cik maksā telpu noma ROOM Jūrmala?",
+          "Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta."
+        ],
+        [
+          "Vai telpu var nomāt pa stundām?",
+          "Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija."
+        ],
+        [
+          "Kādus pasākumus var rīkot ROOM Jūrmala?",
+          "ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus."
+        ],
+        [
+          "Kur nosvinēt bērna dzimšanas dienu Jūrmalā?",
+          "ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem."
+        ],
+        [
+          "Cik cilvēkiem telpa ir piemērota?",
+          "Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu."
+        ],
+        [
+          "Vai telpā ir virtuve un vai drīkst atnest ēdienu?",
+          "Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī."
+        ],
+        [
+          "Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?",
+          "ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu."
+        ],
+        [
+          "Kā rezervēt vai apskatīt telpu pirms pasākuma?",
+          "Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku."
+        ]
+      ]
+    },
+    "booking": {
+      "title": "Rezervēt telpu",
+      "sub": "Aizpildiet formu, un mēs drīz ar Jums sazināsimies",
+      "labels": {
+        "name": "Jūsu vārds",
+        "phone": "Tālrunis",
+        "package": "Nomas veids",
+        "eventType": "Pasākuma veids",
+        "date": "Datums",
+        "time": "Laiks",
+        "notes": "Piezīmes"
+      },
+      "placeholders": {
+        "name": "Vārds, Uzvārds",
+        "phone": "+371 2X XXX XXX",
+        "date": "piem. 20. aprīlis",
+        "start": "No, piem. 14:00",
+        "end": "Līdz, piem. 17:00",
+        "notes": "Cik cilvēku? Īpašas vēlmes?"
+      },
+      "options": [
+        "Izvēlieties pasākuma veidu...",
+        "🎈 Bērnu dzimšanas diena",
+        "👨‍👩‍👧 Ģimenes svinības",
+        "🎨 Meistarklase",
+        "📸 Fotosesija",
+        "🌿 Joga / vingrošana",
+        "🤲 Fizioterapija",
+        "🧒 Bērnu nodarbība",
+        "☀️ Bērnu nometne",
+        "🎓 Seminārs",
+        "🎉 Privāts pasākums",
+        "✨ Cits"
+      ],
+      "packageOptions": [
+        "Izvēlieties nomas veidu...",
+        "Stundas noma",
+        "Dienas pakete",
+        "Nedēļas pakete",
+        "Mēneša abonements"
+      ],
+      "packageNotes": {
+        "hours": "Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?",
+        "day": "Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?",
+        "week": "Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?",
+        "month": "Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?"
+      },
+      "button": "Nosūtīt pieprasījumu ✦",
+      "buttonSent": "✓ Pieprasījums nosūtīts!",
+      "notePrefix": "Rakstiet arī WhatsApp:",
+      "startTimeAria": "Sākuma laiks",
+      "endTimeAria": "Beigu laiks",
+      "errors": {
+        "required": "Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.",
+        "tooLong": "Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz."
+      }
+    },
+    "map": {
+      "tag": "Atrašanās",
+      "title": "Kā mūs atrast?",
+      "sub": "",
+      "details": [
+        [
+          "Adrese",
+          "Skolas iela 50, Jūrmala, LV-2016"
+        ],
+        [
+          "Ar automašīnu",
+          "Bezmaksas autostāvvieta pie ēkas"
+        ],
+        [
+          "Tālrunis",
+          "+371 27 850 380"
+        ]
+      ],
+      "buttons": [
+        "Atvērt Google Maps"
+      ],
+      "iframeTitle": "Room Jūrmala atrašanās vieta",
+      "iframeLang": "lv"
+    },
+    "contact": {
+      "tag": "Sazinieties ar mums",
+      "titleHtml": "Plānojat savu <em>pasākumu?</em>",
+      "sub": "Sazinieties ar mums Jums ērtā veidā",
+      "labels": [
+        "Tālrunis",
+        "WhatsApp",
+        "E-pasts",
+        "Atsauksme"
+      ],
+      "values": [
+        "+371 27 850 380",
+        "Rakstiet mums",
+        "welcome@roomjurmala.lv",
+        "Pastāsti kā mums izdevās"
+      ],
+      "socialTitle": "Seko mums",
+      "socialLabels": [
+        "Instagram",
+        "TikTok",
+        "Facebook"
+      ],
+      "address": "📍 Skolas iela 50, Jūrmala, LV-2016, Latvija"
+    },
+    "footer": {
+      "links": [
+        "Telpa",
+        "Cenas",
+        "Rezervēt",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "Atsauksme"
+      ],
+      "business": "ROOM Jūrmala",
+      "address": "Skolas iela 50, Jūrmala, LV-2016, Latvija",
+      "phoneLabel": "Tālrunis",
+      "phone": "+371 27 850 380",
+      "hoursLabel": "Pēc pieraksta",
+      "hours": "P-Pk 10:00-20:00 · S-Sv 10:00-21:00",
+      "copy": "© 2026 Room Jūrmala. Visas tiesības aizsargātas."
+    },
+    "whatsapp": {
+      "greeting": "Sveiki! Vēlos pieteikt ROOM Jūrmala telpu.",
+      "labels": {
+        "name": "Vārds",
+        "phone": "Tālrunis",
+        "package": "Nomas veids",
+        "eventType": "Pasākuma veids",
+        "date": "Datums",
+        "time": "Laiks",
+        "notes": "Piezīmes"
+      },
+      "timePrefixes": {
+        "from": "No",
+        "until": "Līdz"
+      }
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Event Venue in Jūrmala | ROOM Jūrmala",
+      "description": "Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.",
+      "url": "https://roomjurmala.lv/en/",
+      "ogTitle": "Event Venue in Jūrmala | ROOM Jūrmala",
+      "ogDescription": "Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.",
+      "twitterTitle": "Event Venue in Jūrmala | ROOM Jūrmala",
+      "twitterDescription": "Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.",
+      "locale": "en_GB"
+    },
+    "nav": {
+      "links": [
+        "The space",
+        "Prices",
+        "Availability",
+        "Location",
+        "Contact"
+      ],
+      "cta": "Book",
+      "menuOpen": "Open menu",
+      "menuClose": "Close menu"
+    },
+    "hero": {
+      "titleHtml": "Space for your <br/><em>events</em>",
+      "sub": "A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps",
+      "actions": [
+        "Book now",
+        "Learn more"
+      ]
+    },
+    "categories": {
+      "tag": "The space",
+      "titleHtml": "Find the right <em style=\"color:var(--gold);\">setting</em>",
+      "sub": "A warm place to celebrate, create and gather. We’ll make the room feel comfortable for your day.",
+      "cards": [
+        [
+          "Children’s parties",
+          "A play corner, decorations and a place where children can really enjoy the celebration"
+        ],
+        [
+          "Workshops",
+          "A big table, a comfortable work area and a calm atmosphere for creative sessions"
+        ],
+        [
+          "Photoshoots",
+          "A simple, clean space for beautiful photos"
+        ],
+        [
+          "Private events",
+          "A calm place for small celebrations, conversations, yoga or seminars"
+        ]
+      ]
+    },
+    "features": {
+      "tag": "We have",
+      "titleHtml": "A cozy place for <em>classes</em>",
+      "items": [
+        [
+          "Warm and cozy",
+          "A bright room with a soft carpet, brick wall and a calm feeling from the moment you walk in."
+        ],
+        [
+          "Everything within reach",
+          "Tables, chairs and a comfortable space that can be adapted for your event."
+        ],
+        [
+          "Adapted for you",
+          "We arrange the room so it works for your event and your guests."
+        ],
+        [
+          "Kitchen close by",
+          "Set up the cake, snacks and drinks on site, without having to rush."
+        ]
+      ]
+    },
+    "testimonials": {
+      "tag": "Reviews",
+      "titleHtml": "What our <em>guests</em> say",
+      "sub": "5.0 ★ average Google rating",
+      "cta": "Tell us how we did"
+    },
+    "pricing": {
+      "tag": "Packages",
+      "titleHtml": "Day, week, month",
+      "cards": {
+        "hourly": {
+          "type": "One day",
+          "amountHtml": "<sup>€</sup>130",
+          "lead": "Day package",
+          "summary": "A full day for a one-off event or focused work.",
+          "period": "/ 8 hours",
+          "features": [
+            "Save €30 · €16.25/h"
+          ],
+          "cta": "Book a day"
+        },
+        "party": {
+          "popular": "Most popular",
+          "type": "Week · 40h total",
+          "amountHtml": "<sup>€</sup>550",
+          "forUpTo": "Week package",
+          "summary": "5 working days in a row. Ideal for summer camps and courses.",
+          "perEvent": "/ 5 days",
+          "featuresPrimary": [
+            "Save €250 · €13.75/h"
+          ],
+          "moreThan15": "Best for",
+          "featuresSecondary": [
+            "Children’s camps",
+            "Courses and workshops"
+          ],
+          "cta": "Book a week"
+        },
+        "custom": {
+          "type": "Regular · monthly",
+          "amountHtml": "<sup>€</sup>460",
+          "lead": "Subscription",
+          "summary": "A monthly solution for classes and groups.",
+          "period": "/ month · min. 3 months",
+          "features": [
+            "Save €180/month · 8h weekly"
+          ],
+          "cta": "Apply"
+        }
+      }
+    },
+    "calendar": {
+      "titleHtml": "Choose a date for <em style=\"color:var(--gold);\">your event</em>",
+      "daysShort": [
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su"
+      ],
+      "monthsHeader": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "monthsDate": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "freeLabel": "Available"
+    },
+    "faq": {
+      "tag": "Frequently asked",
+      "titleHtml": "Small questions <em>before booking</em>",
+      "sub": "A quick note on pricing, hourly rental, event types and where to find us.",
+      "items": [
+        [
+          "How much does ROOM Jūrmala cost to rent?",
+          "Hourly rental starts from €20. Popular options are 3 hours for €55, 6 hours for €100, the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event."
+        ],
+        [
+          "Can the venue be rented by the hour?",
+          "Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed."
+        ],
+        [
+          "What events can be hosted at ROOM Jūrmala?",
+          "ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings."
+        ],
+        [
+          "Where can you celebrate a child’s birthday in Jūrmala?",
+          "ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends."
+        ],
+        [
+          "How many guests is the venue suitable for?",
+          "Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking."
+        ],
+        [
+          "Is there a kitchen and can we bring food?",
+          "The venue has a small kitchen and an area for food or drinks, so it works for children’s parties, family celebrations and workshops with a break. Food details and the exact layout are best agreed during booking."
+        ],
+        [
+          "Where is ROOM Jūrmala located and is parking available?",
+          "ROOM Jūrmala is located at Skolas iela 50, Jūrmala, LV-2016. Free parking is available by the building, and the room is easy to reach by car or public transport."
+        ],
+        [
+          "How can I book or view the venue before an event?",
+          "You can send a booking request through the website form, WhatsApp or by phone at +371 27 850 380. If you want to view the venue before your event, contact us in advance to agree on a suitable time."
+        ]
+      ]
+    },
+    "booking": {
+      "title": "Book your event",
+      "sub": "Fill in the form and we'll get back to you soon",
+      "labels": {
+        "name": "Your name",
+        "phone": "Phone",
+        "package": "Rental type",
+        "eventType": "Event type",
+        "date": "Date",
+        "time": "Time",
+        "notes": "Notes"
+      },
+      "placeholders": {
+        "name": "Name, Surname",
+        "phone": "+371 2X XXX XXX",
+        "date": "e.g. 20 April",
+        "start": "From, e.g. 14:00",
+        "end": "Until, e.g. 17:00",
+        "notes": "How many guests? Any special requests?"
+      },
+      "options": [
+        "Choose event type...",
+        "🎈 Children’s birthday",
+        "👨‍👩‍👧 Family celebration",
+        "🎨 Workshop",
+        "📸 Photoshoot",
+        "🌿 Yoga / exercise",
+        "🤲 Physiotherapy",
+        "🧒 Children’s class",
+        "☀️ Children’s camp",
+        "🎓 Seminar",
+        "🎉 Private event",
+        "✨ Other"
+      ],
+      "packageOptions": [
+        "Choose rental type...",
+        "Hourly rental",
+        "Day package",
+        "Week package",
+        "Monthly subscription"
+      ],
+      "packageNotes": {
+        "hours": "I am interested in renting the room for a few hours. Is it possible to book the room on this date and time?",
+        "day": "I am interested in the day package for €130. Is it possible to book the room on this date?",
+        "week": "I am interested in the week package for €550. Is it possible to book the room on this date?",
+        "month": "I am interested in the monthly subscription for €460 per month. Is it possible to agree on a regular booking time?"
+      },
+      "button": "Send booking request ✦",
+      "buttonSent": "✓ Request sent!",
+      "notePrefix": "Or message us on WhatsApp:",
+      "startTimeAria": "Start time",
+      "endTimeAria": "End time",
+      "errors": {
+        "required": "Please fill in your name, phone, booking type, event type, date and time.",
+        "tooLong": "The message is too long. Please shorten the notes and try again."
+      }
+    },
+    "map": {
+      "tag": "Location",
+      "title": "How to find us",
+      "sub": "",
+      "details": [
+        [
+          "Address",
+          "Skolas iela 50, Jūrmala, LV-2016"
+        ],
+        [
+          "By car",
+          "Free parking next to the building"
+        ],
+        [
+          "Phone",
+          "+371 27 850 380"
+        ]
+      ],
+      "buttons": [
+        "Open Google Maps"
+      ],
+      "iframeTitle": "Room Jūrmala location",
+      "iframeLang": "en"
+    },
+    "contact": {
+      "tag": "Contact us",
+      "titleHtml": "Ready for your <em>event?</em>",
+      "sub": "Get in touch however works best for you",
+      "labels": [
+        "Phone",
+        "WhatsApp",
+        "Email",
+        "Review"
+      ],
+      "values": [
+        "+371 27 850 380",
+        "Message us",
+        "welcome@roomjurmala.lv",
+        "Tell us how we did"
+      ],
+      "socialTitle": "Follow us",
+      "socialLabels": [
+        "Instagram",
+        "TikTok",
+        "Facebook"
+      ],
+      "address": "📍 Skolas iela 50, Jūrmala, LV-2016, Latvia"
+    },
+    "footer": {
+      "links": [
+        "The space",
+        "Prices",
+        "Book",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "Review"
+      ],
+      "business": "ROOM Jūrmala",
+      "address": "Skolas iela 50, Jūrmala, LV-2016, Latvia",
+      "phoneLabel": "Phone",
+      "phone": "+371 27 850 380",
+      "hoursLabel": "By appointment",
+      "hours": "Mon-Fri 10:00-20:00 · Sat-Sun 10:00-21:00",
+      "copy": "© 2026 Room Jūrmala. All rights reserved."
+    },
+    "whatsapp": {
+      "greeting": "Hello! I would like to book ROOM Jūrmala.",
+      "labels": {
+        "name": "Name",
+        "phone": "Phone",
+        "package": "Rental type",
+        "eventType": "Event type",
+        "date": "Date",
+        "time": "Time",
+        "notes": "Notes"
+      },
+      "timePrefixes": {
+        "from": "From",
+        "until": "Until"
+      }
+    }
+  },
+  "ru": {
+    "meta": {
+      "title": "Зал для мероприятий в Юрмале | ROOM Jūrmala",
+      "description": "Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.",
+      "url": "https://roomjurmala.lv/ru/",
+      "ogTitle": "Зал для мероприятий в Юрмале | ROOM Jūrmala",
+      "ogDescription": "Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.",
+      "twitterTitle": "Зал для мероприятий в Юрмале | ROOM Jūrmala",
+      "twitterDescription": "Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.",
+      "locale": "ru_RU"
+    },
+    "nav": {
+      "links": [
+        "Зал",
+        "Цены",
+        "Свободные даты",
+        "Адрес",
+        "Контакты"
+      ],
+      "cta": "Забронировать",
+      "menuOpen": "Открыть меню",
+      "menuClose": "Закрыть меню"
+    },
+    "hero": {
+      "titleHtml": "Пространство для ваших <br/><em>мероприятий</em>",
+      "sub": "Пространство в Каугури для детских праздников, фотосессий, мастер-классов, занятий с тренерами, семинаров и детских лагерей",
+      "actions": [
+        "Забронировать",
+        "Узнать больше"
+      ]
+    },
+    "categories": {
+      "tag": "Наш зал",
+      "titleHtml": "Найдите место для вашего <em style=\"color:var(--gold);\">мероприятия</em>",
+      "sub": "У нас можно праздновать, творить и встречаться. Мы позаботимся, чтобы зал был уютным и удобным для вашего дня.",
+      "cards": [
+        [
+          "Детские дни рождения",
+          "Игровой уголок, декорации и место, где детям по-настоящему радостно праздновать"
+        ],
+        [
+          "Мастер-классы",
+          "Большой стол, удобное рабочее место и спокойная атмосфера для творчества"
+        ],
+        [
+          "Фотосессии",
+          "Простое и чистое пространство для красивых кадров"
+        ],
+        [
+          "Частные мероприятия",
+          "Спокойное место для небольших праздников, разговоров, йоги или семинаров"
+        ]
+      ]
+    },
+    "features": {
+      "tag": "У нас есть",
+      "titleHtml": "Уютное место для <em>занятий</em>",
+      "items": [
+        [
+          "Тепло и уютно",
+          "Светлый зал с мягким ковром, кирпичной стеной и спокойной атмосферой уже с порога."
+        ],
+        [
+          "Все под рукой",
+          "Столы, стулья и удобное пространство, которое можно адаптировать под ваше мероприятие."
+        ],
+        [
+          "Подстроим под вас",
+          "Расставим всё так, чтобы зал был удобен для вашего мероприятия и гостей."
+        ],
+        [
+          "Кухня под рукой",
+          "Торт, закуски и напитки удобно подготовить и подать прямо на месте."
+        ]
+      ]
+    },
+    "testimonials": {
+      "tag": "Отзывы",
+      "titleHtml": "Что говорят наши <em>гости</em>",
+      "sub": "5.0 ★ средняя оценка в Google",
+      "cta": "Расскажите как у нас получилось"
+    },
+    "pricing": {
+      "tag": "Пакеты",
+      "titleHtml": "День, неделя, месяц",
+      "cards": {
+        "hourly": {
+          "type": "Один день",
+          "amountHtml": "<sup>€</sup>130",
+          "lead": "Пакет на день",
+          "summary": "Полный день для разового события или интенсивной работы.",
+          "period": "/ 8 часов",
+          "features": [
+            "Экономия 30€ · 16.25€/ч"
+          ],
+          "cta": "Забронировать день"
+        },
+        "party": {
+          "popular": "Самый популярный",
+          "type": "Неделя · 40ч всего",
+          "amountHtml": "<sup>€</sup>550",
+          "forUpTo": "Пакет на неделю",
+          "summary": "5 рабочих дней подряд. Идеально для летних лагерей и курсов.",
+          "perEvent": "/ 5 дней",
+          "featuresPrimary": [
+            "Экономия 250€ · 13.75€/ч"
+          ],
+          "moreThan15": "Подходит для",
+          "featuresSecondary": [
+            "Детских лагерей",
+            "Курсов и мастер-классов"
+          ],
+          "cta": "Забронировать неделю"
+        },
+        "custom": {
+          "type": "Регулярно · месяц",
+          "amountHtml": "<sup>€</sup>460",
+          "lead": "Абонемент",
+          "summary": "Месячное решение для занятий и групп.",
+          "period": "/ месяц · мин. 3 месяца",
+          "features": [
+            "Экономия 180€/мес · 8ч в неделю"
+          ],
+          "cta": "Записаться"
+        }
+      }
+    },
+    "calendar": {
+      "titleHtml": "Выберите дату для вашего <em style=\"color:var(--gold);\">мероприятия</em>",
+      "daysShort": [
+        "Пн",
+        "Вт",
+        "Ср",
+        "Чт",
+        "Пт",
+        "Сб",
+        "Вс"
+      ],
+      "monthsHeader": [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь"
+      ],
+      "monthsDate": [
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+      ],
+      "freeLabel": "Свободно"
+    },
+    "faq": {
+      "tag": "Частые вопросы",
+      "titleHtml": "Маленькие вопросы <em>перед бронью</em>",
+      "sub": "Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.",
+      "items": [
+        [
+          "Сколько стоит аренда ROOM Jūrmala?",
+          "Почасовая аренда начинается от 20€ в час. Популярные варианты: 3 часа — 55€, 6 часов — 100€, день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия."
+        ],
+        [
+          "Можно ли арендовать зал по часам?",
+          "Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день."
+        ],
+        [
+          "Какие мероприятия можно проводить в ROOM Jūrmala?",
+          "В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия."
+        ],
+        [
+          "Где отметить день рождения ребенка в Юрмале?",
+          "ROOM Jūrmala — хорошее место для детского дня рождения в Юрмале, если хочется праздника в своем кругу. Зал можно оформить по своему вкусу, принести еду и спокойно отметить с семьей и друзьями."
+        ],
+        [
+          "На сколько гостей рассчитан зал?",
+          "Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей."
+        ],
+        [
+          "Есть ли кухня и можно ли принести еду?",
+          "В зале есть небольшая кухня и зона для еды или напитков, поэтому здесь удобно проводить детский праздник, семейное торжество или мастер-класс с перерывом. Детали по еде и расстановке лучше согласовать при бронировании."
+        ],
+        [
+          "Где находится ROOM Jūrmala и есть ли парковка?",
+          "ROOM Jūrmala находится по адресу Skolas iela 50, Jūrmala, LV-2016. У здания есть бесплатная парковка, до зала удобно добраться на машине или общественном транспорте."
+        ],
+        [
+          "Как забронировать или посмотреть зал перед мероприятием?",
+          "Заявку на бронирование можно отправить через форму на сайте, WhatsApp или по телефону +371 27 850 380. Если хотите посмотреть зал до мероприятия, свяжитесь заранее, чтобы договориться об удобном времени."
+        ]
+      ]
+    },
+    "booking": {
+      "title": "Забронировать зал",
+      "sub": "Заполните форму, и мы скоро свяжемся с вами",
+      "labels": {
+        "name": "Ваше имя",
+        "phone": "Телефон",
+        "package": "Тип аренды",
+        "eventType": "Формат мероприятия",
+        "date": "Дата",
+        "time": "Время",
+        "notes": "Примечания"
+      },
+      "placeholders": {
+        "name": "Имя, фамилия",
+        "phone": "+371 2X XXX XXX",
+        "date": "например, 20 апреля",
+        "start": "Начало, например 14:00",
+        "end": "Окончание, например 17:00",
+        "notes": "Сколько гостей? Есть особые пожелания?"
+      },
+      "options": [
+        "Выберите тип мероприятия...",
+        "🎈 Детский день рождения",
+        "👨‍👩‍👧 Семейный праздник",
+        "🎨 Мастер-класс",
+        "📸 Фотосессия",
+        "🌿 Йога / гимнастика",
+        "🤲 Физиотерапия",
+        "🧒 Детское занятие",
+        "☀️ Детский лагерь",
+        "🎓 Семинар",
+        "🎉 Частное мероприятие",
+        "✨ Другое"
+      ],
+      "packageOptions": [
+        "Выберите тип аренды...",
+        "Почасовая аренда",
+        "Пакет на день",
+        "Пакет на неделю",
+        "Месячный абонемент"
+      ],
+      "packageNotes": {
+        "hours": "Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?",
+        "day": "Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?",
+        "week": "Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?",
+        "month": "Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?"
+      },
+      "button": "Отправить заявку ✦",
+      "buttonSent": "✓ Заявка отправлена!",
+      "notePrefix": "Или напишите в WhatsApp:",
+      "startTimeAria": "Время начала",
+      "endTimeAria": "Время окончания",
+      "errors": {
+        "required": "Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.",
+        "tooLong": "Сообщение слишком длинное. Сократите примечания и попробуйте снова."
+      }
+    },
+    "map": {
+      "tag": "Адрес",
+      "title": "Как нас найти?",
+      "sub": "",
+      "details": [
+        [
+          "Адрес",
+          "Skolas iela 50, Jūrmala, LV-2016"
+        ],
+        [
+          "На машине",
+          "Бесплатная парковка рядом со зданием"
+        ],
+        [
+          "Телефон",
+          "+371 27 850 380"
+        ]
+      ],
+      "buttons": [
+        "Открыть в Google Maps"
+      ],
+      "iframeTitle": "Местоположение Room Jūrmala",
+      "iframeLang": "ru"
+    },
+    "contact": {
+      "tag": "Свяжитесь с нами",
+      "titleHtml": "Готовы провести своё <em>мероприятие?</em>",
+      "sub": "Свяжитесь с нами любым удобным способом",
+      "labels": [
+        "Телефон",
+        "WhatsApp",
+        "Эл. почта",
+        "Отзыв"
+      ],
+      "values": [
+        "+371 27 850 380",
+        "Написать нам",
+        "welcome@roomjurmala.lv",
+        "Расскажите как у нас получилось"
+      ],
+      "socialTitle": "Подписывайтесь на нас",
+      "socialLabels": [
+        "Instagram",
+        "TikTok",
+        "Facebook"
+      ],
+      "address": "📍 Skolas iela 50, Jūrmala, LV-2016, Латвия"
+    },
+    "footer": {
+      "links": [
+        "Зал",
+        "Цены",
+        "Забронировать",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "Отзыв"
+      ],
+      "business": "ROOM Jūrmala",
+      "address": "Skolas iela 50, Jūrmala, LV-2016, Латвия",
+      "phoneLabel": "Телефон",
+      "phone": "+371 27 850 380",
+      "hoursLabel": "По записи",
+      "hours": "Пн-Пт 10:00-20:00 · Сб-Вс 10:00-21:00",
+      "copy": "© 2026 Room Jūrmala. Все права защищены."
+    },
+    "whatsapp": {
+      "greeting": "Здравствуйте! Хочу забронировать зал ROOM Jūrmala.",
+      "labels": {
+        "name": "Имя",
+        "phone": "Телефон",
+        "package": "Тип аренды",
+        "eventType": "Формат мероприятия",
+        "date": "Дата",
+        "time": "Время",
+        "notes": "Примечания"
+      },
+      "timePrefixes": {
+        "from": "С",
+        "until": "До"
+      }
+    }
+  }
+}
