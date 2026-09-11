@@ -170,3 +170,13 @@ body{background:var(--paper)}
 .hour-saving{display:block;font-size:12px;margin-top:12px;color:var(--green)}
 .hour-choice[aria-pressed=true] .hour-saving{color:#ffbc88}
 .hour-saving-note{font-size:12px;color:var(--muted);margin:16px 0 0;line-height:1.5}
+
+.film-scroll-enabled{position:relative}
+.film-scroll-enabled .film-scroll-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.film-scroll-enabled .paper-film-heading{margin:0;width:100%;padding-top:20px;padding-bottom:18px}
+.film-scroll-enabled .paper-film-heading h3{font-size:clamp(30px,5vw,42px)}
+.film-scroll-enabled .paper-film-heading p{margin-top:9px}
+.film-scroll-enabled .paper-film-heading>p{display:none}
+.film-scroll-enabled .paper-films{flex:none;scroll-snap-type:none;scroll-behavior:auto;touch-action:pan-y;overflow-x:hidden;padding-bottom:22px}
+.film-scroll-enabled .paper-film{flex-basis:min(75vw,36svh);max-width:none}
+.film-scroll-enabled .paper-film h4{font-size:22px;margin-top:12px}

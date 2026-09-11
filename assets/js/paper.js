@@ -1,6 +1,7 @@
 export function mountPaper(reduced){
   mountTypewriter(document.querySelector('#paper-title'),reduced);
   mountGalleryScroll(reduced);
+  mountMobileFilms(reduced);
   const strip=document.querySelector('.paper-films');
   let drag=null;
   strip?.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0||e.target.closest('button,a'))return;drag={x:e.clientX,left:strip.scrollLeft};strip.setPointerCapture(e.pointerId);strip.classList.add('is-dragging');});
@@ -116,4 +117,34 @@ function mountGalleryScroll(reduced){
   addEventListener('scroll',schedule,{passive:true});
   addEventListener('resize',schedule,{passive:true});
   reduced.addEventListener('change',configure);configure();
+}
+
+function mountMobileFilms(reduced){
+  const strip=document.querySelector('.paper-films');
+  const heading=document.querySelector('.paper-film-heading');
+  if(!strip||!heading)return;
+  const track=document.createElement('div');track.className='film-scroll-track';
+  const pin=document.createElement('div');pin.className='film-scroll-pin';
+  heading.before(track);track.append(pin);pin.append(heading,strip);
+  const mobile=matchMedia('(max-width: 900px)');
+  let frame=0;
+  function paint(){
+    frame=0;if(!mobile.matches||reduced.matches)return;
+    const travel=strip.scrollWidth-strip.clientWidth;
+    const distance=track.offsetHeight-pin.offsetHeight;
+    const progress=Math.max(0,Math.min(1,-track.getBoundingClientRect().top/Math.max(1,distance)));
+    strip.scrollLeft=travel*progress;
+  }
+  function schedule(){if(!frame)frame=requestAnimationFrame(paint);}
+  function configure(){
+    const enabled=mobile.matches&&!reduced.matches;
+    track.classList.toggle('film-scroll-enabled',enabled);
+    track.style.height=enabled?(innerHeight+Math.max(0,strip.scrollWidth-strip.clientWidth)*1.25)+'px':'';
+    if(!enabled)strip.scrollLeft=0;
+    schedule();
+  }
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',configure,{passive:true});
+  reduced.addEventListener('change',configure);mobile.addEventListener('change',configure);
+  configure();
 }
