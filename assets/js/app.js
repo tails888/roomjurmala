@@ -1,5 +1,5 @@
 import {mountScroll} from './scroll.js?v=20260911-scroll';
-import {mountPaper} from './paper.js?v=20260911-typing';
+import {mountPaper} from './paper.js?v=20260911-gallery-scroll';
 import {mountFilms,mountStory} from './films.js';
 import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.mjs';
 const config=JSON.parse(document.getElementById('site-data').textContent);

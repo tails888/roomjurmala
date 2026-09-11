@@ -223,10 +223,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-clean-video">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-clean-video">
-  <script src="/calendar-events.js?v=20260911-clean-video" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-clean-video"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-gallery-scroll">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-gallery-scroll">
+  <script src="/calendar-events.js?v=20260911-gallery-scroll" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-gallery-scroll"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -234,7 +234,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-clean-video" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-gallery-scroll" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
