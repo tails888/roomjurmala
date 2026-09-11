@@ -155,7 +155,7 @@ const minimal = {
   bookWhatsApp: 'Pieteikties WhatsApp', soundOn: 'Ieslēgt skaņu', soundOff: 'Izslēgt skaņu',
   pauseVideo: 'Apturēt video', playVideo: 'Atskaņot video', filmFallback: 'Atvērt video',
   scroll: 'Tālāk', schedule: 'Plānotās nodarbības', selectedPlan: 'Izvēlētais plāns', clearPlan: 'Noņemt',
-  faqTitle: 'Bieži jautātais.', noScript: 'Sazinieties ar mums WhatsApp, lai vienotos par datumu.',
+  faqTitle: 'Noderīgi zināt', noScript: 'Sazinieties ar mums WhatsApp, lai vienotos par datumu.',
   invalidRequired: 'Izvēlieties datumu un aptuveno laiku.', invalidTime: 'Ievadiet derīgu laiku.'
  },
  en: {
