@@ -63,8 +63,8 @@ for (const [route, { html, ids }] of pages) {
     if (photo.video) checkUrl(photo.video, base);
   }
   if (['/','/en/','/ru/'].includes(route)) {
-    assert.equal([...html.matchAll(/<video\b/g)].length,7,`${route} must embed all seven home videos`);
-    assert.equal([...html.matchAll(/class="ambient-video"/g)].length,7,`${route} visibility-controlled media`);
+    assert.equal([...html.matchAll(/<video\b/g)].length,6,`${route} must embed all six home videos`);
+    assert.equal([...html.matchAll(/class="ambient-video"/g)].length,6,`${route} visibility-controlled media`);
     assert(html.includes('"@type":"FAQPage"')&&html.includes('id="faq"'),`${route} must include visible FAQs and matching schema`);
   }
   assert(!/id="customerName"|id="customerPhone"|id="bookingNotes"/.test(html),`${route} booking should stay simple`);
