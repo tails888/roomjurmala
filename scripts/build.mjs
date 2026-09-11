@@ -182,7 +182,7 @@ function booking(c,d){
   <p id="booking-error" class="form-error" role="alert" hidden></p>
   <div class="quick-fields"><div class="field"><label for="booking-date">${c.booking.labels.date}</label><input id="booking-date" type="date" required></div><div class="field"><label for="booking-time">${d.approximateTime}</label><input id="booking-time" type="time" required></div></div>
   <input type="hidden" name="text" id="whatsapp-message"><p id="selected-plan" class="selected-plan" hidden><span></span><button type="button" id="clear-plan">${d.clearPlan}</button></p>
-  <button class="button button-orange form-submit" type="submit">${d.bookWhatsApp}${arrow}</button>
+  <button class="button button-orange form-submit" type="submit">${d.bookWhatsApp}</button>
  </form></div><div class="cal-widget" aria-live="polite"></div></section>`;
 }
 function faq(lang,kind,c,d){
