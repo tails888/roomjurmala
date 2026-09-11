@@ -59,12 +59,15 @@ function mountTypewriter(title,reduced){
     letters[index-1]?.classList.remove('typing-cursor');
     if(index>=letters.length){finish();return;}
     const letter=letters[index++];letter.classList.add('is-written','typing-cursor');
-    timer=setTimeout(tick,letter.textContent===' '?260:180);
+    const rhythm=[115,145,125,165,135];
+    const delay=/[.!?]/.test(letter.textContent)?480:letter.textContent===' '?230:rhythm[(index-1)%rhythm.length];
+    timer=setTimeout(tick,delay);
   }
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:0});
   observer.observe(title);
   reduced.addEventListener('change',()=>{if(reduced.matches)finish();});
-  timer=setTimeout(tick,450);
+  // Start after the display font is ready to avoid a mid-animation font swap.
+  document.fonts.ready.then(()=>{if(reduced.matches){finish();return;}timer=setTimeout(tick,300);});
 }
 
 // A native sticky scroll track: no wheel trapping and no automatic dialogs.

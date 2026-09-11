@@ -26,9 +26,9 @@ html.custom-scroll{scrollbar-width:thin;scrollbar-color:#285343 #f6f2e9}
 .scroll-reveal:focus-within{opacity:1;translate:0 0}
 .paper-activity.scroll-reveal{transition:opacity .85s ease var(--reveal-delay,0ms),translate 1s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms),transform .45s,box-shadow .45s}
 @media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1;translate:none;transition:none}}
-.typewriter-char{position:relative;opacity:0;transition:opacity .22s ease}
+.typewriter-char{position:relative;opacity:0;transition:opacity .34s cubic-bezier(.2,.65,.3,1)}
 .typewriter-char.is-written{opacity:1}
-.is-typing .typing-cursor::after{content:"";position:absolute;right:-.015em;top:.14em;height:.72em;border-right:2px solid #bd561d;animation:typing-blink 1s step-end infinite}
+.is-typing .typing-cursor::after{content:"";position:absolute;right:-.015em;top:.14em;height:.72em;border-right:2px solid #bd561d;animation:typing-blink .85s ease-in-out infinite}
 @keyframes typing-blink{50%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.typewriter-char{opacity:1;transition:none}.typing-cursor::after{display:none}}
 :root{--paper:#f6f2e9;--ink:#171d19;--green:#173f34;--accent:#e77b35;--muted:#66695f;--line:#173f3429}
