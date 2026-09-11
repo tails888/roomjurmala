@@ -32,9 +32,9 @@ function header(lang,kind,c,d){
     <button class="menu-toggle circle-button" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="${esc(c.nav.menuOpen)}"><span></span><span></span></button></div>
   </header>
   <dialog id="mobile-menu" aria-label="${esc(d.menu)}">
-    <div class="menu-top"><span>ROOM Jūrmala</span><button class="circle-button menu-close" aria-label="${esc(d.close)}">${plus}</button></div>
+    <div class="menu-top"><a class="menu-logo" href="${route(lang)}"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala"></a><button class="circle-button menu-close" aria-label="${esc(d.close)}">${plus}</button></div>
     <nav class="menu-links"><a href="${route(lang)}">${d.home}</a><a href="${route(lang,'space')}">${c.nav.links[0]}</a><a href="${route(lang,'pricing')}">${c.nav.links[1]}</a><a href="#calendar">${c.nav.links[2]}</a><a href="#contact">${c.nav.links[4]}</a></nav>
-    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">WhatsApp</a><p class="menu-address">Skolas iela 50 · Jūrmala</p>
+    <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">${{lv:'Sazinies',en:'Get in touch',ru:'Связаться'}[lang]}</a>
   </dialog>`;
 }
 function inlineVideo(index,poster,id,d,hero=false){
@@ -138,7 +138,7 @@ function reviews(lang){
  const t=reviewCopy[lang];
  const stars=`<span class="review-stars" role="img" aria-label="${esc(t.rating)}">★★★★★</span>`;
  return `<section class="section reviews-section" id="reviews" aria-labelledby="reviews-title"><div class="reviews-heading"><div><p class="reviews-eyebrow">${t.eyebrow}</p><h2 id="reviews-title">${t.title}</h2></div><a class="reviews-score" href="${esc(reviewSource)}" target="_blank" rel="noopener noreferrer"><strong>${lang==='en'?'5.0':'5,0'}<span>/ 5</span></strong><span>${stars}<span class="reviews-count">${t.count}</span></span></a></div>
- <div class="reviews-grid">${customerReviews.map(r=>`<figure class="review-card"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote cite="${esc(r.url)}" lang="lv"><p>${esc(r.quote)}</p></blockquote><figcaption><img class="review-avatar" src="${esc(r.avatar)}" width="40" height="40" alt="" loading="lazy" referrerpolicy="no-referrer"><span><span class="review-author" lang="lv">${esc(r.author)}</span><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t.original+' · '+r.author)}">${t.original}</a></span></figcaption></figure>`).join('')}</div><div class="reviews-bottom"><p>${t.note}</p><a class="text-link" href="${esc(reviewSource)}" target="_blank" rel="noopener noreferrer">${t.all}</a></div></section>`;
+ <div class="reviews-grid">${customerReviews.map(r=>`<figure class="review-card"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote cite="${esc(r.url)}" lang="lv"><p>${esc(r.quote)}</p></blockquote><figcaption><img class="review-avatar" src="${esc(r.avatar)}" width="40" height="40" alt="" loading="lazy" referrerpolicy="no-referrer"><span><span class="review-author" lang="lv">${esc(r.author)}</span><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t.original+' · '+r.author)}">${t.original}</a></span></figcaption></figure>`).join('')}</div><div class="reviews-bottom"><p>${t.note}</p><div class="review-actions"><a class="text-link" href="${esc(reviewSource)}" target="_blank" rel="noopener noreferrer">${t.all}</a><a class="button review-write" href="https://search.google.com/local/writereview?placeid=ChIJRx5g737n7kYRPc4miG_Jw1o" target="_blank" rel="noopener noreferrer">${t.write}</a></div></div></section>`;
 }
 function gallery(c,d){
   return `<section id="gallery" class="section gallery-section"><div class="section-heading reveal"><h2>${d.enter}</h2><p>${d.galleryIntro}</p></div>
@@ -163,7 +163,7 @@ function pricing(lang,kind,c,d){
 }
 function booking(c,d){
  return `<section id="calendar" class="section quick-booking"><div><h2>${d.bookingTitle}</h2><p>${d.bookingIntro}</p></div>
- <div class="booking-calendar" hidden><div class="cal-nav"><button type="button" class="circle-button" id="prevMonth" aria-label="${esc(d.prevMonth)}"><span class="turn-back">${arrow}</span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button type="button" class="circle-button" id="nextMonth" aria-label="${esc(d.nextMonth)}">${arrow}</button></div><div class="cal-weekdays" aria-hidden="true">${c.calendar.daysShort.map(day=>`<span>${day}</span>`).join('')}</div><div id="calGrid" class="cal-grid" role="group" aria-labelledby="calMonthLabel"></div><p class="cal-legend"><span></span>${d.scheduled}</p><p class="cal-note">${d.bookingNote}</p></div><div class="quick-booking-content"><noscript><p class="notice">${d.noScript} <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
+ <div class="booking-calendar" hidden><div class="cal-nav"><button type="button" class="circle-button" id="prevMonth" aria-label="${esc(d.prevMonth)}"><span class="turn-back">${arrow}</span></button><h3 id="calMonthLabel" aria-live="polite"></h3><button type="button" class="circle-button" id="nextMonth" aria-label="${esc(d.nextMonth)}">${arrow}</button></div><div class="cal-weekdays" aria-hidden="true">${c.calendar.daysShort.map(day=>`<span>${day}</span>`).join('')}</div><div id="calGrid" class="cal-grid" role="group" aria-labelledby="calMonthLabel"></div><p class="cal-legend"><span></span>${d.scheduled}</p></div><div class="quick-booking-content"><noscript><p class="notice">${d.noScript} <a href="https://wa.me/37127850380">WhatsApp</a></p></noscript>
  <form id="booking-form" action="https://wa.me/37127850380" method="get" target="_blank" rel="noopener noreferrer" novalidate data-booking-ui hidden>
   <p id="booking-error" class="form-error" role="alert" hidden></p>
   <div class="quick-fields"><div class="field"><label for="booking-date">${c.booking.labels.date}</label><input id="booking-date" type="date" required></div><div class="field"><label for="booking-time">${d.approximateTime}</label><input id="booking-time" type="time" required></div></div>
@@ -223,10 +223,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-gallery-scroll">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-gallery-scroll">
-  <script src="/calendar-events.js?v=20260911-gallery-scroll" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-gallery-scroll"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-menu-reviews">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-menu-reviews">
+  <script src="/calendar-events.js?v=20260911-menu-reviews" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-menu-reviews"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -234,7 +234,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-gallery-scroll" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-menu-reviews" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }

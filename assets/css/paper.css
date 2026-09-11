@@ -142,3 +142,11 @@ body{background:var(--paper)}
  .gallery-scroll-photo{inset:8svh 5% 12svh}
 }
 @media(prefers-reduced-motion:reduce){.gallery-scroll-stage,.gallery-scroll-meter{display:none!important}}
+
+#mobile-menu .menu-logo{display:block;width:112px;padding:7px 10px;background:var(--paper);border-radius:12px;flex-shrink:0}
+#mobile-menu .menu-logo img{display:block;width:100%;height:auto}
+#mobile-menu>.text-link{margin-bottom:env(safe-area-inset-bottom)}
+.review-actions{display:flex;align-items:center;justify-content:flex-end;gap:24px;flex-wrap:wrap}
+.review-write{background:var(--accent);color:var(--ink);border-color:var(--accent);font-size:14px;min-height:48px;padding:14px 24px}
+@media(max-width:600px){.review-actions{width:100%;justify-content:flex-start;gap:20px}.review-write{width:100%}}
+@media(max-height:650px){#mobile-menu .menu-logo{width:88px;padding:4px 8px}}

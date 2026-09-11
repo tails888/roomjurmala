@@ -6,7 +6,7 @@ export const customerReviews = [
   {author:'Agnese Čimale', initials:'AČ', avatar:'https://lh3.googleusercontent.com/a-/ALV-UjW2VRyfeBA2hTTEZAe5lRpqYnrigBeYG_JbzjOMzxZDgKxC3Crq=w72-h72-p-rp-mo-br100', url:'https://maps.app.goo.gl/tvwkV6u4uX3NXYLe7', quote:'Paldies par iespēju un ļoti vērtīgi, ka kaut kas tāds ir pieejams Jūrmalas mammām!'},
 ];
 export const reviewCopy = {
-  lv:{eyebrow:'KLIENTU ATSAUKSMES',title:'Pie mums <em>ir labi.</em>',count:'12 Google atsauksmes',all:'Visas atsauksmes Google',note:'Klientu atsauksmju fragmenti no Google.',original:'Lasīt Google',rating:'5 no 5 zvaigznēm'},
-  en:{eyebrow:'GUEST REVIEWS',title:'Good to <em>be here.</em>',count:'12 Google reviews',all:'All reviews on Google',note:'Excerpts from Google reviews, in the original Latvian.',original:'Read on Google',rating:'5 out of 5 stars'},
-  ru:{eyebrow:'ОТЗЫВЫ ГОСТЕЙ',title:'Здесь <em>хорошо.</em>',count:'12 отзывов в Google',all:'Все отзывы в Google',note:'Фрагменты отзывов из Google на языке оригинала, латышском.',original:'Читать в Google',rating:'5 из 5 звёзд'},
+  lv:{write:'Novērtē mūs Google',eyebrow:'KLIENTU ATSAUKSMES',title:'Pie mums <em>ir labi.</em>',count:'12 Google atsauksmes',all:'Visas atsauksmes Google',note:'Klientu atsauksmju fragmenti no Google.',original:'Lasīt Google',rating:'5 no 5 zvaigznēm'},
+  en:{write:'Review us on Google',eyebrow:'GUEST REVIEWS',title:'Good to <em>be here.</em>',count:'12 Google reviews',all:'All reviews on Google',note:'Excerpts from Google reviews, in the original Latvian.',original:'Read on Google',rating:'5 out of 5 stars'},
+  ru:{write:'Оцените нас в Google',eyebrow:'ОТЗЫВЫ ГОСТЕЙ',title:'Здесь <em>хорошо.</em>',count:'12 отзывов в Google',all:'Все отзывы в Google',note:'Фрагменты отзывов из Google на языке оригинала, латышском.',original:'Читать в Google',rating:'5 из 5 звёзд'},
 };
