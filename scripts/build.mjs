@@ -110,9 +110,9 @@ function simplePricing(lang,d){
  const t=simplePriceCopy[lang],side=sideCopy[lang],prices=[0,20,38,55,70,85,100,115,130];
  const duration=n=>n+' '+d.units[0][new Intl.PluralRules(lang).select(n)==='one'?0:new Intl.PluralRules(lang).select(n)==='few'?1:2];
  const wa=message=>'https://wa.me/37127850380?text='+encodeURIComponent(message);
- const choice=n=>`<a href="${wa(t.greeting+' '+duration(n)+' · '+prices[n]+' €')}" role="button" class="hour-choice" data-simple-hour="${n}" aria-pressed="${n===3}"><span>${duration(n)}</span><strong>${prices[n]} <small>€</small></strong><span class="choice-check" aria-hidden="true">✓</span></a>`;
+ const choice=n=>`<a href="${wa(t.greeting+' '+duration(n)+' · '+prices[n]+' €')}" role="button" class="hour-choice" data-simple-hour="${n}" aria-pressed="${n===3}"><span>${duration(n)}</span><strong>${prices[n]} <small>€</small></strong>${n*20>prices[n]?`<span class="hour-saving">${{lv:'Ietaupi',en:'Save',ru:'Экономия'}[lang]} ${n*20-prices[n]} €</span>`:''}<span class="choice-check" aria-hidden="true">✓</span></a>`;
  return `<article class="simple-price-page"><header class="simple-price-heading"><nav class="breadcrumbs"><a href="${route(lang)}">${side.home}</a><span>/</span><span>${side.pricingTitle}</span></nav><p class="paper-eyebrow">ROOM Jūrmala</p><h1>${side.pricingTitle}</h1><p>${t.intro}</p></header>
- <section class="simple-rental" data-simple-calculator data-greeting="${esc(t.greeting)}" aria-labelledby="simple-title"><div class="simple-rental-options"><h2 id="simple-title">${t.title}</h2><div class="hour-choices">${[2,3,4,8].map(choice).join('')}</div><details class="other-hours"><summary>${t.other}</summary><div class="hour-choices">${[1,5,6,7].map(choice).join('')}</div></details></div>
+ <section class="simple-rental" data-simple-calculator data-greeting="${esc(t.greeting)}" aria-labelledby="simple-title"><div class="simple-rental-options"><h2 id="simple-title">${t.title}</h2><div class="hour-choices">${[2,3,4,8].map(choice).join('')}</div><p class="hour-saving-note">${{lv:'Ietaupījums salīdzinājumā ar 20 € stundā.',en:'Savings compared with €20 per hour.',ru:'Экономия по сравнению с 20 € в час.'}[lang]}</p><details class="other-hours"><summary>${t.other}</summary><div class="hour-choices">${[1,5,6,7].map(choice).join('')}</div></details></div>
  <div class="simple-rental-result"><div aria-live="polite" aria-atomic="true"><p>${t.total}</p><strong class="simple-total" data-simple-total>55 €</strong><p class="simple-duration" data-simple-duration>${duration(3)}</p></div><a class="button" data-simple-book href="${wa(t.greeting+' '+duration(3)+' · 55 €')}" target="_blank" rel="noopener noreferrer">${t.book}</a><p class="simple-confirmation">${t.note}</p><noscript><p>${t.intro} <a href="${wa(t.greeting)}">WhatsApp</a></p></noscript></div></section>
 
  <details class="regular-rental" open><summary>${t.regular}</summary><div class="regular-plans"><article><h3>${t.days}</h3><p>${t.daysNote}</p><dl>${[250,360,460].map((v,i)=>`<div><dt>${i+2} ${d.units[1][2]}</dt><dd>${v} €</dd></div>`).join('')}</dl><a href="${wa(t.greeting+' '+t.days)}">${t.ask}</a></article><article><h3>${t.week}</h3><strong>550 €</strong><p>${t.weekNote}</p><a href="${wa(t.greeting+' '+t.week+' · 550 €')}">${t.ask}</a></article><article><h3>${t.month}</h3><strong>460 €</strong><p>${t.monthNote}</p><a href="${wa(t.greeting+' '+t.month+' · '+t.monthNote)}">${t.ask}</a></article></div></details>
@@ -236,10 +236,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-simple-prices">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-simple-prices">
-  <script src="/calendar-events.js?v=20260911-simple-prices" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-simple-prices"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-hour-savings">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-hour-savings">
+  <script src="/calendar-events.js?v=20260911-hour-savings" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-hour-savings"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -247,7 +247,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-simple-prices" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-hour-savings" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
