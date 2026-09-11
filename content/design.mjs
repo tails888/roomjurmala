@@ -163,7 +163,7 @@ const minimal = {
   eventTitle: 'For your<br><em>occasions.</em>', eventNames: ['Celebrate','Create','Learn','Move'],
   eventDescriptions: ['Celebrations with your favourite people.','Workshops and creative sessions.','Children’s classes and shared discoveries.','Yoga, exercise and time for yourself.'],
   simplePrice: 'Simply<br><em>get together.</em>', from: 'from', perHour: 'per hour', perDay: 'per day',
-  bookingTitle: 'See you soon?', bookingIntro: 'We’ll confirm availability in our conversation.', approximateTime: 'Approximate time',
+  bookingTitle: 'Plan your visit', bookingIntro: 'We’ll confirm availability in our conversation.', approximateTime: 'Approximate time',
   bookWhatsApp: 'Book via WhatsApp', soundOn: 'Enable sound', soundOff: 'Mute sound',
   pauseVideo: 'Pause video', playVideo: 'Play video', filmFallback: 'Open video',
   scroll: 'Explore', schedule: 'Scheduled classes', selectedPlan: 'Selected plan', clearPlan: 'Remove',
