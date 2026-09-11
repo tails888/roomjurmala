@@ -84,3 +84,10 @@ All twelve LV, EN and RU secondary pages now use the article layout in editorial
 ### Canonical page consolidation
 
 The current build produces exactly 9 pages: home, space and pricing in LV, EN and RU. Party and workshop content is now in anchored sections of the space pages. Their six former URLs have 301 redirects in .htaccess and in the local preview server. The sitemap and internal links use the remaining nine pages. This changes repository routing, not Search Console indexing state; production redirects take effect when deployed.
+
+
+### Interactive hire calculator
+
+The three pricing pages include a responsive calculator for hours, days, weeks and membership, using the existing booking-core price tables. Native range controls, increment/decrement buttons and quick duration presets update the quote and per-hour cost immediately. Membership shows 460 EUR per month and the full selected term cost, with a three-month minimum. Monthly savings are not compared against an assumed month length. Booking links pass the chosen period and total to the homepage form. The static price tables remain available without JavaScript. No calendars, maps or social widgets were added to secondary pages.
+
+Validated the original price-break tests, keyboard range control, all four mode maximum prices, membership minimum, mobile 320/390px layouts, LV/EN/RU labels, and the calculator-to-homepage booking handoff.

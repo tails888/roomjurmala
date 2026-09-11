@@ -86,6 +86,12 @@ for(const lang of ['','en/','ru/']){
   assert(pages.get('/'+lang+'telpa/').ids.has(slug),'Consolidated service section missing');
  }
 }
+for(const route of ['/cenas/','/en/cenas/','/ru/cenas/']){
+ const {html}=pages.get(route);
+ assert(html.includes('data-rental-calculator hidden'),'Calculator must have a static price fallback before JavaScript');
+ assert.equal((html.match(/role="tab" type="button" data-mode=/g)||[]).length,4,'Four rental modes');
+ assert(html.includes('class="editorial-hourly"'),'Static rates must remain available without JavaScript');
+}
 const sitemap=read('sitemap.xml');
 const submitted=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
 assert.equal(submitted.length,pages.size,'Sitemap must contain every page once');

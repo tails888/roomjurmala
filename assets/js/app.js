@@ -134,6 +134,25 @@ function renderQuote(){
   $('#calc-saving').textContent=money(quote.saving);
   $('#duration-slider').setAttribute('aria-valuetext',formatDuration(quote,lang,d.units));
   $('#plan-note').textContent=mode==='months'?d.minTerm:'';
+  const calculator=$('[data-rental-calculator]');
+  if(calculator){
+    const t=config.calculator,slider=$('#duration-slider');
+    $('#plan-note').textContent=t.notes[mode];
+    $('#rental-selected').textContent=formatDuration(quote,lang,d.units);
+    $('#rental-unit-label').textContent=mode==='months'?t.perMonth:t.perHour;
+    const hours=quote.quantity*({hours:1,days:8,weeks:40}[mode]||1);
+    $('#rental-unit-price').textContent=new Intl.NumberFormat(lang,{maximumFractionDigits:2}).format(mode==='months'?460:quote.price/hours)+' €';
+    $('.rental-saving').hidden=mode==='months'||quote.saving===0;
+    slider.style.setProperty('--range-progress',((quote.quantity-Number(slider.min))/(Number(slider.max)-Number(slider.min))*100)+'%');
+    $$('[data-duration-step]').forEach(b=>b.disabled=Number(b.dataset.durationStep)<0?quote.quantity===Number(slider.min):quote.quantity===Number(slider.max));
+    const presets={hours:[1,3,6,8],days:[1,2,3,4],weeks:[1,2,3,4],months:[3,6,9,12]}[mode];
+    const container=$('.rental-presets');
+    if(container.dataset.mode!==mode){
+      container.replaceChildren();container.dataset.mode=mode;
+      presets.forEach(n=>{const button=makeEl('button','',formatDuration(getQuote(mode,n),lang,d.units));button.type='button';button.dataset.durationPreset=n;button.addEventListener('click',()=>{slider.value=n;renderQuote();});container.append(button);});
+    }
+    $$('[data-duration-preset]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.durationPreset)===quote.quantity)));
+  }
 }
 function chooseMode(button){
   mode=button.dataset.mode;
@@ -147,6 +166,8 @@ function chooseMode(button){
 const modeTabs=$$('[data-mode]');
 modeTabs.forEach(b=>b.addEventListener('click',()=>chooseMode(b)));tabKeyboard(modeTabs,chooseMode);
 $('#duration-slider')?.addEventListener('input',renderQuote);
+$$('[data-duration-step]').forEach(b=>b.addEventListener('click',()=>{const slider=$('#duration-slider');slider.value=Math.max(Number(slider.min),Math.min(Number(slider.max),Number(slider.value)+Number(b.dataset.durationStep)));renderQuote();}));
+if($('[data-rental-calculator]')){chooseMode(modeTabs[0]);$('[data-rental-calculator]').hidden=false;}
 let updateMessage=()=>{};
 function choosePackage(plan=''){
   if(!$('#booking-form'))return;
