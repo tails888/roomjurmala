@@ -34,7 +34,7 @@ function header(lang,kind,c,d){
     <button class="menu-toggle circle-button" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="${esc(c.nav.menuOpen)}"><span></span><span></span></button></div>
   </header>
   <dialog id="mobile-menu" aria-label="${esc(d.menu)}">
-    <div class="menu-top"><a class="menu-logo" href="${route(lang)}"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala"></a><button class="circle-button menu-close" aria-label="${esc(d.close)}">${plus}</button></div>
+    <div class="menu-top"><button class="circle-button menu-close" aria-label="${esc(d.close)}">${plus}</button></div>
     <nav class="menu-links"><a href="${route(lang)}">${d.home}</a><a href="${route(lang,'space')}">${c.nav.links[0]}</a><a href="${route(lang,'pricing')}">${c.nav.links[1]}</a><a href="#calendar">${c.nav.links[2]}</a><a href="#contact">${c.nav.links[4]}</a></nav>
     <a class="text-link" href="https://wa.me/37127850380" target="_blank" rel="noopener noreferrer">${{lv:'Sazinies',en:'Get in touch',ru:'Связаться'}[lang]}</a>
   </dialog>`;
