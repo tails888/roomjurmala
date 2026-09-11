@@ -4,7 +4,7 @@ import {servicePages,serviceSlugs} from '../content/services.mjs';
 import {customerReviews,reviewSource,reviewCopy} from '../content/reviews.mjs';
 import {sideCopy} from '../content/sidepages.mjs';
 import {paperCopy} from '../content/paper.mjs';
-import {calculatorCopy} from '../content/calculator.mjs';
+import {calculatorCopy,simplePriceCopy} from '../content/calculator.mjs';
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -106,7 +106,20 @@ function rentalCalculator(lang,d){
  const t=calculatorCopy[lang];
  return `<section class="rent-calculator" aria-labelledby="rental-title" data-rental-calculator hidden><div class="rental-controls"><h2 id="rental-title">${t.title}</h2><p class="rental-intro">${t.intro}</p><div class="rental-tabs" role="tablist" aria-label="${esc(d.duration)}">${['hours','days','weeks','months'].map((m,i)=>`<button role="tab" type="button" data-mode="${m}" id="mode-${m}" aria-controls="calc-panel" aria-selected="${i===0}" tabindex="${i===0?'0':'-1'}">${t.modes[i]}</button>`).join('')}</div><div id="calc-panel" role="tabpanel" aria-labelledby="mode-hours"><div class="rental-duration"><div><label for="duration-slider">${t.duration}</label><span id="duration-label">3 ${d.units[0][1]}</span></div><div class="rental-stepper"><button type="button" data-duration-step="-1" aria-label="${esc(t.less)}">−</button><button type="button" data-duration-step="1" aria-label="${esc(t.more)}">+</button></div></div><input id="duration-slider" type="range" min="1" max="8" value="3" step="1" aria-describedby="plan-note"><div class="rental-range-labels"><span id="range-min">1 ${d.units[0][0]}</span><span id="range-max">8 ${d.units[0][2]}</span></div><div class="rental-presets" role="group" aria-label="${esc(t.presets)}"></div><p id="plan-note" class="rental-note">${t.notes.hours}</p></div></div><div class="rental-result" role="region" aria-label="${esc(t.total)}"><div class="rental-live" aria-live="polite" aria-atomic="true"><p class="rental-total-label">${t.total}</p><strong id="calc-price">55 €</strong><dl class="rental-breakdown"><div><dt>${t.chosen}</dt><dd id="rental-selected">3 ${d.units[0][1]}</dd></div><div><dt id="rental-unit-label">${t.perHour}</dt><dd id="rental-unit-price">18,33 €</dd></div></dl><p class="rental-saving"><span>${t.saving}</span><strong id="calc-saving">5 €</strong></p></div><a class="button button-dark" id="calculator-book" href="#calendar">${t.book}</a><p class="rental-confirmation">${t.note}</p></div></section>`;
 }
+function simplePricing(lang,d){
+ const t=simplePriceCopy[lang],side=sideCopy[lang],prices=[0,20,38,55,70,85,100,115,130];
+ const duration=n=>n+' '+d.units[0][new Intl.PluralRules(lang).select(n)==='one'?0:new Intl.PluralRules(lang).select(n)==='few'?1:2];
+ const wa=message=>'https://wa.me/37127850380?text='+encodeURIComponent(message);
+ const choice=n=>`<a href="${wa(t.greeting+' '+duration(n)+' · '+prices[n]+' €')}" role="button" class="hour-choice" data-simple-hour="${n}" aria-pressed="${n===3}"><span>${duration(n)}</span><strong>${prices[n]} <small>€</small></strong><span class="choice-check" aria-hidden="true">✓</span></a>`;
+ return `<article class="simple-price-page"><header class="simple-price-heading"><nav class="breadcrumbs"><a href="${route(lang)}">${side.home}</a><span>/</span><span>${side.pricingTitle}</span></nav><p class="paper-eyebrow">ROOM Jūrmala</p><h1>${side.pricingTitle}</h1><p>${t.intro}</p></header>
+ <section class="simple-rental" data-simple-calculator data-greeting="${esc(t.greeting)}" aria-labelledby="simple-title"><div class="simple-rental-options"><h2 id="simple-title">${t.title}</h2><div class="hour-choices">${[2,3,4,8].map(choice).join('')}</div><details class="other-hours"><summary>${t.other}</summary><div class="hour-choices">${[1,5,6,7].map(choice).join('')}</div></details></div>
+ <div class="simple-rental-result"><div aria-live="polite" aria-atomic="true"><p>${t.total}</p><strong class="simple-total" data-simple-total>55 €</strong><p class="simple-duration" data-simple-duration>${duration(3)}</p></div><a class="button" data-simple-book href="${wa(t.greeting+' '+duration(3)+' · 55 €')}" target="_blank" rel="noopener noreferrer">${t.book}</a><p class="simple-confirmation">${t.note}</p><noscript><p>${t.intro} <a href="${wa(t.greeting)}">WhatsApp</a></p></noscript></div></section>
+ <section class="price-included"><h2>${t.included}</h2><ul>${t.features.map(x=>`<li><span aria-hidden="true">✓</span>${x}</li>`).join('')}</ul><p>${t.terms}</p></section>
+ <details class="regular-rental"><summary>${t.regular}</summary><div class="regular-plans"><article><h3>${t.days}</h3><p>${t.daysNote}</p><dl>${[250,360,460].map((v,i)=>`<div><dt>${i+2} ${d.units[1][2]}</dt><dd>${v} €</dd></div>`).join('')}</dl><a href="${wa(t.greeting+' '+t.days)}">${t.ask}</a></article><article><h3>${t.week}</h3><strong>550 €</strong><p>${t.weekNote}</p><a href="${wa(t.greeting+' '+t.week+' · 550 €')}">${t.ask}</a></article><article><h3>${t.month}</h3><strong>460 €</strong><p>${t.monthNote}</p><a href="${wa(t.greeting+' '+t.month+' · '+t.monthNote)}">${t.ask}</a></article></div></details>
+ <a class="text-link simple-space-link" href="${route(lang,'space')}">${side.related}</a></article>`;
+}
 function editorialPage(lang,kind,d){
+ if(kind==='pricing')return simplePricing(lang,d);
  const t=sideCopy[lang],p=servicePages[lang][kind],isPrice=kind==='pricing';
  const title=p?clean(p.eyebrow):isPrice?t.pricingTitle:t.spaceTitle;
  const intro=p?p.intro:isPrice?t.priceIntro:t.description;
@@ -223,10 +236,10 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-card-zoom">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-card-zoom">
-  <script src="/calendar-events.js?v=20260911-card-zoom" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-card-zoom"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-simple-prices">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-simple-prices">
+  <script src="/calendar-events.js?v=20260911-simple-prices" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-simple-prices"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -234,7 +247,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-card-zoom" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-simple-prices" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }

@@ -294,3 +294,18 @@ if(location.hostname==='roomjurmala.lv'||location.hostname==='www.roomjurmala.lv
   const analytics=makeEl('script');analytics.async=true;analytics.src='https://www.googletagmanager.com/gtag/js?id=G-QLD7392ML2';
   document.head.append(analytics);window.gtag('js',new Date());window.gtag('config','G-QLD7392ML2');
 }
+
+const simpleCalculator=document.querySelector('[data-simple-calculator]');
+if(simpleCalculator){
+  const buttons=[...simpleCalculator.querySelectorAll('[data-simple-hour]')];
+  buttons.forEach(button=>button.addEventListener('keydown',event=>{if(event.key===' '){event.preventDefault();button.click();}}));
+  buttons.forEach(button=>button.addEventListener('click',event=>{
+    event.preventDefault();
+    const q=getQuote('hours',Number(button.dataset.simpleHour));
+    const duration=formatDuration(q,lang,d.units);
+    buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    simpleCalculator.querySelector('[data-simple-total]').textContent=money(q.price);
+    simpleCalculator.querySelector('[data-simple-duration]').textContent=duration;
+    simpleCalculator.querySelector('[data-simple-book]').href='https://wa.me/37127850380?text='+encodeURIComponent(simpleCalculator.dataset.greeting+' '+duration+' · '+money(q.price));
+  }));
+}

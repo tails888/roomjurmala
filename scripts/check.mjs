@@ -75,7 +75,7 @@ for (const [route, { html, ids }] of pages) {
   } else {
     assert(!ids.has('calendar')&&!ids.has('booking-form'),route+' must use the homepage calendar');
     assert(!/<iframe|class="footer-socials"|class="reviews-section"/.test(html),route+' should have no map, social or reviews widgets');
-    assert(html.includes('class="editorial-page"')&&html.includes('class="minimal-footer"'),route+' needs the minimal article layout');
+    assert((html.includes('class="editorial-page"')||html.includes('class="simple-price-page"'))&&html.includes('class="minimal-footer"'),route+' needs the minimal article layout');
     assert(html.includes('#calendar'),route+' needs a homepage booking link');
   }
 }
@@ -88,9 +88,9 @@ for(const lang of ['','en/','ru/']){
 }
 for(const route of ['/cenas/','/en/cenas/','/ru/cenas/']){
  const {html}=pages.get(route);
- assert(html.includes('data-rental-calculator hidden'),'Calculator must have a static price fallback before JavaScript');
- assert.equal((html.match(/role="tab" type="button" data-mode=/g)||[]).length,4,'Four rental modes');
- assert(html.includes('class="editorial-hourly"'),'Static rates must remain available without JavaScript');
+ assert(html.includes('data-simple-calculator'),'Simple calculator must be present');
+ assert.equal((html.match(/data-simple-hour=/g)||[]).length,8,'All eight hourly prices must remain available');
+ assert(html.includes('class="regular-rental"'),'Longer hire terms must remain available');
 }
 const sitemap=read('sitemap.xml');
 const submitted=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
