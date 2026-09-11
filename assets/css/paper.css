@@ -1,4 +1,9 @@
 /* Folded paper direction. Original brand artwork and real venue media. */
+.typewriter-char{position:relative;opacity:0;transition:opacity .22s ease}
+.typewriter-char.is-written{opacity:1}
+.is-typing .typing-cursor::after{content:"";position:absolute;right:-.015em;top:.14em;height:.72em;border-right:2px solid #bd561d;animation:typing-blink 1s step-end infinite}
+@keyframes typing-blink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.typewriter-char{opacity:1;transition:none}.typing-cursor::after{display:none}}
 :root{--paper:#f6f2e9;--ink:#171d19;--green:#173f34;--accent:#e77b35;--muted:#66695f;--line:#173f3429}
 body{background:var(--paper)}
 .site-header{min-height:100px;border-bottom:0;background:var(--paper);padding-block:12px}

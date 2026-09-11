@@ -1,4 +1,5 @@
 export function mountPaper(reduced){
+  mountTypewriter(document.querySelector('#paper-title'),reduced);
   const strip=document.querySelector('.paper-films');
   let drag=null;
   strip?.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0||e.target.closest('button,a'))return;drag={x:e.clientX,left:strip.scrollLeft};strip.setPointerCapture(e.pointerId);strip.classList.add('is-dragging');});
@@ -25,4 +26,41 @@ export function mountPaper(reduced){
   art?.addEventListener('pointerleave',reset);
   addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
   reduced.addEventListener('change',reset);desktop.addEventListener('change',reset);schedule();
+}
+
+function mountTypewriter(title,reduced){
+  if(!title||reduced.matches)return;
+  const label=title.innerText.replace(/\s+/g,' ').trim();
+  const letters=[];
+  // Keep every letter in flow so typing never moves the booking controls.
+  for(const node of [...title.childNodes]){
+    if(node.nodeType!==Node.TEXT_NODE)continue;
+    const fragment=document.createDocumentFragment();
+    for(const character of Array.from(node.textContent)){
+      const span=document.createElement('span');
+      span.className='typewriter-char';span.textContent=character;
+      span.setAttribute('aria-hidden','true');fragment.append(span);letters.push(span);
+    }
+    node.replaceWith(fragment);
+  }
+  title.setAttribute('aria-label',label);
+  title.classList.add('is-typing');
+  let index=0,timer=0,visible=true;
+  function finish(){
+    clearTimeout(timer);title.classList.remove('is-typing');
+    letters.forEach(letter=>{letter.classList.add('is-written');letter.classList.remove('typing-cursor');});
+    observer.disconnect();
+  }
+  function tick(){
+    if(reduced.matches){finish();return;}
+    if(document.hidden||!visible){timer=setTimeout(tick,250);return;}
+    letters[index-1]?.classList.remove('typing-cursor');
+    if(index>=letters.length){finish();return;}
+    const letter=letters[index++];letter.classList.add('is-written','typing-cursor');
+    timer=setTimeout(tick,letter.textContent===' '?260:180);
+  }
+  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;},{threshold:0});
+  observer.observe(title);
+  reduced.addEventListener('change',()=>{if(reduced.matches)finish();});
+  timer=setTimeout(tick,450);
 }
