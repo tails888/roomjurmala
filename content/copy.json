@@ -174,7 +174,7 @@
       "items": [
         [
           "Cik maksā telpu noma ROOM Jūrmala?",
-          "Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta."
+          "Telpas noma maksā 20 € par 1 stundu, 38 € par 2 stundām, 55 € par 3 stundām un 70 € par 4 stundām. Vienas dienas noma maksā 130 €. Cenu lapā izvēlieties vajadzīgo ilgumu un uzreiz redzēsiet kopējo cenu. Regulārai nomai pieejams abonements no 460 € mēnesī ar vismaz 3 mēnešu termiņu."
         ],
         [
           "Vai telpu var nomāt pa stundām?",
@@ -190,7 +190,7 @@
         ],
         [
           "Cik cilvēkiem telpa ir piemērota?",
-          "Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu."
+          "Ērtais viesu skaits atkarīgs no pasākuma un telpas iekārtojuma. Rakstot par rezervāciju, norādiet, cik būs pieaugušo un bērnu. Kopā vienosimies par piemērotu iekārtojumu. Telpas nomas cenu aprēķina pēc ilguma."
         ],
         [
           "Vai telpā ir virtuve un vai drīkst atnest ēdienu?",
@@ -521,7 +521,7 @@
       "items": [
         [
           "How much does ROOM Jūrmala cost to rent?",
-          "Hourly rental starts from €20. Popular options are 3 hours for €55, 6 hours for €100, the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event."
+          "Room hire costs €20 for 1 hour, €38 for 2 hours, €55 for 3 hours and €70 for 4 hours. One day costs €130. Choose your duration on the pricing page to see the total. Regular hire is available from €460 per month with a minimum term of 3 months."
         ],
         [
           "Can the venue be rented by the hour?",
@@ -537,7 +537,7 @@
         ],
         [
           "How many guests is the venue suitable for?",
-          "Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking."
+          "The comfortable guest count depends on your event and the room layout. When enquiring, tell us how many adults and children are coming so we can agree on a suitable setup. Room hire is priced by duration."
         ],
         [
           "Is there a kitchen and can we bring food?",
@@ -868,7 +868,7 @@
       "items": [
         [
           "Сколько стоит аренда ROOM Jūrmala?",
-          "Почасовая аренда начинается от 20€ в час. Популярные варианты: 3 часа — 55€, 6 часов — 100€, день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия."
+          "Аренда зала стоит 20 € за 1 час, 38 € за 2 часа, 55 € за 3 часа и 70 € за 4 часа. Аренда на один день стоит 130 €. Выберите нужную продолжительность на странице цен, чтобы увидеть итоговую сумму. Для регулярных занятий доступен абонемент от 460 € в месяц сроком не менее 3 месяцев."
         ],
         [
           "Можно ли арендовать зал по часам?",
@@ -884,7 +884,7 @@
         ],
         [
           "На сколько гостей рассчитан зал?",
-          "Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей."
+          "Комфортное количество гостей зависит от мероприятия и расстановки мебели. При бронировании напишите, сколько будет взрослых и детей, и мы подберём удобный вариант. Стоимость аренды зависит от продолжительности."
         ],
         [
           "Есть ли кухня и можно ли принести еду?",

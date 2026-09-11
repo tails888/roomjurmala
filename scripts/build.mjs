@@ -42,7 +42,7 @@ function header(lang,kind,c,d){
 function inlineVideo(index,poster,id,d,hero=false){
  const file=hero?'room-hero-tour.mp4':videos[index];
  if(hero)poster='june-17';
- return `<div class="film-media" data-film>
+ return `<div class="film-media" data-film ${hero?'style="background-image:url(/assets/images/video-posters/june-17.jpg);background-size:cover;background-position:center"':''}>
   <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
 
   <a class="film-error" href="/assets/videos/${file}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
@@ -193,8 +193,11 @@ function booking(c,d){
   <button class="button button-orange form-submit" type="submit">${d.bookWhatsApp}</button>
  </form></div><div class="cal-widget" aria-live="polite"></div></section>`;
 }
+function faqItems(lang,kind,c){
+ return servicePages[lang][kind]?servicePages[lang][kind].faq.map(([q,a])=>({q,a})):kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
+}
 function faq(lang,kind,c,d){
- const items=servicePages[lang][kind]?servicePages[lang][kind].faq.map(([q,a])=>({q,a})):kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
+ const items=faqItems(lang,kind,c);
  return `<section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>${kind==='home'?d.faqTitle:sideCopy[lang].faq}</h2><p>${c.faq.sub}</p></div><div class="faq-list">${items.map(x=>`<details><summary>${x.q}${plus}</summary><p>${x.a}</p></details>`).join('')}</div></section>`;
 }
 function footer(lang,c,d){
@@ -230,7 +233,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
  // Schema describes the content still visible on each page.
  head=head.replace(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,(tag,raw)=>{
    const data=JSON.parse(raw);
-   if(kind==='home'&&data['@type']==='FAQPage'){data.mainEntity=c.faq.items.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}));}
+   if(data['@type']==='FAQPage'){data.mainEntity=faqItems(lang,kind,c).map(({q,a})=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}));}
    if(kind==='space'&&data['@type']==='CollectionPage'){
      data.description=sideCopy[lang].description;
      data.mainEntity={'@type':'ItemList',itemListElement:['party','workshops'].map((k,i)=>({'@type':'ListItem',position:i+1,name:servicePages[lang][k].name,url:'https://roomjurmala.lv'+route(lang,k)}))};
@@ -245,10 +248,11 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-tour">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-tour">
-  <script src="/calendar-events.js?v=20260911-tour" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-tour"></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-iphone">
+  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-iphone">
+  <script src="/calendar-events.js?v=20260911-iphone" defer></script>
+  <script src="/assets/js/analytics.js?v=20260911" defer></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-iphone"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -256,7 +260,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 `;
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-tour" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-iphone" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }

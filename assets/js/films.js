@@ -16,7 +16,7 @@ export function mountFilms(copy,reduced){
           state.video.play().then(()=>{if(!wanted(state))state.video.pause();}).catch(()=>{}).finally(()=>{state.pending=false;});
         }
       }else{
-        state.video.pause();
+        if(!state.video.hasAttribute('data-hero-priming'))state.video.pause();
         if(!state.visible||!active(state)){state.video.muted=true;state.manual=false;state.host.querySelector('.video-sound')?.setAttribute('aria-pressed','false');state.host.querySelector('.video-sound')?.setAttribute('aria-label',copy.soundOn);}
       }
     }

@@ -89,7 +89,7 @@
       },
       {
         "q": "Cik cilvēkiem telpa ir piemērota?",
-        "a": "Ballītes paketes ir veidotas līdz 15 viesiem un grupām virs 15 viesiem. Ērtākais cilvēku skaits atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm."
+        "a": "Ērtais viesu skaits atkarīgs no pasākuma un telpas iekārtojuma. Rakstot par rezervāciju, norādiet, cik būs pieaugušo un bērnu. Kopā vienosimies par piemērotu iekārtojumu. Telpas nomas cenu aprēķina pēc ilguma."
       },
       {
         "q": "Kur atrodas ROOM Jūrmala un kā rezervēt telpu?",
@@ -192,7 +192,7 @@
       },
       {
         "q": "How many people is the venue suitable for?",
-        "a": "Party packages are available for up to 15 guests and for groups over 15 guests. The most comfortable number depends on the event type, table layout and planned activities."
+        "a": "The comfortable guest count depends on your event and the room layout. When enquiring, tell us how many adults and children are coming so we can agree on a suitable setup. Room hire is priced by duration."
       },
       {
         "q": "Where is ROOM Jūrmala located and how can I book it?",
@@ -295,7 +295,7 @@
       },
       {
         "q": "На сколько человек рассчитан зал?",
-        "a": "Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Комфортное количество зависит от типа мероприятия, расстановки столов и запланированных активностей."
+        "a": "Комфортное количество гостей зависит от мероприятия и расстановки мебели. При бронировании напишите, сколько будет взрослых и детей, и мы подберём удобный вариант. Стоимость аренды зависит от продолжительности."
       },
       {
         "q": "Где находится ROOM Jūrmala и как забронировать зал?",
