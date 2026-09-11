@@ -62,6 +62,14 @@ for (const [route, { html, ids }] of pages) {
     checkUrl(photo.src, base);
     checkUrl(photo.video, base);
   }
+  if (!route.includes('/telpa/') && !route.includes('/cenas/')) {
+    assert.equal([...html.matchAll(/<video\b/g)].length,5,`${route} must embed all five real videos`);
+    assert.equal([...html.matchAll(/class="ambient-video"/g)].length,5,`${route} visibility-controlled media`);
+    assert(!html.includes('"@type":"FAQPage"'),`${route} must not describe removed FAQs`);
+  }
+  assert(!/id="customerName"|id="customerPhone"|id="bookingNotes"/.test(html),`${route} booking should stay simple`);
+  assert.equal([...html.matchAll(/<input[^>]*type="(?:date|time)"/g)].length,2,`${route} has two booking fields`);
+  assert(/action="https:\/\/wa.me\/37127850380" method="get"/.test(html),`${route} native WhatsApp handoff`);
   assert(/data-booking-ui hidden/.test(html), `${route} must not expose an unhandled form before JS is ready`);
 }
 

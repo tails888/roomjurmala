@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {getQuote,validateBooking,rigaNow,formatDuration,requestMessage,whatsappUrl,validDate} from '../assets/js/booking-core.mjs';
-const data={name:'Test Guest',phone:'+371 20000000',package:'hours',eventType:'Workshop',date:'2026-09-18',start:'14:00',end:'17:00',notes:'Three guests'};
+const data={date:'2026-09-18',time:'14:00'};
 const now={date:'2026-09-11',time:'13:00'};
 test('all retained hourly and daily price breaks',()=>{
   assert.deepEqual(Array.from({length:8},(_,i)=>getQuote('hours',i+1).price),[20,38,55,70,85,100,115,130]);
@@ -15,30 +15,30 @@ test('membership honors the three-month minimum and full selected cost',()=>{
   assert.throws(()=>getQuote('hours',NaN),RangeError);
   assert.throws(()=>getQuote('hours',2.5),RangeError);
 });
-test('booking validates dates, phone numbers, required fields and time order',()=>{
+test('two-field booking validates the date and approximate time',()=>{
   assert.equal(validateBooking(data,now),null);
-  assert.equal(validateBooking({...data,name:''},now).key,'invalidRequired');
-  assert.equal(validateBooking({...data,phone:'letters123'},now).key,'invalidPhone');
+  assert.deepEqual(validateBooking({...data,time:''},now),{key:'invalidRequired',fields:['time']});
   assert.equal(validateBooking({...data,date:'2026-09-01'},now).key,'invalidDate');
   assert.equal(validateBooking({...data,date:'2026-02-30'},now).key,'invalidDate');
-  assert.equal(validateBooking({...data,start:'18:00'},now).key,'invalidTime');
-  assert.equal(validateBooking({...data,end:'25:00'},now).key,'invalidTime');
-  assert.equal(validateBooking({...data,date:now.date,start:'12:00'},now).key,'pastTime');
-  assert.equal(validateBooking({...data,notes:'a'.repeat(501)},now).key,'tooLong');
+  assert.equal(validateBooking({...data,time:'25:00'},now).key,'invalidTime');
+  assert.equal(validateBooking({...data,date:now.date,time:'12:00'},now).key,'pastTime');
+  assert.equal(validateBooking({...data,date:now.date,time:'13:00'},now).key,'pastTime');
+  assert.equal(validateBooking({...data,date:now.date,time:'13:01'},now),null);
 });
 test('Riga date is independent of the visitor timezone and handles DST',()=>{
   assert.deepEqual(rigaNow(new Date('2026-09-11T22:30:00Z')),{date:'2026-09-12',time:'01:30'});
   assert.deepEqual(rigaNow(new Date('2026-12-11T22:30:00Z')),{date:'2026-12-12',time:'00:30'});
   assert.equal(validDate('2028-02-29'),true);assert.equal(validDate('2027-02-29'),false);
 });
-test('request preserves special characters without adding URL parameters',()=>{
-  const copy={greeting:'Hello',labels:{name:'Name',phone:'Phone',package:'Plan',eventType:'Event',date:'Date',time:'Time',notes:'Notes'}};
-  const message=requestMessage({...data,name:'A & B',notes:'<text> # ? &'},copy,'Hourly','3 hours · 55 €');
+test('WhatsApp request needs no personal fields and retains a selected price',()=>{
+  const copy={greeting:'Hello & welcome',labels:{date:'Date',time:'Time'}};
+  const message=requestMessage(data,copy,'3 hours · 55 €');
   const url=new URL(whatsappUrl(message));
   assert.equal(url.origin,'https://wa.me');assert.equal(url.pathname,'/37127850380');
   assert.deepEqual([...url.searchParams.keys()],['text']);
   assert.equal(url.searchParams.get('text'),message);
-  assert.match(message,/3 hours · 55 €/);
+  assert.equal(message,'Hello & welcome\n\nDate: 2026-09-18\nTime: 14:00\n3 hours · 55 €');
+  assert(!requestMessage(data,copy).includes('undefined'));
 });
 test('Russian quantity labels use correct plural forms',()=>{
   const units=[['час','часа','часов'],['день','дня','дней'],['неделя','недели','недель'],['месяц','месяца','месяцев']];

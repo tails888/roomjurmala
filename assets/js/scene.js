@@ -26,7 +26,7 @@ export function mountScene(host,photos){
     const group=new THREE.Group();
     group.position.set(x,0,z);group.rotation.y=rotation;
     const geometry=new THREE.BoxGeometry(width+.025,height+.025,.048);
-    const material=new THREE.MeshBasicMaterial({color:0xdca17d});
+    const material=new THREE.MeshBasicMaterial({color:0xef782f});
     const rim=new THREE.Mesh(geometry,material);
     const imageGeometry=new THREE.PlaneGeometry(width,height);
     const imageMaterial=new THREE.MeshBasicMaterial({color:0xffffff});

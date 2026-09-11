@@ -144,5 +144,46 @@ export const design = {
   }
 };
 
+// Short interface copy for the video-led site.
+const minimal = {
+ lv: {
+  hero: 'Vieta būt<br><em>kopā.</em>', venue: 'Pasākumu telpa Jūrmalā', findDate: 'Izvēlēties datumu',
+  eventTitle: 'Jūsu<br><em>notikumiem.</em>', eventNames: ['Svinēt','Radīt','Mācīties','Kustēties'],
+  eventDescriptions: ['Svinības savā lokā.','Meistarklases un radošās darbnīcas.','Nodarbības bērniem un kopā būšanas prieks.','Joga, vingrošana un laiks sev.'],
+  simplePrice: 'Vienkārši<br><em>satikties.</em>', from: 'no', perHour: 'stundā', perDay: 'dienā',
+  bookingTitle: 'Tiekamies?', bookingIntro: 'Pieejamību apstiprināsim sarakstē.', approximateTime: 'Aptuvenais laiks',
+  bookWhatsApp: 'Pieteikties WhatsApp', soundOn: 'Ieslēgt skaņu', soundOff: 'Izslēgt skaņu',
+  pauseVideo: 'Apturēt video', playVideo: 'Atskaņot video', filmFallback: 'Atvērt video',
+  scroll: 'Tālāk', schedule: 'Plānotās nodarbības', selectedPlan: 'Izvēlētais plāns', clearPlan: 'Noņemt',
+  faqTitle: 'Bieži jautātais.', noScript: 'Sazinieties ar mums WhatsApp, lai vienotos par datumu.',
+  invalidRequired: 'Izvēlieties datumu un aptuveno laiku.', invalidTime: 'Ievadiet derīgu laiku.'
+ },
+ en: {
+  hero: 'Room to be<br><em>together.</em>', venue: 'Event space in Jūrmala', findDate: 'Choose a date',
+  eventTitle: 'For your<br><em>occasions.</em>', eventNames: ['Celebrate','Create','Learn','Move'],
+  eventDescriptions: ['Celebrations with your favourite people.','Workshops and creative sessions.','Children’s classes and shared discoveries.','Yoga, exercise and time for yourself.'],
+  simplePrice: 'Simply<br><em>get together.</em>', from: 'from', perHour: 'per hour', perDay: 'per day',
+  bookingTitle: 'See you soon?', bookingIntro: 'We’ll confirm availability in our conversation.', approximateTime: 'Approximate time',
+  bookWhatsApp: 'Book via WhatsApp', soundOn: 'Enable sound', soundOff: 'Mute sound',
+  pauseVideo: 'Pause video', playVideo: 'Play video', filmFallback: 'Open video',
+  scroll: 'Explore', schedule: 'Scheduled classes', selectedPlan: 'Selected plan', clearPlan: 'Remove',
+  faqTitle: 'Good to know.', noScript: 'Contact us on WhatsApp to arrange your date.',
+  invalidRequired: 'Choose a date and an approximate time.', invalidTime: 'Enter a valid time.'
+ },
+ ru: {
+  hero: 'Место для<br><em>встреч.</em>', venue: 'Пространство для мероприятий в Юрмале', findDate: 'Выбрать дату',
+  eventTitle: 'Для ваших<br><em>событий.</em>', eventNames: ['Праздновать','Творить','Учиться','Двигаться'],
+  eventDescriptions: ['Праздники в кругу близких.','Мастер-классы и творческие встречи.','Детские занятия и новые открытия.','Йога, гимнастика и время для себя.'],
+  simplePrice: 'Просто<br><em>встретиться.</em>', from: 'от', perHour: 'в час', perDay: 'в день',
+  bookingTitle: 'Встретимся?', bookingIntro: 'Подтвердим доступность в переписке.', approximateTime: 'Примерное время',
+  bookWhatsApp: 'Написать в WhatsApp', soundOn: 'Включить звук', soundOff: 'Выключить звук',
+  pauseVideo: 'Остановить видео', playVideo: 'Воспроизвести видео', filmFallback: 'Открыть видео',
+  scroll: 'Далее', schedule: 'Запланированные занятия', selectedPlan: 'Выбранный план', clearPlan: 'Убрать',
+  faqTitle: 'Частые вопросы.', noScript: 'Напишите нам в WhatsApp, чтобы выбрать дату.',
+  invalidRequired: 'Выберите дату и примерное время.', invalidTime: 'Введите корректное время.'
+ }
+};
+for (const lang of ['lv','en','ru']) Object.assign(design[lang], minimal[lang]);
+
 export const photoFiles = ['space-open.jpeg','activity-room.jpeg','kitchen-dining.jpeg','creative-table.jpeg','soft-play.jpeg'];
 export const videos = ['room-jurmala-privats-pasakums.mp4','room-jurmala-bernu-nodarbiba.mp4','room-jurmala-telpas-ieeja.mp4','room-jurmala-radosa-darbnica-berniem.mp4','room-jurmala-vingrosanas-nodarbiba.mp4'];

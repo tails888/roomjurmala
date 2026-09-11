@@ -1,4 +1,5 @@
-import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,whatsappUrl,validDate} from './booking-core.mjs';
+import {mountFilms,mountStory} from './films.js';
+import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.mjs';
 const config=JSON.parse(document.getElementById('site-data').textContent);
 const {lang,d,photos}=config;
 const $=selector=>document.querySelector(selector);
@@ -125,17 +126,6 @@ function tabKeyboard(buttons,activate){
     if(next!==undefined){e.preventDefault();activate(buttons[next]);buttons[next].focus();}
   }));
 }
-function selectEvent(button){
-  const index=Number(button.dataset.event),imageIndex=[1,3,0,1][index];
-  $$('[data-event]').forEach(b=>{const active=b===button;b.setAttribute('aria-selected',active);b.tabIndex=active?0:-1;b.parentElement.classList.toggle('is-active',active);b.parentElement.querySelector('p').hidden=!active;});
-  $('#event-image').src=photos[imageIndex].src;
-  $('#event-image').alt=photos[imageIndex].name;
-  $('#event-visual').setAttribute('aria-labelledby',button.id);
-  $('#event-visual [data-video]').dataset.video=String([1,3,2,4][index]);
-}
-const eventTabs=$$('[data-event]');
-eventTabs.forEach(b=>b.addEventListener('click',()=>selectEvent(b)));tabKeyboard(eventTabs,selectEvent);
-
 let mode='hours',quote=getQuote('hours',3),selectedPlan='';
 function renderQuote(){
   quote=getQuote(mode,$('#duration-slider').value);
@@ -157,93 +147,54 @@ function chooseMode(button){
 const modeTabs=$$('[data-mode]');
 modeTabs.forEach(b=>b.addEventListener('click',()=>chooseMode(b)));tabKeyboard(modeTabs,chooseMode);
 $('#duration-slider')?.addEventListener('input',renderQuote);
-function choosePackage(value,plan=''){
-  $('#bookingPackageSelect').value=value;selectedPlan=plan;
-  $('#selected-plan').hidden=!plan;$('#selected-plan').textContent=d.selectedPlan+' · '+plan;
-  if(!$('#request-review').hidden){$('#request-review').hidden=true;$('#booking-form').hidden=false;}
+function choosePackage(plan=''){
+  selectedPlan=plan;
+  $('#selected-plan').hidden=!plan;
+  $('#selected-plan span').textContent=plan;
+  updateMessage();
 }
-$('#calculator-book')?.addEventListener('click',()=>choosePackage(quote.package,formatDuration(quote,lang,d.units)+' · '+money(quote.price)));
+$('#calculator-book')?.addEventListener('click',()=>choosePackage(formatDuration(quote,lang,d.units)+' · '+money(quote.price)));
 $$('[data-package]').forEach(b=>b.addEventListener('click',()=>{
   const m={day:'days',week:'weeks',month:'months'}[b.dataset.package],q=getQuote(m,m==='months'?3:1);
-  choosePackage(b.dataset.package,formatDuration(q,lang,d.units)+' · '+money(q.price));
+  choosePackage(formatDuration(q,lang,d.units)+' · '+money(q.price));
 }));
-$('#bookingPackageSelect').addEventListener('change',()=>choosePackage($('#bookingPackageSelect').value));
-$$('[data-event-book]').forEach(b=>b.addEventListener('click',()=>{$('#eventTypeSelect').selectedIndex=Number(b.dataset.eventBook);}));
-
-const now=rigaNow(),dateInput=$('#desiredDateTime');
-dateInput.min=now.date;
-let currentYear=Number(now.date.slice(0,4)),currentMonth=Number(now.date.slice(5,7))-1;
-let selectedDate=null;
-function dateKey(y,m,day){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');}
-function renderCalendar(focusDay){
-  const today=rigaNow().date;
-  $('#calMonthLabel').textContent=config.calendar.monthsHeader[currentMonth]+' '+currentYear;
-  $('#prevMonth').disabled=dateKey(currentYear,currentMonth,1)<=today.slice(0,7)+'-01';
-  const grid=$('#calGrid');grid.replaceChildren();
-  const offset=(new Date(currentYear,currentMonth,1).getDay()+6)%7;
-  for(let i=0;i<offset;i++){const empty=makeEl('span','cal-empty');empty.setAttribute('aria-hidden','true');grid.append(empty);}
-  const days=new Date(currentYear,currentMonth+1,0).getDate();
-  for(let day=1;day<=days;day++){
-    const date=dateKey(currentYear,currentMonth,day);
-    const events=window.RoomJurmalaCalendar?.getEventsForDate(currentYear,currentMonth,day)||[];
-    const cell=makeEl('button','cal-cell'+(events.length?' has-events':'')+(date===today?' is-today':''),String(day));
-    cell.type='button';cell.dataset.date=date;cell.disabled=date<today;
-    cell.setAttribute('aria-pressed',date===selectedDate);
-    cell.setAttribute('aria-label',new Intl.DateTimeFormat(lang,{dateStyle:'long'}).format(new Date(currentYear,currentMonth,day))+(events.length?' · '+d.scheduled:''));
-    if(date===today)cell.setAttribute('aria-current','date');
-    cell.addEventListener('click',()=>{selectedDate=date;dateInput.value=date;renderCalendar(day);hideReview();});
-    cell.addEventListener('keydown',e=>{
-      const offsets={ArrowRight:1,ArrowLeft:-1,ArrowDown:7,ArrowUp:-7};
-      if(e.key in offsets){e.preventDefault();const next=new Date(currentYear,currentMonth,day+offsets[e.key]);const key=dateKey(next.getFullYear(),next.getMonth(),next.getDate());if(key<today)return;currentYear=next.getFullYear();currentMonth=next.getMonth();renderCalendar(next.getDate());}
-    });
-    grid.append(cell);
-  }
-  window.RoomJurmalaCalendar?.renderPanel({
-    widget:$('.cal-widget'),lang,currentYear,currentMonth,
-    today:new Date(Number(today.slice(0,4)),Number(today.slice(5,7))-1,Number(today.slice(8))),
-    selectedDateParts:selectedDate?{year:Number(selectedDate.slice(0,4)),month:Number(selectedDate.slice(5,7))-1,day:Number(selectedDate.slice(8))}:null,
-    formatDate:(day,month)=>new Intl.DateTimeFormat(lang,{day:'numeric',month:'long'}).format(new Date(currentYear,month,day))
-  });
-  if(focusDay)grid.querySelector('[data-date="'+dateKey(currentYear,currentMonth,focusDay)+'"]')?.focus({preventScroll:true});
+$('#clear-plan').addEventListener('click',()=>choosePackage(''));
+const dateInput=$('#booking-date'),timeInput=$('#booking-time'),form=$('#booking-form');
+dateInput.min=rigaNow().date;
+const fields={date:dateInput,time:timeInput};
+function updateMessage(){
+  $('#whatsapp-message').value=requestMessage({date:dateInput.value,time:timeInput.value},config.whatsapp,selectedPlan);
 }
-function moveMonth(direction){
-  const date=new Date(currentYear,currentMonth+direction,1);
-  currentYear=date.getFullYear();currentMonth=date.getMonth();renderCalendar();
+function renderSchedule(){
+  const widget=$('.cal-widget');if(!widget)return;
+  const now=rigaNow(),today=new Date(now.date+'T12:00:00');
+  const date=validDate(dateInput.value)?new Date(dateInput.value+'T12:00:00'):today;
+  window.RoomJurmalaCalendar?.renderPanel({widget,lang,currentYear:date.getFullYear(),currentMonth:date.getMonth(),today,
+    selectedDateParts:dateInput.value?{year:date.getFullYear(),month:date.getMonth(),day:date.getDate()}:null,
+    formatDate:(day,month)=>new Intl.DateTimeFormat(lang,{day:'numeric',month:'long'}).format(new Date(date.getFullYear(),month,day))});
 }
-$('#prevMonth').addEventListener('click',()=>moveMonth(-1));
-$('#nextMonth').addEventListener('click',()=>moveMonth(1));
-dateInput.addEventListener('change',()=>{if(validDate(dateInput.value)){selectedDate=dateInput.value;currentYear=Number(selectedDate.slice(0,4));currentMonth=Number(selectedDate.slice(5,7))-1;renderCalendar();}});
-renderCalendar();
-function hideReview(){$('#request-review').hidden=true;$('#booking-form').hidden=false;}
-$('#edit-request').addEventListener('click',()=>{hideReview();$('#customerName').focus();});
-const form=$('#booking-form');
-form.addEventListener('input',e=>{e.target.removeAttribute('aria-invalid');});
+form.addEventListener('input',e=>{e.target.removeAttribute('aria-invalid');$('#booking-error').hidden=true;updateMessage();});
+dateInput.addEventListener('change',renderSchedule);
 form.addEventListener('submit',e=>{
-  e.preventDefault();
-  const data=Object.fromEntries(new FormData(form));
-  const error=validateBooking(data);
-  $$('[aria-invalid]').forEach(el=>el.removeAttribute('aria-invalid'));
-  const errorBox=$('#booking-error');
+  const error=validateBooking({date:dateInput.value,time:timeInput.value});
+  Object.values(fields).forEach(el=>el.removeAttribute('aria-invalid'));
   if(error){
-    errorBox.textContent=d[error.key];errorBox.hidden=false;
-    error.fields.forEach(name=>form.elements.namedItem(name)?.setAttribute('aria-invalid','true'));
-    form.elements.namedItem(error.fields[0])?.focus();
-    return;
+    e.preventDefault();$('#booking-error').textContent=d[error.key];$('#booking-error').hidden=false;
+    error.fields.forEach(name=>fields[name].setAttribute('aria-invalid','true'));fields[error.fields[0]].focus();return;
   }
-  errorBox.hidden=true;
-  const label=$('#bookingPackageSelect').selectedOptions[0].textContent;
-  const message=requestMessage(data,config.whatsapp,label,selectedPlan);
-  $('#request-message').textContent=message;
-  $('#request-whatsapp').href=whatsappUrl(message);
-  form.hidden=true;$('#request-review').hidden=false;$('#request-review').focus();
+  $('#booking-error').hidden=true;updateMessage();
+  // Native form navigation opens WhatsApp with the prepared text. The visitor sends it there.
 });
-// Reveal the form only after its local validation and request review are wired.
-$('[data-booking-ui]').hidden=false;
-$('#load-map').addEventListener('click',()=>{
-  const frame=makeEl('iframe');frame.title=config.mapTitle;frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';
-  frame.src='https://www.google.com/maps?q=56.9619657,23.6038606&z=17&hl='+lang+'&output=embed';
-  $('.map-panel').replaceChildren(frame);
-});
+renderSchedule();updateMessage();form.hidden=false;
+const films=mountFilms(d,reduced);
+mountStory($('.film-story'),films,reduced);
+const mobileBook=$('.mobile-book'),hero=$('.video-hero')||$('.hero');
+let bookingVisible=false,heroVisible=Boolean(hero);
+const bookingObserver=new IntersectionObserver(entries=>{
+  for(const entry of entries){if(entry.target===$('#calendar'))bookingVisible=entry.isIntersecting;if(entry.target===hero)heroVisible=entry.isIntersecting;}
+  const show=!bookingVisible&&!heroVisible;mobileBook.classList.toggle('is-visible',show);mobileBook.setAttribute('aria-hidden',String(!show));mobileBook.tabIndex=show?0:-1;
+},{threshold:0});
+bookingObserver.observe($('#calendar'));if(hero)bookingObserver.observe(hero);
 // Keep preview traffic out of the existing production analytics property.
 if(location.hostname==='roomjurmala.lv'||location.hostname==='www.roomjurmala.lv'){
   window.dataLayer=window.dataLayer||[];
