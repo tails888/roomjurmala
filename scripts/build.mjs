@@ -101,7 +101,7 @@ function serviceLanding(lang,kind,d){
 }
 function activityArt(name){return `<img class="activity-art" src="/assets/images/activities/${name}.png" width="120" height="120" alt="" aria-hidden="true" loading="lazy" decoding="async">`;}
 function consolidatedServices(lang){
- return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><div class="activity-heading">${activityArt(k==='party'?'party':'workshop')}<h2>${p.eyebrow}</h2></div><p>${p.intro}</p>${p.details.map(([heading,text],i)=>`${k==='workshops'&&i===1?`<div class="activity-heading">${activityArt('yoga')}<h3>${heading}</h3></div>`:`<h3>${heading}</h3>`}<p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
+ return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><div class="activity-heading">${activityArt(k==='party'?'party':'workshop')}<h2>${p.eyebrow}</h2></div><p>${p.intro}</p>${p.details.map(([heading,text],i)=>`<h3>${heading}</h3><p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
 }
 function rentalCalculator(lang,d){
  const t=calculatorCopy[lang];
