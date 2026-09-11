@@ -246,7 +246,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-3d">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-3d"></script>
+  <script type="module" src="/assets/js/app.js?v=20260911-ga4"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>

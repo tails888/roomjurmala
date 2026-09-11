@@ -285,14 +285,6 @@ const bookingObserver=new IntersectionObserver(entries=>{
 },{threshold:0});
 if($('#calendar'))bookingObserver.observe($('#calendar'));bookingObserver.observe($('#contact'));if(hero)bookingObserver.observe(hero);
 }
-// Keep preview traffic out of the existing production analytics property.
-if(location.hostname==='roomjurmala.lv'||location.hostname==='www.roomjurmala.lv'){
-  window.dataLayer=window.dataLayer||[];
-  window.gtag=function(){window.dataLayer.push(arguments);};
-  const analytics=makeEl('script');analytics.async=true;analytics.src='https://www.googletagmanager.com/gtag/js?id=G-QLD7392ML2';
-  document.head.append(analytics);window.gtag('js',new Date());window.gtag('config','G-QLD7392ML2');
-}
-
 const simpleCalculator=document.querySelector('[data-simple-calculator]');
 if(simpleCalculator){
   const buttons=[...simpleCalculator.querySelectorAll('[data-simple-hour]')];
