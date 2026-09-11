@@ -29,3 +29,19 @@ export const servicePages={
   workshops:{name:'Занятия и мастер-классы',title:'Аренда зала для занятий в Юрмале | ROOM Jūrmala',description:'Помещение для мастер-классов, йоги, гимнастики и детских занятий в Юрмале. Столы, стулья, мини-кухня и регулярная аренда. От 20 € в час.',heading:'Место для<br><em>ваших знаний.</em>',eyebrow:'Аренда помещения для занятий и мастер-классов в Юрмале',intro:'Проводите творческие встречи, занятия движением или небольшие семинары. Светлое помещение в Каугури для разовых и регулярных групп.',image:0,detailImage:3,video:3,poster:'create',caption:'Творческий мастер-класс для детей в ROOM Jūrmala.',detailTitle:'От общего стола<br><em>к движению.</em>',details:[['Творческие мастер-классы','Столы и стулья для рисования, рукоделия и совместных заданий. Программу составляет преподаватель; материалы и расстановку обсудим заранее.'],['Йога и групповые занятия','Помещение можно подготовить для йоги, гимнастики и детских подвижных занятий. Сообщите размер группы и необходимое оборудование, чтобы согласовать расстановку.'],['Регулярные встречи','Можно выбрать почасовую аренду или абонемент. Мини-кухня пригодится для перерывов, а бесплатная парковка у здания упростит приезд.']],priceTitle:'Одна встреча.<br><em>Или свой ритм.</em>',rates:[['20 €','1 час'],['130 €','8 часов'],['460 €','в месяц · 8 ч в неделю']],priceNote:'Абонемент оформляется минимум на 3 месяца. Дни и время регулярных занятий согласуем до бронирования.',faq:[['Можно ли арендовать зал регулярно?','Да. Абонемент стоит 460 € в месяц и включает 8 часов в неделю, минимальный срок составляет 3 месяца. Дни и время согласуем индивидуально.'],['Какое оборудование есть в помещении?','Есть столы, стулья, мини-кухня и зона для занятий. Спортивный инвентарь, материалы для мастер-класса и особые технические потребности обсудите заранее.'],['Можно ли записаться на занятие из календаря?','Да. Выберите отмеченную дату и нажмите кнопку записи у занятия. В сообщении WhatsApp будут его название, дата и время начала. Участие подтвердим в переписке.'],['Включена ли работа преподавателя в аренду?','Нет. Эти цены относятся к аренде помещения. Участие в занятии из календаря оформляется отдельно; стоимость и программу уточняйте в переписке.']],related:'Планируете детский день рождения?',request:'Аренда помещения для занятия или мастер-класса'}
  }
 };
+
+// Booking is handled from the homepage; these pages describe the hire itself.
+const bookingAnswers={
+ lv:'Sākumlapā izvēlieties datumu un aptuveno sākuma laiku, tad atveriet sagatavoto WhatsApp ziņu. Pieejamību un rezervāciju apstiprināsim sarakstē.',
+ en:'Choose your date and approximate start time on the homepage, then open the prepared WhatsApp message. We will confirm availability and your booking in the conversation.',
+ ru:'Выберите дату и примерное время начала на главной странице, затем откройте подготовленное сообщение в WhatsApp. Доступность и бронирование подтвердим в переписке.'
+};
+const groupQuestions={
+ lv:['Kā vienoties par telpu savai nodarbībai?','Sazinoties norādiet nodarbības veidu, dalībnieku skaitu, ilgumu un vēlamo datumu. Ja plānojat regulāru grupu, pievienojiet arī vēlamās nedēļas dienas. Telpas pieejamību un iekārtojumu saskaņosim sarakstē.'],
+ en:['How do I arrange hire for my class?','Tell us the class type, group size, duration and preferred date. For a regular group, include your preferred weekdays. We will agree on availability and the room layout in our conversation.'],
+ ru:['Как договориться об аренде для своего занятия?','Укажите формат занятия, число участников, длительность и желаемую дату. Для регулярной группы добавьте предпочтительные дни недели. Доступность и расстановку согласуем в переписке.']
+};
+for(const lang of ['lv','en','ru']){
+ servicePages[lang].party.faq[3][1]=bookingAnswers[lang];
+ servicePages[lang].workshops.faq[2]=groupQuestions[lang];
+}

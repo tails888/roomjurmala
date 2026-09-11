@@ -75,3 +75,7 @@ Analytics retain the existing property and load only on `roomjurmala.lv` or `www
 content/reviews.mjs stores three original Latvian quotations and direct Google Maps review links, checked on 11 September 2026. Google displayed 5.0 from 12 reviews. This is a manual snapshot, not a live feed. Refresh the rating, count and quotations together after checking the profile. English and Russian homepages identify quotations as Latvian originals.
 
 The section renders in static HTML with a heading, blockquotes and author/source links. No Review or AggregateRating structured data is added for these self-serving business reviews, following https://developers.google.com/search/docs/appearance/structured-data/review-snippet.
+
+### Minimal secondary pages
+
+All twelve LV, EN and RU secondary pages now use the article layout in editorialPage, copy in content/sidepages.mjs, and the existing service descriptions. They contain static descriptive content, native FAQs, compact hire information and phone/email contacts. Calendar, map embeds, social profile rows, reviews and floating booking widgets appear only on the homepage. Existing canonical routes, hreflang alternatives and sitemap entries are preserved. Booking links retain the service context and lead to the same language homepage.

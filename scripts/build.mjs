@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { design, photoFiles, videos } from '../content/design.mjs';
 import {servicePages,serviceSlugs} from '../content/services.mjs';
 import {customerReviews,reviewSource,reviewCopy} from '../content/reviews.mjs';
+import {sideCopy} from '../content/sidepages.mjs';
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -87,6 +88,24 @@ function serviceLanding(lang,kind,d){
  <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
  <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
 }
+function editorialPage(lang,kind,d){
+ const t=sideCopy[lang],p=servicePages[lang][kind],isPrice=kind==='pricing';
+ const title=p?clean(p.eyebrow):isPrice?t.pricingTitle:t.spaceTitle;
+ const intro=p?p.intro:isPrice?t.priceIntro:t.description;
+ const picture=kind==='party'?4:kind==='workshops'?3:1;
+ const entries=p?p.details:t.spaceDetails;
+ const related=['space','party','workshops','pricing'].filter(k=>k!==kind);
+ const names={space:t.spaceTitle,pricing:t.pricingTitle,party:servicePages[lang].party.name,workshops:servicePages[lang].workshops.name};
+ return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p></header>
+ <div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text])=>`<section class="editorial-section"><h2>${heading}</h2><p>${text}</p></section>`).join('')}`}
+ <section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
+ <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
+ <nav class="editorial-related" aria-label="${esc(t.related)}"><p>${t.related}</p>${related.map(k=>`<a href="${route(lang,k)}">${names[k]}</a>`).join('')}</nav></article>`;
+}
+function minimalFooter(lang){
+ const t=sideCopy[lang];
+ return `<footer class="minimal-footer" id="contact"><div><a class="minimal-wordmark" href="${route(lang)}">ROOM Jūrmala</a><p>${t.location}</p></div><div><p>${t.contact}</p><a href="tel:+37127850380">+371 27 850 380</a><a href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a><small>${t.contactNote}</small></div></footer>`;
+}
 function serviceHead(lang,kind){
  const p=servicePages[lang][kind],url='https://roomjurmala.lv'+route(lang,kind),image='https://roomjurmala.lv'+photo(p.image===0?p.detailImage:p.image);
  const schemas=[{'@context':'https://schema.org','@type':'Service',name:p.eyebrow,description:p.description,url,serviceType:p.name,areaServed:{'@type':'City',name:'Jūrmala'},provider:{'@type':'LocalBusiness','@id':'https://roomjurmala.lv/#business',name:'ROOM Jūrmala',url:'https://roomjurmala.lv/',telephone:'+37127850380',image,address:{'@type':'PostalAddress',streetAddress:'Skolas iela 50',addressLocality:'Jūrmala',postalCode:'LV-2016',addressCountry:'LV'}}},
@@ -136,7 +155,7 @@ function booking(c,d){
 }
 function faq(lang,kind,c,d){
  const items=servicePages[lang][kind]?servicePages[lang][kind].faq.map(([q,a])=>({q,a})):kind==='space'?source[lang+'-space'].faq:c.faq.items.map(([q,a])=>({q,a}));
- return `<section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>${d.faqTitle}</h2><p>${c.faq.sub}</p></div><div class="faq-list">${items.map(x=>`<details><summary>${x.q}${plus}</summary><p>${x.a}</p></details>`).join('')}</div></section>`;
+ return `<section class="section faq-section" id="faq"><div class="faq-heading reveal"><h2>${kind==='home'?d.faqTitle:sideCopy[lang].faq}</h2><p>${c.faq.sub}</p></div><div class="faq-list">${items.map(x=>`<details><summary>${x.q}${plus}</summary><p>${x.a}</p></details>`).join('')}</div></section>`;
 }
 function footer(lang,c,d){
  const labels={lv:{contact:'Sazinieties ar mums',social:'ROOM ikdiena',credit:'Mājaslapu izstrādāja'},en:{contact:'Get in touch',social:'Life at ROOM',credit:'Website by'},ru:{contact:'Свяжитесь с нами',social:'Жизнь ROOM',credit:'Разработка сайта'}}[lang];
@@ -172,10 +191,14 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',.
  head=head.replace(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,(tag,raw)=>{
    const data=JSON.parse(raw);
    if(kind==='home'&&data['@type']==='FAQPage'){data.mainEntity=c.faq.items.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}));}
+   if(kind==='space'&&data['@type']==='CollectionPage'){
+     data.description=sideCopy[lang].description;
+     data.mainEntity={'@type':'ItemList',itemListElement:['party','workshops'].map((k,i)=>({'@type':'ListItem',position:i+1,name:servicePages[lang][k].name,url:'https://roomjurmala.lv'+route(lang,k)}))};
+   }
    delete data.aggregateRating;
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });
- const body=servicePages[lang][kind]?serviceLanding(lang,kind,d):kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d)+reviews(lang):kind==='space'?hero(lang,kind,c,d)+serviceLinks(lang)+gallery(c,d)+services(lang):pricing(lang,kind,c,d);
+ const body=kind==='home'?videoHero(d)+events(lang,c,d)+priceStrip(lang,d)+reviews(lang):editorialPage(lang,kind,d);
  const data={lang,d,serviceRequest:servicePages[lang][kind]?.request||'',booking:c.booking,calendar:c.calendar,whatsapp:c.whatsapp,photos:photoFiles.map((f,i)=>({src:photo(i),name:d.photoNames[i],description:d.photoDescriptions[i],video:'/assets/videos/'+videos[i]})),mapTitle:c.map.iframeTitle};
  let html=`<!DOCTYPE html>
 <html lang="${lang}">
@@ -186,7 +209,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',.
   <script src="/calendar-events.js" defer></script>
   <script type="module" src="/assets/js/app.js?v=20260911-video"></script>
 </head>
-<body class="page-${kind}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${footer(lang,c,d)}${dialogs(d)}
+<body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
 </body></html>
 `;

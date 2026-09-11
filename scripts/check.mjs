@@ -74,6 +74,8 @@ for (const [route, { html, ids }] of pages) {
   assert(/data-booking-ui hidden/.test(html), `${route} must not expose an unhandled form before JS is ready`);
   } else {
     assert(!ids.has('calendar')&&!ids.has('booking-form'),route+' must use the homepage calendar');
+    assert(!/<iframe|class="footer-socials"|class="reviews-section"/.test(html),route+' should have no map, social or reviews widgets');
+    assert(html.includes('class="editorial-page"')&&html.includes('class="minimal-footer"'),route+' needs the minimal article layout');
     assert(html.includes('#calendar'),route+' needs a homepage booking link');
   }
 }
