@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# Consolidated service pages now live under the existing space page.
+RewriteRule ^(en/|ru/)?(?:bernu-ballites|telpas-nodarbibam)(?:/index\.html|/)?$ https://roomjurmala.lv/$1telpa/ [R=301,L,NE]
+
+
 # Redirect explicit index.html URLs to the clean canonical directory URL.
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
 RewriteRule ^(.*/)?index\.html$ https://roomjurmala.lv/$1 [R=301,L,NE]

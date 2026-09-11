@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const origin = 'https://roomjurmala.lv';
-const routes = ['bernu-ballites/','telpas-nodarbibam/','en/bernu-ballites/','en/telpas-nodarbibam/','ru/bernu-ballites/','ru/telpas-nodarbibam/','', 'telpa/', 'cenas/', 'en/', 'en/telpa/', 'en/cenas/', 'ru/', 'ru/telpa/', 'ru/cenas/'];
+const routes = ['', 'telpa/', 'cenas/', 'en/', 'en/telpa/', 'en/cenas/', 'ru/', 'ru/telpa/', 'ru/cenas/'];
 const pages = new Map();
 const read = file => fs.readFileSync(file, 'utf8');
 const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
@@ -80,6 +80,12 @@ for (const [route, { html, ids }] of pages) {
   }
 }
 
+for(const lang of ['','en/','ru/']){
+ for(const slug of ['bernu-ballites','telpas-nodarbibam']){
+  assert(!fs.existsSync(path.join(root,lang,slug,'index.html')),'Retired service page still exists');
+  assert(pages.get('/'+lang+'telpa/').ids.has(slug),'Consolidated service section missing');
+ }
+}
 const sitemap=read('sitemap.xml');
 const submitted=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
 assert.equal(submitted.length,pages.size,'Sitemap must contain every page once');
@@ -119,4 +125,4 @@ for (const dir of ['assets/js', 'scripts', 'tests']) {
 }
 assert(fs.existsSync('assets/vendor/three.module.js') && fs.existsSync('assets/vendor/three.core.js'), 'Three.js modules');
 assert(fs.existsSync('assets/vendor/THREE-LICENSE.txt'), 'Three.js license');
-console.log('Verified all 15 routes, SEO metadata, internal links, assets, JSON, IDs, form fallback and JavaScript syntax.');
+console.log('Verified all 9 routes, SEO metadata, internal links, assets, JSON, IDs, form fallback and JavaScript syntax.');

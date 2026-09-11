@@ -79,3 +79,8 @@ The section renders in static HTML with a heading, blockquotes and author/source
 ### Minimal secondary pages
 
 All twelve LV, EN and RU secondary pages now use the article layout in editorialPage, copy in content/sidepages.mjs, and the existing service descriptions. They contain static descriptive content, native FAQs, compact hire information and phone/email contacts. Calendar, map embeds, social profile rows, reviews and floating booking widgets appear only on the homepage. Existing canonical routes, hreflang alternatives and sitemap entries are preserved. Booking links retain the service context and lead to the same language homepage.
+
+
+### Canonical page consolidation
+
+The current build produces exactly 9 pages: home, space and pricing in LV, EN and RU. Party and workshop content is now in anchored sections of the space pages. Their six former URLs have 301 redirects in .htaccess and in the local preview server. The sitemap and internal links use the remaining nine pages. This changes repository routing, not Search Console indexing state; production redirects take effect when deployed.

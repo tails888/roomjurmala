@@ -6,6 +6,8 @@ const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charse
 http.createServer(async (req,res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+    const retired=pathname.match(/^\/(en\/|ru\/)?(?:bernu-ballites|telpas-nodarbibam)(?:\/index\.html|\/)?$/);
+    if(retired){res.writeHead(301,{Location:'/'+(retired[1]||'')+'telpa/'+new URL(req.url,'http://localhost').search});res.end();return;}
     let file = path.resolve(root,'.'+pathname);
     if (!file.startsWith(root+path.sep) && file!==root) throw new Error('Invalid path');
     if (pathname.split('/').some(p=>p.startsWith('.')||['node_modules','content','scripts','tests'].includes(p))) throw new Error('Private path');

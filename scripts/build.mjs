@@ -14,7 +14,7 @@ const plus='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 
 const play='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z" stroke="currentColor" stroke-width="1.25"/></svg>';
 const pauseIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2"/></svg>';
 const soundIcon='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9ZM17 8c2 2 2 6 0 8M20 5c4 4 4 10 0 14" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
-const route=(lang,kind='home')=>(lang==='lv'?'/':'/'+lang+'/')+(kind==='home'?'':kind==='space'?'telpa/':kind==='pricing'?'cenas/':serviceSlugs[kind]+'/');
+const route=(lang,kind='home')=>(lang==='lv'?'/':'/'+lang+'/')+(kind==='home'?'':kind==='space'?'telpa/':kind==='pricing'?'cenas/':'telpa/#'+serviceSlugs[kind]);
 const photo=i=>'/assets/images/gallery/'+photoFiles[i];
 function header(lang,kind,c,d){
   return `<a class="skip-link" href="#main">${esc(d.skip)}</a>
@@ -88,6 +88,9 @@ function serviceLanding(lang,kind,d){
  <section class="service-price"><h2>${p.priceTitle}</h2><div><dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p><a class="text-link" href="${route(lang,'pricing')}">${d.allPrices}${diagonal}</a></div></section>
  <section class="section service-related"><img src="${photo(p.detailImage)}" width="2048" height="1536" alt="${esc(d.photoNames[p.detailImage])}" loading="lazy"><div><h2>${p.related}</h2><a class="text-link" href="${route(lang,other)}">${servicePages[lang][other].name}${diagonal}</a></div></section>`;
 }
+function consolidatedServices(lang){
+ return ['party','workshops'].map(k=>{const p=servicePages[lang][k];return `<section class="editorial-section" id="${serviceSlugs[k]}"><h2>${p.eyebrow}</h2><p>${p.intro}</p>${p.details.map(([heading,text])=>`<h3>${heading}</h3><p>${text}</p>`).join('')}<p>${p.priceNote}</p></section>`;}).join('');
+}
 function editorialPage(lang,kind,d){
  const t=sideCopy[lang],p=servicePages[lang][kind],isPrice=kind==='pricing';
  const title=p?clean(p.eyebrow):isPrice?t.pricingTitle:t.spaceTitle;
@@ -98,7 +101,7 @@ function editorialPage(lang,kind,d){
  const names={space:t.spaceTitle,pricing:t.pricingTitle,party:servicePages[lang].party.name,workshops:servicePages[lang].workshops.name};
  return `<article class="editorial-page"><header class="editorial-heading"><nav class="breadcrumbs" aria-label="${lang==='lv'?'Lapas ceļš':lang==='en'?'Breadcrumb':'Навигация'}"><a href="${route(lang)}">${t.home}</a><span>/</span><span>${p?p.name:isPrice?t.pricingTitle:t.spaceTitle}</span></nav><p class="editorial-eyebrow">${t.eyebrow}</p><h1>${title}</h1><p class="editorial-intro">${intro}</p></header>
  <div class="editorial-layout"><div class="editorial-content">${isPrice?`<section class="editorial-section"><h2>${t.hours}</h2><dl class="editorial-hourly">${[20,38,55,70,85,100,115,130].map((price,i)=>`<div><dt>${i+1} h</dt><dd>${price} €</dd></div>`).join('')}</dl><p>${t.note}</p></section><section class="editorial-section"><h2>${t.packages}</h2><dl class="editorial-packages">${d.packageNames.map((n,i)=>`<div><dt>${n}<small>${d.packageTerms[i]}</small></dt><dd>${[130,550,460][i]} €</dd></div>`).join('')}</dl><p>${t.membership}</p></section>`:`<figure class="editorial-photo"><img src="${photo(picture)}" width="${picture===3?2048:1536}" height="${picture===3?1536:2048}" alt="${esc(d.photoNames[picture])}" fetchpriority="high"><figcaption>${t.location}</figcaption></figure>${entries.map(([heading,text])=>`<section class="editorial-section"><h2>${heading}</h2><p>${text}</p></section>`).join('')}`}
- <section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
+ ${kind==='space'?consolidatedServices(lang):''}<section class="editorial-section editorial-planning"><h2>${t.planTitle}</h2>${t.plan.map(text=>`<p>${text}</p>`).join('')}</section></div>
  <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
  <nav class="editorial-related" aria-label="${esc(t.related)}"><p>${t.related}</p>${related.map(k=>`<a href="${route(lang,k)}">${names[k]}</a>`).join('')}</nav></article>`;
 }
@@ -183,7 +186,7 @@ fs.copyFileSync('node_modules/three/LICENSE','assets/vendor/THREE-LICENSE.txt');
 const faces=fs.readFileSync('assets/fonts/fonts.css','utf8').match(/@font-face\s*\{[^}]*\}/g);
 const seen=new Set();
 fs.writeFileSync('assets/fonts/site-fonts.css',faces.filter(x=>/font-family: '(Inter|Cormorant Garamond)'/.test(x)).filter(x=>{const key=x.replace(/font-weight:[^;]+;/,'');if(seen.has(key))return false;seen.add(key);return true;}).map(x=>x.includes("'Inter'")?x.replace(/font-weight:[^;]+;/,'font-weight: 100 900;'):x).join('\n'));
-for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',...Object.keys(serviceSlugs)]){
+for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing']){
  const c=copy[lang], d=design[lang], page=source[lang+'-'+kind]||{head:serviceHead(lang,kind)};
  let head=page.head.replace(/<!-- Google tag[\s\S]*?<\/script>\s*<script>[\s\S]*?<\/script>/,'');
  head=head.replace(/\s*<!--[^]*?-->/g,'');
@@ -219,7 +222,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing',.
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }
-console.log('Built 15 static pages in LV, EN and RU with existing assets.');
+console.log('Built 9 static pages in LV, EN and RU with existing assets.');
 
-const sitemapRoutes=['home','space','pricing',...Object.keys(serviceSlugs)];
+const sitemapRoutes=['home','space','pricing'];
 fs.writeFileSync('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+sitemapRoutes.flatMap(kind=>['lv','en','ru'].map(lang=>`  <url><loc>https://roomjurmala.lv${route(lang,kind)}</loc>${['lv','en','ru','x-default'].map(l=>`<xhtml:link rel="alternate" hreflang="${l}" href="https://roomjurmala.lv${route(l==='x-default'?'lv':l,kind)}" />`).join('')}<lastmod>2026-09-11</lastmod></url>`)).join('\n')+'\n</urlset>\n');
