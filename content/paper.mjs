@@ -1,6 +1,6 @@
 export const paperCopy = {
   "lv": {
-    "title": "Telpa jūsu<br>pasākumiem",
+    "title": "Pasākumu telpa<br>Jūrmalā",
     "eyebrow": "Pasākumu telpa Jūrmalā",
     "intro": "Svētkiem. Idejām. Kustībai.",
     "book": "Rezervēt",

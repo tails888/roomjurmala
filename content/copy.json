@@ -1,12 +1,12 @@
 {
   "lv": {
     "meta": {
-      "title": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "title": "Pasākumu telpas noma Jūrmalā | ROOM Jūrmala",
       "description": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
       "url": "https://roomjurmala.lv/",
-      "ogTitle": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "ogTitle": "Pasākumu telpas noma Jūrmalā | ROOM Jūrmala",
       "ogDescription": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
-      "twitterTitle": "Telpa pasākumiem Jūrmalā | ROOM Jūrmala",
+      "twitterTitle": "Pasākumu telpas noma Jūrmalā | ROOM Jūrmala",
       "twitterDescription": "Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.",
       "locale": "lv_LV"
     },
@@ -23,7 +23,7 @@
       "menuClose": "Aizvērt izvēlni"
     },
     "hero": {
-      "titleHtml": "Telpa jūsu <br/><em>pasākumiem</em>",
+      "titleHtml": "Pasākumu telpa <br/><em>Jūrmalā</em>",
       "sub": "Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm",
       "actions": [
         "Rezervēt",

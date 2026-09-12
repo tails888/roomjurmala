@@ -1,7 +1,7 @@
 export const sideCopy = {
   "lv": {
-    "spaceTitle": "Vieta jūsu svētkiem un nodarbībām",
-    "pricingTitle": "Telpas nomas cenas",
+    "spaceTitle": "Telpa svinībām un nodarbībām Jūrmalā",
+    "pricingTitle": "Telpas nomas cenas Jūrmalā",
     "eyebrow": "ROOM Jūrmala · Kauguri",
     "description": "Pie mums Kauguros var nosvinēt dzimšanas dienu, satikt ģimeni un draugus vai vadīt nodarbību. Telpā ir vieta gan kopīgam galdam, gan bērnu rotaļām un kustībai.",
     "spaceDetails": [
