@@ -175,7 +175,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <head>${head}
   <meta name="theme-color" content="#173f34">
   <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260911-3d">
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260912-hours">
   <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-languages">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>

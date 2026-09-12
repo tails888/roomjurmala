@@ -90,4 +90,12 @@ dialog{padding:0;border:0;max-width:none;max-height:none;color:var(--ink)}dialog
  .venue-film-grid h4{font-size:19px}
 }
 
-.opening-hours{margin-top:20px;max-width:100%}.opening-hours h2{font:600 13px/1.5 var(--sans);margin:0 0 9px}.opening-hours dl{margin:0;font-size:12px;line-height:1.7}.opening-hours dl>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 20px}.opening-hours dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}.opening-hours dt{color:var(--muted)}
+.opening-hours{margin-top:22px;width:320px;max-width:100%;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#eee9df80}
+.opening-hours h2{font:600 11px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
+.opening-hours dl{margin:0;font:400 12px/1.6 var(--sans)}
+.opening-hours dl>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:12px;padding:9px 0}
+.opening-hours dl>div+div{border-top:1px solid var(--line)}
+.opening-hours dl>div:last-child{padding-bottom:0}
+.opening-hours dd{margin:0;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
+.opening-hours dt{color:var(--muted);overflow-wrap:anywhere}
+@media(max-width:380px){.opening-hours{padding:16px}.opening-hours dl{font-size:11px}.opening-hours dl>div{gap:8px}}
