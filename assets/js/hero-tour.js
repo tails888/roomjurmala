@@ -13,7 +13,7 @@ export function mountHeroTour(reduced){
   host.style.backgroundImage=`url("${video.poster}")`;
   host.style.backgroundSize='cover';host.style.backgroundPosition='center';
   video.style.opacity='0';
-  function reveal(){decoded=true;video.style.opacity='1';}
+  function reveal(){decoded=true;video.style.opacity='1';host.dataset.videoReady='';schedule();}
   if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(reveal);
   else video.addEventListener('loadeddata',reveal,{once:true});
   function prime(){
@@ -27,7 +27,10 @@ export function mountHeroTour(reduced){
   const clamp=n=>Math.max(0,Math.min(1,n));
   const smooth=n=>{n=clamp(n);return n*n*(3-2*n);};
   function seek(){
-    if(!enabled||document.hidden||!Number.isFinite(video.duration)||video.seeking)return;
+    if(!enabled||document.hidden||!Number.isFinite(video.duration)||video.seeking||!decoded)return;
+    // The first decoded frame is already the start; seeking a few milliseconds
+    // during initial buffering can cancel and restart a Range request.
+    if(targetTime===0&&video.currentTime<.08)return;
     const time=Math.min(Math.max(.04,targetTime*Math.max(0,video.duration-.08)),video.duration);
     if(Math.abs(video.currentTime-time)>.035){try{video.currentTime=time;}catch{/* Wait for media metadata. */}}
   }

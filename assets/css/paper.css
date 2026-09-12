@@ -238,3 +238,5 @@ body{background:var(--paper)}
 /* Fit the longer Russian event heading without overflowing its column. */
 @media(min-width:761px){html[lang="ru"] .paper-hero h1{font-size:clamp(60px,8vw,120px)}}
 @media(max-width:760px){html[lang="ru"] .paper-hero h1{font-size:clamp(48px,12vw,90px)}}
+
+.paper-art-video .film-media{position:relative}.paper-art-video .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none}.paper-art-video video{position:relative}.paper-art-video .film-media[data-video-ready] .hero-poster{visibility:hidden}

@@ -8,6 +8,10 @@ import {sideCopy} from '../content/sidepages.mjs';
 import {paperCopy} from '../content/paper.mjs';
 import {calculatorCopy,simplePriceCopy} from '../content/calculator.mjs';
 import {openingHours, openingHoursCopy} from '../content/opening-hours.mjs';
+// Keep the cascade unchanged while removing two render-blocking round trips.
+const cssSources=['assets/fonts/site-fonts.css','assets/css/site.css','assets/css/paper.css'];
+fs.writeFileSync('assets/css/bundle.css',cssSources.map(file=>fs.readFileSync(file,'utf8')).join('\n'));
+const imageVariants=JSON.parse(fs.readFileSync('content/image-variants.json','utf8'));
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -44,7 +48,8 @@ function inlineVideo(index,poster,id,d,hero=false){
  const file=hero?'room-hero-tour.mp4':videos[index];
  if(hero)poster='june-17';
  return `<div class="film-media" data-film ${hero?'style="background-image:url(/assets/images/video-posters/june-17.jpg);background-size:cover;background-position:center"':''}>
-  <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="${hero?'metadata':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
+  ${hero?'<img class="hero-poster" src="/assets/images/video-posters/june-17.jpg" width="576" height="677" alt="" fetchpriority="high">':''}
+  <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="${hero?'auto':'none'}" poster="/assets/images/video-posters/${poster}.jpg" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
 
   <a class="film-error" href="/assets/videos/${file}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
@@ -174,17 +179,21 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <html lang="${lang}">
 <head>${head}
   <meta name="theme-color" content="#173f34">
-  <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260912-hours">
-  <link rel="stylesheet" href="/assets/css/paper.css?v=20260911-languages">
+  ${kind==='home'?'<link rel="preload" as="image" href="/assets/images/video-posters/june-17.jpg" fetchpriority="high">':''}
+  <link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-perf">
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260911-mobile-fix"></script>
+  <script type="module" src="/assets/js/app.js?v=20260912-perf"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
 </body></html>
 `;
+ html=html.replace(/<img\b([^>]*?)src="(\/assets\/images\/gallery\/[^"]+\.(?:jpg|jpeg|png))"([^>]*)>/g,(tag,before,src,after)=>{
+   const variants=imageVariants[src];
+   if(!variants)return tag;
+   return `<img${before}src="${src}" srcset="${variants.map(v=>v.src+' '+v.width+'w').join(', ')}" sizes="(max-width: 680px) 80vw, 600px"${after}>`;
+ });
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
   html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260911-3d" defer></script>','');
