@@ -1,4 +1,4 @@
-import {mountHeroTour} from './hero-tour.js?v=20260912-perf';
+import {mountHeroTour} from './hero-tour.js?v=20260912-fast';
 export function mountPaper(reduced){
   mountHeroTour(reduced);
   mountTypewriter(document.querySelector('#paper-title'),reduced);
@@ -34,7 +34,7 @@ export function mountPaper(reduced){
 
 function mountTypewriter(title,reduced){
   if(!title||reduced.matches)return;
-  const label=title.innerText.replace(/\s+/g,' ').trim();
+  const label=[...title.childNodes].map(node=>node.nodeName==='BR'?' ':node.textContent).join('').replace(/\s+/g,' ').trim();
   const letters=[];
   // Keep every letter in flow so typing never moves the booking controls.
   for(const node of [...title.childNodes]){
@@ -69,7 +69,7 @@ function mountTypewriter(title,reduced){
   observer.observe(title);
   reduced.addEventListener('change',()=>{if(reduced.matches)finish();});
   // Start after the display font is ready to avoid a mid-animation font swap.
-  document.fonts.ready.then(()=>{if(reduced.matches){finish();return;}timer=setTimeout(tick,300);});
+  document.fonts.load('500 1em \"Cormorant Garamond\"',label).catch(()=>{}).then(()=>{if(reduced.matches){finish();return;}timer=setTimeout(tick,300);});
 }
 
 // A native sticky scroll track: no wheel trapping and no automatic dialogs.
@@ -81,24 +81,44 @@ function mountGalleryScroll(reduced){
   board.before(track);track.append(board);
   const meter=document.createElement('div');meter.className='gallery-scroll-meter';meter.setAttribute('aria-hidden','true');
   cards.forEach(()=>meter.append(document.createElement('span')));board.append(meter);
-  let raf=0;
+  let raf=0,geometry=null,near=false;
   const smooth=n=>{n=Math.max(0,Math.min(1,n));return n*n*(3-2*n);};
+  function measure(){
+    const width=board.clientWidth,height=board.clientHeight;
+    geometry={distance:Math.max(1,track.offsetHeight-board.offsetHeight),poses:cards.map(card=>({
+      card,scale:Math.min(width*.84/card.offsetWidth,height*.76/card.offsetHeight),
+      x:width/2-card.offsetLeft-card.offsetWidth/2,
+      y:height*.47-card.offsetTop-card.offsetHeight/2,
+      angle:parseFloat(getComputedStyle(card).getPropertyValue('--angle'))||0,
+      imageWidth:card.querySelector('img').clientWidth
+    }))};
+  }
+  function prepareImages(){
+    if(!near||!geometry||reduced.matches)return;
+    // CSS transforms do not affect native auto sizes. Prepare the full zoom size
+    // only as the visitor approaches the gallery, while retaining original dialogs.
+    for(const {card,scale,imageWidth} of geometry.poses){
+      const img=card.querySelector('img');
+      const width=Math.ceil(imageWidth*Math.max(1,scale));
+      if(width>Number(img.dataset.preparedWidth||0)){
+        img.sizes=width+'px';img.dataset.preparedWidth=String(width);
+      }
+    }
+  }
   function paint(){
     raf=0;if(reduced.matches)return;
     const rect=track.getBoundingClientRect();
-    const distance=track.offsetHeight-board.offsetHeight;
+    if(!geometry)measure();
+    prepareImages();
+    const distance=geometry.distance;
     const progress=Math.max(0,Math.min(1,-rect.top/distance));
     const timeline=progress*(cards.length+1);
     let strongest=0,active=-1;
-    const poses=cards.map((card,i)=>{
+    const poses=geometry.poses.map(({card,scale,x,y,angle},i)=>{
       const local=timeline-i-.15;
       const enter=smooth(local/.65);
       const leave=smooth((local-1.05)/.65);
       const strength=enter*(1-leave);
-      const scale=Math.min(board.clientWidth*.84/card.offsetWidth,board.clientHeight*.76/card.offsetHeight);
-      const x=board.clientWidth/2-card.offsetLeft-card.offsetWidth/2;
-      const y=board.clientHeight*.47-card.offsetTop-card.offsetHeight/2;
-      const angle=parseFloat(getComputedStyle(card).getPropertyValue('--angle'))||0;
       if(strength>strongest){strongest=strength;active=i;}
       return {card,strength,scale,x,y,angle};
     });
@@ -114,13 +134,16 @@ function mountGalleryScroll(reduced){
   }
   function schedule(){if(!raf)raf=requestAnimationFrame(paint);}
   function configure(){
+    geometry=null;
     track.classList.toggle('gallery-scroll-enabled',!reduced.matches);
     board.style.removeProperty('--gallery-focus');
     cards.forEach(card=>{card.style.removeProperty('--card-transform');card.style.removeProperty('opacity');card.style.removeProperty('z-index');card.style.removeProperty('box-shadow');});
     schedule();
   }
   addEventListener('scroll',schedule,{passive:true});
-  addEventListener('resize',schedule,{passive:true});
+  addEventListener('resize',()=>{geometry=null;schedule();},{passive:true});
+  new ResizeObserver(()=>{geometry=null;schedule();}).observe(board);
+  new IntersectionObserver(entries=>{near=entries[0].isIntersecting;schedule();},{rootMargin:'500px'}).observe(board);
   reduced.addEventListener('change',configure);configure();
 }
 

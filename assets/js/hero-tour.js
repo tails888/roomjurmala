@@ -4,10 +4,9 @@ export function mountHeroTour(reduced){
   const video=art?.querySelector('[data-hero-video]');
   if(!video)return;
   const mobile=matchMedia('(max-width:760px)');
-  const track=document.createElement('div');track.className='hero-tour-track';
-  const pin=document.createElement('div');pin.className='hero-tour-pin';
-  art.before(track);track.append(pin);pin.append(art);
-  let enabled=false,frame=0,targetTime=0,priming=false,decoded=false;
+  const track=art.closest('.hero-tour-track');
+  const pin=art.closest('.hero-tour-pin');
+  let enabled=false,frame=0,targetTime=0,priming=false,decoded=false,near=false,painted=false;
   // Keep an independent poster visible until Safari has presented a video frame.
   const host=video.closest('.film-media');
   host.style.backgroundImage=`url("${video.poster}")`;
@@ -17,7 +16,7 @@ export function mountHeroTour(reduced){
   if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(reveal);
   else video.addEventListener('loadeddata',reveal,{once:true});
   function prime(){
-    if(!enabled||priming||decoded)return;
+    if(!enabled||!near||!painted||priming||decoded)return;
     priming=true;video.dataset.heroPriming='';video.muted=true;video.playsInline=true;
     // iOS may ignore preload until playback is requested, even for a paused scrubber.
     video.play().then(()=>{video.pause();schedule();}).catch(()=>{}).finally(()=>{
@@ -49,7 +48,7 @@ export function mountHeroTour(reduced){
     if(next===enabled){schedule();return;}
     enabled=next;track.classList.toggle('hero-tour-enabled',enabled);
     video.toggleAttribute('data-scroll-scrub',enabled);
-    if(enabled){video.pause();video.preload='auto';paint();prime();}
+    if(enabled){video.pause();paint();prime();}
     else{track.style.removeProperty('--tour-open');delete track.dataset.progress;}
     document.dispatchEvent(new Event('hero-tour-change'));
   }
@@ -63,5 +62,16 @@ export function mountHeroTour(reduced){
   addEventListener('scroll',schedule,{passive:true});
   addEventListener('resize',schedule,{passive:true});
   mobile.addEventListener('change',configure);reduced.addEventListener('change',configure);
+  // Show the lightweight poster before a large video can compete for bandwidth.
+  const poster=host.querySelector('.hero-poster');
+  const posterReady=poster?.decode?poster.decode().catch(()=>{}):Promise.resolve();
+  posterReady.then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    painted=true;video.dataset.mediaReady='';prime();
+    document.dispatchEvent(new Event('room:media-ready'));
+  })));
+  const proximity=new IntersectionObserver(entries=>{
+    near=entries[0].isIntersecting;if(near)prime();
+  },{rootMargin:'200px'});
+  proximity.observe(host);
   configure();
 }

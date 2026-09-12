@@ -99,3 +99,7 @@ dialog{padding:0;border:0;max-width:none;max-height:none;color:var(--ink)}dialog
 .opening-hours dd{margin:0;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
 .opening-hours dt{color:var(--muted);overflow-wrap:anywhere}
 @media(max-width:380px){.opening-hours{padding:16px}.opening-hours dl{font-size:11px}.opening-hours dl>div{gap:8px}}
+
+/* Keep the contact card inside the content column on narrow phones. */
+.footer-main>div{min-width:0;max-width:100%}
+@media(max-width:680px){.footer-main{grid-template-columns:minmax(0,1fr)}.footer-contact{width:100%}.footer-identity #map-section{min-width:0}}

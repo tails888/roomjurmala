@@ -7,7 +7,11 @@ export function mountScroll(reduced){
   document.body.append(progress);
   let frame=0,target=scrollY,lastTime=0,progressFrame=0;
   const enabled=()=>desktop.matches&&!reduced.matches;
-  const limit=()=>Math.max(0,root.scrollHeight-innerHeight);
+  let scrollLimit=0;
+  const measure=()=>{scrollLimit=Math.max(0,root.scrollHeight-innerHeight);};
+  const limit=()=>scrollLimit;
+  measure();
+  new ResizeObserver(()=>{measure();schedule();}).observe(document.body);
   const clamp=n=>Math.max(0,Math.min(limit(),n));
   function stop(){cancelAnimationFrame(frame);frame=0;target=scrollY;lastTime=0;}
   function step(time){
@@ -49,7 +53,7 @@ export function mountScroll(reduced){
   function configure(){stop();root.classList.toggle('custom-scroll',enabled());schedule();}
   addEventListener('wheel',wheel,{passive:false});
   addEventListener('scroll',schedule,{passive:true});
-  addEventListener('resize',()=>{stop();schedule();},{passive:true});
+  addEventListener('resize',()=>{measure();stop();schedule();},{passive:true});
   addEventListener('pointerdown',stop,{passive:true});
   addEventListener('touchstart',stop,{passive:true});
   addEventListener('keydown',stop);

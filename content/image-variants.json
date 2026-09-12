@@ -1,12 +1,28 @@
 {
   "/assets/images/gallery/activity-room.jpeg": [
     {
-      "src": "/assets/images/gallery/activity-room-320.webp",
+      "src": "/assets/images/gallery/activity-room-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/activity-room-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/activity-room-640.webp",
+      "src": "/assets/images/gallery/activity-room-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/activity-room-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/activity-room-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/activity-room-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/activity-room.jpeg",
@@ -15,12 +31,28 @@
   ],
   "/assets/images/gallery/creative-table.jpeg": [
     {
-      "src": "/assets/images/gallery/creative-table-320.webp",
+      "src": "/assets/images/gallery/creative-table-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/creative-table-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/creative-table-640.webp",
+      "src": "/assets/images/gallery/creative-table-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/creative-table-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/creative-table-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/creative-table-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/creative-table.jpeg",
@@ -29,12 +61,28 @@
   ],
   "/assets/images/gallery/flowers-and-yoga.jpg": [
     {
-      "src": "/assets/images/gallery/flowers-and-yoga-320.webp",
+      "src": "/assets/images/gallery/flowers-and-yoga-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/flowers-and-yoga-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/flowers-and-yoga-640.webp",
+      "src": "/assets/images/gallery/flowers-and-yoga-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/flowers-and-yoga-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/flowers-and-yoga-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/flowers-and-yoga-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/flowers-and-yoga.jpg",
@@ -43,12 +91,28 @@
   ],
   "/assets/images/gallery/group-seminar.jpg": [
     {
-      "src": "/assets/images/gallery/group-seminar-320.webp",
+      "src": "/assets/images/gallery/group-seminar-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/group-seminar-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/group-seminar-640.webp",
+      "src": "/assets/images/gallery/group-seminar-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/group-seminar-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/group-seminar-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/group-seminar-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/group-seminar.jpg",
@@ -57,12 +121,24 @@
   ],
   "/assets/images/gallery/kitchen-and-tables.jpg": [
     {
-      "src": "/assets/images/gallery/kitchen-and-tables-320.webp",
+      "src": "/assets/images/gallery/kitchen-and-tables-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-and-tables-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/kitchen-and-tables-640.webp",
+      "src": "/assets/images/gallery/kitchen-and-tables-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-and-tables-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-and-tables-w960.webp",
+      "width": 960
     },
     {
       "src": "/assets/images/gallery/kitchen-and-tables.jpg",
@@ -71,12 +147,28 @@
   ],
   "/assets/images/gallery/kitchen-dining.jpeg": [
     {
-      "src": "/assets/images/gallery/kitchen-dining-320.webp",
+      "src": "/assets/images/gallery/kitchen-dining-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-dining-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/kitchen-dining-640.webp",
+      "src": "/assets/images/gallery/kitchen-dining-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-dining-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-dining-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/kitchen-dining-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/kitchen-dining.jpeg",
@@ -85,12 +177,28 @@
   ],
   "/assets/images/gallery/movement-class.jpg": [
     {
-      "src": "/assets/images/gallery/movement-class-320.webp",
+      "src": "/assets/images/gallery/movement-class-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/movement-class-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/movement-class-640.webp",
+      "src": "/assets/images/gallery/movement-class-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/movement-class-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/movement-class-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/movement-class-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/movement-class.jpg",
@@ -99,12 +207,24 @@
   ],
   "/assets/images/gallery/quiet-moment.jpg": [
     {
-      "src": "/assets/images/gallery/quiet-moment-320.webp",
+      "src": "/assets/images/gallery/quiet-moment-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/quiet-moment-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/quiet-moment-640.webp",
+      "src": "/assets/images/gallery/quiet-moment-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/quiet-moment-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/quiet-moment-w960.webp",
+      "width": 960
     },
     {
       "src": "/assets/images/gallery/quiet-moment.jpg",
@@ -113,12 +233,24 @@
   ],
   "/assets/images/gallery/room-open.jpg": [
     {
-      "src": "/assets/images/gallery/room-open-320.webp",
+      "src": "/assets/images/gallery/room-open-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/room-open-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/room-open-640.webp",
+      "src": "/assets/images/gallery/room-open-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/room-open-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/room-open-w960.webp",
+      "width": 960
     },
     {
       "src": "/assets/images/gallery/room-open.jpg",
@@ -127,12 +259,28 @@
   ],
   "/assets/images/gallery/soft-play.jpeg": [
     {
-      "src": "/assets/images/gallery/soft-play-320.webp",
+      "src": "/assets/images/gallery/soft-play-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/soft-play-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/soft-play-640.webp",
+      "src": "/assets/images/gallery/soft-play-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/soft-play-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/soft-play-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/soft-play-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/soft-play.jpeg",
@@ -141,12 +289,24 @@
   ],
   "/assets/images/gallery/sunlit-room.jpg": [
     {
-      "src": "/assets/images/gallery/sunlit-room-320.webp",
+      "src": "/assets/images/gallery/sunlit-room-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/sunlit-room-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/sunlit-room-640.webp",
+      "src": "/assets/images/gallery/sunlit-room-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/sunlit-room-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/sunlit-room-w960.webp",
+      "width": 960
     },
     {
       "src": "/assets/images/gallery/sunlit-room.jpg",
@@ -155,12 +315,28 @@
   ],
   "/assets/images/gallery/yoga-by-windows.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-by-windows-320.webp",
+      "src": "/assets/images/gallery/yoga-by-windows-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-by-windows-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-by-windows-640.webp",
+      "src": "/assets/images/gallery/yoga-by-windows-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-by-windows-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-by-windows-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-by-windows-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-by-windows.jpg",
@@ -169,12 +345,28 @@
   ],
   "/assets/images/gallery/yoga-class.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-class-320.webp",
+      "src": "/assets/images/gallery/yoga-class-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-class-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-class-640.webp",
+      "src": "/assets/images/gallery/yoga-class-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-class-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-class-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-class-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-class.jpg",
@@ -183,12 +375,28 @@
   ],
   "/assets/images/gallery/yoga-group.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-group-320.webp",
+      "src": "/assets/images/gallery/yoga-group-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-group-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-group-640.webp",
+      "src": "/assets/images/gallery/yoga-group-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-group-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-group-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-group-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-group.jpg",
@@ -197,12 +405,28 @@
   ],
   "/assets/images/gallery/yoga-mats.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-mats-320.webp",
+      "src": "/assets/images/gallery/yoga-mats-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-mats-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-mats-640.webp",
+      "src": "/assets/images/gallery/yoga-mats-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-mats-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-mats-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-mats-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-mats.jpg",
@@ -211,12 +435,28 @@
   ],
   "/assets/images/gallery/yoga-practice.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-practice-320.webp",
+      "src": "/assets/images/gallery/yoga-practice-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-practice-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-practice-640.webp",
+      "src": "/assets/images/gallery/yoga-practice-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-practice-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-practice-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-practice-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-practice.jpg",
@@ -225,12 +465,28 @@
   ],
   "/assets/images/gallery/yoga-session.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-session-320.webp",
+      "src": "/assets/images/gallery/yoga-session-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-session-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-session-640.webp",
+      "src": "/assets/images/gallery/yoga-session-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-session-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-session-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-session-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-session.jpg",
@@ -239,12 +495,28 @@
   ],
   "/assets/images/gallery/yoga-together.jpg": [
     {
-      "src": "/assets/images/gallery/yoga-together-320.webp",
+      "src": "/assets/images/gallery/yoga-together-w160.webp",
+      "width": 160
+    },
+    {
+      "src": "/assets/images/gallery/yoga-together-w320.webp",
       "width": 320
     },
     {
-      "src": "/assets/images/gallery/yoga-together-640.webp",
+      "src": "/assets/images/gallery/yoga-together-w480.webp",
+      "width": 480
+    },
+    {
+      "src": "/assets/images/gallery/yoga-together-w640.webp",
       "width": 640
+    },
+    {
+      "src": "/assets/images/gallery/yoga-together-w960.webp",
+      "width": 960
+    },
+    {
+      "src": "/assets/images/gallery/yoga-together-w1280.webp",
+      "width": 1280
     },
     {
       "src": "/assets/images/gallery/yoga-together.jpg",
