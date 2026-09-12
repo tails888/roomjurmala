@@ -7,6 +7,7 @@ import {customerReviews,reviewSource,reviewCopy} from '../content/reviews.mjs';
 import {sideCopy} from '../content/sidepages.mjs';
 import {paperCopy} from '../content/paper.mjs';
 import {calculatorCopy,simplePriceCopy} from '../content/calculator.mjs';
+import {openingHours, openingHoursCopy} from '../content/opening-hours.mjs';
 const copy=JSON.parse(fs.readFileSync('content/copy.json','utf8'));
 const source=JSON.parse(fs.readFileSync('content/pages.json','utf8'));
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -94,9 +95,13 @@ function editorialPage(lang,kind,d){
  <aside class="editorial-aside" aria-label="${esc(t.rates)}"><p class="editorial-eyebrow">${t.rates}</p>${p?`<dl>${p.rates.map(([price,term])=>`<div><dt>${term}</dt><dd>${price}</dd></div>`).join('')}</dl><p>${p.priceNote}</p>`:`<p class="editorial-start-price">20 € <small>/ h</small></p><p>${t.note}</p>`}<a class="button button-orange" href="#calendar">${t.book}</a>${!isPrice?`<a class="editorial-link" href="${route(lang,'pricing')}">${t.allPrices}</a>`:''}<div class="editorial-location"><p>${t.location}</p><p>${t.access}</p></div></aside></div>
  </article>`;
 }
+function hours(lang){
+ const t=openingHoursCopy[lang];
+ return `<section class="opening-hours" aria-label="${t.title}"><h2>${t.title}</h2><dl>${openingHours.map((slot,i)=>`<div><dt>${t.days[i]}</dt><dd><time datetime="${slot.opens}">${slot.opens}</time>–<time datetime="${slot.closes}">${slot.closes}</time></dd></div>`).join('')}</dl></section>`;
+}
 function minimalFooter(lang){
  const t=sideCopy[lang];
- return `<footer class="minimal-footer" id="contact"><div><a class="minimal-wordmark" href="${route(lang)}">ROOM Jūrmala</a><p>${t.location}</p></div><div><p>${t.contact}</p><a href="tel:+37127850380">+371 27 850 380</a><a href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a><small>${t.contactNote}</small></div></footer>`;
+ return `<footer class="minimal-footer" id="contact"><div><a class="minimal-wordmark" href="${route(lang)}">ROOM Jūrmala</a><p>${t.location}</p></div><div><p>${t.contact}</p><a href="tel:+37127850380">+371 27 850 380</a><a href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a><small>${t.contactNote}</small>${hours(lang)}</div></footer>`;
 }
 function serviceHead(lang,kind){
  const p=servicePages[lang][kind],url='https://roomjurmala.lv'+route(lang,kind),image='https://roomjurmala.lv'+photo(p.image===0?p.detailImage:p.image);
@@ -139,7 +144,7 @@ function footer(lang,c,d){
   tiktok:'<path d="M14 3v12.5a4.5 4.5 0 1 1-4-4.47V15a1.5 1.5 0 1 0 1 1.42V3h3c.3 3 2 4.7 5 5v3c-2-.1-3.7-.8-5-2"/>'
  };
  const socials=[['Instagram','instagram','https://www.instagram.com/room.jurmala/'],['Facebook','facebook','https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/'],['TikTok','tiktok','https://www.tiktok.com/@room.jurmala']];
- return `<footer class="site-footer" id="contact"><div class="footer-map"><iframe title="${esc(c.map.iframeTitle)}" src="https://www.google.com/maps?q=ROOM%20J%C5%ABrmala%2C%20Skolas%20iela%2050%2C%20J%C5%ABrmala&amp;z=16&amp;output=embed&amp;hl=${lang}" width="1200" height="360" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="footer-main"><div class="footer-identity"><a class="brand" href="${route(lang)}"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala" loading="lazy"></a><div id="map-section"><address>Skolas iela 50, Jūrmala</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">${c.map.buttons[0]}${diagonal}</a></div></div><div class="footer-contact"><p class="footer-label">${labels.contact}</p><a class="footer-phone" href="tel:+37127850380">+371 27 850 380</a><a class="footer-email" href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a></div></div>
+ return `<footer class="site-footer" id="contact"><div class="footer-map"><iframe title="${esc(c.map.iframeTitle)}" src="https://www.google.com/maps?q=ROOM%20J%C5%ABrmala%2C%20Skolas%20iela%2050%2C%20J%C5%ABrmala&amp;z=16&amp;output=embed&amp;hl=${lang}" width="1200" height="360" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="footer-main"><div class="footer-identity"><a class="brand" href="${route(lang)}"><img src="/assets/images/brand/logo-header.png" width="560" height="374" alt="ROOM Jūrmala" loading="lazy"></a><div id="map-section"><address>Skolas iela 50, Jūrmala</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">${c.map.buttons[0]}${diagonal}</a></div></div><div class="footer-contact"><p class="footer-label">${labels.contact}</p><a class="footer-phone" href="tel:+37127850380">+371 27 850 380</a><a class="footer-email" href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a>${hours(lang)}</div></div>
  <nav class="footer-socials" aria-label="${esc(labels.social)}">${socials.map(([name,key,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="social-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${socialIcons[key]}</svg></span><span>${name}</span></a>`).join('')}</nav>
  <div class="footer-bottom"><span>${c.footer.copy}</span><a class="site-credit" href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer"><span>${labels.credit}</span><strong>SEO Latvija</strong></a></div></footer>
  <a class="mobile-book button button-orange" href="#calendar" aria-hidden="true" tabindex="-1">${d.findDate}</a>`;
@@ -159,6 +164,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
      data.description=sideCopy[lang].description;
      data.mainEntity={'@type':'ItemList',itemListElement:['party','workshops'].map((k,i)=>({'@type':'ListItem',position:i+1,name:servicePages[lang][k].name,url:'https://roomjurmala.lv'+route(lang,k)}))};
    }
+   if([].concat(data['@type']).includes('LocalBusiness'))data.openingHoursSpecification=openingHours;
    delete data.aggregateRating;
    return '<script type="application/ld+json">'+json(data)+'</script>';
  });

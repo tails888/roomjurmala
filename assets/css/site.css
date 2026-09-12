@@ -89,3 +89,5 @@ dialog{padding:0;border:0;max-width:none;max-height:none;color:var(--ink)}dialog
  .venue-film-grid{gap:12px}.venue-film-grid .film-media{height:260px}
  .venue-film-grid h4{font-size:19px}
 }
+
+.opening-hours{margin-top:20px;max-width:100%}.opening-hours h2{font:600 13px/1.5 var(--sans);margin:0 0 9px}.opening-hours dl{margin:0;font-size:12px;line-height:1.7}.opening-hours dl>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 20px}.opening-hours dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}.opening-hours dt{color:var(--muted)}
