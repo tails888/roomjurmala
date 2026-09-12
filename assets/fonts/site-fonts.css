@@ -12,7 +12,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/13755630d7-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  unicode-range: U+0490-0491,U+04B0-04B1;
 }
 @font-face {
   font-family: 'Inter';
@@ -44,7 +44,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/b6db4a06c1-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0102-010B,U+010E-0111,U+0114-0121,U+0124-0129,U+012C-0135,U+0138-013A,U+013D-0144,U+0147-015F,U+0162-0169,U+016C-017C,U+017F-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+20B0,U+20B6-20B7,U+20BB,U+20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
   font-family: 'Inter';
@@ -52,7 +52,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/6ab57b19c6-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-001F,U+007F-009F,U+00AD,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0329,U+2000-2001,U+2003-2008,U+200A,U+200C-2012,U+2015-2017,U+201B,U+201F-2021,U+2023-2025,U+2027-2031,U+2034-2038,U+203B-2043,U+2045-206F,U+2215,U+FFFD;
 }
 @font-face {
   font-family: 'Inter';
@@ -68,7 +68,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/2c5c12ea2c-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L9UUMJng.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  unicode-range: U+0490-0491,U+04B0-04B1;
 }
 @font-face {
   font-family: 'Inter';
@@ -100,7 +100,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/02076e7d8a-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L3UUMJng.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0102-010B,U+010E-0111,U+0114-0121,U+0124-0129,U+012C-0135,U+0138-013A,U+013D-0144,U+0147-015F,U+0162-0169,U+016C-017C,U+017F-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+20B0,U+20B6-20B7,U+20BB,U+20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
   font-family: 'Inter';
@@ -108,7 +108,7 @@
   font-weight: 100 900;
   font-display: swap;
   src: url(/assets/fonts/85a0222926-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L5UUM.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-001F,U+007F-009F,U+00AD,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0329,U+2000-2001,U+2003-2008,U+200A,U+200C-2012,U+2015-2017,U+201B,U+201F-2021,U+2023-2025,U+2027-2031,U+2034-2038,U+203B-2043,U+2045-206F,U+2215,U+FFFD;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -124,7 +124,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/c8e477690f-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  unicode-range: U+0490-0491,U+04B0-04B1;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -140,7 +140,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/f3bda5d4e1-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0102-010B,U+010E-0111,U+0114-0121,U+0124-0129,U+012C-0135,U+0138-013A,U+013D-0144,U+0147-015F,U+0162-0169,U+016C-017C,U+017F-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+20A0,U+20A2-20A3,U+20A5,U+20A8-20A9,U+20AD,U+20AF-20B0,U+20B3,U+20B6-20B7,U+20BB-20BC,U+20BE-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -148,7 +148,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/4db21dbf6b-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-001F,U+007F-009F,U+00B5,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0329,U+2000-2001,U+2003-2008,U+200A,U+200C-2012,U+2015-2017,U+201B,U+201F-2021,U+2023-2025,U+2027-2031,U+2034-2038,U+203B-2043,U+2045-206F,U+2215,U+FFFD;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -164,7 +164,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/dc67de7e1c-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  unicode-range: U+0490-0491,U+04B0-04B1;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -180,7 +180,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/26a769c817-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0102-010B,U+010E-0111,U+0114-0121,U+0124-0129,U+012C-0135,U+0138-013A,U+013D-0144,U+0147-015F,U+0162-0169,U+016C-017C,U+017F-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+20A0,U+20A2-20A3,U+20A5,U+20A8-20A9,U+20AD,U+20AF-20B0,U+20B3,U+20B6-20B7,U+20BB-20BC,U+20BE-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
   font-family: 'Cormorant Garamond';
@@ -188,5 +188,102 @@
   font-weight: 500;
   font-display: swap;
   src: url(/assets/fonts/abcaa8b479-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-001F,U+007F-009F,U+00B5,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0329,U+2000-2001,U+2003-2008,U+200A,U+200C-2012,U+2015-2017,U+201B,U+201F-2021,U+2023-2025,U+2027-2031,U+2034-2038,U+203B-2043,U+2045-206F,U+2215,U+FFFD;
+}
+/* Compact LV, EN and RU subsets take precedence; other glyphs retain the original font fallback. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-13755630d7-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
+  unicode-range: U+0301,U+0400-045F,U+2116;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-b6db4a06c1-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
+  unicode-range: U+0100-0101,U+010C-010D,U+0112-0113,U+0122-0123,U+012A-012B,U+0136-0137,U+013B-013C,U+0145-0146,U+0160-0161,U+016A-016B,U+017D-017E,U+0304,U+0308,U+2020,U+20A0-20AB,U+20AD-20AF,U+20B1-20B5,U+20B8-20BA,U+20BC-20BF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-6ab57b19c6-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
+  unicode-range: U+0020-007E,U+00A0-00AC,U+00AE-00FF,U+0304,U+0308,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+2122,U+2191,U+2193,U+2212,U+FEFF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-2c5c12ea2c-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L9UUMJng.woff2) format('woff2');
+  unicode-range: U+0301,U+0400-045F,U+2116;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-02076e7d8a-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L3UUMJng.woff2) format('woff2');
+  unicode-range: U+0100-0101,U+010C-010D,U+0112-0113,U+0122-0123,U+012A-012B,U+0136-0137,U+013B-013C,U+0145-0146,U+0160-0161,U+016A-016B,U+017D-017E,U+0304,U+0308,U+2020,U+20A0-20AB,U+20AD-20AF,U+20B1-20B5,U+20B8-20BA,U+20BC-20BF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/site-85a0222926-UcC53FwrK3iLTcvneQg7Ca725JhhKnNqk6L5UUM.woff2) format('woff2');
+  unicode-range: U+0020-007E,U+00A0-00AC,U+00AE-00FF,U+0304,U+0308,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+2122,U+2191,U+2193,U+2212,U+FEFF;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-c8e477690f-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2) format('woff2');
+  unicode-range: U+0301,U+0400-045F,U+2116;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-f3bda5d4e1-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2) format('woff2');
+  unicode-range: U+0100-0101,U+010C-010D,U+0112-0113,U+0122-0123,U+012A-012B,U+0136-0137,U+013B-013C,U+0145-0146,U+0160-0161,U+016A-016B,U+017D-017E,U+0304,U+0308,U+2020,U+20A1,U+20A4,U+20A6-20A7,U+20AA-20AB,U+20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-4db21dbf6b-co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2) format('woff2');
+  unicode-range: U+0020-007E,U+00A0-00B4,U+00B6-00FF,U+0304,U+0308,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+2122,U+2191,U+2193,U+2212,U+FEFF;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-dc67de7e1c-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2) format('woff2');
+  unicode-range: U+0301,U+0400-045F,U+2116;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-26a769c817-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2) format('woff2');
+  unicode-range: U+0100-0101,U+010C-010D,U+0112-0113,U+0122-0123,U+012A-012B,U+0136-0137,U+013B-013C,U+0145-0146,U+0160-0161,U+016A-016B,U+017D-017E,U+0304,U+0308,U+2020,U+20A1,U+20A4,U+20A6-20A7,U+20AA-20AB,U+20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/assets/fonts/site-abcaa8b479-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2) format('woff2');
+  unicode-range: U+0020-007E,U+00A0-00B4,U+00B6-00FF,U+0304,U+0308,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20AC,U+2122,U+2191,U+2193,U+2212,U+FEFF;
 }

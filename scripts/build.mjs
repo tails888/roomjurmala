@@ -26,7 +26,7 @@ const photo=i=>'/assets/images/gallery/'+photoFiles[i];
 function header(lang,kind,c,d){
   return `<a class="skip-link" href="#main">${esc(d.skip)}</a>
   <header class="site-header">
-    <a class="brand" href="${route(lang)}" aria-label="ROOM Jūrmala"><img src="/assets/images/brand/logo-header-small.webp" width="280" height="187" alt="ROOM Jūrmala"></a>
+    <a class="brand" href="${route(lang)}" aria-label="ROOM Jūrmala"><img src="/assets/images/brand/logo-header-224.webp" width="224" height="150" alt="ROOM Jūrmala"></a>
     <nav class="desktop-nav" aria-label="${esc(d.menu)}">
       <a href="${route(lang,'space')}" ${kind==='space'?'aria-current="page"':''}>${c.nav.links[0]}</a>
       <a href="${route(lang,'pricing')}" ${kind==='pricing'?'aria-current="page"':''}>${c.nav.links[1]}</a>
@@ -45,9 +45,9 @@ function header(lang,kind,c,d){
 function inlineVideo(index,poster,id,d,hero=false){
  const file=hero?'room-hero-tour.mp4':videos[index];
  if(hero)poster='june-17';
- return `<div class="film-media" data-film ${hero?'style="background-image:url(/assets/images/video-posters/june-17.webp);background-size:cover;background-position:center"':''}>
-  ${hero?'<img class="hero-poster" src="/assets/images/video-posters/june-17.webp" width="576" height="677" alt="" fetchpriority="high">':''}
-  <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="none" poster="/assets/images/video-posters/${poster}.webp" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
+ return `<div class="film-media" data-film ${hero?'style="background-image:url(/assets/images/video-posters/june-17-preview.webp);background-size:cover;background-position:center"':''}>
+  ${hero?'<img class="hero-poster" src="/assets/images/video-posters/june-17-preview.webp" width="576" height="677" alt="" fetchpriority="high">':''}
+  <video id="${id}" class="ambient-video" ${hero?'data-hero-video':''} muted playsinline loop  preload="none" poster="/assets/images/video-posters/${poster}-preview.webp" width="480" height="848" aria-label="${esc(hero?d.venue:d.eventNames[index===0?0:index===3?1:index===1?2:3])}"><source src="/assets/videos/${file}" type="video/mp4"></video>
 
   <a class="film-error" href="/assets/videos/${file}" target="_blank" rel="noopener" hidden>${d.filmFallback}${diagonal}</a>
  </div>`;
@@ -63,7 +63,7 @@ function paperGallery(lang,d){
 }
 function newPhotoIndex(id){return 5+newPhotos.findIndex(p=>p.id===id);}
 function mediaPhotos(lang,ids){return `<div class="venue-photo-strip" tabindex="0" role="region" aria-label="${design[lang].allPhotos}">${ids.map(id=>{const n=newPhotoIndex(id);return `<button type="button" class="venue-photo" data-photo-detail="${n}" aria-label="${esc(design[lang].photo+' · '+design[lang].photoNames[n])}"><img src="${photo(n)}" alt="${esc(design[lang].photoNames[n])}" width="960" height="1280" sizes="auto, (max-width: 760px) 70vw, 350px" loading="lazy" decoding="async"></button>`;}).join('')}</div>`;}
-function newFilm(lang,id,title,showCaption=true){return `<article class="paper-film"><div class="film-media" data-film><video class="ambient-video" muted playsinline loop preload="none" poster="/assets/images/video-posters/june-${id}.webp" width="576" height="1024" aria-label="${esc(title)}"><source src="/assets/videos/room-june-${id}.mp4" type="video/mp4"></video><a class="film-error" href="/assets/videos/room-june-${id}.mp4" target="_blank" rel="noopener" hidden>${design[lang].filmFallback}</a></div>${showCaption?`<h4>${title}</h4>`:''}</article>`;}
+function newFilm(lang,id,title,showCaption=true){return `<article class="paper-film"><div class="film-media" data-film><video class="ambient-video" muted playsinline loop preload="none" poster="/assets/images/video-posters/june-${id}-preview.webp" width="576" height="1024" aria-label="${esc(title)}"><source src="/assets/videos/room-june-${id}.mp4" type="video/mp4"></video><a class="film-error" href="/assets/videos/room-june-${id}.mp4" target="_blank" rel="noopener" hidden>${design[lang].filmFallback}</a></div>${showCaption?`<h4>${title}</h4>`:''}</article>`;}
 function venueFilms(lang,ids){const labels={lv:{14:'Pie kopīga galda',17:'Vieta rotaļām',18:'Ieskaties telpā',19:'Galda futbols'},en:{14:'Around the table',17:'Room to play',18:'A look inside',19:'Table football'},ru:{14:'За общим столом',17:'Место для игр',18:'Взгляд внутрь',19:'Настольный футбол'}};return `<div class="venue-film-grid">${ids.map(id=>newFilm(lang,id,labels[lang][id],false)).join('')}</div>`;}
 function activityArt(name){return `<img class="activity-art" src="/assets/images/activities/${name}.png" width="120" height="120" alt="" aria-hidden="true" loading="lazy" decoding="async">`;}
 function consolidatedServices(lang){
@@ -147,7 +147,7 @@ function footer(lang,c,d){
   tiktok:'<path d="M14 3v12.5a4.5 4.5 0 1 1-4-4.47V15a1.5 1.5 0 1 0 1 1.42V3h3c.3 3 2 4.7 5 5v3c-2-.1-3.7-.8-5-2"/>'
  };
  const socials=[['Instagram','instagram','https://www.instagram.com/room.jurmala/'],['Facebook','facebook','https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/'],['TikTok','tiktok','https://www.tiktok.com/@room.jurmala']];
- return `<footer class="site-footer" id="contact"><div class="footer-map"><iframe title="${esc(c.map.iframeTitle)}" src="https://www.google.com/maps?q=ROOM%20J%C5%ABrmala%2C%20Skolas%20iela%2050%2C%20J%C5%ABrmala&amp;z=16&amp;output=embed&amp;hl=${lang}" width="1200" height="360" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="footer-main"><div class="footer-identity"><a class="brand" href="${route(lang)}"><img src="/assets/images/brand/logo-header-small.webp" width="280" height="187" alt="ROOM Jūrmala" loading="lazy"></a><div id="map-section"><address>Skolas iela 50, Jūrmala</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">${c.map.buttons[0]}${diagonal}</a></div></div><div class="footer-contact"><p class="footer-label">${labels.contact}</p><a class="footer-phone" href="tel:+37127850380">+371 27 850 380</a><a class="footer-email" href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a>${hours(lang)}</div></div>
+ return `<footer class="site-footer" id="contact"><div class="footer-map"><iframe title="${esc(c.map.iframeTitle)}" src="https://www.google.com/maps?q=ROOM%20J%C5%ABrmala%2C%20Skolas%20iela%2050%2C%20J%C5%ABrmala&amp;z=16&amp;output=embed&amp;hl=${lang}" width="1200" height="360" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="footer-main"><div class="footer-identity"><a class="brand" href="${route(lang)}"><img src="/assets/images/brand/logo-header-224.webp" width="224" height="150" alt="ROOM Jūrmala" loading="lazy"></a><div id="map-section"><address>Skolas iela 50, Jūrmala</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=ROOM+Jurmala+Skolas+iela+50" target="_blank" rel="noopener noreferrer">${c.map.buttons[0]}${diagonal}</a></div></div><div class="footer-contact"><p class="footer-label">${labels.contact}</p><a class="footer-phone" href="tel:+37127850380">+371 27 850 380</a><a class="footer-email" href="mailto:welcome@roomjurmala.lv">welcome@roomjurmala.lv</a>${hours(lang)}</div></div>
  <nav class="footer-socials" aria-label="${esc(labels.social)}">${socials.map(([name,key,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="social-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${socialIcons[key]}</svg></span><span>${name}</span></a>`).join('')}</nav>
  <div class="footer-bottom"><span>${c.footer.copy}</span><a class="site-credit" href="https://seolatvija.lv/" target="_blank" rel="noopener noreferrer"><span>${labels.credit}</span><strong>SEO Latvija</strong></a></div></footer>
  <a class="mobile-book button button-orange" href="#calendar" aria-hidden="true" tabindex="-1">${d.findDate}</a>`;
@@ -177,15 +177,17 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
 <html lang="${lang}">
 <head>${head}
   <meta name="theme-color" content="#173f34">
-  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/abcaa8b479-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" crossorigin>
-  ${lang==='lv'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/26a769c817-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2" crossorigin>':lang==='ru'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/dc67de7e1c-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2" crossorigin>':''}
-  ${kind==='home'?'<script>document.documentElement.classList.add("has-js")</script><link rel="preload" as="image" href="/assets/images/video-posters/june-17.webp" fetchpriority="high">':''}
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/site-abcaa8b479-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" crossorigin>
+  ${lang==='lv'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/site-26a769c817-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2" crossorigin>':lang==='ru'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/site-dc67de7e1c-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2" crossorigin>':''}
+  ${kind==='home'?'<script>document.documentElement.classList.add("has-js")</script><link rel="preload" as="image" href="/assets/images/video-posters/june-17-preview.webp" fetchpriority="high">':''}
   ${kind==='home'?`<style>${criticalStyles(header(lang,kind,c,d)+paperHero(lang,d))}</style>
-  <link data-site-styles rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast" media="print" onload="this.media='all'" onerror="this.media='all';this.dataset.failed='true'">
-  <noscript><link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast"></noscript>`:'<link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast">'}
+  <link data-site-styles rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2" media="print" onload="this.media='all'" onerror="this.media='all';this.dataset.failed='true'">
+  <noscript><link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2"></noscript>`:'<link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2">'}
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
-  <script type="module" src="/assets/js/app.js?v=20260912-fast"></script>
+  ${['scroll','paper','hero-tour','films'].map(name=>`<link rel="modulepreload" href="/assets/js/${name}.js?v=20260912-fast2">`).join('')}
+  <link rel="modulepreload" href="/assets/js/booking-core.js?v=20260911-mobile-fix">
+  <script type="module" src="/assets/js/app.js?v=20260912-fast2"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>

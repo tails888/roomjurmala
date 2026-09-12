@@ -1,6 +1,6 @@
-import {mountScroll} from './scroll.js?v=20260912-fast';
-import {mountPaper} from './paper.js?v=20260912-fast';
-import {mountFilms,mountStory} from './films.js?v=20260912-fast';
+import {mountScroll} from './scroll.js?v=20260912-fast2';
+import {mountPaper} from './paper.js?v=20260912-fast2';
+import {mountFilms,mountStory} from './films.js?v=20260912-fast2';
 import {getQuote,limits,formatDuration,rigaNow,validateBooking,requestMessage,validDate} from './booking-core.js?v=20260911-mobile-fix';
 // Geometry-dependent motion starts when the complete cascade is available.
 const siteStyles=document.querySelector('[data-site-styles]');
