@@ -181,8 +181,8 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   ${lang==='lv'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/site-26a769c817-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2" crossorigin>':lang==='ru'?'<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/site-dc67de7e1c-co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2" crossorigin>':''}
   ${kind==='home'?'<script>document.documentElement.classList.add("has-js")</script><link rel="preload" as="image" href="/assets/images/video-posters/june-17-preview.webp" fetchpriority="high">':''}
   ${kind==='home'?`<style>${criticalStyles(header(lang,kind,c,d)+paperHero(lang,d))}</style>
-  <link data-site-styles rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2" media="print" onload="this.media='all'" onerror="this.media='all';this.dataset.failed='true'">
-  <noscript><link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2"></noscript>`:'<link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-fast2">'}
+  <link data-site-styles rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking" media="print" onload="this.media='all'" onerror="this.media='all';this.dataset.failed='true'">
+  <noscript><link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking"></noscript>`:'<link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking">'}
   <script src="/calendar-events.js?v=20260911-3d" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
   ${['scroll','paper','hero-tour','films'].map(name=>`<link rel="modulepreload" href="/assets/js/${name}.js?v=20260912-fast2">`).join('')}
