@@ -27,13 +27,16 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
   async function stop() { if (processHandle && processHandle.exitCode === null) await new Promise(resolve => { processHandle.once('exit',resolve); processHandle.kill(); }); }
   t.after(async()=>{await stop();await rm(directory,{recursive:true,force:true});});
   await start();
-  let cookie = '', csrf = '';
-  async function call(route, method='GET', body, overrides={}) {
-    const response=await fetch(origin+route,{method,headers:{Cookie:cookie,Origin:origin,'Content-Type':'application/json','X-Room-Admin':'1','X-CSRF-Token':csrf,...overrides},...(body===undefined?{}:{body:JSON.stringify(body)})});
-    if(response.headers.get('set-cookie')) cookie=response.headers.get('set-cookie').split(';')[0];
-    const result=await response.json(); if(result.csrf) csrf=result.csrf;
-    return {status:response.status,body:result,headers:response.headers};
+  function client() {
+    return {cookie:'',csrf:'',async call(route, method='GET', body, overrides={}) {
+      const response=await fetch(origin+route,{method,headers:{Cookie:this.cookie,Origin:origin,'Content-Type':'application/json','X-Room-Admin':'1','X-CSRF-Token':this.csrf,...overrides},...(body===undefined?{}:{body:JSON.stringify(body)})});
+      if(response.headers.get('set-cookie')) this.cookie=response.headers.get('set-cookie').split(';')[0];
+      const result=await response.json(); if(result.csrf) this.csrf=result.csrf;
+      return {status:response.status,body:result,headers:response.headers};
+    }};
   }
+  const owner = client(), manager = client();
+  const call = (...args) => owner.call(...args);
   const eventInput={title:'Pārbaudes darbnīca <img src=x>',date:addDays(rigaClock().date,2),startTime:'17:00',endTime:'18:30',description:'Latviešu burti āčēģīķļņšūž',weekly:false};
   await t.test('guest cannot write, activate without token, forge origin or omit CSRF',async()=>{
     const session=await call('/api/session'); assert.equal(session.body.authenticated,false);assert.ok(session.headers.get('set-cookie').includes('HttpOnly'));
@@ -44,10 +47,20 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
   });
   const password=randomBytes(18).toString('hex');
   await t.test('owner setup is single-use and rotates the session',async()=>{
-    const oldCookie=cookie;
-    const result=await call('/api/setup','POST',{token,email:'owner@example.com',password}); assert.equal(result.status,201);assert.notEqual(cookie,oldCookie);
+    const oldCookie=owner.cookie;
+    const result=await call('/api/setup','POST',{token,email:'owner@example.com',password}); assert.equal(result.status,201);assert.notEqual(owner.cookie,oldCookie);
     assert.equal((await call('/api/setup','POST',{token,email:'other@example.com',password})).status,403);
     assert.equal((await call('/api/session')).body.authenticated,true);
+  });
+  await t.test('migration retains the original login, active session and existing events', async()=>{
+    const eventsBefore=(await call('/api/events')).body.events;
+    await stop();
+    const oldSchema=spawnSync(php,['-r',`$db=new SQLite3(getenv('ROOM_TEST_DB')); $db->exec('CREATE TABLE owner(id INTEGER PRIMARY KEY CHECK(id=1),email TEXT NOT NULL,password_hash TEXT NOT NULL,version TEXT NOT NULL)'); $db->exec('INSERT INTO owner SELECT * FROM administrators'); $db->exec('DROP TABLE administrators'); session_save_path(getenv('ROOM_TEST_SESSIONS')); session_id(getenv('ROOM_TEST_SESSION_ID')); session_start(); $_SESSION['owner_version']=$_SESSION['admin_version']; unset($_SESSION['admin_id'],$_SESSION['admin_version']); session_write_close();`],{env:{...process.env,ROOM_TEST_DB:path.join(data,'calendar.sqlite'),ROOM_TEST_SESSIONS:path.join(data,'sessions'),ROOM_TEST_SESSION_ID:owner.cookie.split('=')[1]}});
+    assert.equal(oldSchema.status,0);
+    await start();
+    const session=(await call('/api/session')).body;
+    assert.equal(session.authenticated,true); assert.equal(session.user.email,'owner@example.com');
+    assert.deepEqual((await call('/api/events')).body.events,eventsBefore);
   });
   let event;
   await t.test('creation validates dates and is idempotent',async()=>{
@@ -70,6 +83,43 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
     const restored=await call('/api/events/'+weekly.id,'PATCH',{...change,action:'restore',scope:'series',date:addDays(eventInput.date,7)});
     assert.equal(restored.body.event.cancelledFrom,undefined);assert.deepEqual(restored.body.event.exclusions,[eventInput.date]);
     await stop();await start();assert.ok((await call('/api/events')).body.events.some(e=>e.id===event.id));
+  });
+  const managerToken=randomBytes(32).toString('hex'), managerPassword=randomBytes(18).toString('hex');
+  await t.test('a second invitation is email-bound and single-use, with no third account or public signup',async()=>{
+    await writeFile(path.join(data,'invitations.json'),JSON.stringify({invitations:[{slot:2,email:'manager@example.com',tokenHash:createHash('sha256').update(managerToken).digest('hex'),expires:Math.floor(Date.now()/1000)+3600}]}));
+    await manager.call('/api/session');
+    const invitation=await manager.call('/api/activation','POST',{token:managerToken});
+    assert.equal(invitation.status,200);assert.equal(invitation.body.email,'manager@example.com');
+    assert.equal((await manager.call('/api/setup','POST',{token:managerToken,email:'someone@example.com',password:managerPassword})).status,403);
+    const created=await manager.call('/api/setup','POST',{token:managerToken,email:'MANAGER@example.com',password:managerPassword});
+    assert.equal(created.status,201);assert.equal(created.body.user.email,'manager@example.com');
+    assert.equal((await manager.call('/api/setup','POST',{token:managerToken,email:'third@example.com',password:managerPassword})).status,403);
+    assert.equal((await manager.call('/api/setup','POST',{email:'third@example.com',password:managerPassword})).status,403);
+    assert.equal((await manager.call('/api/activation','POST',{token:managerToken})).status,403);
+    assert.equal((await manager.call('/api/session')).body.setupAvailable,false);
+  });
+  await t.test('both independent accounts can create, cancel and restore the shared events',async()=>{
+    assert.equal((await call('/api/session')).body.user.email,'owner@example.com');
+    assert.equal((await manager.call('/api/session')).body.user.email,'manager@example.com');
+    const created=await manager.call('/api/events','POST',{...eventInput,title:'Otrā administratora pasākums'},{'Idempotency-Key':randomUUID()});
+    assert.equal(created.status,201);
+    const change={action:'cancel',scope:'one',date:eventInput.date};
+    assert.equal((await call('/api/events/'+created.body.event.id,'PATCH',change)).body.event.status,'cancelled');
+    assert.equal((await manager.call('/api/events/'+created.body.event.id,'PATCH',{...change,action:'restore'})).body.event.status,'active');
+    assert.equal((await manager.call('/api/events/'+event.id,'PATCH',change)).body.event.status,'cancelled');
+    assert.equal((await call('/api/events/'+event.id,'PATCH',{...change,action:'restore'})).body.event.status,'active');
+    await stop();await start();
+    assert.equal((await call('/api/session')).body.authenticated,true);
+    assert.equal((await manager.call('/api/session')).body.authenticated,true);
+  });
+  await t.test('logging out one account leaves the other signed in and passwords cannot cross accounts',async()=>{
+    await manager.call('/api/logout','POST',{action:'logout'});
+    await manager.call('/api/session');
+    assert.equal((await manager.call('/api/events','POST',eventInput,{'Idempotency-Key':randomUUID()})).status,401);
+    assert.equal((await call('/api/session')).body.authenticated,true);
+    assert.equal((await manager.call('/api/login','POST',{email:'manager@example.com',password})).status,401);
+    assert.equal((await manager.call('/api/login','POST',{email:'owner@example.com',password:managerPassword})).status,401);
+    assert.equal((await manager.call('/api/login','POST',{email:'manager@example.com',password:managerPassword})).body.user.email,'manager@example.com');
   });
   await t.test('logout revokes access and a correct login restores it',async()=>{
     await call('/api/logout','POST',{action:'logout'});assert.equal((await call('/api/session')).body.authenticated,false);

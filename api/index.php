@@ -8,8 +8,8 @@ if (!room_local() && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off')) 
 if (($_SERVER['HTTP_HOST'] ?? '') !== parse_url(room_origin(), PHP_URL_HOST) . (parse_url(room_origin(), PHP_URL_PORT) ? ':' . parse_url(room_origin(), PHP_URL_PORT) : '')) room_json(403, ['error' => 'Nederīga vietnes adrese.']);
 
 if ($method === 'GET' && $path === '/api/session') {
-    $authenticated = room_authenticated();
-    room_json(200, ['authenticated' => $authenticated, 'csrf' => $_SESSION['csrf'], 'setupAvailable' => !room_owner() && (bool)room_bootstrap()]);
+    $account = room_current_account();
+    room_json(200, ['authenticated' => (bool)$account, 'csrf' => $_SESSION['csrf'], 'user' => $account ? ['email' => $account['email']] : null, 'setupAvailable' => (bool)room_pending_invitations()]);
 }
 if ($method === 'GET' && $path === '/api/events') {
     $rows = room_db()->query('SELECT payload FROM events ORDER BY id'); $events = [];
@@ -21,35 +21,50 @@ $input = room_input();
 
 if ($method === 'POST' && $path === '/api/login') {
     room_rate_limit('login');
-    $owner = room_db()->querySingle('SELECT * FROM owner WHERE id=1', true);
+    $email = is_string($input['email'] ?? null) ? strtolower(trim($input['email'])) : '';
+    $statement = room_db()->prepare('SELECT * FROM administrators WHERE email=:email');
+    $statement->bindValue(':email', $email);
+    $account = $statement->execute()->fetchArray(SQLITE3_ASSOC);
     $password = is_string($input['password'] ?? null) ? $input['password'] : '';
     // Always verify a hash so unknown email addresses have no shortcut.
-    $hash = $owner['password_hash'] ?? '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.';
+    $hash = $account['password_hash'] ?? '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.';
     $valid = strlen($password) <= 72 && password_verify($password, $hash);
-    if (!$owner || !$valid || !is_string($input['email'] ?? null) || strtolower(trim($input['email'])) !== $owner['email']) room_json(401, ['error' => 'E-pasts vai parole nav pareiza.']);
-    room_start_login($owner);
-    room_json(200, ['authenticated' => true, 'csrf' => $_SESSION['csrf']]);
+    if (!$account || !$valid) room_json(401, ['error' => 'E-pasts vai parole nav pareiza.']);
+    room_start_login($account);
+    room_json(200, ['authenticated' => true, 'csrf' => $_SESSION['csrf'], 'user' => ['email' => $account['email']]]);
+}
+if ($method === 'POST' && $path === '/api/activation') {
+    room_rate_limit('activation');
+    $invitation = room_invitation($input['token'] ?? null);
+    if (!$invitation) room_json(403, ['error' => 'Aktivizācijas saite nav derīga vai jau ir izmantota.']);
+    room_json(200, ['email' => $invitation['email'] ?? null]);
 }
 if ($method === 'POST' && $path === '/api/setup') {
     room_rate_limit('setup');
-    $bootstrap = room_bootstrap();
-    if (!$bootstrap || !is_string($input['token'] ?? null) || !hash_equals($bootstrap['tokenHash'], hash('sha256', $input['token'])) || room_owner()) room_json(403, ['error' => 'Aktivizācijas saite nav derīga vai jau ir izmantota.']);
+    $invitation = room_invitation($input['token'] ?? null);
+    if (!$invitation) room_json(403, ['error' => 'Aktivizācijas saite nav derīga vai jau ir izmantota.']);
     $email = is_string($input['email'] ?? null) ? strtolower(trim($input['email'])) : '';
     $password = is_string($input['password'] ?? null) ? $input['password'] : '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) room_json(400, ['error' => 'Ievadi derīgu e-pasta adresi.']);
+    if (isset($invitation['email']) && $email !== strtolower($invitation['email'])) room_json(403, ['error' => 'Šī saite paredzēta citai e-pasta adresei.']);
     if (room_length($password) < 12 || strlen($password) > 72) room_json(400, ['error' => 'Izvēlies vismaz 12 rakstzīmju garu paroli. Ļoti gara parole jāsaīsina.']);
     $db = room_db(); $db->exec('BEGIN IMMEDIATE');
     try {
-        if ($db->querySingle('SELECT id FROM owner WHERE id=1')) { $db->exec('ROLLBACK'); room_json(409, ['error' => 'Administrācija jau ir aktivizēta.']); }
-        $owner = ['email' => $email, 'version' => bin2hex(random_bytes(16))];
-        $statement = $db->prepare('INSERT INTO owner(id,email,password_hash,version) VALUES(1,:email,:hash,:version)');
-        $statement->bindValue(':email', $email); $statement->bindValue(':hash', password_hash($password, PASSWORD_DEFAULT)); $statement->bindValue(':version', $owner['version']); $statement->execute();
+        if (!room_invitation($input['token'])) { $db->exec('ROLLBACK'); room_json(409, ['error' => 'Šī piekļuve jau ir aktivizēta.']); }
+        $statement = $db->prepare('SELECT id FROM administrators WHERE email=:email');
+        $statement->bindValue(':email', $email);
+        if ($statement->execute()->fetchArray()) { $db->exec('ROLLBACK'); room_json(409, ['error' => 'Šim e-pastam piekļuve jau ir izveidota. Ielogojies ar savu paroli.']); }
+        $account = ['id' => $invitation['slot'], 'email' => $email, 'version' => bin2hex(random_bytes(16))];
+        $statement = $db->prepare('INSERT INTO administrators(id,email,password_hash,version) VALUES(:id,:email,:hash,:version)');
+        $statement->bindValue(':id', $account['id'], SQLITE3_INTEGER); $statement->bindValue(':email', $email); $statement->bindValue(':hash', password_hash($password, PASSWORD_DEFAULT)); $statement->bindValue(':version', $account['version']); $statement->execute();
+        $statement = $db->prepare('INSERT INTO used_invitations(token_hash) VALUES(:hash)');
+        $statement->bindValue(':hash', $invitation['tokenHash']); $statement->execute();
         $db->exec('COMMIT');
     } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
-    room_start_login($owner);
-    room_json(201, ['authenticated' => true, 'csrf' => $_SESSION['csrf']]);
+    room_start_login($account);
+    room_json(201, ['authenticated' => true, 'csrf' => $_SESSION['csrf'], 'user' => ['email' => $account['email']]]);
 }
-room_require_owner();
+room_require_admin();
 if ($method === 'POST' && $path === '/api/logout') {
     $_SESSION = []; session_destroy();
     setcookie('room_owner', '', ['expires' => time()-3600, 'path' => '/api/', 'secure' => !room_local(), 'httponly' => true, 'samesite' => 'Strict']);

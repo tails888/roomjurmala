@@ -40,12 +40,17 @@ function room_db(): SQLite3 {
     $db->busyTimeout(5000);
     $db->exec('PRAGMA foreign_keys = ON');
     $db->exec('CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, payload TEXT NOT NULL)');
-    $db->exec('CREATE TABLE IF NOT EXISTS owner (id INTEGER PRIMARY KEY CHECK(id=1), email TEXT NOT NULL, password_hash TEXT NOT NULL, version TEXT NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS administrators (id INTEGER PRIMARY KEY CHECK(id IN (1,2)), email TEXT NOT NULL UNIQUE COLLATE NOCASE, password_hash TEXT NOT NULL, version TEXT NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS used_invitations (token_hash TEXT PRIMARY KEY)');
     $db->exec('CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)');
     $db->exec('CREATE TABLE IF NOT EXISTS attempts (bucket TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL)');
     $db->exec('CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, event_id TEXT NOT NULL, created INTEGER NOT NULL)');
     $db->exec('BEGIN IMMEDIATE');
     try {
+        if ($db->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='owner'")) {
+            $db->exec('INSERT INTO administrators(id,email,password_hash,version) SELECT id,email,password_hash,version FROM owner');
+            $db->exec('DROP TABLE owner');
+        }
         if (!$db->querySingle("SELECT value FROM meta WHERE key='seeded'")) {
             $seed = json_decode(file_get_contents(dirname(__DIR__) . '/content/events-seed.json'), true, 512, JSON_THROW_ON_ERROR);
             foreach ($seed['events'] as $event) {
@@ -74,18 +79,22 @@ function room_session(): void {
     if (isset($_SESSION['expires']) && $_SESSION['expires'] < time()) $_SESSION = [];
     $_SESSION['csrf'] ??= bin2hex(random_bytes(32));
 }
-function room_owner(): ?array {
-    $row = room_db()->querySingle('SELECT email,version FROM owner WHERE id=1', true);
+function room_account(int $id): ?array {
+    $statement = room_db()->prepare('SELECT id,email,version FROM administrators WHERE id=:id');
+    $statement->bindValue(':id', $id, SQLITE3_INTEGER);
+    $row = $statement->execute()->fetchArray(SQLITE3_ASSOC);
     return $row ?: null;
 }
-function room_authenticated(): bool {
+function room_current_account(): ?array {
     room_session();
-    $owner = room_owner();
-    return $owner && isset($_SESSION['owner_version'], $_SESSION['expires'])
-        && hash_equals($owner['version'], $_SESSION['owner_version']) && $_SESSION['expires'] >= time();
+    // Preserve the first administrator's existing session during the migration.
+    $account = room_account($_SESSION['admin_id'] ?? 1);
+    $version = $_SESSION['admin_version'] ?? $_SESSION['owner_version'] ?? '';
+    return $account && isset($_SESSION['expires']) && hash_equals($account['version'], $version)
+        && $_SESSION['expires'] >= time() ? $account : null;
 }
-function room_require_owner(): void {
-    if (!room_authenticated()) room_json(401, ['error' => 'Lūdzu, ielogojies vēlreiz.']);
+function room_require_admin(): void {
+    if (!room_current_account()) room_json(401, ['error' => 'Lūdzu, ielogojies vēlreiz.']);
 }
 function room_input(): array {
     if (($_SERVER['HTTP_ORIGIN'] ?? '') !== room_origin()
@@ -123,15 +132,41 @@ function room_rate_limit(string $purpose): void {
         $db->exec('COMMIT');
     } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
 }
-function room_start_login(array $owner): void {
+function room_start_login(array $account): void {
     session_regenerate_id(true);
-    $_SESSION = ['csrf' => bin2hex(random_bytes(32)), 'owner_version' => $owner['version'], 'expires' => time() + 43200];
+    $_SESSION = ['csrf' => bin2hex(random_bytes(32)), 'admin_id' => $account['id'], 'admin_version' => $account['version'], 'expires' => time() + 43200];
 }
-function room_bootstrap(): ?array {
-    $path = room_private_dir() . '/bootstrap.json';
-    if (!is_file($path)) return null;
-    $data = json_decode(file_get_contents($path), true, 16, JSON_THROW_ON_ERROR);
-    return isset($data['tokenHash'], $data['expires']) && $data['expires'] > time() ? $data : null;
+function room_pending_invitations(): array {
+    $path = room_private_dir() . '/invitations.json';
+    if (is_file($path)) {
+        $data = json_decode(file_get_contents($path), true, 16, JSON_THROW_ON_ERROR);
+        $invitations = $data['invitations'] ?? [];
+    } else {
+        $legacy = room_private_dir() . '/bootstrap.json';
+        if (!is_file($legacy)) return [];
+        $data = json_decode(file_get_contents($legacy), true, 16, JSON_THROW_ON_ERROR);
+        $invitations = [array_merge($data, ['slot' => 1, 'email' => null])];
+    }
+    $pending = [];
+    foreach ($invitations as $invitation) {
+        if (!in_array($invitation['slot'] ?? null, [1,2], true)
+            || !is_string($invitation['tokenHash'] ?? null) || !preg_match('/^[a-f0-9]{64}$/D', $invitation['tokenHash'])
+            || !is_int($invitation['expires'] ?? null) || $invitation['expires'] <= time()
+            || (isset($invitation['email']) && !filter_var($invitation['email'], FILTER_VALIDATE_EMAIL))
+            || room_account($invitation['slot'])) continue;
+        $statement = room_db()->prepare('SELECT token_hash FROM used_invitations WHERE token_hash=:hash');
+        $statement->bindValue(':hash', $invitation['tokenHash']);
+        if (!$statement->execute()->fetchArray()) $pending[] = $invitation;
+    }
+    return $pending;
+}
+function room_invitation(mixed $token): ?array {
+    if (!is_string($token) || strlen($token) > 128) return null;
+    $hash = hash('sha256', $token);
+    foreach (room_pending_invitations() as $invitation) {
+        if (hash_equals($invitation['tokenHash'], $hash)) return $invitation;
+    }
+    return null;
 }
 function room_valid_date(mixed $value): bool {
     if (!is_string($value) || !preg_match('/^\d{4}-\d{2}-\d{2}$/D', $value)) return false;
