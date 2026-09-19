@@ -16,6 +16,23 @@ function room_send_reset_email(string $email, string $token): bool {
     if (room_local() && getenv('ROOM_TEST_MAIL') === '1') {
         return file_put_contents(room_private_dir().'/reset-outbox.ndjson', json_encode(['to'=>$email,'subject'=>$subject,'body'=>$body], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n", FILE_APPEND | LOCK_EX) !== false;
     }
+    $passwordFile = room_private_dir().'/smtp-password.txt';
+    if (is_file($passwordFile)) {
+        chmod($passwordFile,0600);
+        $smtpPassword = rtrim(file_get_contents($passwordFile), "\r\n");
+        if ($smtpPassword === '') throw new RuntimeException('SMTP mailbox password is not configured');
+        require_once __DIR__.'/vendor/phpmailer/Exception.php';
+        require_once __DIR__.'/vendor/phpmailer/PHPMailer.php';
+        require_once __DIR__.'/vendor/phpmailer/SMTP.php';
+        $mailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+        $mailer->isSMTP(); $mailer->Host = 'smtp.hostinger.com'; $mailer->Port = 465;
+        $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+        $mailer->SMTPAuth = true; $mailer->Username = 'welcome@roomjurmala.lv'; $mailer->Password = $smtpPassword;
+        $mailer->Timeout = 8; $mailer->getSMTPInstance()->Timelimit = 8; $mailer->SMTPDebug = 0;
+        $mailer->CharSet = 'UTF-8'; $mailer->setFrom('welcome@roomjurmala.lv','ROOM Jūrmala');
+        $mailer->addAddress($email); $mailer->Subject = $subject; $mailer->Body = $body;
+        return $mailer->send();
+    }
     $headers = ['From'=>'ROOM Jurmala <welcome@roomjurmala.lv>', 'Reply-To'=>'welcome@roomjurmala.lv', 'MIME-Version'=>'1.0', 'Content-Type'=>'text/plain; charset=UTF-8', 'Content-Transfer-Encoding'=>'base64'];
     return mail($email, '=?UTF-8?B?'.base64_encode($subject).'?=', chunk_split(base64_encode($body)), $headers, '-fwelcome@roomjurmala.lv');
 }
@@ -46,7 +63,7 @@ function room_request_reset(array $input): never {
         $mailError = null;
         try { $sent = room_send_reset_email($account['email'],$token); }
         catch (Throwable $error) { $sent = false; $mailError = $error->getMessage(); }
-        file_put_contents(room_private_dir().'/mail-status.json', json_encode(['time'=>gmdate('c'),'accepted'=>$sent,'error'=>$mailError], JSON_THROW_ON_ERROR), LOCK_EX);
+        file_put_contents(room_private_dir().'/mail-status.json', json_encode(['time'=>gmdate('c'),'accepted'=>$sent,'transport'=>is_file(room_private_dir().'/smtp-password.txt')?'smtp':'php-mail','error'=>$mailError], JSON_THROW_ON_ERROR), LOCK_EX);
         if (!$sent) {
             $statement=$db->prepare('DELETE FROM password_resets WHERE token_hash=:hash'); $statement->bindValue(':hash',hash('sha256',$token)); $statement->execute();
             error_log('ROOM password reset email could not be handed to the mail server');
