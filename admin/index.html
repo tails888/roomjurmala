@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pasākumi · ROOM Jūrmala</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/fonts/site-fonts.css">
+  <link rel="stylesheet" href="/assets/css/admin.css">
+  <script type="module" src="/assets/js/admin.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pāriet uz saturu</a>
+  <header class="admin-header">
+    <a class="wordmark" href="/admin/" aria-label="ROOM Jūrmala administrācija">ROOM Jūrmala</a>
+    <a class="site-link" href="/#calendar" target="_blank" rel="noopener">Atvērt mājaslapu <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+  </header>
+  <main id="main">
+    <div class="page-heading">
+      <div><h1>Pasākumi</h1><p>Viss kalendārs vienuviet.</p></div>
+      <button class="button primary add-button" id="add-event" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>Pievienot pasākumu</button>
+    </div>
+    <div class="workspace">
+      <section class="schedule" aria-label="Pasākumu saraksts">
+        <div class="filters" role="group" aria-label="Parādīt pasākumus">
+          <button type="button" class="filter" id="upcoming-filter" aria-pressed="true">Tuvākie</button>
+          <button type="button" class="filter" id="cancelled-filter" aria-pressed="false">Atceltie</button>
+        </div>
+        <div id="list-error" class="notice error" role="alert" hidden><p>Neizdevās ielādēt pasākumus. Pārbaudi savienojumu.</p><button id="retry" type="button">Mēģināt vēlreiz</button></div>
+        <div id="event-list" aria-busy="true"><p class="loading">Ielādē pasākumus…</p></div>
+        <button class="more-button" type="button" id="load-more" hidden>Rādīt vēl</button>
+      </section>
+      <section class="editor" id="event-editor" aria-labelledby="form-title">
+        <h2 id="form-title">Jauns pasākums</h2>
+        <p class="editor-intro">Aizpildi un publicē mājaslapā.</p>
+        <form id="event-form" novalidate>
+          <div class="field"><label for="event-title">Pasākuma nosaukums</label><input id="event-title" name="title" type="text" maxlength="160" placeholder="Piemēram, jogas nodarbība" required autocomplete="off" aria-describedby="error-title"><p class="field-error" id="error-title" hidden></p></div>
+          <div class="field"><label for="event-date">Datums</label><input id="event-date" name="date" type="date" required aria-describedby="error-date"><p class="field-error" id="error-date" hidden></p></div>
+          <div class="time-fields">
+            <div class="field"><label for="event-start">No</label><input id="event-start" name="startTime" type="time" required aria-describedby="error-startTime"><p class="field-error" id="error-startTime" hidden></p></div>
+            <div class="field"><label for="event-end">Līdz</label><input id="event-end" name="endTime" type="time" required aria-describedby="error-endTime"><p class="field-error" id="error-endTime" hidden></p></div>
+          </div>
+          <div class="field"><label for="event-description">Apraksts <span>nav obligāts</span></label><textarea id="event-description" name="description" rows="3" maxlength="2000" placeholder="Piemēram, kas jāņem līdzi…" aria-describedby="error-description"></textarea><p class="field-error" id="error-description" hidden></p></div>
+          <label class="repeat-option"><input id="event-weekly" name="weekly" type="checkbox"><span>Atkārtot katru nedēļu</span></label>
+          <p class="repeat-hint" id="repeat-hint" hidden></p>
+          <p class="notice error" id="form-error" role="alert" hidden></p>
+          <button class="button primary publish-button" id="publish" type="submit" disabled>Publicēt pasākumu</button>
+          <p class="form-help">Pasākums parādīsies mājaslapas kalendārā.</p>
+        </form>
+      </section>
+    </div>
+    <footer class="admin-footer">Laiki pēc Latvijas laika.<span>Lokālā izmēģinājuma versija</span></footer>
+    <noscript><p>Lai pievienotu un atceltu pasākumus, ieslēdz JavaScript pārlūkā.</p></noscript>
+  </main>
+  <div class="toast" id="toast" role="status" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span></span><button type="button" id="close-toast" aria-label="Aizvērt paziņojumu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+  <dialog id="cancel-dialog" aria-labelledby="cancel-title" aria-describedby="cancel-summary">
+    <div class="dialog-content">
+      <h2 id="cancel-title">Atcelt pasākumu?</h2>
+      <p id="cancel-summary"></p>
+      <fieldset id="cancel-scope"><legend>Ko vēlies atcelt?</legend><label><input type="radio" name="cancelScope" value="one" checked><span>Tikai šo datumu</span></label><label><input type="radio" name="cancelScope" value="series"><span>Šo un visus turpmākos datumus</span></label></fieldset>
+      <p class="cancel-help">Atcelto pasākumu varēsi atjaunot sadaļā “Atceltie”.</p>
+      <p class="notice error" id="cancel-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" id="keep-event" autofocus>Paturēt pasākumu</button><button class="button danger" type="button" id="confirm-cancel">Atcelt pasākumu</button></div>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,75 @@
+import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
+import path from 'node:path';
+import { randomUUID } from 'node:crypto';
+import { validateEvent, validDate, occursOn, rigaClock } from '../assets/js/event-model.mjs';
+
+export class EventError extends Error {
+  constructor(message, status = 400, fields) { super(message); this.status = status; this.fields = fields; }
+}
+
+// One serialized writer and atomic rename keep simultaneous requests from losing data.
+// The local store lives outside the served web root and is never checked into Git.
+export async function openEventStore(file, seedFile) {
+  let state;
+  try { state = JSON.parse(await readFile(file, 'utf8')); }
+  catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    state = JSON.parse(await readFile(seedFile, 'utf8'));
+    await mkdir(path.dirname(file), { recursive: true });
+    await writeFile(file, JSON.stringify(state, null, 2) + '\n', { flag: 'wx', mode: 0o600 });
+  }
+  if (state.version !== 1 || !Array.isArray(state.events)) throw new Error('Unsupported event store');
+  let queue = Promise.resolve();
+  function update(change) {
+    const task = queue.then(async () => {
+      const next = structuredClone(state);
+      const result = change(next);
+      const temp = file + '.tmp';
+      await writeFile(temp, JSON.stringify(next, null, 2) + '\n', { mode: 0o600 });
+      await rename(temp, file);
+      state = next;
+      return result;
+    });
+    queue = task.catch(() => {});
+    return task;
+  }
+  return {
+    list: () => structuredClone(state.events),
+    create(input, now = rigaClock()) {
+      return update(next => {
+        const fields = validateEvent(input, now);
+        if (Object.keys(fields).length) throw new EventError('Pārbaudi atzīmētos laukus.', 400, fields);
+        const event = {
+          id: randomUUID(), title: { lv: input.title.trim() }, description: { lv: (input.description || '').trim() },
+          time: `${input.startTime}-${input.endTime}`, status: 'active', exclusions: [], createdAt: new Date().toISOString()
+        };
+        if (input.weekly) Object.assign(event, { type: 'weekly', start: input.date, weekdays: [new Date(input.date + 'T12:00:00Z').getUTCDay()] });
+        else event.date = input.date;
+        next.events.push(event);
+        return event;
+      });
+    },
+    change(id, input, now = rigaClock()) {
+      return update(next => {
+        const event = next.events.find(e => e.id === id);
+        if (!event) throw new EventError('Šis pasākums vairs nav pieejams.', 404);
+        if (!input || !['cancel', 'restore'].includes(input.action) || !['one', 'series'].includes(input.scope)
+          || !validDate(input.date) || !occursOn(event, input.date)) throw new EventError('Nederīga pasākuma izvēle.');
+        if (input.date < now.date) throw new EventError('Pagājušu pasākumu nevar mainīt.');
+        if (input.scope === 'series' && !event.weekdays) throw new EventError('Šis pasākums neatkārtojas.');
+        if (input.action === 'cancel') {
+          if (input.scope === 'series') event.cancelledFrom = event.cancelledFrom && event.cancelledFrom < input.date ? event.cancelledFrom : input.date;
+          else if (event.weekdays) event.exclusions = [...new Set([...(event.exclusions || []), input.date])];
+          else event.status = 'cancelled';
+        } else {
+          if (input.scope === 'series') delete event.cancelledFrom;
+          else if (event.cancelledFrom && input.date >= event.cancelledFrom) throw new EventError('Atjauno visu atcelto sēriju.');
+          else if (event.weekdays) event.exclusions = (event.exclusions || []).filter(d => d !== input.date);
+          else event.status = 'active';
+        }
+        event.updatedAt = new Date().toISOString();
+        return event;
+      });
+    }
+  };
+}

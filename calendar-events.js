@@ -122,6 +122,7 @@
   }
 
   function eventMatchesDate(event, date, dateKey) {
+    if (event.status === 'cancelled' || (event.cancelledFrom && dateKey >= event.cancelledFrom) || event.exclusions?.includes(dateKey)) return false;
     if (event.date) return event.date === dateKey;
     if (!event.weekdays || !event.weekdays.includes(date.getDay())) return false;
     if (event.start && dateKey < event.start) return false;
@@ -300,4 +301,32 @@
     resolveCopy,
     resolveLocalized
   };
+  // Static hosting retains the original schedule. The local admin API replaces it
+  // whenever available, including empty schedules after all events are cancelled.
+  let refreshing = false;
+  let lastPayload = '';
+  async function refreshEvents() {
+    if (refreshing || document.hidden) return;
+    refreshing = true;
+    try {
+      const response = await fetch('/api/events', {cache:'no-store', signal:AbortSignal.timeout(8000)});
+      if (!response.ok) return;
+      const payload = await response.json();
+      if (!Array.isArray(payload.events)) return;
+      const serialized = JSON.stringify(payload.events);
+      if (serialized === lastPayload) return;
+      lastPayload = serialized;
+      EVENTS.splice(0, EVENTS.length, ...payload.events);
+      window.dispatchEvent(new Event('room-events-updated'));
+    } catch { /* Keep the last successfully loaded schedule during a connection loss. */ }
+    finally { refreshing = false; }
+  }
+  window.RoomJurmalaCalendar.refresh = refreshEvents;
+  if (typeof fetch === 'function' && typeof document !== 'undefined') {
+    refreshEvents();
+    setInterval(refreshEvents, 15000);
+    window.addEventListener('focus', refreshEvents);
+    document.addEventListener('visibilitychange', refreshEvents);
+    window.addEventListener('storage', event => { if (event.key === 'room-events-updated') refreshEvents(); });
+  }
 })();

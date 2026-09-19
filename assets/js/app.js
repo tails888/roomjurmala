@@ -232,6 +232,7 @@ function renderSchedule(){
   });
   $('.booking-calendar').hidden=false;
 }
+window.addEventListener('room-events-updated', renderSchedule);
 for(const [id,step] of [['prevMonth',-1],['nextMonth',1]])$('#'+id).addEventListener('click',()=>{
   const date=new Date(calendarYear,calendarMonth+step,1);calendarYear=date.getFullYear();calendarMonth=date.getMonth();renderSchedule();
 });
