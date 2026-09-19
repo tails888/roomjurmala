@@ -7,6 +7,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 if (!room_local() && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off')) room_json(403, ['error' => 'Izmanto drošo HTTPS adresi.']);
 if (($_SERVER['HTTP_HOST'] ?? '') !== parse_url(room_origin(), PHP_URL_HOST) . (parse_url(room_origin(), PHP_URL_PORT) ? ':' . parse_url(room_origin(), PHP_URL_PORT) : '')) room_json(403, ['error' => 'Nederīga vietnes adrese.']);
 
+if ($method === 'GET' && preg_match('~^/api/events/([a-zA-Z0-9-]+)/image$~D', $path, $match)) {
+    $statement = room_db()->prepare('SELECT payload FROM events WHERE id=:id'); $statement->bindValue(':id', $match[1]);
+    $row = $statement->execute()->fetchArray(SQLITE3_ASSOC);
+    $event = $row ? json_decode($row['payload'], true) : null;
+    $file = room_image_file($match[1]);
+    if (!$event || !isset($event['image']) || !is_file($file)) room_json(404, ['error' => 'Attēls nav atrasts.']);
+    header('Content-Type: image/jpeg'); header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-store'); header('Content-Disposition: inline; filename="room-jurmala-pasakums.jpg"');
+    header('Content-Length: '.filesize($file)); readfile($file); exit;
+}
 if ($method === 'GET' && $path === '/api/session') {
     $account = room_current_account();
     room_json(200, ['authenticated' => (bool)$account, 'csrf' => $_SESSION['csrf'], 'user' => $account ? ['email' => $account['email']] : null, 'setupAvailable' => (bool)room_pending_invitations()]);
@@ -95,6 +105,7 @@ if ($method === 'POST' && $path === '/api/events/cancel-all') {
 if ($method === 'POST' && $path === '/api/events') {
     $errors = room_validate_event($input);
     if ($errors) room_json(400, ['error' => 'Pārbaudi atzīmētos laukus.', 'fields' => $errors]);
+    $imageBytes = room_event_image($input['imageData'] ?? null);
     $requestId = $_SERVER['HTTP_IDEMPOTENCY_KEY'] ?? '';
     if (!preg_match('/^[a-zA-Z0-9-]{16,80}$/D', $requestId)) room_json(400, ['error' => 'Pārlādē lapu un mēģini vēlreiz.']);
     $event = ['id' => bin2hex(random_bytes(16)), 'title' => ['lv' => trim($input['title'])], 'description' => ['lv' => trim($input['description'] ?? '')], 'time' => $input['startTime'].'-'.$input['endTime'], 'status' => 'active', 'exclusions' => [], 'createdAt' => gmdate('c')];
@@ -105,6 +116,12 @@ if ($method === 'POST' && $path === '/api/events') {
         $statement = $db->prepare('SELECT payload FROM events JOIN requests ON requests.event_id=events.id WHERE requests.id=:id');
         $statement->bindValue(':id', $requestId); $existing = $statement->execute()->fetchArray(SQLITE3_ASSOC);
         if ($existing) { $db->exec('COMMIT'); room_json(200, ['event' => json_decode($existing['payload'], true, 512, JSON_THROW_ON_ERROR)]); }
+        if ($imageBytes !== null) {
+            $imageDir = dirname(room_image_file($event['id']));
+            if (!is_dir($imageDir)) mkdir($imageDir, 0700, true);
+            if (file_put_contents(room_image_file($event['id']), $imageBytes, LOCK_EX) === false) throw new RuntimeException('Cannot save event image');
+            $event['image'] = '/api/events/'.$event['id'].'/image';
+        }
         room_save_event($db, $event);
         $statement = $db->prepare('INSERT INTO requests(id,event_id,created) VALUES(:id,:event,:created)');
         $statement->bindValue(':id', $requestId); $statement->bindValue(':event', $event['id']); $statement->bindValue(':created', time(), SQLITE3_INTEGER); $statement->execute();
@@ -128,7 +145,9 @@ if ($method === 'PATCH' && preg_match('~^/api/events/([a-zA-Z0-9-]+)$~D', $path,
                     $statement=$db->prepare($sql); $statement->bindValue(':id',$match[1]); $statement->execute();
                 }
             } else room_save_event($db,$event);
-            $db->exec('COMMIT'); room_json(200,['event'=>$event,'id'=>$match[1]]);
+            $db->exec('COMMIT');
+            if ($event === null && is_file(room_image_file($match[1]))) unlink(room_image_file($match[1]));
+            room_json(200,['event'=>$event,'id'=>$match[1]]);
         }
         if (is_string($date) && (room_archived($event,$date) || in_array($date,$event['deletedDates'] ?? [],true) || ($action==='restore' && $scope==='series' && isset($event['archivedFrom'])))) {
             $db->exec('ROLLBACK'); room_json(400,['error'=>'Vispirms atgriez pasākumu no arhīva.']);

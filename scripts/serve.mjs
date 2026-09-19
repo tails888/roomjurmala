@@ -24,6 +24,11 @@ export async function createLocalServer({ root = process.cwd(), dataFile = proce
   catch { return json(res, 400, {error:'Nederīga adrese.'}); }
   if (requestPath.startsWith('/api/')) {
     try {
+      const imageMatch = requestPath.match(/^\/api\/events\/([a-zA-Z0-9-]+)\/image$/);
+      if (req.method === 'GET' && imageMatch) {
+        const bytes = await store.image(imageMatch[1]);
+        res.writeHead(200, {'Content-Type':'image/jpeg','Cache-Control':'no-store','Content-Disposition':'inline; filename="room-jurmala-pasakums.jpg"'}); res.end(bytes); return;
+      }
       if (req.method === 'GET' && requestPath === '/api/session') return json(res, 200, {authenticated:true,local:true,csrf:''});
       if (req.method === 'GET' && requestPath === '/api/events') return json(res, 200, {events:store.list()});
       if (!['POST', 'PATCH'].includes(req.method)) return json(res, 405, {error:'Darbība nav pieejama.'});
@@ -33,7 +38,7 @@ export async function createLocalServer({ root = process.cwd(), dataFile = proce
       req.setEncoding('utf8');
       for await (const chunk of req) {
         body += chunk;
-        if (Buffer.byteLength(body) > 12000) throw new EventError('Ievadītais teksts ir pārāk garš.', 413);
+        if (Buffer.byteLength(body) > (req.method === 'POST' && requestPath === '/api/events' ? 2850000 : 12000)) throw new EventError('Ievadītais teksts ir pārāk garš.', 413);
       }
       let input;
       try { input = JSON.parse(body); } catch { throw new EventError('Neizdevās nolasīt ievadīto informāciju.'); }
@@ -59,7 +64,7 @@ export async function createLocalServer({ root = process.cwd(), dataFile = proce
     if (pathname === '/admin') { res.writeHead(302, {Location:'/admin/'}); res.end(); return; }
     if (pathname.startsWith('/admin/')) {
       res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-      res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'");
+      res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'");
     }
     if ((await stat(file)).isDirectory()) file=path.join(file,'index.html');
     const data=await readFile(file);

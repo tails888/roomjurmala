@@ -1,4 +1,5 @@
-import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
+import { decodeEventImage } from './event-image.mjs';
+import { readFile, writeFile, mkdir, rename, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { validateEvent, validDate, occursOn, rigaClock, isArchived, changeArchive } from '../assets/js/event-model.mjs';
@@ -23,7 +24,7 @@ export async function openEventStore(file, seedFile) {
   function update(change) {
     const task = queue.then(async () => {
       const next = structuredClone(state);
-      const result = change(next);
+      const result = await change(next);
       const temp = file + '.tmp';
       await writeFile(temp, JSON.stringify(next, null, 2) + '\n', { mode: 0o600 });
       await rename(temp, file);
@@ -35,8 +36,12 @@ export async function openEventStore(file, seedFile) {
   }
   return {
     list: () => structuredClone(state.events),
+    async image(id) {
+      if (!state.events.some(e => e.id === id && e.image)) throw new EventError('Attēls nav atrasts.',404);
+      return readFile(path.join(file + '.images', id + '.jpg'));
+    },
     create(input, now = rigaClock()) {
-      return update(next => {
+      return update(async next => {
         const fields = validateEvent(input, now);
         if (Object.keys(fields).length) throw new EventError('Pārbaudi atzīmētos laukus.', 400, fields);
         const event = {
@@ -45,6 +50,12 @@ export async function openEventStore(file, seedFile) {
         };
         if (input.weekly) Object.assign(event, { type: 'weekly', start: input.date, weekdays: [new Date(input.date + 'T12:00:00Z').getUTCDay()] });
         else event.date = input.date;
+        const bytes = decodeEventImage(input.imageData);
+        if (bytes) {
+          await mkdir(file + '.images', {recursive:true, mode:0o700});
+          await writeFile(path.join(file + '.images', event.id + '.jpg'), bytes, {mode:0o600});
+          event.image = '/api/events/' + event.id + '/image';
+        }
         next.events.push(event);
         return event;
       });
@@ -67,8 +78,8 @@ export async function openEventStore(file, seedFile) {
         return {events:structuredClone(next.events), changed};
       });
     },
-    archive(id,input) {
-      return update(next=>{
+    async archive(id,input) {
+      const result = await update(next=>{
         const index=next.events.findIndex(e=>e.id===id);
         if (index<0) throw new EventError('Pasākums nav atrasts.',404);
         let event;
@@ -76,6 +87,8 @@ export async function openEventStore(file, seedFile) {
         if (!event) next.events.splice(index,1);
         return {event,id};
       });
+      if (!result.event) await unlink(path.join(file + '.images', id + '.jpg')).catch(error => { if (error.code !== 'ENOENT') throw error; });
+      return result;
     },
     change(id, input, now = rigaClock()) {
       return update(next => {

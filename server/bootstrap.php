@@ -102,8 +102,9 @@ function room_input(): array {
         || strtolower(trim(explode(';', $_SERVER['CONTENT_TYPE'] ?? '')[0])) !== 'application/json') room_json(403, ['error' => 'Pārlādē lapu un mēģini vēlreiz.']);
     room_session();
     if (!hash_equals($_SESSION['csrf'], $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '')) room_json(403, ['error' => 'Sesija ir mainījusies. Pārlādē lapu.']);
-    $raw = file_get_contents('php://input', false, null, 0, 16001);
-    if (strlen($raw) > 16000) room_json(413, ['error' => 'Ievadītais teksts ir pārāk garš.']);
+    $limit = ($_SERVER['REQUEST_METHOD'] === 'POST' && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === '/api/events') ? 2850000 : 16000;
+    $raw = file_get_contents('php://input', false, null, 0, $limit + 1);
+    if (strlen($raw) > $limit) room_json(413, ['error' => 'Ievadītais teksts ir pārāk garš.']);
     try { $input = json_decode($raw, true, 32, JSON_THROW_ON_ERROR); }
     catch (JsonException) { room_json(400, ['error' => 'Neizdevās nolasīt ievadīto informāciju.']); }
     if (!is_array($input) || array_is_list($input)) room_json(400, ['error' => 'Pārbaudi ievadīto informāciju.']);
@@ -236,4 +237,16 @@ function room_archive_change(array $event,array $input): ?array {
         }
     }
     $event['updatedAt']=gmdate('c'); return $event;
+}
+
+function room_event_image(mixed $value): ?string {
+    if ($value === null || $value === '') return null;
+    if (!is_string($value) || strlen($value) > 2800000 || !str_starts_with($value, 'data:image/jpeg;base64,')) room_json(400, ['error' => 'Izvēlies derīgu JPG, PNG vai WebP attēlu.']);
+    $bytes = base64_decode(substr($value, 23), true);
+    $info = $bytes === false ? false : @getimagesizefromstring($bytes);
+    if (!$info || $info[2] !== IMAGETYPE_JPEG || $info[0] > 1600 || $info[1] > 1600 || $info[0] < 1 || $info[1] < 1) room_json(400, ['error' => 'Attēls nav derīgs. Izvēlies citu failu.']);
+    return $bytes;
+}
+function room_image_file(string $id): string {
+    return room_private_dir() . '/images/' . $id . '.jpg';
 }

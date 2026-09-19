@@ -183,11 +183,11 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
   ${kind==='home'?`<style>${criticalStyles(header(lang,kind,c,d)+paperHero(lang,d))}</style>
   <link data-site-styles rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking" media="print" onload="this.media='all'" onerror="this.media='all';this.dataset.failed='true'">
   <noscript><link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking"></noscript>`:'<link rel="stylesheet" href="/assets/css/bundle.css?v=20260912-booking">'}
-  <script src="/calendar-events.js?v=20260919-admin" defer></script>
+  <script src="/calendar-events.js?v=20260919-event-images" defer></script>
   <script src="/assets/js/analytics.js?v=20260911" defer></script>
   ${['scroll','paper','hero-tour','films'].map(name=>`<link rel="modulepreload" href="/assets/js/${name}.js?v=20260912-fast2">`).join('')}
   <link rel="modulepreload" href="/assets/js/booking-core.js?v=20260911-mobile-fix">
-  <script type="module" src="/assets/js/app.js?v=20260919-admin"></script>
+  <script type="module" src="/assets/js/app.js?v=20260919-event-images"></script>
 </head>
 <body class="page-${kind} ${kind==='home'?'':'page-editorial'}">${header(lang,kind,c,d)}<main id="main">${body}${kind==='home'?booking(c,d):''}${faq(lang,kind,c,d)}</main>${kind==='home'?footer(lang,c,d):minimalFooter(lang)}${dialogs(d)}
 <script id="site-data" type="application/json">${json(data)}</script>
@@ -200,7 +200,7 @@ for(const lang of ['lv','en','ru'])for(const kind of ['home','space','pricing'])
  });
  if(kind!=='home'){
   const destination=route(lang)+(data.serviceRequest?'?service='+encodeURIComponent(data.serviceRequest):'')+'#calendar';
-  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260919-admin" defer></script>','');
+  html=html.replaceAll('href="#calendar"','href="'+esc(destination)+'"').replace('<script src="/calendar-events.js?v=20260919-event-images" defer></script>','');
  }
  const dir='.'+route(lang,kind);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(dir+'index.html',html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
 }

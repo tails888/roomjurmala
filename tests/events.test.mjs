@@ -145,3 +145,20 @@ test('archive and permanent deletion isolate one occurrence and retain earlier s
   assert.equal(result.event.end,addDays(next,-1));
   assert.equal(archivedEntries([result.event]).length,0);
 });
+
+ test('local event photos persist separately and permanent deletion removes their file', async t => {
+  const {file,store} = await fixture(t);
+  const bytes = await readFile(path.join(root,'assets/images/social/og-image.jpg'));
+  const event = await store.create({...input,weekly:false,imageData:'data:image/jpeg;base64,'+bytes.toString('base64')},now);
+  assert.equal(event.image,'/api/events/'+event.id+'/image');
+  assert.deepEqual(await store.image(event.id),bytes);
+  assert.equal(event.imageData,undefined);
+  await assert.rejects(store.create({...input,imageData:'data:image/jpeg;base64,SGVsbG8='},now));
+  const reopened = await openEventStore(file,path.join(root,'content/events-seed.json'));
+  assert.deepEqual(await reopened.image(event.id),bytes);
+  await reopened.change(event.id,{action:'cancel',scope:'one',date:input.date},now);
+  await reopened.archive(event.id,{action:'archive',scope:'one',date:input.date});
+  await reopened.archive(event.id,{action:'delete',scope:'one',date:input.date,confirm:true});
+  await assert.rejects(reopened.image(event.id));
+  await assert.rejects(readFile(path.join(file+'.images',event.id+'.jpg')),{code:'ENOENT'});
+});

@@ -55,6 +55,12 @@
             <div class="field"><label for="event-end">Līdz</label><input id="event-end" name="endTime" type="time" required aria-describedby="error-endTime"><p class="field-error" id="error-endTime" hidden></p></div>
           </div>
           <div class="field"><label for="event-description">Apraksts <span>nav obligāts</span></label><textarea id="event-description" name="description" rows="3" maxlength="2000" placeholder="Piemēram, kas jāņem līdzi…" aria-describedby="error-description"></textarea><p class="field-error" id="error-description" hidden></p></div>
+          <div class="field image-field"><label for="event-image">Pasākuma attēls <span>nav obligāts</span></label>
+            <input id="event-image" name="image" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="image-help error-image">
+            <p class="form-help" id="image-help">Izvēlies JPG, PNG vai WebP attēlu līdz 10 MB.</p>
+            <div id="image-preview-wrap" hidden><img id="image-preview" alt="Pasākuma attēla priekšskatījums"><button class="more-button" id="remove-image" type="button">Noņemt attēlu</button></div>
+            <p class="field-error" id="error-image" role="alert" hidden></p>
+          </div>
           <label class="repeat-option"><input id="event-weekly" name="weekly" type="checkbox"><span>Atkārtot katru nedēļu</span></label>
           <p class="repeat-hint" id="repeat-hint" hidden></p>
           <p class="notice error" id="form-error" role="alert" hidden></p>
@@ -71,6 +77,17 @@
     <noscript><p>Lai pievienotu un atceltu pasākumus, ieslēdz JavaScript pārlūkā.</p></noscript>
   </main>
   <div class="toast" id="toast" role="status" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span></span><button type="button" id="close-toast" aria-label="Aizvērt paziņojumu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+  <dialog id="published-dialog" aria-labelledby="published-title">
+    <div class="dialog-content">
+      <p class="published-kicker">Gatavs!</p><h2 id="published-title" tabindex="-1">Pasākums publicēts mājaslapā!</h2>
+      <p>Vēlies to pievienot arī Google? Nokopē tekstu un atver ROOM Jūrmala profilu.</p>
+      <div class="field share-text"><label for="google-text">Teksts Google ierakstam</label><textarea id="google-text" rows="6" readonly></textarea></div>
+      <p class="form-help">Google Maps atver “Pārvaldīt uzņēmuma profilu”, izvēlies pievienot pasākumu, ielīmē tekstu, norādi datumus un pievieno bildi. Ielogojies kontā, kas pārvalda ROOM Jūrmala.</p>
+      <div class="share-actions"><button class="button primary" id="copy-google" type="button">Kopēt tekstu un atvērt Google</button><a id="download-image" class="button secondary" hidden>Lejupielādēt bildi</a><a id="open-google" target="_blank" rel="noopener noreferrer">Atvērt Google profilu</a></div>
+      <p id="share-status" role="status" hidden></p>
+      <button class="more-button" type="button" id="close-published">Gatavs</button>
+    </div>
+  </dialog>
   <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-summary">
     <div class="dialog-content">
       <h2 id="delete-title">Dzēst neatgriezeniski?</h2>

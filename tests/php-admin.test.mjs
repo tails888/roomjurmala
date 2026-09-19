@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, readFile } from 'node:fs/promises';
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { createServer } from 'node:net';
 import path from 'node:path';
@@ -75,6 +75,26 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
     const publicEvents=await call('/api/events');assert.equal(publicEvents.body.events.filter(e=>e.id===event.id).length,1);
     assert.equal(publicEvents.body.events.find(e=>e.id===event.id).description.lv,eventInput.description);
     assert.ok(publicEvents.headers.get('cache-control').includes('no-store'));
+  });
+  await t.test('event photos persist privately, reject invalid bytes, and disappear after permanent deletion', async()=>{
+    const bytes = await readFile(path.join(root,'assets/images/social/og-image.jpg'));
+    const imageData = 'data:image/jpeg;base64,' + bytes.toString('base64');
+    const key = {'Idempotency-Key':randomUUID()};
+    assert.equal((await call('/api/events','POST',{...eventInput,imageData:'data:image/jpeg;base64,SGVsbG8='},key)).status,400);
+    assert.equal((await call('/api/events','POST',{...eventInput,imageData:'data:image/svg+xml;base64,PHN2Zz4='},key)).status,400);
+    const created = await call('/api/events','POST',{...eventInput,imageData},key);
+    assert.equal(created.status,201);
+    const photoEvent = created.body.event;
+    assert.equal(photoEvent.image,'/api/events/'+photoEvent.id+'/image');
+    assert.equal((await call('/api/events','POST',{...eventInput,imageData},key)).body.event.id,photoEvent.id);
+    await stop(); await start();
+    const image = await fetch(origin+photoEvent.image);
+    assert.equal(image.status,200); assert.equal(image.headers.get('content-type'),'image/jpeg');
+    assert.deepEqual(Buffer.from(await image.arrayBuffer()),bytes);
+    assert.equal((await call('/api/events')).body.events.find(e=>e.id===photoEvent.id).imageData,undefined);
+    for (const action of ['cancel','archive','delete']) assert.equal((await call('/api/events/'+photoEvent.id,'PATCH',{action,scope:'one',date:eventInput.date,confirm:true})).status,200);
+    assert.equal((await fetch(origin+photoEvent.image)).status,404);
+    await assert.rejects(readFile(path.join(data,'images',photoEvent.id+'.jpg')),{code:'ENOENT'});
   });
   await t.test('cancel, restore and recurring exceptions persist',async()=>{
     const change={action:'cancel',scope:'one',date:eventInput.date};

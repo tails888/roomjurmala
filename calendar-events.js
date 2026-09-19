@@ -204,6 +204,12 @@
     time.className = "cal-event-time";
     time.textContent = event.time.replace("-", "–");
     body.append(meta, title, time);
+    if (typeof event.image === "string" && /^\/api\/events\/[a-zA-Z0-9-]+\/image$/.test(event.image)) {
+      const photo = document.createElement("img");
+      photo.src = event.image; photo.alt = resolveLocalized(event.title, lang); photo.loading = "lazy";
+      photo.style.cssText = "display:block;width:100%;max-width:320px;max-height:260px;object-fit:contain;border-radius:10px;margin-top:12px";
+      body.appendChild(photo);
+    }
     item.append(badge, body);
     if (event.description) {
       const description = document.createElement("p");

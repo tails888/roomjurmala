@@ -1,4 +1,5 @@
 import { rigaClock, addDays, validDate, validateEvent, occurrences, archivedEntries } from './event-model.mjs';
+import { prepareEventImage, sharingText, googleProfileUrl } from './event-sharing.mjs';
 import { initializeAuth, request } from './admin-auth.mjs';
 
 const $ = selector => document.querySelector(selector);
@@ -9,6 +10,8 @@ const bulkDialog = $('#cancel-all-dialog');
 const deleteDialog = $('#delete-dialog');
 let archived = false, pendingDelete = null;
 let events = [], cancelled = false, limit = 6, pending = null, busy = false, loaded = false, toastTimer, refreshing = false;
+let imageData = '', imagePreparing = false, imageRevision = 0;
+const publishedDialog = $('#published-dialog');
 let createRequestId = crypto.randomUUID();
 const icons = {
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -68,12 +71,18 @@ function render() {
     const time = el('span'); time.append(icon('clock'), document.createTextNode(event.time.replaceAll(':', '.').replace('-', '–'))); meta.append(time);
     if (event.weekdays) { const repeat = el('span'); repeat.append(icon('repeat'), document.createTextNode(archived && series ? 'Sērija no šī datuma' : 'Katru nedēļu')); meta.append(repeat); }
     body.append(meta);
+    if (event.image) { const photo = el('img', 'event-thumbnail'); photo.src = event.image; photo.alt = label(event); photo.loading = 'lazy'; body.append(photo); }
     const wholeSeries = archived ? Boolean(series) : Boolean(event.cancelledFrom && date >= event.cancelledFrom);
     const action = el('button', 'event-action', archived ? 'Uz atceltajiem' : cancelled ? (wholeSeries ? 'Atjaunot sēriju' : 'Atjaunot') : 'Atcelt');
     action.type = 'button'; action.disabled = busy;
     action.setAttribute('aria-label', `${action.textContent} · ${label(event)} · ${dateLabel(date)}`);
     action.addEventListener('click', () => archived ? archiveAction(event,date,wholeSeries,'unarchive') : cancelled ? restore(event, date, wholeSeries, action) : openCancel(event, date));
     const actions = el('div','event-actions'); actions.append(action);
+    if (!cancelled && !archived) {
+      const share = el('button', 'event-action', 'Google'); share.type = 'button'; share.disabled = busy;
+      share.setAttribute('aria-label', `Sagatavot Google ierakstu · ${label(event)}`);
+      share.addEventListener('click', () => showSharing(event, date)); actions.append(share);
+    }
     if (cancelled || archived) {
       const extra = el('button','event-action', archived ? 'Dzēst' : wholeSeries ? 'Arhivēt sēriju' : 'Arhivēt');
       extra.type='button'; extra.disabled=busy;
@@ -98,7 +107,7 @@ async function refresh() {
     events = data.events;
     $('#list-error').hidden = true;
     if (!loaded || changed) render();
-    loaded = true; $('#publish').disabled = false; $('#cancel-all').disabled = false;
+    loaded = true; $('#publish').disabled = busy || imagePreparing; $('#cancel-all').disabled = false;
   } catch {
     $('#list-error').hidden = false;
     if (!loaded) { list.replaceChildren(); list.setAttribute('aria-busy','false'); }
@@ -106,7 +115,7 @@ async function refresh() {
 }
 function setBusy(value) {
   busy = value;
-  for (const control of form.elements) control.disabled = value || (!loaded && control.id === 'publish');
+  for (const control of form.elements) control.disabled = value || ((!loaded || imagePreparing) && control.id === 'publish');
   $('#publish').textContent = value ? 'Saglabā…' : 'Publicēt pasākumu';
   $('#confirm-cancel').disabled = value;
   $('#keep-event').disabled = value;
@@ -154,9 +163,9 @@ form.addEventListener('input', event => {
 });
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  if (busy || !loaded) return;
+  if (busy || !loaded || imagePreparing) return;
   const input = { title:form.elements.title.value, date:form.elements.date.value, startTime:form.elements.startTime.value,
-    endTime:form.elements.endTime.value, description:form.elements.description.value, weekly:form.elements.weekly.checked };
+    endTime:form.elements.endTime.value, description:form.elements.description.value, weekly:form.elements.weekly.checked, imageData };
   const errors = validateEvent(input);
   if (Object.keys(errors).length) { showErrors(errors); return; }
   clearErrors(); setBusy(true);
@@ -164,8 +173,8 @@ form.addEventListener('submit', async event => {
     const result = await api('/api/events', {method:'POST', headers:{'Idempotency-Key':createRequestId}, body:JSON.stringify(input)});
     createRequestId = crypto.randomUUID();
     cancelled = false; archived = false; limit = 6;
-    updateEvent(result.event); form.reset(); updateRepeat();
-    notify('Pasākums publicēts un redzams mājaslapā.');
+    updateEvent(result.event); form.reset(); resetImage(); updateRepeat();
+    showSharing(result.event, input.date);
   } catch (error) {
     if (error.fields) showErrors(error.fields);
     else { $('#form-error').textContent = error.name === 'TimeoutError' ? 'Savienojums pārtrūka. Pirms mēģini vēlreiz, pārbaudi pasākumu sarakstu.' : error.message; $('#form-error').hidden = false; }
@@ -273,4 +282,60 @@ $('#confirm-delete').addEventListener('click',async()=>{
     deleteDialog.close(); notify('Pasākums neatgriezeniski izdzēsts.'); $('#archive-filter').focus({preventScroll:true});
   } catch(error) { $('#delete-error').textContent=error.message; $('#delete-error').hidden=false; }
   finally { setBusy(false); }
+});
+
+function resetImage() {
+  imageRevision++; imageData = ''; imagePreparing = false;
+  $('#event-image').value = ''; $('#image-preview').removeAttribute('src');
+  $('#image-preview-wrap').hidden = true; $('#error-image').hidden = true;
+  $('#image-help').textContent = 'Izvēlies JPG, PNG vai WebP attēlu līdz 10 MB.';
+}
+$('#event-image').addEventListener('change', async () => {
+  const file = $('#event-image').files[0];
+  const revision = ++imageRevision;
+  imageData = ''; $('#image-preview-wrap').hidden = true; $('#error-image').hidden = true;
+  if (!file) { resetImage(); setBusy(busy); return; }
+  imagePreparing = true; $('#publish').disabled = true;
+  $('#image-help').textContent = 'Sagatavo attēlu…';
+  try {
+    const prepared = await prepareEventImage(file);
+    if (revision !== imageRevision) return;
+    imageData = prepared;
+    $('#image-preview').src = imageData; $('#image-preview-wrap').hidden = false;
+    $('#image-help').textContent = 'Attēls gatavs. Lai nomainītu, izvēlies citu failu.';
+  } catch (error) {
+    if (revision !== imageRevision) return;
+    $('#error-image').textContent = error.message; $('#error-image').hidden = false;
+    $('#event-image').value = ''; $('#image-help').textContent = 'Izvēlies citu JPG, PNG vai WebP attēlu.';
+  } finally { if (revision === imageRevision) { imagePreparing = false; setBusy(busy); } }
+});
+$('#remove-image').addEventListener('click', () => { resetImage(); createRequestId = crypto.randomUUID(); setBusy(busy); });
+function showSharing(event, date) {
+  $('#google-text').value = sharingText(event, date);
+  $('#open-google').href = googleProfileUrl;
+  $('#share-status').hidden = true;
+  $('#download-image').hidden = !event.image;
+  if (event.image) { $('#download-image').href = event.image; $('#download-image').download = 'room-jurmala-pasakums.jpg'; }
+  else { $('#download-image').removeAttribute('href'); }
+  publishedDialog.showModal();
+  $('#google-text').scrollTop = 0;
+  $('#published-title').focus();
+}
+$('#close-published').addEventListener('click', () => publishedDialog.close());
+$('#copy-google').addEventListener('click', async () => {
+  // Start copying while this page is focused, and open within the same click gesture.
+  let copyAttempt;
+  try { copyAttempt = navigator.clipboard.writeText($('#google-text').value).then(() => true, () => false); }
+  catch { copyAttempt = Promise.resolve(false); }
+  const popup = window.open(googleProfileUrl, '_blank');
+  if (popup) popup.opener = null;
+  let copied = await copyAttempt;
+  if (!copied) {
+    $('#google-text').focus(); $('#google-text').select();
+    try { copied = document.execCommand('copy'); } catch { /* Selected text remains available for manual copying. */ }
+  }
+  $('#share-status').textContent = copied
+    ? (popup ? 'Teksts nokopēts. Ielīmē to Google ierakstā un pievieno bildi.' : 'Teksts nokopēts. Spied “Atvērt Google profilu”, lai turpinātu.')
+    : 'Neizdevās nokopēt automātiski. Iezīmē un nokopē tekstu augstāk, tad atver Google profilu.';
+  $('#share-status').hidden = false;
 });
