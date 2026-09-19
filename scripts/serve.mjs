@@ -24,6 +24,7 @@ export async function createLocalServer({ root = process.cwd(), dataFile = proce
   catch { return json(res, 400, {error:'Nederīga adrese.'}); }
   if (requestPath.startsWith('/api/')) {
     try {
+      if (req.method === 'GET' && requestPath === '/api/session') return json(res, 200, {authenticated:true,local:true,csrf:''});
       if (req.method === 'GET' && requestPath === '/api/events') return json(res, 200, {events:store.list()});
       if (!['POST', 'PATCH'].includes(req.method)) return json(res, 405, {error:'Darbība nav pieejama.'});
       if (req.headers.origin !== origin || req.headers['x-room-admin'] !== '1'

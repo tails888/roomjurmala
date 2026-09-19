@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 const root = process.cwd();
 const routes = ['', 'telpa', 'cenas', 'en', 'en/telpa', 'en/cenas', 'ru', 'ru/telpa', 'ru/cenas'];
 const pending = routes.map(route => path.resolve(root, route, 'index.html'));
+pending.push(path.resolve(root, 'admin/index.html'));
 // The bundled stylesheet is generated from these maintained source files.
 pending.push(...['assets/fonts/site-fonts.css','assets/css/site.css','assets/css/paper.css'].map(file=>path.resolve(root,file)));
 const visited = new Set();

@@ -5,6 +5,13 @@
 
 RewriteEngine On
 
+# Development sources and hidden files are never public website routes.
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+RewriteRule ^(?:server|content|scripts|tests|node_modules|docs)/ - [F,L]
+
+# The calendar API is handled by PHP on Hostinger.
+RewriteRule ^api(?:/.*)?$ api/index.php [END]
+
 # Consolidated service pages now live under the existing space page.
 RewriteRule ^(en/|ru/)?(?:bernu-ballites|telpas-nodarbibam)(?:/index\.html|/)?$ https://roomjurmala.lv/$1telpa/ [R=301,L,NE]
 
@@ -37,6 +44,9 @@ RewriteRule ^(.*)$ https://roomjurmala.lv/$1 [R=301,L,NE]
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "^(?:admin\.(?:js|css)|admin-auth\.mjs|event-model\.mjs)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>

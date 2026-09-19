@@ -1,0 +1,7 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^ index.php [END]
+<IfModule mod_headers.c>
+  Header always set Cache-Control "no-store, private"
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>

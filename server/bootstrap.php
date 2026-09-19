@@ -1,0 +1,165 @@
+<?php
+declare(strict_types=1);
+
+date_default_timezone_set('Europe/Riga');
+ini_set('display_errors', '0');
+
+function room_json(int $status, array $body): never {
+    http_response_code($status);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, private');
+    header('X-Content-Type-Options: nosniff');
+    header('X-Robots-Tag: noindex, nofollow');
+    echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+    exit;
+}
+
+set_exception_handler(function (Throwable $error): void {
+    error_log('ROOM admin error: ' . $error->getMessage());
+    room_json(500, ['error' => 'Neizdevās pabeigt darbību. Mēģini vēlreiz pēc brīža.']);
+});
+
+function room_origin(): string { return rtrim(getenv('ROOM_ORIGIN') ?: 'https://roomjurmala.lv', '/'); }
+function room_local(): bool {
+    return PHP_SAPI === 'cli-server' && in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true);
+}
+function room_private_dir(): string {
+    $dir = getenv('ROOM_DATA_DIR') ?: dirname(__DIR__, 2) . '/.roomjurmala-admin';
+    if (!is_dir($dir) && !mkdir($dir, 0700, true) && !is_dir($dir)) throw new RuntimeException('Cannot create private storage');
+    $dir = realpath($dir);
+    $webRoot = realpath(dirname(__DIR__));
+    if (!$dir || !$webRoot || $dir === $webRoot || str_starts_with($dir, $webRoot . DIRECTORY_SEPARATOR)) throw new RuntimeException('Private storage cannot be inside the web root');
+    return $dir;
+}
+function room_db(): SQLite3 {
+    static $db;
+    if ($db) return $db;
+    umask(0077);
+    $db = new SQLite3(room_private_dir() . '/calendar.sqlite');
+    $db->enableExceptions(true);
+    $db->busyTimeout(5000);
+    $db->exec('PRAGMA foreign_keys = ON');
+    $db->exec('CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, payload TEXT NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS owner (id INTEGER PRIMARY KEY CHECK(id=1), email TEXT NOT NULL, password_hash TEXT NOT NULL, version TEXT NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS attempts (bucket TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, event_id TEXT NOT NULL, created INTEGER NOT NULL)');
+    $db->exec('BEGIN IMMEDIATE');
+    try {
+        if (!$db->querySingle("SELECT value FROM meta WHERE key='seeded'")) {
+            $seed = json_decode(file_get_contents(dirname(__DIR__) . '/content/events-seed.json'), true, 512, JSON_THROW_ON_ERROR);
+            foreach ($seed['events'] as $event) {
+                $statement = $db->prepare('INSERT INTO events(id,payload) VALUES(:id,:payload)');
+                $statement->bindValue(':id', $event['id']);
+                $statement->bindValue(':payload', json_encode($event, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+                $statement->execute();
+            }
+            $db->exec("INSERT INTO meta(key,value) VALUES('seeded','1')");
+        }
+        $db->exec('COMMIT');
+    } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
+    return $db;
+}
+function room_session(): void {
+    if (session_status() === PHP_SESSION_ACTIVE) return;
+    $dir = room_private_dir() . '/sessions';
+    if (!is_dir($dir)) mkdir($dir, 0700, true);
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+    ini_set('session.gc_maxlifetime', '43200');
+    session_save_path($dir);
+    session_name('room_owner');
+    session_set_cookie_params(['lifetime' => 0, 'path' => '/api/', 'secure' => !room_local(), 'httponly' => true, 'samesite' => 'Strict']);
+    session_start();
+    if (isset($_SESSION['expires']) && $_SESSION['expires'] < time()) $_SESSION = [];
+    $_SESSION['csrf'] ??= bin2hex(random_bytes(32));
+}
+function room_owner(): ?array {
+    $row = room_db()->querySingle('SELECT email,version FROM owner WHERE id=1', true);
+    return $row ?: null;
+}
+function room_authenticated(): bool {
+    room_session();
+    $owner = room_owner();
+    return $owner && isset($_SESSION['owner_version'], $_SESSION['expires'])
+        && hash_equals($owner['version'], $_SESSION['owner_version']) && $_SESSION['expires'] >= time();
+}
+function room_require_owner(): void {
+    if (!room_authenticated()) room_json(401, ['error' => 'Lūdzu, ielogojies vēlreiz.']);
+}
+function room_input(): array {
+    if (($_SERVER['HTTP_ORIGIN'] ?? '') !== room_origin()
+        || ($_SERVER['HTTP_X_ROOM_ADMIN'] ?? '') !== '1'
+        || strtolower(trim(explode(';', $_SERVER['CONTENT_TYPE'] ?? '')[0])) !== 'application/json') room_json(403, ['error' => 'Pārlādē lapu un mēģini vēlreiz.']);
+    room_session();
+    if (!hash_equals($_SESSION['csrf'], $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '')) room_json(403, ['error' => 'Sesija ir mainījusies. Pārlādē lapu.']);
+    $raw = file_get_contents('php://input', false, null, 0, 16001);
+    if (strlen($raw) > 16000) room_json(413, ['error' => 'Ievadītais teksts ir pārāk garš.']);
+    try { $input = json_decode($raw, true, 32, JSON_THROW_ON_ERROR); }
+    catch (JsonException) { room_json(400, ['error' => 'Neizdevās nolasīt ievadīto informāciju.']); }
+    if (!is_array($input) || array_is_list($input)) room_json(400, ['error' => 'Pārbaudi ievadīto informāciju.']);
+    return $input;
+}
+function room_rate_limit(string $purpose): void {
+    $db = room_db();
+    $buckets = [$purpose . ':global' => 60, $purpose . ':' . hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown') => 8];
+    $now = time();
+    $db->exec('BEGIN IMMEDIATE');
+    try {
+        $db->exec('DELETE FROM attempts WHERE expires < ' . $now);
+        foreach ($buckets as $bucket => $limit) {
+            $statement = $db->prepare('SELECT count FROM attempts WHERE bucket=:bucket');
+            $statement->bindValue(':bucket', $bucket);
+            $row = $statement->execute()->fetchArray(SQLITE3_ASSOC);
+            if ($row && $row['count'] >= $limit) {
+                $db->exec('ROLLBACK'); header('Retry-After: 900');
+                room_json(429, ['error' => 'Pārāk daudz mēģinājumu. Mēģini vēlreiz pēc 15 minūtēm.']);
+            }
+        }
+        foreach ($buckets as $bucket => $limit) {
+            $statement = $db->prepare('INSERT INTO attempts(bucket,count,expires) VALUES(:bucket,1,:expires) ON CONFLICT(bucket) DO UPDATE SET count=count+1');
+            $statement->bindValue(':bucket', $bucket); $statement->bindValue(':expires', $now + 900, SQLITE3_INTEGER); $statement->execute();
+        }
+        $db->exec('COMMIT');
+    } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
+}
+function room_start_login(array $owner): void {
+    session_regenerate_id(true);
+    $_SESSION = ['csrf' => bin2hex(random_bytes(32)), 'owner_version' => $owner['version'], 'expires' => time() + 43200];
+}
+function room_bootstrap(): ?array {
+    $path = room_private_dir() . '/bootstrap.json';
+    if (!is_file($path)) return null;
+    $data = json_decode(file_get_contents($path), true, 16, JSON_THROW_ON_ERROR);
+    return isset($data['tokenHash'], $data['expires']) && $data['expires'] > time() ? $data : null;
+}
+function room_valid_date(mixed $value): bool {
+    if (!is_string($value) || !preg_match('/^\d{4}-\d{2}-\d{2}$/D', $value)) return false;
+    [$year,$month,$day] = array_map('intval', explode('-', $value));
+    return checkdate($month,$day,$year);
+}
+function room_length(string $value): int { return preg_match_all('/./us', $value); }
+function room_matches(array $event, string $date): bool {
+    if (isset($event['date'])) return $event['date'] === $date;
+    return in_array((int)date('w', strtotime($date . ' 12:00:00')), $event['weekdays'] ?? [], true)
+        && (!isset($event['start']) || $date >= $event['start']) && (!isset($event['end']) || $date <= $event['end']);
+}
+function room_validate_event(array $input): array {
+    $errors = [];
+    if (!is_string($input['title'] ?? null) || trim($input['title']) === '' || room_length(trim($input['title'])) > 160) $errors['title'] = 'Ievadi pasākuma nosaukumu līdz 160 rakstzīmēm.';
+    if (!room_valid_date($input['date'] ?? null) || $input['date'] < date('Y-m-d') || $input['date'] > date('Y-m-d', strtotime('+730 days'))) $errors['date'] = 'Izvēlies datumu no šodienas līdz diviem gadiem uz priekšu.';
+    foreach (['startTime' => 'sākuma', 'endTime' => 'beigu'] as $field => $word) {
+        if (!is_string($input[$field] ?? null) || !preg_match('/^([01]\d|2[0-3]):[0-5]\d$/D', $input[$field])) $errors[$field] = 'Norādi ' . $word . ' laiku.';
+    }
+    if (!isset($errors['startTime']) && !isset($errors['endTime']) && $input['endTime'] <= $input['startTime']) $errors['endTime'] = 'Beigu laikam jābūt vēlāk par sākumu.';
+    if (($input['date'] ?? '') === date('Y-m-d') && !isset($errors['startTime']) && $input['startTime'] <= date('H:i')) $errors['startTime'] = 'Izvēlies laiku, kas vēl nav pagājis.';
+    if (isset($input['description']) && (!is_string($input['description']) || room_length($input['description']) > 2000)) $errors['description'] = 'Apraksts var būt līdz 2000 rakstzīmēm.';
+    if (!is_bool($input['weekly'] ?? null)) $errors['weekly'] = 'Pārbaudi atkārtošanas izvēli.';
+    return $errors;
+}
+function room_save_event(SQLite3 $db, array $event): void {
+    $statement = $db->prepare('INSERT INTO events(id,payload) VALUES(:id,:payload) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload');
+    $statement->bindValue(':id', $event['id']);
+    $statement->bindValue(':payload', json_encode($event, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    $statement->execute();
+}

@@ -1,10 +1,12 @@
 import { rigaClock, addDays, validDate, validateEvent, occurrences } from './event-model.mjs';
+import { initializeAuth, request } from './admin-auth.mjs';
 
 const $ = selector => document.querySelector(selector);
 const form = $('#event-form');
 const list = $('#event-list');
 const dialog = $('#cancel-dialog');
 let events = [], cancelled = false, limit = 6, pending = null, busy = false, loaded = false, toastTimer, refreshing = false;
+let createRequestId = crypto.randomUUID();
 const icons = {
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   repeat: '<path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4m14-1v3a2 2 0 0 1-2 2H3"/>',
@@ -72,14 +74,10 @@ function render() {
   $('#load-more').hidden = rows.length <= limit;
 }
 async function api(url = '/api/events', options = {}) {
-  const response = await fetch(url, {...options, cache:'no-store', headers:{'Content-Type':'application/json','X-Room-Admin':'1', ...options.headers}, signal:AbortSignal.timeout(12000)});
-  let result;
-  try { result = await response.json(); } catch { throw new Error('Administrācija nav savienota. Pārbaudi, vai lokālais serveris darbojas.'); }
-  if (!response.ok) { const error = new Error(result.error || 'Neizdevās saglabāt. Mēģini vēlreiz.'); error.fields = result.fields; throw error; }
-  return result;
+  return request(url, options);
 }
 async function refresh() {
-  if (busy || refreshing || dialog.open) return;
+  if (busy || refreshing || dialog.open || $('#main').hidden) return;
   refreshing = true;
   try {
     const data = await api();
@@ -130,6 +128,7 @@ function updateRepeat() {
   $('#repeat-hint').textContent = validDate(date) ? `Reizi nedēļā no ${dateLabel(date)}. Atsevišķus datumus varēsi atcelt.` : 'Pasākums atkārtosies izvēlētajā nedēļas dienā.';
 }
 form.addEventListener('input', event => {
+  createRequestId = crypto.randomUUID();
   const field = event.target;
   field.removeAttribute('aria-invalid');
   const hint = $('#error-' + field.name); if (hint) hint.hidden = true;
@@ -145,7 +144,8 @@ form.addEventListener('submit', async event => {
   if (Object.keys(errors).length) { showErrors(errors); return; }
   clearErrors(); setBusy(true);
   try {
-    const result = await api('/api/events', {method:'POST', body:JSON.stringify(input)});
+    const result = await api('/api/events', {method:'POST', headers:{'Idempotency-Key':createRequestId}, body:JSON.stringify(input)});
+    createRequestId = crypto.randomUUID();
     cancelled = false; limit = 6;
     updateEvent(result.event); form.reset(); updateRepeat();
     notify('Pasākums publicēts un redzams mājaslapā.');
@@ -202,4 +202,4 @@ window.addEventListener('focus', refresh);
 window.addEventListener('storage', event => { if (event.key === 'room-events-updated') refresh(); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
 setInterval(() => { if (!document.hidden) refresh(); }, 15000);
-refresh();
+initializeAuth(refresh);

@@ -62,7 +62,7 @@ Video posters, the optimized hero video, font language subsets and different ico
 
 `main` contains the approved version; `updates` is the working branch. The previous main version is preserved in `backup/main-before-updates-2026-09-11`.
 
-The repository root remains ready for the existing static host. Publish the generated route directories, `assets/`, `calendar-events.js`, `favicon.ico`, `robots.txt`, `sitemap.xml` and `.htaccess`. Source files, tests, documentation, local design concepts and `.git/` are not public website assets.
+Hostinger deploys the repository root to `public_html`. The generated pages remain static; the event administration uses PHP 8.3 with the built-in SQLite3 extension. Deploy `admin/`, `api/`, `server/`, `content/events-seed.json` and their `.htaccess` files alongside the public assets. The root `.htaccess` blocks web access to private source directories and hidden files. No Node.js server is needed on Hostinger.
 
 A Git push and a hosting deployment are separate operations. The private Sites preview uses its own checkout and publishing process.
 
@@ -76,15 +76,30 @@ Pricing uses `assets/js/booking-core.js`. Memberships have a three-month minimum
 
 Google reviews in `content/reviews.mjs` are a manual snapshot. Refresh the rating, count and quotations together after checking the business profile. No self-serving review rating schema is emitted.
 
-## Local event administration
+## Event administration
 
-Run `npm run dev` and open `http://127.0.0.1:4174/admin/`. The Latvian interface adds one-time or weekly events, cancels one occurrence or all occurrences from a chosen date, and restores cancelled events. It validates dates and times in Europe/Riga. New event copy is entered in Latvian and is displayed as a Latvian fallback on the English and Russian pages.
+Open `/admin/`. The Latvian interface adds one-time or weekly events, cancels one date or all dates from a chosen date, and restores cancelled events. Dates and times use Europe/Riga. New Latvian copy is also the fallback on English and Russian pages.
 
-Changes are saved on the server in `../roomjurmala-data/events.json`, outside the served website directory. The first run imports the existing schedule from `content/events-seed.json`. Later runs retain saved changes. `ROOM_EVENTS_FILE` can select another private file outside the web root. Back up that file before moving the project. Use one server process per store. This file store is intended for the local version, not concurrent multi-instance hosting.
+The public calendar loads `/api/events` and refreshes every 15 seconds while visible and on tab focus. Successful responses replace the embedded schedule, including an empty schedule. Connection failures retain the last loaded schedule. Adding or cancelling events needs no Git push or website deployment.
 
-The public calendar refreshes every 15 seconds while visible, on tab focus, and immediately after a change in another tab on the same origin. A successful API result replaces the embedded events even when the list is empty. A connection failure retains the last loaded schedule. Static hosting without this API continues to show the original embedded schedule and cannot save admin changes.
+### Hostinger activation
 
-This is a working **local preview**, not a publicly deployed admin system. The server binds only to `127.0.0.1`, checks Host and Origin, and requires a custom header for mutations. There is no owner login yet. Before public use, connect an authenticated backend with persistent storage, HTTPS, backups, and authenticated write endpoints. Uploading the static files alone does not make the admin functional. Do not expose this development server through a tunnel or reverse proxy.
+1. Deploy `main` to the existing `roomjurmala.lv` site with PHP 8.3 and SQLite3 enabled.
+2. From this repository, run `node scripts/prepare-admin.mjs ../room-admin-activation`. This creates a one-time activation link and its hash outside Git. The link expires after 48 hours.
+3. In Hostinger File Manager, create `.roomjurmala-admin` beside `public_html`, then upload **only** `bootstrap.json` into it. Never put activation material inside `public_html` or Git. If the API has already been opened, the directory may already exist.
+4. Privately open the link from `activation.txt`. The owner enters her email and a password of at least 12 characters. She can then use `https://roomjurmala.lv/admin/`. The email is a login name; this version sends no email.
+5. After activation, securely remove the local activation files. The bootstrap token cannot create another owner once activation succeeds.
 
-`npm test` covers persistence, concurrent writes in one process, one-off and weekly cancellation, restoration, validation, API origin checks, private-file access, and public-calendar filtering. `npm run check` validates the existing public website.
+Events, password hash and rate limits live in `.roomjurmala-admin/calendar.sqlite`; session files live in its `sessions/` subdirectory. The directory is outside `public_html`, so Git deployments do not replace it. The database imports `content/events-seed.json` only once. Existing local preview events are not automatically copied to production. Back up this private directory through hosting backups and verify that it is included before relying on those backups.
 
+Authentication uses HTTPS, HttpOnly/SameSite cookies, CSRF tokens, bounded sessions and login rate limits. Event writes require the owner session. A failed setup remains closed until a valid bootstrap file and token are supplied. Password recovery currently requires the hosting administrator; there is no email reset flow. To reset access, back up the database, delete only its singleton `owner` row using a trusted SQLite administration tool, and repeat activation with a fresh token. Keep the event tables intact. Removing the owner invalidates existing sessions.
+
+`ROOM_DATA_DIR` can override the private directory and `ROOM_ORIGIN` can override the canonical HTTPS origin. The default is `https://roomjurmala.lv`. Private storage must stay outside the served directory and be writable by PHP.
+
+### Local preview and verification
+
+`npm run dev` exposes an unauthenticated preview only on `127.0.0.1:4174/admin/`. Its JSON store is `../roomjurmala-data/events.json`; `ROOM_EVENTS_FILE` can select another private file. Do not expose this Node development server through a tunnel or reverse proxy.
+
+To test the production PHP backend locally, use PHP 8.3 with SQLite3, set `ROOM_ORIGIN=http://127.0.0.1:4176` and `ROOM_DATA_DIR` to a private directory outside this repository, then run `php -S 127.0.0.1:4176 scripts/php-router.php`.
+
+`npm test` covers event persistence, cancellation, restoration, validation and public-calendar filtering. With PHP available, it also runs real HTTP tests for owner activation, login/logout, origin and CSRF checks, idempotent creation and rate limiting. Set `PHP_BINARY` to the PHP executable when it is not on PATH. `npm run check` validates the public website and admin asset references.
