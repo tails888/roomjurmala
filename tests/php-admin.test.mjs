@@ -45,8 +45,9 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
     assert.equal((await call('/api/events','POST',eventInput,{Origin:'https://example.com'})).status,403);
     assert.equal((await call('/api/events','POST',eventInput,{'X-CSRF-Token':''})).status,403);
   });
-  const password=randomBytes(18).toString('hex');
+  const password=randomBytes(4).toString('hex');
   await t.test('owner setup is single-use and rotates the session',async()=>{
+    assert.equal((await call('/api/setup','POST',{token,email:'owner@example.com',password:'1234567'})).status,400);
     const oldCookie=owner.cookie;
     const result=await call('/api/setup','POST',{token,email:'owner@example.com',password}); assert.equal(result.status,201);assert.notEqual(owner.cookie,oldCookie);
     assert.equal((await call('/api/setup','POST',{token,email:'other@example.com',password})).status,403);

@@ -47,7 +47,7 @@ if ($method === 'POST' && $path === '/api/setup') {
     $password = is_string($input['password'] ?? null) ? $input['password'] : '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) room_json(400, ['error' => 'Ievadi derīgu e-pasta adresi.']);
     if (isset($invitation['email']) && $email !== strtolower($invitation['email'])) room_json(403, ['error' => 'Šī saite paredzēta citai e-pasta adresei.']);
-    if (room_length($password) < 12 || strlen($password) > 72) room_json(400, ['error' => 'Izvēlies vismaz 12 rakstzīmju garu paroli. Ļoti gara parole jāsaīsina.']);
+    if (room_length($password) < 8 || strlen($password) > 72) room_json(400, ['error' => 'Izvēlies vismaz 8 rakstzīmju garu paroli. Ļoti gara parole jāsaīsina.']);
     $db = room_db(); $db->exec('BEGIN IMMEDIATE');
     try {
         if (!room_invitation($input['token'])) { $db->exec('ROLLBACK'); room_json(409, ['error' => 'Šī piekļuve jau ir aktivizēta.']); }

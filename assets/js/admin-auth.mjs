@@ -61,7 +61,7 @@ export async function initializeAuth(callback) {
       $('#login-submit').textContent = 'Izveidot piekļuvi';
       $('#login-password').autocomplete = 'new-password';
       $('#login-password').value = '';
-      $('#password-help').hidden = false; $('#login-password').minLength = 12;
+      $('#password-help').hidden = false; $('#login-password').minLength = 8;
       $('#login-email').value = activation.email || '';
       $('#login-email').readOnly = Boolean(activation.email);
     } else if (session.authenticated) { await signedIn(Boolean(session.local)); return; }
