@@ -1,7 +1,7 @@
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { validateEvent, validDate, occursOn, rigaClock } from '../assets/js/event-model.mjs';
+import { validateEvent, validDate, occursOn, rigaClock, isArchived, changeArchive } from '../assets/js/event-model.mjs';
 
 export class EventError extends Error {
   constructor(message, status = 400, fields) { super(message); this.status = status; this.fields = fields; }
@@ -49,12 +49,41 @@ export async function openEventStore(file, seedFile) {
         return event;
       });
     },
+    cancelAll(input, now = rigaClock()) {
+      if (input?.confirm !== true) throw new EventError('Apstiprini, ka vēlies atcelt visus pasākumus.');
+      return update(next => {
+        let changed = 0;
+        for (const event of next.events) {
+          if (event.status === 'cancelled') continue;
+          if (event.date) {
+            if (event.date < now.date) continue;
+            event.status = 'cancelled';
+          } else if (event.weekdays) {
+            if ((event.end && event.end < now.date) || (event.cancelledFrom && event.cancelledFrom <= now.date)) continue;
+            event.cancelledFrom = now.date;
+          } else continue;
+          event.updatedAt = new Date().toISOString(); changed++;
+        }
+        return {events:structuredClone(next.events), changed};
+      });
+    },
+    archive(id,input) {
+      return update(next=>{
+        const index=next.events.findIndex(e=>e.id===id);
+        if (index<0) throw new EventError('Pasākums nav atrasts.',404);
+        let event;
+        try { event=changeArchive(next.events[index],input); } catch (error) { throw new EventError(error.message); }
+        if (!event) next.events.splice(index,1);
+        return {event,id};
+      });
+    },
     change(id, input, now = rigaClock()) {
       return update(next => {
         const event = next.events.find(e => e.id === id);
         if (!event) throw new EventError('Šis pasākums vairs nav pieejams.', 404);
         if (!input || !['cancel', 'restore'].includes(input.action) || !['one', 'series'].includes(input.scope)
           || !validDate(input.date) || !occursOn(event, input.date)) throw new EventError('Nederīga pasākuma izvēle.');
+        if (isArchived(event,input.date) || event.deletedDates?.includes(input.date) || (input.action==='restore' && input.scope==='series' && event.archivedFrom)) throw new EventError('Vispirms atgriez pasākumu no arhīva.');
         if (input.date < now.date) throw new EventError('Pagājušu pasākumu nevar mainīt.');
         if (input.scope === 'series' && !event.weekdays) throw new EventError('Šis pasākums neatkārtojas.');
         if (input.action === 'cancel') {

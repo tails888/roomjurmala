@@ -37,8 +37,10 @@ export async function createLocalServer({ root = process.cwd(), dataFile = proce
       }
       let input;
       try { input = JSON.parse(body); } catch { throw new EventError('Neizdevās nolasīt ievadīto informāciju.'); }
+      if (req.method === 'POST' && requestPath === '/api/events/cancel-all') return json(res, 200, await store.cancelAll(input));
       if (req.method === 'POST' && requestPath === '/api/events') return json(res, 201, {event:await store.create(input)});
       const match = requestPath.match(/^\/api\/events\/([a-zA-Z0-9-]+)$/);
+      if (req.method === 'PATCH' && match && ['archive','unarchive','delete'].includes(input?.action)) return json(res,200,await store.archive(match[1],input));
       if (req.method === 'PATCH' && match) return json(res, 200, {event:await store.change(match[1], input)});
       return json(res, 404, {error:'Darbība nav atrasta.'});
     } catch (error) {

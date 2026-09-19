@@ -38,6 +38,7 @@
         <div class="filters" role="group" aria-label="Parādīt pasākumus">
           <button type="button" class="filter" id="upcoming-filter" aria-pressed="true">Tuvākie</button>
           <button type="button" class="filter" id="cancelled-filter" aria-pressed="false">Atceltie</button>
+          <button type="button" class="filter" id="archive-filter" aria-pressed="false">Arhīvs</button>
         </div>
         <div id="list-error" class="notice error" role="alert" hidden><p>Neizdevās ielādēt pasākumus. Pārbaudi savienojumu.</p><button id="retry" type="button">Mēģināt vēlreiz</button></div>
         <div id="event-list" aria-busy="true"><p class="loading">Ielādē pasākumus…</p></div>
@@ -62,10 +63,33 @@
         </form>
       </section>
     </div>
+    <section class="bulk-cancel" aria-labelledby="bulk-title">
+      <div><h2 id="bulk-title">Atcelt visus pasākumus</h2><p>Atcel visus šodienas un turpmākos pasākumus, arī visas regulārās nodarbības. Atceltos pasākumus varēsi atjaunot sadaļā “Atceltie”.</p></div>
+      <button class="button secondary" type="button" id="cancel-all" disabled>Atcelt visus pasākumus</button>
+    </section>
     <footer class="admin-footer">Laiki pēc Latvijas laika.<span id="account-email" hidden></span><span id="local-notice" hidden>Lokālā izmēģinājuma versija</span></footer>
     <noscript><p>Lai pievienotu un atceltu pasākumus, ieslēdz JavaScript pārlūkā.</p></noscript>
   </main>
   <div class="toast" id="toast" role="status" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span></span><button type="button" id="close-toast" aria-label="Aizvērt paziņojumu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+  <dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-summary">
+    <div class="dialog-content">
+      <h2 id="delete-title">Dzēst neatgriezeniski?</h2>
+      <p id="delete-summary"></p>
+      <p>Šo darbību nevarēs atsaukt. Pasākumu vairs nevarēs atjaunot.</p>
+      <label class="repeat-option bulk-confirm"><input id="delete-check" type="checkbox"><span>Saprotu, ka dzēšana ir neatgriezeniska.</span></label>
+      <p class="notice error" id="delete-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" id="keep-archive" autofocus>Paturēt arhīvā</button><button class="button danger" type="button" id="confirm-delete" disabled>Dzēst neatgriezeniski</button></div>
+    </div>
+  </dialog>
+  <dialog id="cancel-all-dialog" aria-labelledby="cancel-all-title" aria-describedby="cancel-all-summary">
+    <div class="dialog-content">
+      <h2 id="cancel-all-title">Atcelt pilnīgi visus pasākumus?</h2>
+      <p id="cancel-all-summary">No kalendāra pazudīs visi šodienas un turpmākie pasākumi, tostarp visi atkārtojumi. Iepriekšējo dienu pasākumi paliks nemainīti.</p>
+      <label class="repeat-option bulk-confirm"><input id="cancel-all-check" type="checkbox"><span>Jā, vēlos atcelt visus pasākumus.</span></label>
+      <p class="notice error" id="cancel-all-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" id="keep-all" autofocus>Paturēt pasākumus</button><button class="button danger" type="button" id="confirm-cancel-all" disabled>Atcelt visus</button></div>
+    </div>
+  </dialog>
   <dialog id="cancel-dialog" aria-labelledby="cancel-title" aria-describedby="cancel-summary">
     <div class="dialog-content">
       <h2 id="cancel-title">Atcelt pasākumu?</h2>

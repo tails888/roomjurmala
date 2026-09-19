@@ -33,7 +33,7 @@ export function occurrences(events, from, to, cancelled = false, time = '') {
   const rows = [];
   for (let date = from; date <= to; date = addDays(date, 1)) {
     for (const event of events) {
-      if (occursOn(event, date) && isCancelled(event, date) === cancelled
+      if (!isArchived(event,date) && !event.deletedDates?.includes(date) && occursOn(event, date) && isCancelled(event, date) === cancelled
         && (date > from || event.time.split('-')[1] > time)) rows.push({ event, date });
     }
   }
@@ -53,4 +53,49 @@ export function validateEvent(input, now = rigaClock()) {
   if (input.description !== undefined && (typeof input.description !== 'string' || input.description.length > 2000)) errors.description = 'Apraksts var būt līdz 2000 rakstzīmēm.';
   if (typeof input.weekly !== 'boolean') errors.weekly = 'Pārbaudi atkārtošanas izvēli.';
   return errors;
+}
+
+export function isArchived(event,date) {
+  return event.archived === true || Boolean(event.archivedFrom && date >= event.archivedFrom) || Boolean(event.archivedDates?.includes(date));
+}
+export function archivedEntries(events) {
+  return events.flatMap(event => event.date ? (event.archived ? [{event,date:event.date,series:false}] : []) : [
+    ...(event.archivedDates || []).map(date=>({event,date,series:false})),
+    ...(event.archivedFrom ? [{event,date:event.archivedFrom,series:true}] : [])
+  ]).sort((a,b)=>b.date.localeCompare(a.date));
+}
+export function changeArchive(event,input) {
+  const {action,date,scope}=input || {};
+  if (!['archive','unarchive','delete'].includes(action) || !validDate(date) || !['one','series'].includes(scope)) throw new Error('Nederīga arhīva darbība.');
+  const series=scope==='series';
+  if (series ? !event.weekdays : !occursOn(event,date)) throw new Error('Pasākums nav atrasts.');
+  if (action==='archive') {
+    if (series ? !event.cancelledFrom : !isCancelled(event,date) || event.deletedDates?.includes(date)) throw new Error('Arhivēt var tikai atceltu pasākumu.');
+    if (series) event.archivedFrom=event.cancelledFrom;
+    else if (event.date) event.archived=true;
+    else {
+      if (event.cancelledFrom && date>=event.cancelledFrom) throw new Error('Arhivē visu atcelto sēriju.');
+      event.archivedDates=[...new Set([...(event.archivedDates || []),date])];
+    }
+  } else {
+    if (series ? event.archivedFrom!==date : event.date ? !event.archived : !event.archivedDates?.includes(date)) throw new Error('Pasākums nav arhīvā.');
+    if (action==='delete' && input.confirm!==true) throw new Error('Apstiprini neatgriezenisku dzēšanu.');
+    if (action==='delete' && event.date) return null;
+    if (series) {
+      if (action==='delete') {
+        const end=addDays(event.archivedFrom,-1);
+        if (event.start && event.start>end) return null;
+        event.end=event.end && event.end<end ? event.end : end;
+        delete event.cancelledFrom;
+        for (const field of ['exclusions','archivedDates','deletedDates']) event[field]=(event[field] || []).filter(d=>d<=event.end);
+      }
+      delete event.archivedFrom;
+    } else if (event.date) delete event.archived;
+    else {
+      event.archivedDates=(event.archivedDates || []).filter(d=>d!==date);
+      if (action==='delete') event.deletedDates=[...new Set([...(event.deletedDates || []),date])];
+    }
+  }
+  event.updatedAt=new Date().toISOString();
+  return event;
 }

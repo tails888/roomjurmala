@@ -82,6 +82,10 @@ Open `/admin/`. The Latvian interface adds one-time or weekly events, cancels on
 
 The public calendar loads `/api/events` and refreshes every 15 seconds while visible and on tab focus. Successful responses replace the embedded schedule, including an empty schedule. Connection failures retain the last loaded schedule. Adding or cancelling events needs no Git push or website deployment.
 
+The “Atcelt visus pasākumus” section cancels every event from today onward, including all recurring series, after a checkbox and confirmation. The server applies the changes atomically. Earlier dates remain intact, and individual events or series can be restored from “Atceltie”.
+
+Cancelled entries can be moved to “Arhīvs”, returned to “Atceltie”, or permanently deleted from the archive after explicit confirmation. Archiving a single recurring date leaves other dates active; archiving a cancelled series moves its cancelled tail. Permanent deletion of a recurring date retains only an exclusion so it cannot reappear; deleting a series tail truncates the series and preserves earlier history. Archived entries remain visible in the archive after their date passes.
+
 ### Hostinger activation
 
 The panel supports two independent administrator accounts with equal calendar permissions. Each person uses their own email, password and session. Both see and manage the same events. Logging out on one person's device does not sign out the other person.

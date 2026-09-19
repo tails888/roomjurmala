@@ -198,3 +198,42 @@ function room_save_event(SQLite3 $db, array $event): void {
     $statement->bindValue(':payload', json_encode($event, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
     $statement->execute();
 }
+
+function room_archived(array $event,string $date): bool {
+    return ($event['archived'] ?? false) === true || (isset($event['archivedFrom']) && $date >= $event['archivedFrom']) || in_array($date,$event['archivedDates'] ?? [],true);
+}
+function room_archive_change(array $event,array $input): ?array {
+    $action=$input['action'] ?? null; $date=$input['date'] ?? null; $scope=$input['scope'] ?? null;
+    if (!room_valid_date($date) || !in_array($scope,['one','series'],true)) throw new InvalidArgumentException('Nederīga arhīva darbība.');
+    $series=$scope==='series';
+    if ($series ? !isset($event['weekdays']) : !room_matches($event,$date)) throw new InvalidArgumentException('Pasākums nav atrasts.');
+    $cancelled=($event['status'] ?? '')==='cancelled' || (isset($event['cancelledFrom']) && $date >= $event['cancelledFrom']) || in_array($date,$event['exclusions'] ?? [],true);
+    if ($action==='archive') {
+        if ($series ? !isset($event['cancelledFrom']) : !$cancelled || in_array($date,$event['deletedDates'] ?? [],true)) throw new InvalidArgumentException('Arhivēt var tikai atceltu pasākumu.');
+        if ($series) $event['archivedFrom']=$event['cancelledFrom'];
+        elseif (isset($event['date'])) $event['archived']=true;
+        else {
+            if (isset($event['cancelledFrom']) && $date >= $event['cancelledFrom']) throw new InvalidArgumentException('Arhivē visu atcelto sēriju.');
+            $event['archivedDates']=array_values(array_unique([...($event['archivedDates'] ?? []),$date]));
+        }
+    } else {
+        $exists=$series ? ($event['archivedFrom'] ?? null)===$date : (isset($event['date']) ? ($event['archived'] ?? false) : in_array($date,$event['archivedDates'] ?? [],true));
+        if (!$exists) throw new InvalidArgumentException('Pasākums nav arhīvā.');
+        if ($action==='delete' && ($input['confirm'] ?? null)!==true) throw new InvalidArgumentException('Apstiprini neatgriezenisku dzēšanu.');
+        if ($action==='delete' && isset($event['date'])) return null;
+        if ($series) {
+            if ($action==='delete') {
+                $end=date('Y-m-d',strtotime($event['archivedFrom'].' -1 day'));
+                if (isset($event['start']) && $event['start']>$end) return null;
+                $event['end']=min($event['end'] ?? $end,$end); unset($event['cancelledFrom']);
+                foreach (['exclusions','archivedDates','deletedDates'] as $field) $event[$field]=array_values(array_filter($event[$field] ?? [],fn($d)=>$d<=$event['end']));
+            }
+            unset($event['archivedFrom']);
+        } elseif (isset($event['date'])) unset($event['archived']);
+        else {
+            $event['archivedDates']=array_values(array_filter($event['archivedDates'] ?? [],fn($d)=>$d!==$date));
+            if ($action==='delete') $event['deletedDates']=array_values(array_unique([...($event['deletedDates'] ?? []),$date]));
+        }
+    }
+    $event['updatedAt']=gmdate('c'); return $event;
+}

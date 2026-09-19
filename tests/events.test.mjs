@@ -6,7 +6,7 @@ import vm from 'node:vm';
 import http from 'node:http';
 import { openEventStore } from '../scripts/event-store.mjs';
 import { createLocalServer } from '../scripts/serve.mjs';
-import { rigaClock, addDays, validateEvent, occurrences } from '../assets/js/event-model.mjs';
+import { rigaClock, addDays, validateEvent, occurrences, archivedEntries } from '../assets/js/event-model.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const now = {date:'2026-09-19', time:'13:00'};
@@ -102,4 +102,46 @@ test('public calendar respects API cancellations and retains Latvian text as lan
     {date:'2026-09-21',time:'18:00-19:00',title:{lv:'Darbnīca'}});
   assert.equal(calendar.getEventsForDate(2026,8,21).length, 1);
   assert.equal(calendar.resolveLocalized(calendar.getEventsForDate(2026,8,21)[0].title,'en'), 'Darbnīca');
+});
+
+test('bulk cancellation preserves past events, persists and can be restored',async t=>{
+  const {file,store}=await fixture(t);
+  const weekly=await store.create(input,now);
+  const once=await store.create({...input,weekly:false},now);
+  const past=await store.create({...input,date:'2026-09-18',weekly:false},{date:'2026-09-17',time:'12:00'});
+  assert.throws(()=>store.cancelAll({confirm:false},now));
+  const result=await store.cancelAll({confirm:true},now);
+  assert.ok(result.changed>0);
+  assert.equal(occurrences(result.events,now.date,addDays(now.date,730)).length,0);
+  assert.deepEqual(result.events.find(e=>e.id===past.id),past);
+  assert.equal((await store.cancelAll({confirm:true},now)).changed,0);
+  const reopened=await openEventStore(file,path.join(root,'content/events-seed.json'));
+  assert.equal(occurrences(reopened.list(),now.date,addDays(now.date,730)).length,0);
+  await reopened.change(once.id,{action:'restore',scope:'one',date:input.date},now);
+  await reopened.change(weekly.id,{action:'restore',scope:'series',date:input.date},now);
+  assert.equal(occurrences(reopened.list().filter(e=>[once.id,weekly.id].includes(e.id)),input.date,input.date).length,2);
+});
+
+test('archive and permanent deletion isolate one occurrence and retain earlier series history',async t=>{
+  const {store}=await fixture(t);
+  const one=await store.create({...input,weekly:false},now);
+  await assert.rejects(store.archive(one.id,{action:'delete',scope:'one',date:input.date,confirm:true}));
+  await store.change(one.id,{action:'cancel',scope:'one',date:input.date},now);
+  await store.archive(one.id,{action:'archive',scope:'one',date:input.date});
+  assert.equal(archivedEntries(store.list()).length,1);
+  await assert.rejects(store.archive(one.id,{action:'delete',scope:'one',date:input.date}));
+  assert.equal((await store.archive(one.id,{action:'delete',scope:'one',date:input.date,confirm:true})).event,null);
+  const weekly=await store.create(input,now);
+  const command={scope:'one',date:input.date};
+  await store.change(weekly.id,{...command,action:'cancel'},now);
+  await store.archive(weekly.id,{...command,action:'archive'});
+  await store.archive(weekly.id,{...command,action:'delete',confirm:true});
+  await assert.rejects(store.change(weekly.id,{...command,action:'restore'},now));
+  const next=addDays(input.date,7);
+  assert.equal(occurrences(store.list().filter(e=>e.id===weekly.id),next,next).length,1);
+  await store.change(weekly.id,{action:'cancel',scope:'series',date:next},now);
+  await store.archive(weekly.id,{action:'archive',scope:'series',date:next});
+  const result=await store.archive(weekly.id,{action:'delete',scope:'series',date:next,confirm:true});
+  assert.equal(result.event.end,addDays(next,-1));
+  assert.equal(archivedEntries([result.event]).length,0);
 });

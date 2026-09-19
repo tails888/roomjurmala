@@ -1,10 +1,13 @@
-import { rigaClock, addDays, validDate, validateEvent, occurrences } from './event-model.mjs';
+import { rigaClock, addDays, validDate, validateEvent, occurrences, archivedEntries } from './event-model.mjs';
 import { initializeAuth, request } from './admin-auth.mjs';
 
 const $ = selector => document.querySelector(selector);
 const form = $('#event-form');
 const list = $('#event-list');
 const dialog = $('#cancel-dialog');
+const bulkDialog = $('#cancel-all-dialog');
+const deleteDialog = $('#delete-dialog');
+let archived = false, pendingDelete = null;
 let events = [], cancelled = false, limit = 6, pending = null, busy = false, loaded = false, toastTimer, refreshing = false;
 let createRequestId = crypto.randomUUID();
 const icons = {
@@ -37,24 +40,25 @@ function announceChange() {
 }
 function render() {
   const now = rigaClock();
-  const rows = occurrences(events, now.date, addDays(now.date, 730), cancelled, now.time);
+  const rows = archived ? archivedEntries(events) : occurrences(events, now.date, addDays(now.date, 730), cancelled, now.time);
   list.replaceChildren();
   list.setAttribute('aria-busy', 'false');
-  $('#upcoming-filter').setAttribute('aria-pressed', String(!cancelled));
-  $('#cancelled-filter').setAttribute('aria-pressed', String(cancelled));
+  $('#upcoming-filter').setAttribute('aria-pressed', String(!cancelled && !archived));
+  $('#cancelled-filter').setAttribute('aria-pressed', String(cancelled && !archived));
+  $('#archive-filter').setAttribute('aria-pressed',String(archived));
   if (!rows.length) {
     const empty = el('div', 'empty-state');
-    empty.append(icon('calendar'), el('h3', '', cancelled ? 'Nav atceltu pasākumu' : 'Vieta jaunam pasākumam'),
-      el('p', '', cancelled ? 'Šeit būs atceltie pasākumi. Ja pārdomāsi, tos varēsi atjaunot.' : 'Pievieno pirmo pasākumu, un tas parādīsies mājaslapas kalendārā.'));
+    empty.append(icon('calendar'), el('h3', '', archived ? 'Arhīvs ir tukšs' : cancelled ? 'Nav atceltu pasākumu' : 'Vieta jaunam pasākumam'),
+      el('p', '', archived ? 'Arhivētie pasākumi būs šeit. Tos varēs atgriezt pie atceltajiem vai dzēst neatgriezeniski.' : cancelled ? 'Šeit būs atceltie pasākumi. Ja pārdomāsi, tos varēsi atjaunot.' : 'Pievieno pirmo pasākumu, un tas parādīsies mājaslapas kalendārā.'));
     list.append(empty);
   }
   let month = '';
-  for (const {event, date} of rows.slice(0, limit)) {
+  for (const {event, date, series} of rows.slice(0, limit)) {
     if (date.slice(0, 7) !== month) {
       month = date.slice(0, 7);
       list.append(el('h2', 'month-label', dateLabel(date, {month:'long',year:'numeric'})));
     }
-    const row = el('article', 'event-row' + (cancelled ? ' is-cancelled' : ''));
+    const row = el('article', 'event-row' + (cancelled || archived ? ' is-cancelled' : ''));
     row.dataset.eventId = event.id;
     row.dataset.date = date;
     const tile = el('div', 'date-tile'); tile.setAttribute('aria-label', dateLabel(date, {dateStyle:'full'}));
@@ -62,14 +66,22 @@ function render() {
     const body = el('div', 'event-body'); body.append(el('h3', 'event-title', label(event)));
     const meta = el('p', 'event-meta');
     const time = el('span'); time.append(icon('clock'), document.createTextNode(event.time.replaceAll(':', '.').replace('-', '–'))); meta.append(time);
-    if (event.weekdays) { const repeat = el('span'); repeat.append(icon('repeat'), document.createTextNode('Katru nedēļu')); meta.append(repeat); }
+    if (event.weekdays) { const repeat = el('span'); repeat.append(icon('repeat'), document.createTextNode(archived && series ? 'Sērija no šī datuma' : 'Katru nedēļu')); meta.append(repeat); }
     body.append(meta);
-    const wholeSeries = Boolean(event.cancelledFrom && date >= event.cancelledFrom);
-    const action = el('button', 'event-action', cancelled ? (wholeSeries ? 'Atjaunot sēriju' : 'Atjaunot') : 'Atcelt');
+    const wholeSeries = archived ? Boolean(series) : Boolean(event.cancelledFrom && date >= event.cancelledFrom);
+    const action = el('button', 'event-action', archived ? 'Uz atceltajiem' : cancelled ? (wholeSeries ? 'Atjaunot sēriju' : 'Atjaunot') : 'Atcelt');
     action.type = 'button'; action.disabled = busy;
     action.setAttribute('aria-label', `${action.textContent} · ${label(event)} · ${dateLabel(date)}`);
-    action.addEventListener('click', () => cancelled ? restore(event, date, wholeSeries, action) : openCancel(event, date));
-    row.append(tile, body, action); list.append(row);
+    action.addEventListener('click', () => archived ? archiveAction(event,date,wholeSeries,'unarchive') : cancelled ? restore(event, date, wholeSeries, action) : openCancel(event, date));
+    const actions = el('div','event-actions'); actions.append(action);
+    if (cancelled || archived) {
+      const extra = el('button','event-action', archived ? 'Dzēst' : wholeSeries ? 'Arhivēt sēriju' : 'Arhivēt');
+      extra.type='button'; extra.disabled=busy;
+      extra.setAttribute('aria-label',`${extra.textContent} · ${label(event)} · ${dateLabel(date)}`);
+      extra.addEventListener('click',()=>archived ? openDelete(event,date,wholeSeries) : archiveAction(event,date,wholeSeries,'archive'));
+      actions.append(extra);
+    }
+    row.append(tile, body, actions); list.append(row);
   }
   $('#load-more').hidden = rows.length <= limit;
 }
@@ -77,7 +89,7 @@ async function api(url = '/api/events', options = {}) {
   return request(url, options);
 }
 async function refresh() {
-  if (busy || refreshing || dialog.open || $('#main').hidden) return;
+  if (busy || refreshing || dialog.open || bulkDialog.open || deleteDialog.open || $('#main').hidden) return;
   refreshing = true;
   try {
     const data = await api();
@@ -86,7 +98,7 @@ async function refresh() {
     events = data.events;
     $('#list-error').hidden = true;
     if (!loaded || changed) render();
-    loaded = true; $('#publish').disabled = false;
+    loaded = true; $('#publish').disabled = false; $('#cancel-all').disabled = false;
   } catch {
     $('#list-error').hidden = false;
     if (!loaded) { list.replaceChildren(); list.setAttribute('aria-busy','false'); }
@@ -99,6 +111,11 @@ function setBusy(value) {
   $('#confirm-cancel').disabled = value;
   $('#keep-event').disabled = value;
   $('#add-event').disabled = value;
+  $('#cancel-all').disabled = value || !loaded;
+  $('#keep-archive').disabled = value; $('#delete-check').disabled = value;
+  $('#confirm-delete').disabled = value || !$('#delete-check').checked;
+  $('#keep-all').disabled = value; $('#cancel-all-check').disabled = value;
+  $('#confirm-cancel-all').disabled = value || !$('#cancel-all-check').checked;
   document.querySelectorAll('.event-action').forEach(button => { button.disabled = value; });
 }
 function updateEvent(event) {
@@ -146,7 +163,7 @@ form.addEventListener('submit', async event => {
   try {
     const result = await api('/api/events', {method:'POST', headers:{'Idempotency-Key':createRequestId}, body:JSON.stringify(input)});
     createRequestId = crypto.randomUUID();
-    cancelled = false; limit = 6;
+    cancelled = false; archived = false; limit = 6;
     updateEvent(result.event); form.reset(); updateRepeat();
     notify('Pasākums publicēts un redzams mājaslapā.');
   } catch (error) {
@@ -187,8 +204,8 @@ async function restore(event, date, wholeSeries, button) {
 }
 $('#keep-event').addEventListener('click', () => { if (!busy) dialog.close(); });
 dialog.addEventListener('cancel', event => { if (busy) event.preventDefault(); });
-$('#upcoming-filter').addEventListener('click', () => { cancelled = false; limit = 6; render(); });
-$('#cancelled-filter').addEventListener('click', () => { cancelled = true; limit = 6; render(); });
+$('#upcoming-filter').addEventListener('click', () => { cancelled = false; archived = false; limit = 6; render(); });
+$('#cancelled-filter').addEventListener('click', () => { cancelled = true; archived = false; limit = 6; render(); });
 $('#load-more').addEventListener('click', () => { limit += 6; render(); });
 $('#retry').addEventListener('click', refresh);
 $('#close-toast').addEventListener('click', () => { $('#toast').hidden = true; });
@@ -203,3 +220,57 @@ window.addEventListener('storage', event => { if (event.key === 'room-events-upd
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
 setInterval(() => { if (!document.hidden) refresh(); }, 15000);
 initializeAuth(refresh);
+
+$('#cancel-all').addEventListener('click', () => {
+  if (busy || !loaded) return;
+  $('#cancel-all-check').checked = false; $('#confirm-cancel-all').disabled = true;
+  $('#cancel-all-error').hidden = true; bulkDialog.showModal();
+});
+$('#cancel-all-check').addEventListener('change', () => { $('#confirm-cancel-all').disabled = busy || !$('#cancel-all-check').checked; });
+$('#keep-all').addEventListener('click', () => { if (!busy) bulkDialog.close(); });
+bulkDialog.addEventListener('cancel', event => { if (busy) event.preventDefault(); });
+$('#confirm-cancel-all').addEventListener('click', async () => {
+  if (busy || !$('#cancel-all-check').checked) return;
+  setBusy(true);
+  try {
+    const result = await api('/api/events/cancel-all', {method:'POST', body:JSON.stringify({confirm:true})});
+    events = result.events; cancelled = false; archived = false; limit = 6;
+    announceChange(); render(); bulkDialog.close();
+    notify(result.changed ? 'Visi šodienas un turpmākie pasākumi atcelti. Tos var atjaunot sadaļā “Atceltie”.' : 'Visi šodienas un turpmākie pasākumi jau ir atcelti.');
+    $('#cancelled-filter').focus({preventScroll:true});
+  } catch (error) { $('#cancel-all-error').textContent = error.message; $('#cancel-all-error').hidden = false; }
+  finally { setBusy(false); }
+});
+
+$('#archive-filter').addEventListener('click',()=>{ archived=true; cancelled=false; limit=6; render(); });
+async function archiveAction(event,date,series,action) {
+  if (busy) return;
+  setBusy(true);
+  try {
+    const result=await api('/api/events/'+event.id,{method:'PATCH',body:JSON.stringify({action,date,scope:series?'series':'one'})});
+    updateEvent(result.event);
+    notify(action==='archive' ? 'Pasākums pārvietots uz arhīvu.' : 'Pasākums atgriezts sadaļā “Atceltie”.');
+  } catch(error) { notify(error.message); }
+  finally { setBusy(false); }
+}
+function openDelete(event,date,series) {
+  pendingDelete={event,date,series};
+  $('#delete-summary').textContent=`${label(event)} · ${series ? 'Visa arhivētā sērija no ' : ''}${dateLabel(date,{day:'numeric',month:'long',year:'numeric'})}`;
+  $('#delete-check').checked=false; $('#confirm-delete').disabled=true; $('#delete-error').hidden=true;
+  deleteDialog.showModal();
+}
+$('#delete-check').addEventListener('change',()=>{ $('#confirm-delete').disabled=busy || !$('#delete-check').checked; });
+$('#keep-archive').addEventListener('click',()=>{ if (!busy) deleteDialog.close(); });
+deleteDialog.addEventListener('cancel',event=>{ if (busy) event.preventDefault(); });
+$('#confirm-delete').addEventListener('click',async()=>{
+  if (busy || !pendingDelete || !$('#delete-check').checked) return;
+  setBusy(true);
+  const {event,date,series}=pendingDelete;
+  try {
+    const result=await api('/api/events/'+event.id,{method:'PATCH',body:JSON.stringify({action:'delete',date,scope:series?'series':'one',confirm:true})});
+    if (result.event) updateEvent(result.event);
+    else { events=events.filter(e=>e.id!==event.id); announceChange(); render(); }
+    deleteDialog.close(); notify('Pasākums neatgriezeniski izdzēsts.'); $('#archive-filter').focus({preventScroll:true});
+  } catch(error) { $('#delete-error').textContent=error.message; $('#delete-error').hidden=false; }
+  finally { setBusy(false); }
+});

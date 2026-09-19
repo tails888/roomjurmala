@@ -70,6 +70,28 @@ if ($method === 'POST' && $path === '/api/logout') {
     setcookie('room_owner', '', ['expires' => time()-3600, 'path' => '/api/', 'secure' => !room_local(), 'httponly' => true, 'samesite' => 'Strict']);
     room_json(200, ['authenticated' => false]);
 }
+if ($method === 'POST' && $path === '/api/events/cancel-all') {
+    if (($input['confirm'] ?? null) !== true) room_json(400, ['error' => 'Apstiprini, ka vēlies atcelt visus pasākumus.']);
+    $db = room_db(); $db->exec('BEGIN IMMEDIATE');
+    try {
+        $rows = $db->query('SELECT payload FROM events ORDER BY id'); $events = [];
+        while ($row = $rows->fetchArray(SQLITE3_ASSOC)) $events[] = json_decode($row['payload'], true, 512, JSON_THROW_ON_ERROR);
+        $rows->finalize(); $today = date('Y-m-d'); $changed = 0;
+        foreach ($events as &$event) {
+            if (($event['status'] ?? 'active') === 'cancelled') continue;
+            if (isset($event['date'])) {
+                if ($event['date'] < $today) continue;
+                $event['status'] = 'cancelled';
+            } elseif (isset($event['weekdays'])) {
+                if ((isset($event['end']) && $event['end'] < $today) || (isset($event['cancelledFrom']) && $event['cancelledFrom'] <= $today)) continue;
+                $event['cancelledFrom'] = $today;
+            } else continue;
+            $event['updatedAt'] = gmdate('c'); room_save_event($db, $event); $changed++;
+        }
+        unset($event); $db->exec('COMMIT');
+    } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
+    room_json(200, ['events' => $events, 'changed' => $changed]);
+}
 if ($method === 'POST' && $path === '/api/events') {
     $errors = room_validate_event($input);
     if ($errors) room_json(400, ['error' => 'Pārbaudi atzīmētos laukus.', 'fields' => $errors]);
@@ -98,6 +120,19 @@ if ($method === 'PATCH' && preg_match('~^/api/events/([a-zA-Z0-9-]+)$~D', $path,
         if (!$row) { $db->exec('ROLLBACK'); room_json(404, ['error' => 'Pasākums nav atrasts.']); }
         $event = json_decode($row['payload'], true, 512, JSON_THROW_ON_ERROR);
         $date = $input['date'] ?? null; $scope = $input['scope'] ?? null; $action = $input['action'] ?? null;
+        if (in_array($action,['archive','unarchive','delete'],true)) {
+            try { $event = room_archive_change($event,$input); }
+            catch (InvalidArgumentException $error) { $db->exec('ROLLBACK'); room_json(400,['error'=>$error->getMessage()]); }
+            if ($event === null) {
+                foreach (['DELETE FROM events WHERE id=:id','DELETE FROM requests WHERE event_id=:id'] as $sql) {
+                    $statement=$db->prepare($sql); $statement->bindValue(':id',$match[1]); $statement->execute();
+                }
+            } else room_save_event($db,$event);
+            $db->exec('COMMIT'); room_json(200,['event'=>$event,'id'=>$match[1]]);
+        }
+        if (is_string($date) && (room_archived($event,$date) || in_array($date,$event['deletedDates'] ?? [],true) || ($action==='restore' && $scope==='series' && isset($event['archivedFrom'])))) {
+            $db->exec('ROLLBACK'); room_json(400,['error'=>'Vispirms atgriez pasākumu no arhīva.']);
+        }
         if (!room_valid_date($date) || $date < date('Y-m-d') || !room_matches($event,$date) || !in_array($scope,['one','series'],true) || !in_array($action,['cancel','restore'],true) || ($scope === 'series' && !isset($event['weekdays']))) {
             $db->exec('ROLLBACK'); room_json(400, ['error' => 'Nederīga pasākuma izvēle.']);
         }
