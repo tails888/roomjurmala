@@ -24,9 +24,27 @@
       <div class="field"><label for="login-password">Parole</label><input id="login-password" type="password" autocomplete="current-password" required aria-describedby="password-help"><p class="form-help" id="password-help" hidden>Izvēlies vismaz 8 rakstzīmju garu paroli.</p></div>
       <p class="notice error" id="login-error" role="alert" hidden></p>
       <button class="button primary publish-button" id="login-submit" type="submit" disabled>Ielogoties</button>
+      <button class="forgot-password" type="button" id="forgot-password">Aizmirsi paroli?</button>
       <button class="more-button" type="button" id="login-retry" hidden>Mēģināt vēlreiz</button>
     </form>
     <noscript>Lai ielogotos, ieslēdz JavaScript pārlūkā.</noscript>
+  </section>
+  <section class="login-panel editor" id="recovery-panel" aria-labelledby="recovery-title" hidden>
+    <h1 id="recovery-title" tabindex="-1">Aizmirsi paroli?</h1>
+    <p class="editor-intro" id="recovery-intro">Ievadi savu e-pastu. Nosūtīsim saiti jaunas paroles izveidei.</p>
+    <form id="forgot-form">
+      <div class="field"><label for="recovery-email">E-pasts</label><input id="recovery-email" type="email" autocomplete="username" maxlength="254" required></div>
+      <button class="button primary publish-button" id="send-reset" type="submit">Nosūtīt saiti</button>
+    </form>
+    <form id="reset-form" hidden>
+      <div class="field"><label for="new-password">Jaunā parole</label><input id="new-password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="reset-password-help"><p class="form-help" id="reset-password-help">Vismaz 8 rakstzīmes.</p></div>
+      <div class="field"><label for="confirm-password">Atkārto jauno paroli</label><input id="confirm-password" type="password" autocomplete="new-password" minlength="8" required></div>
+      <button class="button primary publish-button" id="save-password" type="submit">Saglabāt jauno paroli</button>
+    </form>
+    <p class="notice error" id="recovery-error" role="alert" hidden></p>
+    <p class="notice success" id="recovery-message" role="status" hidden></p>
+    <button class="forgot-password" type="button" id="request-new-reset" hidden>Pieprasīt jaunu saiti</button>
+    <button class="forgot-password" type="button" id="back-to-login">Atpakaļ uz ielogošanos</button>
   </section>
   <main id="main" hidden>
     <div class="page-heading">

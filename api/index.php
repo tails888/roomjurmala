@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require dirname(__DIR__) . '/server/bootstrap.php';
+require dirname(__DIR__) . '/server/password-reset.php';
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
@@ -28,6 +29,14 @@ if ($method === 'GET' && $path === '/api/events') {
 }
 if (!in_array($method, ['POST','PATCH'], true)) { header('Allow: GET, POST, PATCH'); room_json(405, ['error' => 'Darbība nav pieejama.']); }
 $input = room_input();
+
+if ($method === 'POST' && $path === '/api/password/forgot') room_request_reset($input);
+if ($method === 'POST' && $path === '/api/password/check') {
+    room_rate_limit('password-reset-check');
+    if (!room_reset_lookup($input['token'] ?? null)) room_json(400,['error'=>'Saite vairs nav derīga. Pieprasi jaunu paroles atjaunošanas saiti.']);
+    room_json(200,['valid'=>true]);
+}
+if ($method === 'POST' && $path === '/api/password/reset') room_complete_reset($input);
 
 if ($method === 'POST' && $path === '/api/login') {
     room_rate_limit('login');

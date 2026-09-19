@@ -44,6 +44,8 @@ function room_db(): SQLite3 {
     $db->exec('CREATE TABLE IF NOT EXISTS used_invitations (token_hash TEXT PRIMARY KEY)');
     $db->exec('CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)');
     $db->exec('CREATE TABLE IF NOT EXISTS attempts (bucket TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL)');
+    $db->exec('CREATE TABLE IF NOT EXISTS password_resets (token_hash TEXT PRIMARY KEY, admin_id INTEGER NOT NULL, account_version TEXT NOT NULL, expires INTEGER NOT NULL, created INTEGER NOT NULL)');
+    $db->exec('CREATE INDEX IF NOT EXISTS password_resets_account ON password_resets(admin_id,created)');
     $db->exec('CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, event_id TEXT NOT NULL, created INTEGER NOT NULL)');
     $db->exec('BEGIN IMMEDIATE');
     try {

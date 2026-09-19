@@ -20,7 +20,7 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
   const origin = `http://127.0.0.1:${port}`;
   let processHandle;
   async function start() {
-    processHandle = spawn(php,['-S',`127.0.0.1:${port}`,'scripts/php-router.php'],{cwd:root,env:{...process.env,ROOM_DATA_DIR:data,ROOM_ORIGIN:origin},stdio:'ignore'});
+    processHandle = spawn(php,['-S',`127.0.0.1:${port}`,'scripts/php-router.php'],{cwd:root,env:{...process.env,ROOM_DATA_DIR:data,ROOM_ORIGIN:origin,ROOM_TEST_MAIL:'1'},stdio:'ignore'});
     for (let i=0;i<60;i++) { try { const result=await fetch(origin+'/api/events'); if(result.ok) return; } catch {} await new Promise(resolve=>setTimeout(resolve,50)); }
     throw new Error('PHP server did not start');
   }
@@ -210,6 +210,53 @@ test('PHP owner authentication and durable calendar API', {skip:available ? fals
     assert.equal((await call('/api/events/'+event.id,'PATCH',{action:'cancel',scope:'one',date:eventInput.date})).status,401);
     assert.equal((await call('/api/login','POST',{email:'owner@example.com',password:'wrong'})).status,401);
     assert.equal((await call('/api/login','POST',{email:'owner@example.com',password})).status,200);
+  });
+  await t.test('password reset mail is private, expires after 30 minutes and resets only its account once', async()=>{
+    const guest=client(); await guest.call('/api/session');
+    const runSQL = sql => {
+      const result=spawnSync(php,['-r',"$db=new SQLite3(getenv('ROOM_TEST_DB')); $db->exec(getenv('ROOM_TEST_SQL'));"],{env:{...process.env,ROOM_TEST_DB:path.join(data,'calendar.sqlite'),ROOM_TEST_SQL:sql}});
+      assert.equal(result.status,0);
+    };
+    runSQL("DELETE FROM attempts WHERE bucket LIKE 'login:%'");
+    assert.equal((await guest.call('/api/password/forgot','POST',{email:'owner@example.com'},{'X-CSRF-Token':''})).status,403);
+    const unknown=await guest.call('/api/password/forgot','POST',{email:'unknown@example.com'});
+    await assert.rejects(readFile(path.join(data,'reset-outbox.ndjson')),{code:'ENOENT'});
+    const request=await guest.call('/api/password/forgot','POST',{email:'MANAGER@example.com'});
+    assert.deepEqual(request.body,unknown.body); assert.equal(request.status,200);
+    const outbox=()=>readFile(path.join(data,'reset-outbox.ndjson'),'utf8').then(s=>s.trim().split('\n').map(JSON.parse));
+    let mails=await outbox(); assert.equal(mails.length,1); assert.equal(mails[0].to,'manager@example.com');
+    assert.match(mails[0].body,/30 minūtes/);
+    const token=mails[0].body.match(/#reset=([a-f0-9]{64})/)[1];
+    assert.ok(!JSON.stringify(request.body).includes(token));
+    assert.equal((await guest.call('/api/password/check','POST',{token})).status,200);
+    assert.equal((await guest.call('/api/password/check','POST',{token:'invalid'})).status,400);
+    await guest.call('/api/password/forgot','POST',{email:'manager@example.com'});
+    assert.equal((await outbox()).length,1,'cooldown avoids repeated emails');
+    const tokenHash=createHash('sha256').update(token).digest('hex');
+    runSQL("UPDATE password_resets SET expires="+(Math.floor(Date.now()/1000)-1)+" WHERE token_hash='"+tokenHash+"'");
+    assert.equal((await guest.call('/api/password/check','POST',{token})).status,400);
+    assert.equal((await guest.call('/api/password/reset','POST',{token,password:'new-test-password'})).status,400);
+    await guest.call('/api/password/forgot','POST',{email:'manager@example.com'});
+    mails=await outbox(); const validToken=mails.at(-1).body.match(/#reset=([a-f0-9]{64})/)[1];
+    assert.notEqual(validToken,token);
+    const hash=createHash('sha256').update(validToken).digest('hex');
+    const stored=spawnSync(php,['-r',"$db=new SQLite3(getenv('ROOM_TEST_DB')); echo json_encode($db->query('SELECT * FROM password_resets')->fetchArray(SQLITE3_ASSOC));"],{env:{...process.env,ROOM_TEST_DB:path.join(data,'calendar.sqlite')}});
+    const record=JSON.parse(stored.stdout); assert.equal(record.token_hash,hash); assert.equal(record.expires-record.created,1800);
+    assert.ok(!stored.stdout.toString().includes(validToken));
+    assert.equal((await manager.call('/api/login','POST',{email:'manager@example.com',password:managerPassword})).status,200);
+    const before=(await call('/api/events')).body.events;
+    assert.equal((await guest.call('/api/password/reset','POST',{token:validToken,password:'short'})).status,400);
+    const newPassword=randomBytes(10).toString('hex');
+    const results=await Promise.all([guest.call('/api/password/reset','POST',{token:validToken,password:newPassword}),guest.call('/api/password/reset','POST',{token:validToken,password:newPassword})]);
+    assert.deepEqual(results.map(r=>r.status).sort(),[200,400]);
+    assert.equal((await manager.call('/api/session')).body.authenticated,false,'old sessions revoked');
+    assert.equal((await call('/api/session')).body.authenticated,true,'other account stays signed in');
+    assert.deepEqual((await call('/api/events')).body.events,before);
+    assert.equal((await guest.call('/api/session')).body.authenticated,false,'reset does not automatically log in');
+    assert.equal((await guest.call('/api/login','POST',{email:'manager@example.com',password:managerPassword})).status,401);
+    assert.equal((await guest.call('/api/login','POST',{email:'manager@example.com',password:newPassword})).status,200);
+    assert.equal((await guest.call('/api/password/reset','POST',{token:validToken,password:newPassword})).status,400);
+    assert.equal((await fetch(origin+'/server/password-reset.php')).status,404);
   });
   await t.test('repeated login attempts are rate-limited',async()=>{
     let result;

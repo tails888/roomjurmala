@@ -18,3 +18,5 @@
 .image-field input[type=file]{padding:12px;background:var(--paper);font-size:13px}.image-field input::file-selector-button{border:0;border-radius:6px;padding:10px 12px;margin-right:12px;background:#fbe8d8;color:var(--ink);cursor:pointer}#image-preview{display:block;width:100%;max-height:260px;object-fit:contain;background:var(--paper);border-radius:8px;margin-top:14px}#remove-image{margin-top:8px}.event-thumbnail{display:block;width:100px;height:70px;object-fit:cover;border-radius:8px;margin-top:12px}
 
 #event-form{margin-top:23px}
+
+.forgot-password{display:block;margin:18px auto 0;padding:8px 4px;min-height:44px;color:var(--accent-dark);font-size:14px;text-decoration:underline;text-underline-offset:5px}.notice.success{background:#edf3e9;color:#304f34}#recovery-title:focus{outline:none}#recovery-panel .notice{margin-top:22px}
