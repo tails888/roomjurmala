@@ -43,8 +43,10 @@ function room_request_reset(array $input): never {
         $db->exec('COMMIT');
     } catch (Throwable $error) { $db->exec('ROLLBACK'); throw $error; }
     if ($token !== null) {
+        $mailError = null;
         try { $sent = room_send_reset_email($account['email'],$token); }
-        catch (Throwable $error) { $sent = false; }
+        catch (Throwable $error) { $sent = false; $mailError = $error->getMessage(); }
+        file_put_contents(room_private_dir().'/mail-status.json', json_encode(['time'=>gmdate('c'),'accepted'=>$sent,'error'=>$mailError], JSON_THROW_ON_ERROR), LOCK_EX);
         if (!$sent) {
             $statement=$db->prepare('DELETE FROM password_resets WHERE token_hash=:hash'); $statement->bindValue(':hash',hash('sha256',$token)); $statement->execute();
             error_log('ROOM password reset email could not be handed to the mail server');
