@@ -46,7 +46,6 @@
       </section>
       <section class="editor" id="event-editor" aria-labelledby="form-title">
         <h2 id="form-title">Jauns pasākums</h2>
-        <p class="editor-intro">Aizpildi un publicē mājaslapā.</p>
         <form id="event-form" novalidate>
           <div class="field"><label for="event-title">Pasākuma nosaukums</label><input id="event-title" name="title" type="text" maxlength="160" placeholder="Piemēram, jogas nodarbība" required autocomplete="off" aria-describedby="error-title"><p class="field-error" id="error-title" hidden></p></div>
           <div class="field"><label for="event-date">Datums</label><input id="event-date" name="date" type="date" required aria-describedby="error-date"><p class="field-error" id="error-date" hidden></p></div>
@@ -54,10 +53,10 @@
             <div class="field"><label for="event-start">No</label><input id="event-start" name="startTime" type="time" required aria-describedby="error-startTime"><p class="field-error" id="error-startTime" hidden></p></div>
             <div class="field"><label for="event-end">Līdz</label><input id="event-end" name="endTime" type="time" required aria-describedby="error-endTime"><p class="field-error" id="error-endTime" hidden></p></div>
           </div>
-          <div class="field"><label for="event-description">Apraksts <span>nav obligāts</span></label><textarea id="event-description" name="description" rows="3" maxlength="2000" placeholder="Piemēram, kas jāņem līdzi…" aria-describedby="error-description"></textarea><p class="field-error" id="error-description" hidden></p></div>
-          <div class="field image-field"><label for="event-image">Pasākuma attēls <span>nav obligāts</span></label>
+          <div class="field"><label for="event-description">Apraksts</label><textarea id="event-description" name="description" rows="3" maxlength="2000" placeholder="Piemēram, kas jāņem līdzi…" aria-describedby="error-description"></textarea><p class="field-error" id="error-description" hidden></p></div>
+          <div class="field image-field"><label for="event-image">Pasākuma attēls</label>
             <input id="event-image" name="image" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="image-help error-image">
-            <p class="form-help" id="image-help">Izvēlies JPG, PNG vai WebP attēlu līdz 10 MB.</p>
+            <p class="form-help" id="image-help" hidden></p>
             <div id="image-preview-wrap" hidden><img id="image-preview" alt="Pasākuma attēla priekšskatījums"><button class="more-button" id="remove-image" type="button">Noņemt attēlu</button></div>
             <p class="field-error" id="error-image" role="alert" hidden></p>
           </div>

@@ -282,7 +282,7 @@ function resetImage() {
   imageRevision++; imageData = ''; imagePreparing = false;
   $('#event-image').value = ''; $('#image-preview').removeAttribute('src');
   $('#image-preview-wrap').hidden = true; $('#error-image').hidden = true;
-  $('#image-help').textContent = 'Izvēlies JPG, PNG vai WebP attēlu līdz 10 MB.';
+  $('#image-help').textContent = ''; $('#image-help').hidden = true;
 }
 $('#event-image').addEventListener('change', async () => {
   const file = $('#event-image').files[0];
@@ -290,7 +290,7 @@ $('#event-image').addEventListener('change', async () => {
   imageData = ''; $('#image-preview-wrap').hidden = true; $('#error-image').hidden = true;
   if (!file) { resetImage(); setBusy(busy); return; }
   imagePreparing = true; $('#publish').disabled = true;
-  $('#image-help').textContent = 'Sagatavo attēlu…';
+  $('#image-help').hidden = false; $('#image-help').textContent = 'Sagatavo attēlu…';
   try {
     const prepared = await prepareEventImage(file);
     if (revision !== imageRevision) return;
