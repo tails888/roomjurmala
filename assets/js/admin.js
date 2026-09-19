@@ -1,5 +1,5 @@
 import { rigaClock, addDays, validDate, validateEvent, occurrences, archivedEntries } from './event-model.mjs';
-import { prepareEventImage, sharingText, googleProfileUrl } from './event-sharing.mjs';
+import { prepareEventImage } from './event-image.mjs';
 import { initializeAuth, request } from './admin-auth.mjs';
 
 const $ = selector => document.querySelector(selector);
@@ -11,7 +11,6 @@ const deleteDialog = $('#delete-dialog');
 let archived = false, pendingDelete = null;
 let events = [], cancelled = false, limit = 6, pending = null, busy = false, loaded = false, toastTimer, refreshing = false;
 let imageData = '', imagePreparing = false, imageRevision = 0;
-const publishedDialog = $('#published-dialog');
 let createRequestId = crypto.randomUUID();
 const icons = {
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -78,11 +77,6 @@ function render() {
     action.setAttribute('aria-label', `${action.textContent} · ${label(event)} · ${dateLabel(date)}`);
     action.addEventListener('click', () => archived ? archiveAction(event,date,wholeSeries,'unarchive') : cancelled ? restore(event, date, wholeSeries, action) : openCancel(event, date));
     const actions = el('div','event-actions'); actions.append(action);
-    if (!cancelled && !archived) {
-      const share = el('button', 'event-action', 'Google'); share.type = 'button'; share.disabled = busy;
-      share.setAttribute('aria-label', `Sagatavot Google ierakstu · ${label(event)}`);
-      share.addEventListener('click', () => showSharing(event, date)); actions.append(share);
-    }
     if (cancelled || archived) {
       const extra = el('button','event-action', archived ? 'Dzēst' : wholeSeries ? 'Arhivēt sēriju' : 'Arhivēt');
       extra.type='button'; extra.disabled=busy;
@@ -174,7 +168,7 @@ form.addEventListener('submit', async event => {
     createRequestId = crypto.randomUUID();
     cancelled = false; archived = false; limit = 6;
     updateEvent(result.event); form.reset(); resetImage(); updateRepeat();
-    showSharing(result.event, input.date);
+    notify('Pasākums publicēts un redzams mājaslapā.');
   } catch (error) {
     if (error.fields) showErrors(error.fields);
     else { $('#form-error').textContent = error.name === 'TimeoutError' ? 'Savienojums pārtrūka. Pirms mēģini vēlreiz, pārbaudi pasākumu sarakstu.' : error.message; $('#form-error').hidden = false; }
@@ -310,32 +304,3 @@ $('#event-image').addEventListener('change', async () => {
   } finally { if (revision === imageRevision) { imagePreparing = false; setBusy(busy); } }
 });
 $('#remove-image').addEventListener('click', () => { resetImage(); createRequestId = crypto.randomUUID(); setBusy(busy); });
-function showSharing(event, date) {
-  $('#google-text').value = sharingText(event, date);
-  $('#open-google').href = googleProfileUrl;
-  $('#share-status').hidden = true;
-  $('#download-image').hidden = !event.image;
-  if (event.image) { $('#download-image').href = event.image; $('#download-image').download = 'room-jurmala-pasakums.jpg'; }
-  else { $('#download-image').removeAttribute('href'); }
-  publishedDialog.showModal();
-  $('#google-text').scrollTop = 0;
-  $('#published-title').focus();
-}
-$('#close-published').addEventListener('click', () => publishedDialog.close());
-$('#copy-google').addEventListener('click', async () => {
-  // Start copying while this page is focused, and open within the same click gesture.
-  let copyAttempt;
-  try { copyAttempt = navigator.clipboard.writeText($('#google-text').value).then(() => true, () => false); }
-  catch { copyAttempt = Promise.resolve(false); }
-  const popup = window.open(googleProfileUrl, '_blank');
-  if (popup) popup.opener = null;
-  let copied = await copyAttempt;
-  if (!copied) {
-    $('#google-text').focus(); $('#google-text').select();
-    try { copied = document.execCommand('copy'); } catch { /* Selected text remains available for manual copying. */ }
-  }
-  $('#share-status').textContent = copied
-    ? (popup ? 'Teksts nokopēts. Ielīmē to Google ierakstā un pievieno bildi.' : 'Teksts nokopēts. Spied “Atvērt Google profilu”, lai turpinātu.')
-    : 'Neizdevās nokopēt automātiski. Iezīmē un nokopē tekstu augstāk, tad atver Google profilu.';
-  $('#share-status').hidden = false;
-});

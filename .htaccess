@@ -46,7 +46,7 @@ RewriteRule ^(.*)$ https://roomjurmala.lv/$1 [R=301,L,NE]
   <FilesMatch "\.(html)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
-  <FilesMatch "^(?:admin\.(?:js|css)|admin-auth\.mjs|event-model\.mjs|event-sharing\.mjs)$">
+  <FilesMatch "^(?:admin\.(?:js|css)|admin-auth\.mjs|event-model\.mjs|event-image\.mjs)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
