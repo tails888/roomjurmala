@@ -2,12 +2,12 @@ const I18N = {
   lv: {
     meta: {
       title: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      description: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      description: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       url: 'https://roomjurmala.lv/',
       ogTitle: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      ogDescription: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      ogDescription: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       twitterTitle: 'Telpa pasākumiem Jūrmalā | ROOM Jūrmala',
-      twitterDescription: 'Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.',
+      twitterDescription: 'Pasākumu telpa Kauguros, Jūrmalā bērnu ballītēm, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem un nodarbībām. Pieejama stundas noma.',
       locale: 'lv_LV'
     },
     nav: {
@@ -17,7 +17,7 @@ const I18N = {
       menuClose: 'Aizvērt izvēlni'
     },
     hero: {
-      titleHtml: 'Telpa jūsu<br/><em>pasākumiem</em>',
+      titleHtml: 'Telpa jūsu <br/><em>pasākumiem</em>',
       sub: 'Telpa Kauguros bērnu ballītēm, fotosesijām, meistarklasēm, treneru nodarbībām, semināriem un bērnu nometnēm',
       actions: ['Rezervēt', 'Uzzināt vairāk']
     },
@@ -49,51 +49,47 @@ const I18N = {
       cta: 'Pastāsti kā mums izdevās'
     },
     pricing: {
-      tag: 'Cenas',
-      titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
+      tag: 'Paketes',
+      titleHtml: 'Dienas, nedēļas, mēneša',
       cards: {
         hourly: {
-          type: 'Stundas noma',
-          period: 'par stundu',
+          type: 'Viena diena',
+          amountHtml: '<sup>€</sup>130',
+          lead: 'Dienas pakete',
+          summary: 'Pilna diena vienreizējam pasākumam vai intensīvam darbam.',
+          period: '/ 8 stundas',
           features: [
-            'Darba dienās līdz 18:00 10€/stundā',
-            'Pēc 18:00 un brīvdienās 20€/stundā',
-            'Visa telpa iekļauta',
-            'Virtuve iekļauta',
-            'Bezmaksas autostāvvieta'
+            'Ietaupi 30€ · 16.25€/h'
           ],
-          cta: 'Rezervēt'
+          cta: 'Rezervēt dienu'
         },
         party: {
           popular: 'Populārākais',
-          type: 'Ballītes pakete',
-          forUpTo: 'Ballītēm līdz 15 viesiem',
-          perEvent: 'par pasākumu',
+          type: 'Nedēļa · 40h kopā',
+          amountHtml: '<sup>€</sup>550',
+          forUpTo: 'Nedēļas pakete',
+          summary: '5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.',
+          perEvent: '/ 5 dienas',
           featuresPrimary: [
-            '3 stundas 100€',
-            'Katra nākamā stunda 20€',
-            'Visa telpa privātam pasākumam'
+            'Ietaupi 250€ · 13.75€/h'
           ],
-          moreThan15: 'Ja viesu skaits pārsniedz 15 cilvēkus',
+          moreThan15: 'Laba izvēle',
           featuresSecondary: [
-            '3 stundas 130€',
-            'Katra nākamā stunda 30€'
+            'Bērnu nometnēm',
+            'Kursiem un meistarklasēm'
           ],
-          cta: 'Pieprasīt paketi'
+          cta: 'Rezervēt nedēļu'
         },
         custom: {
-          type: 'Individuāls piedāvājums',
-          amountHtml: 'Pēc<br/>vienošanās',
-          period: 'semināri, fotosesijas, treneru nodarbības, nometnes',
+          type: 'Regulāri · mēnesī',
+          amountHtml: '<sup>€</sup>460',
+          lead: 'Abonements',
+          summary: 'Mēneša risinājums nodarbībām un grupām.',
+          period: '/ mēnesī · min. 3 mēneši',
           features: [
-            'Jogas un fitnesa nodarbības',
-            'Profesionālas fotosesijas',
-            'Bērnu nometnes un attīstības grupas',
-            'Korporatīvie pasākumi',
-            'Regulāri nomas līgumi',
-            'Meistarklases no A–Z'
+            'Ietaupi 180€/mēn · 8h nedēļā'
           ],
-          cta: 'Sazināties'
+          cta: 'Pieteikties'
         }
       }
     },
@@ -109,8 +105,8 @@ const I18N = {
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', 'Darba dienās līdz 18:00 — 10€/stundā. Pēc 18:00 un brīvdienās — 20€/stundā. Ballītes pakete uz 3 stundām sākas no 100€ līdz 15 viesiem; ja viesu ir vairāk, pakete sākas no 130€.'],
-        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
+        ['Cik maksā telpu noma ROOM Jūrmala?', 'Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.'],
+        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
         ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
         ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
         ['Cik cilvēkiem telpa ir piemērota?', 'Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.'],
@@ -122,7 +118,15 @@ const I18N = {
     booking: {
       title: 'Rezervēt telpu',
       sub: 'Aizpildiet formu, un mēs drīz ar Jums sazināsimies',
-      labels: ['Jūsu vārds', 'Tālrunis', 'Pasākuma veids', 'Datums', 'Laiks', 'Piezīmes'],
+      labels: {
+        name: 'Jūsu vārds',
+        phone: 'Tālrunis',
+        package: 'Nomas veids',
+        eventType: 'Pasākuma veids',
+        date: 'Datums',
+        time: 'Laiks',
+        notes: 'Piezīmes'
+      },
       placeholders: {
         name: 'Vārds, Uzvārds',
         phone: '+371 2X XXX XXX',
@@ -145,11 +149,28 @@ const I18N = {
         '🎉 Privāts pasākums',
         '✨ Cits'
       ],
+      packageOptions: [
+        'Izvēlieties nomas veidu...',
+        'Stundas noma',
+        'Dienas pakete',
+        'Nedēļas pakete',
+        'Mēneša abonements'
+      ],
+      packageNotes: {
+        hours: 'Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?',
+        day: 'Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?',
+        week: 'Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?',
+        month: 'Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?'
+      },
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
       startTimeAria: 'Sākuma laiks',
-      endTimeAria: 'Beigu laiks'
+      endTimeAria: 'Beigu laiks',
+      errors: {
+        required: 'Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.',
+        tooLong: 'Ziņa ir pārāk gara. Saīsiniet piezīmes un mēģiniet vēlreiz.'
+      }
     },
     map: {
       tag: 'Atrašanās',
@@ -185,10 +206,11 @@ const I18N = {
       copy: '© 2026 Room Jūrmala. Visas tiesības aizsargātas.'
     },
     whatsapp: {
-      greeting: 'Sveiki! Es vēlos rezervēt ROOM Jūrmala telpu.',
+      greeting: 'Sveiki! Vēlos pieteikt ROOM Jūrmala telpu.',
       labels: {
         name: 'Vārds',
         phone: 'Tālrunis',
+        package: 'Nomas veids',
         eventType: 'Pasākuma veids',
         date: 'Datums',
         time: 'Laiks',
@@ -203,12 +225,12 @@ const I18N = {
   en: {
     meta: {
       title: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      description: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      description: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       url: 'https://roomjurmala.lv/en/',
       ogTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      ogDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      ogDescription: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       twitterTitle: 'Event Venue in Jūrmala | ROOM Jūrmala',
-      twitterDescription: 'Event and activity venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars, training sessions and children’s camps. Hourly rental available.',
+      twitterDescription: 'Event venue in Kauguri, Jūrmala for children’s birthdays, family celebrations, workshops, photoshoots, seminars and classes. Hourly rental available.',
       locale: 'en_GB'
     },
     nav: {
@@ -218,7 +240,7 @@ const I18N = {
       menuClose: 'Close menu'
     },
     hero: {
-      titleHtml: 'Event venue in Jūrmala<br/><em>for celebrations and classes</em>',
+      titleHtml: 'Space for your <br/><em>events</em>',
       sub: 'A space in Kauguri for children’s parties, photoshoots, workshops, trainer-led classes, seminars and children’s camps',
       actions: ['Book now', 'Learn more']
     },
@@ -250,50 +272,47 @@ const I18N = {
       cta: 'Tell us how we did'
     },
     pricing: {
-      tag: 'Prices',
-      titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
+      tag: 'Packages',
+      titleHtml: 'Day, week, month',
       cards: {
         hourly: {
-          type: 'Hourly room rental',
-          period: 'per hour',
+          type: 'One day',
+          amountHtml: '<sup>€</sup>130',
+          lead: 'Day package',
+          summary: 'A full day for a one-off event or focused work.',
+          period: '/ 8 hours',
           features: [
-            'Weekdays until 6:00 PM — €10/hour',
-            'After 6:00 PM and on weekends — €20/hour',
-            'Full room access included',
-            'Kitchen included',
-            'Free parking'
+            'Save €30 · €16.25/h'
           ],
-          cta: 'Book now'
+          cta: 'Book a day'
         },
         party: {
           popular: 'Most popular',
-          type: 'Party package',
-          forUpTo: 'For parties up to 15 guests',
-          perEvent: 'per event',
+          type: 'Week · 40h total',
+          amountHtml: '<sup>€</sup>550',
+          forUpTo: 'Week package',
+          summary: '5 working days in a row. Ideal for summer camps and courses.',
+          perEvent: '/ 5 days',
           featuresPrimary: [
-            '3 hours for €100',
-            'Additional hours €20 each',
-            'The whole room for your private event'
+            'Save €250 · €13.75/h'
           ],
-          moreThan15: 'If there are more than 15 guests',
+          moreThan15: 'Best for',
           featuresSecondary: [
-            '3 hours for €130',
-            'Additional hours €30 each'
+            'Children’s camps',
+            'Courses and workshops'
           ],
-          cta: 'Request package'
+          cta: 'Book a week'
         },
         custom: {
-          type: 'Custom offer',
-          amountHtml: 'By<br/>agreement',
-          period: 'seminars, photoshoots, corporate events',
+          type: 'Regular · monthly',
+          amountHtml: '<sup>€</sup>460',
+          lead: 'Subscription',
+          summary: 'A monthly solution for classes and groups.',
+          period: '/ month · min. 3 months',
           features: [
-            'Yoga & fitness sessions',
-            'Professional photoshoots',
-            'Corporate events',
-            'Regular room rental agreements',
-            'Workshops of all kinds'
+            'Save €180/month · 8h weekly'
           ],
-          cta: 'Contact us'
+          cta: 'Apply'
         }
       }
     },
@@ -309,8 +328,8 @@ const I18N = {
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', 'On weekdays until 6:00 PM the room is €10/hour. After 6:00 PM and on weekends it is €20/hour. The 3-hour party package starts from €100 for up to 15 guests; for larger groups, it starts from €130.'],
-        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
+        ['How much does ROOM Jūrmala cost to rent?', 'Hourly rental starts from €20. Popular options are 3 hours for €55, 6 hours for €100, the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event.'],
+        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
         ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
         ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
         ['How many guests is the venue suitable for?', 'Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking.'],
@@ -322,7 +341,15 @@ const I18N = {
     booking: {
       title: 'Book your event',
       sub: "Fill in the form and we'll get back to you soon",
-      labels: ['Your name', 'Phone', 'Event type', 'Date', 'Time', 'Notes'],
+      labels: {
+        name: 'Your name',
+        phone: 'Phone',
+        package: 'Rental type',
+        eventType: 'Event type',
+        date: 'Date',
+        time: 'Time',
+        notes: 'Notes'
+      },
       placeholders: {
         name: 'Name, Surname',
         phone: '+371 2X XXX XXX',
@@ -345,11 +372,28 @@ const I18N = {
         '🎉 Private event',
         '✨ Other'
       ],
+      packageOptions: [
+        'Choose rental type...',
+        'Hourly rental',
+        'Day package',
+        'Week package',
+        'Monthly subscription'
+      ],
+      packageNotes: {
+        hours: 'I am interested in renting the room for a few hours. Is it possible to book the room on this date and time?',
+        day: 'I am interested in the day package for €130. Is it possible to book the room on this date?',
+        week: 'I am interested in the week package for €550. Is it possible to book the room on this date?',
+        month: 'I am interested in the monthly subscription for €460 per month. Is it possible to agree on a regular booking time?'
+      },
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
       startTimeAria: 'Start time',
-      endTimeAria: 'End time'
+      endTimeAria: 'End time',
+      errors: {
+        required: 'Please fill in your name, phone, booking type, event type, date and time.',
+        tooLong: 'The message is too long. Please shorten the notes and try again.'
+      }
     },
     map: {
       tag: 'Location',
@@ -389,6 +433,7 @@ const I18N = {
       labels: {
         name: 'Name',
         phone: 'Phone',
+        package: 'Rental type',
         eventType: 'Event type',
         date: 'Date',
         time: 'Time',
@@ -403,12 +448,12 @@ const I18N = {
   ru: {
     meta: {
       title: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      description: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      description: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       url: 'https://roomjurmala.lv/ru/',
       ogTitle: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      ogDescription: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      ogDescription: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       twitterTitle: 'Зал для мероприятий в Юрмале | ROOM Jūrmala',
-      twitterDescription: 'Зал для мероприятий и занятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары, тренировки и детские лагеря. Доступна почасовая аренда.',
+      twitterDescription: 'Зал для мероприятий в Каугури, Юрмале: детские дни рождения, семейные праздники, мастер-классы, фотосессии, семинары и занятия. Почасовая аренда.',
       locale: 'ru_RU'
     },
     nav: {
@@ -418,7 +463,7 @@ const I18N = {
       menuClose: 'Закрыть меню'
     },
     hero: {
-      titleHtml: 'Пространство для ваших<br/><em>мероприятий</em>',
+      titleHtml: 'Пространство для ваших <br/><em>мероприятий</em>',
       sub: 'Пространство в Каугури для детских праздников, фотосессий, мастер-классов, занятий с тренерами, семинаров и детских лагерей',
       actions: ['Забронировать', 'Узнать больше']
     },
@@ -450,50 +495,47 @@ const I18N = {
       cta: 'Расскажите как у нас получилось'
     },
     pricing: {
-      tag: 'Цены',
-      titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
+      tag: 'Пакеты',
+      titleHtml: 'День, неделя, месяц',
       cards: {
         hourly: {
-          type: 'Почасовая аренда',
-          period: 'в час',
+          type: 'Один день',
+          amountHtml: '<sup>€</sup>130',
+          lead: 'Пакет на день',
+          summary: 'Полный день для разового события или интенсивной работы.',
+          period: '/ 8 часов',
           features: [
-            'По будням до 18:00 — 10€/час',
-            'После 18:00 и в выходные — 20€/час',
-            'Весь зал включён',
-            'Кухня включена',
-            'Бесплатная парковка'
+            'Экономия 30€ · 16.25€/ч'
           ],
-          cta: 'Забронировать'
+          cta: 'Забронировать день'
         },
         party: {
           popular: 'Самый популярный',
-          type: 'Пакет для праздника',
-          forUpTo: 'Для праздников до 15 гостей',
-          perEvent: 'за мероприятие',
+          type: 'Неделя · 40ч всего',
+          amountHtml: '<sup>€</sup>550',
+          forUpTo: 'Пакет на неделю',
+          summary: '5 рабочих дней подряд. Идеально для летних лагерей и курсов.',
+          perEvent: '/ 5 дней',
           featuresPrimary: [
-            '3 часа за 100€',
-            'Каждый следующий час — 20€',
-            'Весь зал для вашего частного мероприятия'
+            'Экономия 250€ · 13.75€/ч'
           ],
-          moreThan15: 'Если гостей больше 15',
+          moreThan15: 'Подходит для',
           featuresSecondary: [
-            '3 часа за 130€',
-            'Каждый следующий час — 30€'
+            'Детских лагерей',
+            'Курсов и мастер-классов'
           ],
-          cta: 'Запросить пакет'
+          cta: 'Забронировать неделю'
         },
         custom: {
-          type: 'Индивидуальное предложение',
-          amountHtml: 'По<br/>договорённости',
-          period: 'семинары, фотосессии, корпоративные мероприятия',
+          type: 'Регулярно · месяц',
+          amountHtml: '<sup>€</sup>460',
+          lead: 'Абонемент',
+          summary: 'Месячное решение для занятий и групп.',
+          period: '/ месяц · мин. 3 месяца',
           features: [
-            'Аренда зала для йоги и фитнеса',
-            'Профессиональные фотосессии',
-            'Корпоративные мероприятия',
-            'Регулярная аренда зала',
-            'Мастер-классы от А до Я'
+            'Экономия 180€/мес · 8ч в неделю'
           ],
-          cta: 'Обсудить условия'
+          cta: 'Записаться'
         }
       }
     },
@@ -509,8 +551,8 @@ const I18N = {
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', 'По будням до 18:00 аренда стоит 10€/час. После 18:00 и в выходные — 20€/час. Пакет для праздника на 3 часа начинается от 100€ для компании до 15 гостей; для больших групп — от 130€.'],
-        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
+        ['Сколько стоит аренда ROOM Jūrmala?', 'Почасовая аренда начинается от 20€ в час. Популярные варианты: 3 часа — 55€, 6 часов — 100€, день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия.'],
+        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
         ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
         ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
         ['На сколько гостей рассчитан зал?', 'Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей.'],
@@ -522,7 +564,15 @@ const I18N = {
     booking: {
       title: 'Забронировать зал',
       sub: 'Заполните форму, и мы скоро свяжемся с вами',
-      labels: ['Ваше имя', 'Телефон', 'Формат мероприятия', 'Дата', 'Время', 'Примечания'],
+      labels: {
+        name: 'Ваше имя',
+        phone: 'Телефон',
+        package: 'Тип аренды',
+        eventType: 'Формат мероприятия',
+        date: 'Дата',
+        time: 'Время',
+        notes: 'Примечания'
+      },
       placeholders: {
         name: 'Имя, фамилия',
         phone: '+371 2X XXX XXX',
@@ -545,11 +595,28 @@ const I18N = {
         '🎉 Частное мероприятие',
         '✨ Другое'
       ],
+      packageOptions: [
+        'Выберите тип аренды...',
+        'Почасовая аренда',
+        'Пакет на день',
+        'Пакет на неделю',
+        'Месячный абонемент'
+      ],
+      packageNotes: {
+        hours: 'Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?',
+        day: 'Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?',
+        week: 'Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?',
+        month: 'Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?'
+      },
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
       startTimeAria: 'Время начала',
-      endTimeAria: 'Время окончания'
+      endTimeAria: 'Время окончания',
+      errors: {
+        required: 'Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.',
+        tooLong: 'Сообщение слишком длинное. Сократите примечания и попробуйте снова.'
+      }
     },
     map: {
       tag: 'Адрес',
@@ -589,6 +656,7 @@ const I18N = {
       labels: {
         name: 'Имя',
         phone: 'Телефон',
+        package: 'Тип аренды',
         eventType: 'Формат мероприятия',
         date: 'Дата',
         time: 'Время',
@@ -613,8 +681,21 @@ const SERVICES_PATHS = {
   en: '/en/telpa/',
   ru: '/ru/telpa/'
 };
+const PRICING_PATHS = {
+  lv: '/cenas/',
+  en: '/en/cenas/',
+  ru: '/ru/cenas/'
+};
+const BOOKING_LIMITS = {
+  name: 80,
+  phone: 20,
+  date: 80,
+  notes: 500,
+  message: 1500
+};
 let currentLang = getInitialLanguage();
 let selectedDateParts = null;
+let lastAutoBookingNote = '';
 
 function getLanguageFromPath() {
   const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
@@ -677,9 +758,27 @@ function updateLocalizedServiceLinks(lang) {
   });
 }
 
+function updateLocalizedPricingLinks(lang) {
+  const pricingPath = PRICING_PATHS[lang] || PRICING_PATHS.lv;
+  [
+    '.nav-links a:nth-child(2)',
+    '.mobile-menu-links a:nth-child(2)',
+    '.footer-links a:nth-child(2)'
+  ].forEach((selector) => {
+    const node = document.querySelector(selector);
+    if (node) node.setAttribute('href', pricingPath);
+  });
+}
+
 function setPlaceholder(id, value) {
   const node = document.getElementById(id);
   if (node) node.placeholder = value;
+}
+
+function setFieldLabel(fieldId, value) {
+  const field = document.getElementById(fieldId);
+  const label = field?.closest('.booking-field')?.querySelector('label');
+  if (label) label.textContent = value;
 }
 
   function setOptionTexts(selectId, values) {
@@ -749,7 +848,6 @@ function prepareLiveWriting() {
     '#faq .section-tag',
     '#faq .section-title',
     '#faq .section-sub',
-    '#faq .faq-question',
     '#map-section .section-tag',
     '.map-info-title',
     '.map-info-sub',
@@ -865,6 +963,45 @@ function setDateTimeValue(timeSlot) {
   }
 }
 
+function normalizeBookingPackage(packageValue) {
+  return (packageValue || '').replace(/^package-/, '');
+}
+
+function getBookingPackageNote(packageValue) {
+  const normalizedPackage = normalizeBookingPackage(packageValue);
+  return I18N[currentLang]?.booking?.packageNotes?.[normalizedPackage] || '';
+}
+
+function setBookingPackageChoice(packageValue, options = {}) {
+  const normalizedPackage = normalizeBookingPackage(packageValue);
+  const packageField = document.getElementById('bookingPackageSelect');
+  const notesField = document.getElementById('bookingNotes');
+  const note = getBookingPackageNote(normalizedPackage);
+
+  if (packageField && normalizedPackage) packageField.value = normalizedPackage;
+  if (!notesField || !note) return;
+
+  const currentNote = notesField.value.trim();
+  const previousAutoNote = lastAutoBookingNote.trim();
+  const canReplaceNote = options.forceNote || !currentNote || currentNote === previousAutoNote;
+  if (!canReplaceNote) return;
+
+  notesField.value = note;
+  lastAutoBookingNote = note;
+}
+
+function refreshAutoBookingNoteLanguage() {
+  const packageField = document.getElementById('bookingPackageSelect');
+  const notesField = document.getElementById('bookingNotes');
+  if (!packageField || !notesField || !lastAutoBookingNote) return;
+  if (notesField.value.trim() !== lastAutoBookingNote.trim()) return;
+
+  const note = getBookingPackageNote(packageField.value);
+  if (!note) return;
+  notesField.value = note;
+  lastAutoBookingNote = note;
+}
+
 function applyLanguage(lang) {
   const copy = I18N[lang] || I18N.lv;
   currentLang = I18N[lang] ? lang : 'lv';
@@ -891,9 +1028,10 @@ function applyLanguage(lang) {
 	    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
 	    if (twitterDescription) twitterDescription.setAttribute('content', copy.meta.twitterDescription || copy.meta.ogDescription || copy.meta.description);
 
-	    setSelectorListText('.nav-links a', copy.nav.links);
+  setSelectorListText('.nav-links a', copy.nav.links);
   setSelectorListText('.mobile-menu-links a', copy.nav.links);
   updateLocalizedServiceLinks(currentLang);
+  updateLocalizedPricingLinks(currentLang);
   document.querySelectorAll('.nav-cta').forEach((node) => {
     node.textContent = copy.nav.cta;
   });
@@ -928,6 +1066,7 @@ function applyLanguage(lang) {
     if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;
   }
 
+  setText('#pricing .section-tag', copy.pricing.tag);
   setHTML('#pricing .section-title', copy.pricing.titleHtml);
 
   const priceCards = document.querySelectorAll('.price-card');
@@ -936,18 +1075,25 @@ function applyLanguage(lang) {
   const customCard = priceCards[2];
 
   if (hourlyCard) {
+    const hourlyAmount = hourlyCard.querySelector('.price-amount');
     const pricePeriods = hourlyCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
-    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
+    setText('.pricing-grid .price-card:nth-of-type(1) .price-summary', copy.pricing.cards.hourly.summary);
+    if (hourlyAmount) hourlyAmount.innerHTML = copy.pricing.cards.hourly.amountHtml;
+    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.lead;
+    if (pricePeriods[1]) pricePeriods[1].textContent = copy.pricing.cards.hourly.period;
     setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
     setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
   }
 
   if (partyCard) {
+    const partyAmount = partyCard.querySelector('.price-amount');
     const partyPeriods = partyCard.querySelectorAll('.price-period');
     const partyLists = partyCard.querySelectorAll('.price-features');
     setText('.pricing-grid .price-card:nth-of-type(2) .price-popular', copy.pricing.cards.party.popular);
     setText('.pricing-grid .price-card:nth-of-type(2) .price-type', copy.pricing.cards.party.type);
+    setText('.pricing-grid .price-card:nth-of-type(2) .price-summary', copy.pricing.cards.party.summary);
+    if (partyAmount) partyAmount.innerHTML = copy.pricing.cards.party.amountHtml;
     if (partyPeriods[0]) partyPeriods[0].textContent = copy.pricing.cards.party.forUpTo;
     if (partyPeriods[1]) partyPeriods[1].textContent = copy.pricing.cards.party.perEvent;
     if (partyPeriods[2]) partyPeriods[2].textContent = copy.pricing.cards.party.moreThan15;
@@ -960,8 +1106,10 @@ function applyLanguage(lang) {
     const customAmount = customCard.querySelector('.price-amount');
     const customPeriods = customCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
+    setText('.pricing-grid .price-card:nth-of-type(3) .price-summary', copy.pricing.cards.custom.summary);
     if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
-    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.period;
+    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.lead;
+    if (customPeriods[1]) customPeriods[1].textContent = copy.pricing.cards.custom.period;
     setNodeListText(customCard.querySelectorAll('.price-features li'), copy.pricing.cards.custom.features);
     setText('.pricing-grid .price-card:nth-of-type(3) .price-cta', copy.pricing.cards.custom.cta);
   }
@@ -971,14 +1119,22 @@ function applyLanguage(lang) {
 
   setText('.booking-title', copy.booking.title);
   setText('.booking-sub', copy.booking.sub);
-  setSelectorListText('.booking-field label', copy.booking.labels);
+  setFieldLabel('customerName', copy.booking.labels.name);
+  setFieldLabel('customerPhone', copy.booking.labels.phone);
+  setFieldLabel('bookingPackageSelect', copy.booking.labels.package);
+  setFieldLabel('eventTypeSelect', copy.booking.labels.eventType);
+  setFieldLabel('desiredDateTime', copy.booking.labels.date);
+  setFieldLabel('startTimeDesktop', copy.booking.labels.time);
+  setFieldLabel('bookingNotes', copy.booking.labels.notes);
   setPlaceholder('customerName', copy.booking.placeholders.name);
   setPlaceholder('customerPhone', copy.booking.placeholders.phone);
   setPlaceholder('desiredDateTime', copy.booking.placeholders.date);
   setPlaceholder('startTimeDesktop', copy.booking.placeholders.start);
   setPlaceholder('endTimeDesktop', copy.booking.placeholders.end);
   setPlaceholder('bookingNotes', copy.booking.placeholders.notes);
+  setOptionTexts('bookingPackageSelect', copy.booking.packageOptions);
   setOptionTexts('eventTypeSelect', copy.booking.options);
+  refreshAutoBookingNoteLanguage();
   setText('.booking-btn', copy.booking.button);
   const bookingNote = document.querySelector('.booking-note');
   if (bookingNote) {
@@ -1128,19 +1284,40 @@ function getTimeFieldValue(desktopId, mobileId) {
   return mobileValue || desktopValue;
 }
 
+function limitText(value, max) {
+  return (value || '').trim().slice(0, max);
+}
+
+function setBookingError(form, message, focusNode) {
+  const error = form.querySelector('.booking-error') || form.parentElement?.querySelector('.booking-error');
+  if (error) {
+    error.textContent = message;
+    error.hidden = false;
+  }
+  if (focusNode) focusNode.focus({ preventScroll: true });
+}
+
+function clearBookingError(form) {
+  const error = form.querySelector('.booking-error') || form.parentElement?.querySelector('.booking-error');
+  if (error) {
+    error.textContent = '';
+    error.hidden = true;
+  }
+  form.querySelectorAll('.is-invalid').forEach((node) => node.classList.remove('is-invalid'));
+}
+
 function syncTimeInputsForDevice() {
-  const isMobileLike = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   const desktopIds = ['startTimeDesktop', 'endTimeDesktop'];
   const mobileIds = ['startTimeMobile', 'endTimeMobile'];
 
   desktopIds.forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = isMobileLike;
+    if (el) el.disabled = false;
   });
 
   mobileIds.forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.disabled = !isMobileLike;
+    if (el) el.disabled = true;
   });
 }
 
@@ -1183,6 +1360,19 @@ document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link
   link.addEventListener('click', () => setMobileMenuOpen(false));
 });
 
+document.querySelectorAll('#pricing .price-cta[data-booking-package]').forEach((link) => {
+  link.addEventListener('click', () => {
+    setBookingPackageChoice(link.dataset.bookingPackage, { forceNote: true });
+  });
+});
+
+const bookingPackageSelect = document.getElementById('bookingPackageSelect');
+if (bookingPackageSelect) {
+  bookingPackageSelect.addEventListener('change', () => {
+    setBookingPackageChoice(bookingPackageSelect.value);
+  });
+}
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setMobileMenuOpen(false);
 });
@@ -1193,20 +1383,74 @@ window.addEventListener('resize', () => {
 
 function handleBooking(e) {
   e.preventDefault();
+  const form = e.target;
   const copy = I18N[currentLang];
-  const name = document.getElementById('customerName')?.value.trim() || '-';
-  const customerPhone = document.getElementById('customerPhone')?.value.trim() || '-';
-  const eventType = document.getElementById('eventTypeSelect')?.value.trim() || '-';
-  const bookingDate = document.getElementById('desiredDateTime')?.value.trim() || '-';
+  clearBookingError(form);
+
+  const nameField = document.getElementById('customerName');
+  const phoneField = document.getElementById('customerPhone');
+  const packageField = document.getElementById('bookingPackageSelect');
+  const eventField = document.getElementById('eventTypeSelect');
+  const dateField = document.getElementById('desiredDateTime');
+  const notesField = document.getElementById('bookingNotes');
+  const startDesktop = document.getElementById('startTimeDesktop');
+  const endDesktop = document.getElementById('endTimeDesktop');
+  const startMobile = document.getElementById('startTimeMobile');
+  const endMobile = document.getElementById('endTimeMobile');
+
+  const name = limitText(nameField?.value, BOOKING_LIMITS.name);
+  const customerPhone = limitText(phoneField?.value, BOOKING_LIMITS.phone);
+  const bookingPackageValue = limitText(packageField?.value, 80);
+  const bookingPackage = limitText(packageField?.selectedOptions?.[0]?.textContent || bookingPackageValue, 80);
+  const eventType = limitText(eventField?.value, 80);
+  const bookingDate = limitText(dateField?.value, BOOKING_LIMITS.date);
   const startTime = getTimeFieldValue('startTimeDesktop', 'startTimeMobile');
   const endTime = getTimeFieldValue('endTimeDesktop', 'endTimeMobile');
-  const notes = document.getElementById('bookingNotes')?.value.trim() || '-';
+  const notes = limitText(notesField?.value, BOOKING_LIMITS.notes);
   let bookingTime = '-';
   if (startTime && endTime) bookingTime = `${startTime} - ${endTime}`;
   else if (startTime) bookingTime = `${copy.whatsapp.timePrefixes.from} ${startTime}`;
   else if (endTime) bookingTime = `${copy.whatsapp.timePrefixes.until} ${endTime}`;
 
+  const requiredFields = [
+    [nameField, name],
+    [phoneField, customerPhone],
+    [packageField, bookingPackageValue],
+    [eventField, eventType],
+    [dateField, bookingDate]
+  ];
+  const missing = requiredFields.find(([, value]) => !value);
+  if (missing || bookingTime === '-') {
+    requiredFields.forEach(([node, value]) => {
+      if (node && !value) node.classList.add('is-invalid');
+    });
+    const timeFocus = [startDesktop, startMobile, endDesktop, endMobile].find((node) => node && !node.disabled);
+    if (bookingTime === '-') {
+      [startDesktop, endDesktop, startMobile, endMobile].forEach((node) => node?.classList.add('is-invalid'));
+    }
+    setBookingError(form, copy.booking.errors.required, missing?.[0] || timeFocus);
+    return;
+  }
+
   const btn = e.target.querySelector('.booking-btn');
+  const phone = '37127850380';
+  const notesBlock = notes ? '\n\n' + notes : '';
+  const message =
+    copy.whatsapp.greeting + '\n\n' +
+    copy.whatsapp.labels.name + ': ' + name + '\n' +
+    copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
+    copy.whatsapp.labels.package + ': ' + bookingPackage + '\n' +
+    copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
+    copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
+    copy.whatsapp.labels.time + ': ' + bookingTime +
+    notesBlock;
+
+  if (message.length > BOOKING_LIMITS.message) {
+    notesField?.classList.add('is-invalid');
+    setBookingError(form, copy.booking.errors.tooLong, notesField);
+    return;
+  }
+
   btn.textContent = copy.booking.buttonSent;
   btn.style.background = '#C97942';
   btn.disabled = true;
@@ -1216,17 +1460,8 @@ function handleBooking(e) {
     btn.disabled = false;
   }, 3000);
 
-  const phone = '+37127850380';
-  const msg = encodeURIComponent(
-    copy.whatsapp.greeting + '\n\n' +
-    copy.whatsapp.labels.name + ': ' + name + '\n' +
-    copy.whatsapp.labels.phone + ': ' + customerPhone + '\n' +
-    copy.whatsapp.labels.eventType + ': ' + eventType + '\n' +
-    copy.whatsapp.labels.date + ': ' + bookingDate + '\n' +
-    copy.whatsapp.labels.time + ': ' + bookingTime + '\n' +
-    copy.whatsapp.labels.notes + ': ' + notes
-  );
-  setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank'); }, 500);
+  const msg = encodeURIComponent(message);
+  setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank', 'noopener,noreferrer'); }, 500);
 }
 
 applyLanguage(currentLang);
