@@ -56,7 +56,9 @@ const I18N = {
           type: 'Stundas noma',
           period: 'par stundu',
           features: [
-            "20 €/stundā",
+            "3 stundas 55 €",
+            "6 stundas 100 €",
+            "Visa diena (8h) 130 €",
             'Visa telpa iekļauta',
             'Virtuve iekļauta',
             'Bezmaksas autostāvvieta'
@@ -108,14 +110,14 @@ const I18N = {
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', "Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €."],
-        ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
-        ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
-        ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
-        ['Cik cilvēkiem telpa ir piemērota?', 'Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu.'],
-        ['Vai telpā ir virtuve un vai drīkst atnest ēdienu?', 'Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī.'],
-        ['Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?', 'ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu.'],
-        ['Kā rezervēt vai apskatīt telpu pirms pasākuma?', 'Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku.']
+        ["Cik maksā telpu noma ROOM Jūrmala?", "Stundas noma maksā no 20 € stundā: 3 stundas 55 €, 6 stundas 100 €, visa diena (8 h) 130 €. Ballītēm līdz 15 viesiem — 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15 — 3 stundas 130 €, katra nākamā stunda 30 €. Ilgākam laikam ir nedēļas pakete 550 € un mēneša abonements 460 €."],
+        ["Vai telpu var nomāt pa stundām?", "Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija."],
+        ["Kādus pasākumus var rīkot ROOM Jūrmala?", "ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus."],
+        ["Kur nosvinēt bērna dzimšanas dienu Jūrmalā?", "ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem."],
+        ["Cik cilvēkiem telpa ir piemērota?", "Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu."],
+        ["Vai telpā ir virtuve un vai drīkst atnest ēdienu?", "Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī."],
+        ["Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?", "ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu."],
+        ["Kā rezervēt vai apskatīt telpu pirms pasākuma?", "Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku."]
       ]
     },
     booking: {
@@ -157,14 +159,20 @@ const I18N = {
         "Stundas noma",
         "Ballīte līdz 15 viesiem",
         "Ballīte virs 15 viesiem",
+        "Dienas pakete",
+        "Nedēļas pakete",
+        "Mēneša abonements",
         "Individuāls piedāvājums"
-],
+      ],
       packageNotes: {
-        "hours": "Interesē telpas noma par 20 €/stundā.",
-        "day": "Interesē ballīte līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €.",
-        "week": "Interesē ballīte vairāk nekā 15 viesiem: 3 stundas 130 €, katra nākamā stunda 30 €.",
-        "month": "Vēlos vienoties par individuālu piedāvājumu."
-},
+        "hours": "Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?",
+        "party-small": "Interesē ballīte līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €.",
+        "party-large": "Interesē ballīte vairāk nekā 15 viesiem: 3 stundas 130 €, katra nākamā stunda 30 €.",
+        "day": "Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?",
+        "week": "Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?",
+        "month": "Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?",
+        "custom": "Vēlos vienoties par individuālu piedāvājumu."
+      },
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
@@ -282,7 +290,9 @@ const I18N = {
           type: 'Hourly room rental',
           period: 'per hour',
           features: [
-            "€20 per hour",
+            "3 hours €55",
+            "6 hours €100",
+            "Full day (8h) €130",
             'Full room access included',
             'Kitchen included',
             'Free parking'
@@ -313,6 +323,7 @@ const I18N = {
           features: [
             'Yoga & fitness sessions',
             'Professional photoshoots',
+            'Children’s camps and development groups',
             'Corporate events',
             'Regular room rental agreements',
             'Workshops of all kinds'
@@ -333,14 +344,14 @@ const I18N = {
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', "Hourly rental is €20 per hour. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests: €130 for 3 hours, then €30 per additional hour."],
-        ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
-        ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
-        ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
-        ['How many guests is the venue suitable for?', 'Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking.'],
-        ['Is there a kitchen and can we bring food?', 'The venue has a small kitchen and an area for food or drinks, so it works for children’s parties, family celebrations and workshops with a break. Food details and the exact layout are best agreed during booking.'],
-        ['Where is ROOM Jūrmala located and is parking available?', 'ROOM Jūrmala is located at Skolas iela 50, Jūrmala, LV-2016. Free parking is available by the building, and the room is easy to reach by car or public transport.'],
-        ['How can I book or view the venue before an event?', 'You can send a booking request through the website form, WhatsApp or by phone at +371 27 850 380. If you want to view the venue before your event, contact us in advance to agree on a suitable time.']
+        ["How much does ROOM Jūrmala cost to rent?", "Hourly rental starts from €20 per hour: 3 hours €55, 6 hours €100 and a full day (8 hours) €130. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests it is €130 for 3 hours, then €30 per additional hour. For longer bookings there is a week package at €550 and a monthly subscription at €460."],
+        ["Can the venue be rented by the hour?", "Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed."],
+        ["What events can be hosted at ROOM Jūrmala?", "ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings."],
+        ["Where can you celebrate a child’s birthday in Jūrmala?", "ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends."],
+        ["How many guests is the venue suitable for?", "Party packages are available for up to 15 guests and for larger groups over 15 guests. The best setup depends on the event type, table layout and planned activities, so it is best to mention the guest count when booking."],
+        ["Is there a kitchen and can we bring food?", "The venue has a small kitchen and an area for food or drinks, so it works for children’s parties, family celebrations and workshops with a break. Food details and the exact layout are best agreed during booking."],
+        ["Where is ROOM Jūrmala located and is parking available?", "ROOM Jūrmala is located at Skolas iela 50, Jūrmala, LV-2016. Free parking is available by the building, and the room is easy to reach by car or public transport."],
+        ["How can I book or view the venue before an event?", "You can send a booking request through the website form, WhatsApp or by phone at +371 27 850 380. If you want to view the venue before your event, contact us in advance to agree on a suitable time."]
       ]
     },
     booking: {
@@ -382,14 +393,20 @@ const I18N = {
         "Hourly rental",
         "Party with up to 15 guests",
         "Party with more than 15 guests",
+        "Day package",
+        "Week package",
+        "Monthly subscription",
         "Custom offer"
-],
+      ],
       packageNotes: {
-        "hours": "I am interested in hourly rental at €20 per hour.",
-        "day": "I am interested in a party for up to 15 guests: €100 for 3 hours, then €20 per additional hour.",
-        "week": "I am interested in a party for more than 15 guests: €130 for 3 hours, then €30 per additional hour.",
-        "month": "I would like to discuss a custom offer."
-},
+        "hours": "I am interested in renting the room for a few hours. Is it possible to book the room on this date and time?",
+        "party-small": "I am interested in a party for up to 15 guests: €100 for 3 hours, then €20 per additional hour.",
+        "party-large": "I am interested in a party for more than 15 guests: €130 for 3 hours, then €30 per additional hour.",
+        "day": "I am interested in the day package for €130. Is it possible to book the room on this date?",
+        "week": "I am interested in the week package for €550. Is it possible to book the room on this date?",
+        "month": "I am interested in the monthly subscription for €460 per month. Is it possible to agree on a regular booking time?",
+        "custom": "I would like to discuss a custom offer."
+      },
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
@@ -507,7 +524,9 @@ const I18N = {
           type: 'Почасовая аренда',
           period: 'в час',
           features: [
-            "20 €/час",
+            "3 часа 55 €",
+            "6 часов 100 €",
+            "Весь день (8ч) 130 €",
             'Весь зал включён',
             'Кухня включена',
             'Бесплатная парковка'
@@ -538,6 +557,7 @@ const I18N = {
           features: [
             'Аренда зала для йоги и фитнеса',
             'Профессиональные фотосессии',
+            'Детские лагеря и развивающие группы',
             'Корпоративные мероприятия',
             'Регулярная аренда зала',
             'Мастер-классы от А до Я'
@@ -558,14 +578,14 @@ const I18N = {
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', "Почасовая аренда — 20 €/час. Для праздников до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €. Если гостей больше 15: 3 часа — 130 €, каждый следующий час — 30 €."],
-        ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
-        ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
-        ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
-        ['На сколько гостей рассчитан зал?', 'Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей.'],
-        ['Есть ли кухня и можно ли принести еду?', 'В зале есть небольшая кухня и зона для еды или напитков, поэтому здесь удобно проводить детский праздник, семейное торжество или мастер-класс с перерывом. Детали по еде и расстановке лучше согласовать при бронировании.'],
-        ['Где находится ROOM Jūrmala и есть ли парковка?', 'ROOM Jūrmala находится по адресу Skolas iela 50, Jūrmala, LV-2016. У здания есть бесплатная парковка, до зала удобно добраться на машине или общественном транспорте.'],
-        ['Как забронировать или посмотреть зал перед мероприятием?', 'Заявку на бронирование можно отправить через форму на сайте, WhatsApp или по телефону +371 27 850 380. Если хотите посмотреть зал до мероприятия, свяжитесь заранее, чтобы договориться об удобном времени.']
+        ["Сколько стоит аренда ROOM Jūrmala?", "Почасовая аренда — от 20 € в час: 3 часа — 55 €, 6 часов — 100 €, весь день (8 часов) — 130 €. Для праздников до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €. Если гостей больше 15: 3 часа — 130 €, каждый следующий час — 30 €. Для более долгой аренды есть пакет на неделю за 550 € и месячный абонемент за 460 €."],
+        ["Можно ли арендовать зал по часам?", "Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день."],
+        ["Какие мероприятия можно проводить в ROOM Jūrmala?", "В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия."],
+        ["Где отметить день рождения ребенка в Юрмале?", "ROOM Jūrmala — хорошее место для детского дня рождения в Юрмале, если хочется праздника в своем кругу. Зал можно оформить по своему вкусу, принести еду и спокойно отметить с семьей и друзьями."],
+        ["На сколько гостей рассчитан зал?", "Пакеты для праздников рассчитаны на компании до 15 гостей и на группы больше 15 гостей. Лучший формат зависит от типа мероприятия, расстановки столов и активностей, поэтому при бронировании стоит указать количество гостей."],
+        ["Есть ли кухня и можно ли принести еду?", "В зале есть небольшая кухня и зона для еды или напитков, поэтому здесь удобно проводить детский праздник, семейное торжество или мастер-класс с перерывом. Детали по еде и расстановке лучше согласовать при бронировании."],
+        ["Где находится ROOM Jūrmala и есть ли парковка?", "ROOM Jūrmala находится по адресу Skolas iela 50, Jūrmala, LV-2016. У здания есть бесплатная парковка, до зала удобно добраться на машине или общественном транспорте."],
+        ["Как забронировать или посмотреть зал перед мероприятием?", "Заявку на бронирование можно отправить через форму на сайте, WhatsApp или по телефону +371 27 850 380. Если хотите посмотреть зал до мероприятия, свяжитесь заранее, чтобы договориться об удобном времени."]
       ]
     },
     booking: {
@@ -607,14 +627,20 @@ const I18N = {
         "Почасовая аренда",
         "Праздник до 15 гостей",
         "Праздник более 15 гостей",
+        "Пакет на день",
+        "Пакет на неделю",
+        "Месячный абонемент",
         "Индивидуальное предложение"
-],
+      ],
       packageNotes: {
-        "hours": "Интересует почасовая аренда за 20 €/час.",
-        "day": "Интересует праздник до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €.",
-        "week": "Интересует праздник более 15 гостей: 3 часа — 130 €, каждый следующий час — 30 €.",
-        "month": "Хочу обсудить индивидуальное предложение."
-},
+        "hours": "Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?",
+        "party-small": "Интересует праздник до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €.",
+        "party-large": "Интересует праздник более 15 гостей: 3 часа — 130 €, каждый следующий час — 30 €.",
+        "day": "Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?",
+        "week": "Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?",
+        "month": "Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?",
+        "custom": "Хочу обсудить индивидуальное предложение."
+      },
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
@@ -970,6 +996,20 @@ function setDateTimeValue(timeSlot) {
   }
 }
 
+function renderCalendarEventsPanel() {
+  if (!window.RoomJurmalaCalendar) return;
+  const grid = document.getElementById('calGrid');
+  window.RoomJurmalaCalendar.renderPanel({
+    widget: grid?.closest('.cal-widget'),
+    lang: currentLang,
+    selectedDateParts,
+    currentYear: curYear,
+    currentMonth: curMonth,
+    today,
+    formatDate: formatSelectedDate
+  });
+}
+
 function normalizeBookingPackage(packageValue) {
   return (packageValue || '').replace(/^package-/, '');
 }
@@ -1221,24 +1261,34 @@ function renderCalendar() {
     const cell = document.createElement('div');
     const isToday = (d === today.getDate() && curMonth === today.getMonth() && curYear === today.getFullYear());
     const isPast  = new Date(curYear, curMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const dateLabel = formatSelectedDate(d, curMonth);
+    const dateEvents = window.RoomJurmalaCalendar?.getEventsForDate(curYear, curMonth, d) || [];
+    const eventLabel = window.RoomJurmalaCalendar?.getCellEventLabel(dateEvents, currentLang) || "";
 
     cell.className = 'cal-cell' + (isToday ? ' today' : '') + (isPast ? ' past' : '');
+    if (dateEvents.length) {
+      cell.classList.add('has-events');
+      cell.setAttribute('aria-label', `${dateLabel}: ${eventLabel}`);
+    }
     if (selectedDateParts && selectedDateParts.day === d && selectedDateParts.month === curMonth && selectedDateParts.year === curYear) {
       cell.classList.add('free-sel');
     }
     cell.textContent = d;
     if (isPast) cell.style.opacity = '0.3';
     if (!isPast) {
-      cell.title = `${calendarCopy.freeLabel} — ${formatSelectedDate(d, curMonth)}`;
+      cell.title = dateEvents.length ? `${dateLabel}\n${eventLabel}` : `${calendarCopy.freeLabel} — ${dateLabel}`;
       cell.addEventListener('click', () => {
         document.querySelectorAll('.cal-cell.free-sel').forEach(c => c.classList.remove('free-sel'));
         cell.classList.add('free-sel');
         selectedDateParts = { day: d, month: curMonth, year: curYear };
         setDateTimeValue('');
+        renderCalendarEventsPanel();
       });
     }
     grid.appendChild(cell);
   }
+
+  renderCalendarEventsPanel();
 }
 
 document.getElementById('prevMonth').addEventListener('click', () => {
@@ -1461,7 +1511,53 @@ function handleBooking(e) {
   setTimeout(() => { window.open('https://wa.me/' + phone + '?text=' + msg, '_blank', 'noopener,noreferrer'); }, 500);
 }
 
+function loadLazyVideo(video) {
+  if (!video || video.dataset.loaded === 'true') return;
+  video.querySelectorAll('source[data-src]').forEach((source) => {
+    source.src = source.dataset.src;
+    source.removeAttribute('data-src');
+  });
+  video.dataset.loaded = 'true';
+  video.load();
+  if (video.autoplay) {
+    video.play().catch(() => {});
+  }
+}
+
+function initLazyVideos() {
+  const videos = document.querySelectorAll('video[data-lazy-video]');
+  if (!videos.length) return;
+  const rootMarginPx = 180;
+
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(loadLazyVideo);
+    return;
+  }
+
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      loadLazyVideo(entry.target);
+      videoObserver.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: `${rootMarginPx}px 0px`,
+    threshold: 0
+  });
+
+  videos.forEach((video) => {
+    const rect = video.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewportHeight + rootMarginPx && rect.bottom > -rootMarginPx) {
+      loadLazyVideo(video);
+      return;
+    }
+    videoObserver.observe(video);
+  });
+}
+
 applyLanguage(currentLang);
+initLazyVideos();
 
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -1474,3 +1570,5 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
+
+window.addEventListener("room-events-updated", () => renderCalendar());

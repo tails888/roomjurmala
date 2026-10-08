@@ -27,8 +27,11 @@ const SERVICE_BOOKING_COPY = {
       "Stundas noma",
       "Ballīte līdz 15 viesiem",
       "Ballīte virs 15 viesiem",
+      "Dienas pakete",
+      "Nedēļas pakete",
+      "Mēneša abonements",
       "Individuāls piedāvājums"
-],
+    ],
     errors: {
       required: "Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.",
       invalidTime: "Lūdzu ievadiet laiku formātā 14:00.",
@@ -56,8 +59,11 @@ const SERVICE_BOOKING_COPY = {
       "Hourly rental",
       "Party with up to 15 guests",
       "Party with more than 15 guests",
+      "Day package",
+      "Week package",
+      "Monthly subscription",
       "Custom offer"
-],
+    ],
     errors: {
       required: "Please fill in your name, phone, booking type, event type, date and time.",
       invalidTime: "Please enter the time in 14:00 format.",
@@ -85,8 +91,11 @@ const SERVICE_BOOKING_COPY = {
       "Почасовая аренда",
       "Праздник до 15 гостей",
       "Праздник более 15 гостей",
+      "Пакет на день",
+      "Пакет на неделю",
+      "Месячный абонемент",
       "Индивидуальное предложение"
-],
+    ],
     errors: {
       required: "Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.",
       invalidTime: "Пожалуйста, укажите время в формате 14:00.",
@@ -125,6 +134,20 @@ function serviceBookingSetDateTimeValue(timeSlot) {
   else if (timeSlot) input.value = timeSlot;
 }
 
+function serviceBookingRenderEventsPanel() {
+  if (!window.RoomJurmalaCalendar) return;
+  const grid = document.getElementById("calGrid");
+  window.RoomJurmalaCalendar.renderPanel({
+    widget: grid?.closest(".cal-widget"),
+    lang: serviceBookingLang,
+    selectedDateParts: serviceBookingDateParts,
+    currentYear: serviceBookingYear,
+    currentMonth: serviceBookingMonth,
+    today: serviceBookingToday,
+    formatDate: serviceBookingFormatDate
+  });
+}
+
 function serviceBookingRenderCalendar() {
   const label = document.getElementById("calMonthLabel");
   const grid = document.getElementById("calGrid");
@@ -150,11 +173,17 @@ function serviceBookingRenderCalendar() {
       && serviceBookingYear === serviceBookingToday.getFullYear();
     const isPast = new Date(serviceBookingYear, serviceBookingMonth, day)
       < new Date(serviceBookingToday.getFullYear(), serviceBookingToday.getMonth(), serviceBookingToday.getDate());
+    const dateLabel = serviceBookingFormatDate(day, serviceBookingMonth);
+    const dateEvents = window.RoomJurmalaCalendar?.getEventsForDate(serviceBookingYear, serviceBookingMonth, day) || [];
+    const eventLabel = window.RoomJurmalaCalendar?.getCellEventLabel(dateEvents, serviceBookingLang) || "";
 
     cell.type = "button";
     cell.className = "cal-cell" + (isToday ? " today" : "") + (isPast ? " past" : "");
     cell.textContent = day;
-    cell.setAttribute("aria-label", `${serviceBookingCopy.freeLabel} - ${serviceBookingFormatDate(day, serviceBookingMonth)}`);
+    cell.setAttribute("aria-label", dateEvents.length ? `${dateLabel}: ${eventLabel}` : `${serviceBookingCopy.freeLabel} - ${dateLabel}`);
+    if (dateEvents.length) {
+      cell.classList.add("has-events");
+    }
 
     if (
       serviceBookingDateParts
@@ -169,17 +198,20 @@ function serviceBookingRenderCalendar() {
       cell.disabled = true;
       cell.style.opacity = "0.3";
     } else {
-      cell.title = `${serviceBookingCopy.freeLabel} - ${serviceBookingFormatDate(day, serviceBookingMonth)}`;
+      cell.title = dateEvents.length ? `${dateLabel}\n${eventLabel}` : `${serviceBookingCopy.freeLabel} - ${dateLabel}`;
       cell.addEventListener("click", () => {
         document.querySelectorAll(".cal-cell.free-sel").forEach((node) => node.classList.remove("free-sel"));
         cell.classList.add("free-sel");
         serviceBookingDateParts = { day, month: serviceBookingMonth, year: serviceBookingYear };
         serviceBookingSetDateTimeValue("");
+        serviceBookingRenderEventsPanel();
       });
     }
 
     grid.appendChild(cell);
   }
+
+  serviceBookingRenderEventsPanel();
 }
 
 function serviceBookingFormatTime(value) {
@@ -358,3 +390,5 @@ if ("IntersectionObserver" in window) {
 } else {
   serviceBookingRevealEls.forEach((el) => el.classList.add("visible"));
 }
+
+window.addEventListener("room-events-updated", () => serviceBookingRenderCalendar());

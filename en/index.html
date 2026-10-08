@@ -190,7 +190,7 @@
       "name": "How much does ROOM Jūrmala cost to rent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Hourly rental is €20 per hour. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests: €130 for 3 hours, then €30 per additional hour."
+        "text": "Hourly rental starts from €20 per hour: 3 hours €55, 6 hours €100 and a full day (8 hours) €130. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests it is €130 for 3 hours, then €30 per additional hour. For longer bookings there is a week package at €550 and a monthly subscription at €460."
       }
     },
     {
@@ -211,10 +211,10 @@
     },
     {
       "@type": "Question",
-      "name": "Is ROOM Jūrmala suitable for children’s birthdays?",
+      "name": "Where can you celebrate a child’s birthday in Jūrmala?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event."
+        "text": "ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends."
       }
     },
     {
@@ -262,8 +262,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&amp;family=Caveat:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Marck+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260524-pricing-type" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="/styles.css?v=20261008-may-restore" />
 </head>
 <body>
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
@@ -277,7 +278,7 @@
     <a href="#calendar" class="nav-cta nav-cta-mobile">Book</a>
   </div>
   <a href="#" class="nav-logo">
-    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
   </a>
   <div class="nav-links">
     <a href="/en/telpa/">The space</a>
@@ -314,8 +315,8 @@
 
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/gallery/space-open.jpeg">
-    <source src="/assets/videos/room-jurmala-privats-pasakums.mp4" type="video/mp4" />
+  <video class="hero-video" autoplay muted loop playsinline  poster="/assets/images/gallery/space-open.jpeg" preload="none" data-lazy-video>
+    <source data-src="/assets/videos/room-jurmala-privats-pasakums.mp4" type="video/mp4" />
   </video>
   <div class="hero-overlay"></div>
   <span class="paw-trail" aria-hidden="true"></span>
@@ -341,8 +342,8 @@
     <div class="cat-grid">
       <!-- Card 1 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/gallery/soft-play.jpeg">
-          <source src="/assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="/assets/images/gallery/soft-play.jpeg" preload="none" data-lazy-video>
+          <source data-src="/assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -353,8 +354,8 @@
       </div>
       <!-- Card 2 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/gallery/creative-table.jpeg">
-          <source src="/assets/videos/room-jurmala-radosa-darbnica-berniem.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="/assets/images/gallery/creative-table.jpeg" preload="none" data-lazy-video>
+          <source data-src="/assets/videos/room-jurmala-radosa-darbnica-berniem.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -365,8 +366,8 @@
       </div>
       <!-- Card 3 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/gallery/activity-room.jpeg">
-          <source src="/assets/videos/room-jurmala-telpas-ieeja.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="/assets/images/gallery/activity-room.jpeg" preload="none" data-lazy-video>
+          <source data-src="/assets/videos/room-jurmala-telpas-ieeja.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -377,8 +378,8 @@
       </div>
       <!-- Card 4 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="/assets/images/gallery/kitchen-dining.jpeg">
-          <source src="/assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="/assets/images/gallery/kitchen-dining.jpeg" preload="none" data-lazy-video>
+          <source data-src="/assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -396,8 +397,8 @@
   <div class="container">
     <div class="feat-layout">
       <div class="feat-visual reveal">
-        <video class="feat-video" autoplay muted loop playsinline>
-          <source src="/assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
+        <video class="feat-video" autoplay muted loop playsinline preload="none" data-lazy-video>
+          <source data-src="/assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="reveal">
@@ -506,7 +507,9 @@
         <div class="price-period">per hour</div>
         <hr class="price-divider"/>
         <ul class="price-features">
-          <li>€20 per hour</li>
+          <li>3 hours €55</li>
+          <li>6 hours €100</li>
+          <li>Full day (8h) €130</li>
           <li>Full room access included</li>
           <li>Kitchen included</li>
           <li>Free parking</li>
@@ -533,7 +536,7 @@
           <li>3 hours for €130</li>
           <li>Additional hours €30 each</li>
         </ul>
-        <a href="#calendar" data-booking-package="day" class="price-cta solid">Request package</a>
+        <a href="#calendar" data-booking-package="party-small" class="price-cta solid">Request package</a>
       </div>
       <!-- Custom -->
       <div class="price-card reveal">
@@ -545,14 +548,15 @@
         <ul class="price-features">
           <li>Yoga & fitness sessions</li>
           <li>Professional photoshoots</li>
+          <li>Children’s camps and development groups</li>
           <li>Corporate events</li>
           <li>Regular room rental agreements</li>
           <li>Workshops of all kinds</li>
-          <li>Meistarklases no A–Z</li>
         </ul>
         <a href="tel:+37127850380" class="price-cta outline">Contact us</a>
       </div>
     </div>
+    <p class="pricing-more reveal"><a href="/en/cenas/">All prices and calculator →</a></p>
   </div>
 </section>
 
@@ -588,25 +592,28 @@
         <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
         <form onsubmit="handleBooking(event)" novalidate>
           <div class="booking-field">
-            <label>Your name</label>
+            <label for="customerName">Your name</label>
             <input type="text" id="customerName" placeholder="Name, Surname" maxlength="80" autocomplete="name" required />
           </div>
           <div class="booking-field">
-            <label>Phone</label>
+            <label for="customerPhone">Phone</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
           </div>
           <div class="booking-field">
-            <label>Rental type</label>
+            <label for="bookingPackageSelect">Rental type</label>
             <select id="bookingPackageSelect" required>
               <option value="">Choose rental type...</option>
               <option value="hours">Hourly rental</option>
-              <option value="day">Party with up to 15 guests</option>
-              <option value="week">Party with more than 15 guests</option>
-              <option value="month">Custom offer</option>
+              <option value="party-small">Party with up to 15 guests</option>
+              <option value="party-large">Party with more than 15 guests</option>
+              <option value="day">Day package</option>
+              <option value="week">Week package</option>
+              <option value="month">Monthly subscription</option>
+              <option value="custom">Custom offer</option>
             </select>
           </div>
           <div class="booking-field">
-            <label>Event type</label>
+            <label for="eventTypeSelect">Event type</label>
             <select id="eventTypeSelect" required>
               <option value="">Choose event type...</option>
               <option>🎈 Children’s birthday</option>
@@ -623,18 +630,18 @@
             </select>
           </div>
           <div class="booking-field">
-            <label>Date</label>
+            <label for="desiredDateTime">Date</label>
             <input id="desiredDateTime" type="text" placeholder="e.g. 20 April" maxlength="80" required />
           </div>
           <div class="booking-field">
-            <label>Time</label>
+            <label for="startTimeDesktop">Time</label>
             <div class="booking-time-row">
               <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="From, e.g. 14:00" />
               <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Until, e.g. 17:00" />
             </div>
           </div>
           <div class="booking-field">
-            <label>Notes</label>
+            <label for="bookingNotes">Notes</label>
             <textarea id="bookingNotes" placeholder="How many guests? Any special requests?" maxlength="500"></textarea>
           </div>
           <div class="booking-submit-wrap">
@@ -660,7 +667,7 @@
       <div class="faq-list reveal">
         <details class="faq-item">
           <summary class="faq-question">How much does ROOM Jūrmala cost to rent?</summary>
-          <p class="faq-answer">Hourly rental is €20 per hour. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests: €130 for 3 hours, then €30 per additional hour.</p>
+          <p class="faq-answer">Hourly rental starts from €20 per hour: 3 hours €55, 6 hours €100 and a full day (8 hours) €130. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests it is €130 for 3 hours, then €30 per additional hour. For longer bookings there is a week package at €550 and a monthly subscription at €460.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Can the venue be rented by the hour?</summary>
@@ -671,8 +678,8 @@
           <p class="faq-answer">ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.</p>
         </details>
         <details class="faq-item">
-          <summary class="faq-question">Is ROOM Jūrmala suitable for children’s birthdays?</summary>
-          <p class="faq-answer">Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.</p>
+          <summary class="faq-question">Where can you celebrate a child’s birthday in Jūrmala?</summary>
+          <p class="faq-answer">ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">How many guests is the venue suitable for?</summary>
@@ -837,10 +844,12 @@
     <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener noreferrer">Review</a>
   </div>
   <span class="footer-copy">© 2026 Room Jūrmala. All rights reserved.</span>
+  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
 </footer>
 
 <!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
 <script>window.ROOM_PAGE_LANG = "en";</script>
-<script src="/script.js?v=20261008-party-pricing"></script>
+<script src="/calendar-events.js?v=20261008-admin-events"></script>
+<script src="/script.js?v=20261008-may-restore"></script>
 </body>
 </html>

@@ -198,7 +198,7 @@
       "name": "Cik maksā telpu noma ROOM Jūrmala?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €."
+        "text": "Stundas noma maksā no 20 € stundā: 3 stundas 55 €, 6 stundas 100 €, visa diena (8 h) 130 €. Ballītēm līdz 15 viesiem — 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15 — 3 stundas 130 €, katra nākamā stunda 30 €. Ilgākam laikam ir nedēļas pakete 550 € un mēneša abonements 460 €."
       }
     },
     {
@@ -219,10 +219,10 @@
     },
     {
       "@type": "Question",
-      "name": "Vai ROOM Jūrmala der bērnu dzimšanas dienām?",
+      "name": "Kur nosvinēt bērna dzimšanas dienu Jūrmalā?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai."
+        "text": "ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem."
       }
     },
     {
@@ -270,8 +270,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&amp;family=Caveat:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Marck+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260524-pricing-type" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="styles.css?v=20261008-may-restore" />
 </head>
 <body>
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
@@ -285,7 +286,7 @@
     <a href="#calendar" class="nav-cta nav-cta-mobile">Rezervēt</a>
   </div>
   <a href="#" class="nav-logo">
-    <img src="assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+    <img src="assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
   </a>
   <div class="nav-links">
     <a href="/telpa/">Telpa</a>
@@ -322,8 +323,8 @@
 
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/images/gallery/space-open.jpeg">
-    <source src="assets/videos/room-jurmala-privats-pasakums.mp4" type="video/mp4" />
+  <video class="hero-video" autoplay muted loop playsinline  poster="assets/images/gallery/space-open.jpeg" preload="none" data-lazy-video>
+    <source data-src="assets/videos/room-jurmala-privats-pasakums.mp4" type="video/mp4" />
   </video>
   <div class="hero-overlay"></div>
   <span class="paw-trail" aria-hidden="true"></span>
@@ -349,8 +350,8 @@
     <div class="cat-grid">
       <!-- Card 1 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="assets/images/gallery/soft-play.jpeg">
-          <source src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/soft-play.jpeg" preload="none" data-lazy-video>
+          <source data-src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -361,8 +362,8 @@
       </div>
       <!-- Card 2 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="assets/images/gallery/creative-table.jpeg">
-          <source src="assets/videos/room-jurmala-radosa-darbnica-berniem.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/creative-table.jpeg" preload="none" data-lazy-video>
+          <source data-src="assets/videos/room-jurmala-radosa-darbnica-berniem.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -373,8 +374,8 @@
       </div>
       <!-- Card 3 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="assets/images/gallery/activity-room.jpeg">
-          <source src="assets/videos/room-jurmala-telpas-ieeja.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/activity-room.jpeg" preload="none" data-lazy-video>
+          <source data-src="assets/videos/room-jurmala-telpas-ieeja.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -385,8 +386,8 @@
       </div>
       <!-- Card 4 — with video -->
       <div class="cat-card reveal">
-        <video class="cat-card-video" autoplay muted loop playsinline preload="auto" poster="assets/images/gallery/kitchen-dining.jpeg">
-          <source src="assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4" type="video/mp4" />
+        <video class="cat-card-video" autoplay muted loop playsinline  poster="assets/images/gallery/kitchen-dining.jpeg" preload="none" data-lazy-video>
+          <source data-src="assets/videos/room-jurmala-vingrosanas-nodarbiba.mp4" type="video/mp4" />
         </video>
         <div class="cat-overlay"></div>
         <div class="cat-content">
@@ -404,8 +405,8 @@
   <div class="container">
     <div class="feat-layout">
       <div class="feat-visual reveal">
-        <video class="feat-video" autoplay muted loop playsinline>
-          <source src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
+        <video class="feat-video" autoplay muted loop playsinline preload="none" data-lazy-video>
+          <source data-src="assets/videos/room-jurmala-bernu-nodarbiba.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="reveal">
@@ -514,7 +515,9 @@
         <div class="price-period">par stundu</div>
         <hr class="price-divider"/>
         <ul class="price-features">
-          <li>20 €/stundā</li>
+          <li>3 stundas 55 €</li>
+          <li>6 stundas 100 €</li>
+          <li>Visa diena (8h) 130 €</li>
           <li>Visa telpa iekļauta</li>
           <li>Virtuve iekļauta</li>
           <li>Bezmaksas autostāvvieta</li>
@@ -541,7 +544,7 @@
           <li>3 stundas 130€</li>
           <li>Katra nākamā stunda 30€</li>
         </ul>
-        <a href="#calendar" data-booking-package="day" class="price-cta solid">Pieprasīt paketi</a>
+        <a href="#calendar" data-booking-package="party-small" class="price-cta solid">Pieprasīt paketi</a>
       </div>
       <!-- Custom -->
       <div class="price-card reveal">
@@ -561,6 +564,7 @@
         <a href="tel:+37127850380" class="price-cta outline">Sazināties</a>
       </div>
     </div>
+    <p class="pricing-more reveal"><a href="/cenas/">Visas cenas un kalkulators →</a></p>
   </div>
 </section>
 
@@ -596,25 +600,28 @@
         <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
         <form onsubmit="handleBooking(event)" novalidate>
           <div class="booking-field">
-            <label>Jūsu vārds</label>
+            <label for="customerName">Jūsu vārds</label>
             <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
           </div>
           <div class="booking-field">
-            <label>Tālrunis</label>
+            <label for="customerPhone">Tālrunis</label>
             <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
           </div>
           <div class="booking-field">
-            <label>Nomas veids</label>
+            <label for="bookingPackageSelect">Nomas veids</label>
             <select id="bookingPackageSelect" required>
               <option value="">Izvēlieties nomas veidu...</option>
               <option value="hours">Stundas noma</option>
-              <option value="day">Ballīte līdz 15 viesiem</option>
-              <option value="week">Ballīte virs 15 viesiem</option>
-              <option value="month">Individuāls piedāvājums</option>
+              <option value="party-small">Ballīte līdz 15 viesiem</option>
+              <option value="party-large">Ballīte virs 15 viesiem</option>
+              <option value="day">Dienas pakete</option>
+              <option value="week">Nedēļas pakete</option>
+              <option value="month">Mēneša abonements</option>
+              <option value="custom">Individuāls piedāvājums</option>
             </select>
           </div>
           <div class="booking-field">
-            <label>Pasākuma veids</label>
+            <label for="eventTypeSelect">Pasākuma veids</label>
             <select id="eventTypeSelect" required>
               <option value="">Izvēlieties pasākuma veidu...</option>
               <option>🎈 Bērnu dzimšanas diena</option>
@@ -631,18 +638,18 @@
             </select>
           </div>
           <div class="booking-field">
-            <label>Datums</label>
+            <label for="desiredDateTime">Datums</label>
             <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
           </div>
           <div class="booking-field">
-            <label>Laiks</label>
+            <label for="startTimeDesktop">Laiks</label>
             <div class="booking-time-row">
               <input type="text" id="startTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="No, piem. 14:00" />
               <input type="text" id="endTimeDesktop" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="Līdz, piem. 17:00" />
             </div>
           </div>
           <div class="booking-field">
-            <label>Piezīmes</label>
+            <label for="bookingNotes">Piezīmes</label>
             <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
           </div>
           <div class="booking-submit-wrap">
@@ -668,7 +675,7 @@
       <div class="faq-list reveal">
         <details class="faq-item">
           <summary class="faq-question">Cik maksā telpu noma ROOM Jūrmala?</summary>
-          <p class="faq-answer">Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €.</p>
+          <p class="faq-answer">Stundas noma maksā no 20 € stundā: 3 stundas 55 €, 6 stundas 100 €, visa diena (8 h) 130 €. Ballītēm līdz 15 viesiem — 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15 — 3 stundas 130 €, katra nākamā stunda 30 €. Ilgākam laikam ir nedēļas pakete 550 € un mēneša abonements 460 €.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Vai telpu var nomāt pa stundām?</summary>
@@ -679,8 +686,8 @@
           <p class="faq-answer">ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.</p>
         </details>
         <details class="faq-item">
-          <summary class="faq-question">Vai ROOM Jūrmala der bērnu dzimšanas dienām?</summary>
-          <p class="faq-answer">Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.</p>
+          <summary class="faq-question">Kur nosvinēt bērna dzimšanas dienu Jūrmalā?</summary>
+          <p class="faq-answer">ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Cik cilvēkiem telpa ir piemērota?</summary>
@@ -845,10 +852,12 @@
     <a href="https://g.page/r/CT3OJohvycNaEBM/review" target="_blank" rel="noopener noreferrer">Atsauksme</a>
   </div>
   <span class="footer-copy">© 2026 Room Jūrmala. Visas tiesības aizsargātas.</span>
+  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
 </footer>
 
 <!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
 <script>window.ROOM_PAGE_LANG = "lv";</script>
-<script src="script.js?v=20261008-party-pricing"></script>
+<script src="calendar-events.js?v=20261008-admin-events"></script>
+<script src="script.js?v=20261008-may-restore"></script>
 </body>
 </html>

@@ -148,10 +148,10 @@
       },
       {
         "@type": "Question",
-        "name": "Is the venue suitable for children’s birthdays?",
+        "name": "Where can you celebrate a child’s birthday in Jūrmala?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, the venue has a play area, soft play elements, room for activities and a place for a celebration table. It works well for children’s birthdays and small family celebrations in Jūrmala."
+          "text": "ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends."
         }
       },
       {
@@ -231,8 +231,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&amp;family=Caveat:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Marck+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260524-faq-details" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="/styles.css?v=20261008-may-restore" />
 </head>
 <body class="services-page">
 <nav>
@@ -245,7 +246,7 @@
     <a href="#calendar" class="nav-cta nav-cta-mobile">Book</a>
   </div>
   <a href="/en/" class="nav-logo">
-    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
   </a>
   <div class="nav-links">
     <a href="/en/telpa/">The space</a>
@@ -398,8 +399,8 @@
             <p class="faq-answer">Yes, the venue can be arranged for a party, class, workshop, photoshoot or small seminar. Tables, chairs, a small kitchen and an open activity area are available.</p>
           </details>
           <details class="faq-item">
-            <summary class="faq-question">Is the venue suitable for children’s birthdays?</summary>
-            <p class="faq-answer">Yes, the venue has a play area, soft play elements, room for activities and a place for a celebration table. It works well for children’s birthdays and small family celebrations in Jūrmala.</p>
+            <summary class="faq-question">Where can you celebrate a child’s birthday in Jūrmala?</summary>
+            <p class="faq-answer">ROOM Jūrmala is a good place for a child’s birthday in Jūrmala if you want to celebrate with your own group. You can arrange the room to your taste, bring your own food and enjoy a relaxed celebration with family and friends.</p>
           </details>
           <details class="faq-item">
             <summary class="faq-question">Can the venue be used for family celebrations and private events?</summary>
@@ -468,25 +469,28 @@
           <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
           <form onsubmit="handleBooking(event)" novalidate>
             <div class="booking-field">
-              <label>Your name</label>
+              <label for="customerName">Your name</label>
               <input type="text" id="customerName" placeholder="Name, Surname" maxlength="80" autocomplete="name" required />
             </div>
             <div class="booking-field">
-              <label>Phone</label>
+              <label for="customerPhone">Phone</label>
               <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
             </div>
             <div class="booking-field">
-              <label>Rental type</label>
+              <label for="bookingPackageSelect">Rental type</label>
               <select id="bookingPackageSelect" required>
                 <option value="">Choose rental type...</option>
                 <option value="hours">Hourly rental</option>
-                <option value="day">Party with up to 15 guests</option>
-                <option value="week">Party with more than 15 guests</option>
-                <option value="month">Custom offer</option>
+                <option value="party-small">Party with up to 15 guests</option>
+                <option value="party-large">Party with more than 15 guests</option>
+                <option value="day">Day package</option>
+                <option value="week">Week package</option>
+                <option value="month">Monthly subscription</option>
+                <option value="custom">Custom offer</option>
               </select>
             </div>
             <div class="booking-field">
-              <label>Event type</label>
+              <label for="eventTypeSelect">Event type</label>
               <select id="eventTypeSelect" required>
                 <option value="">Choose event type...</option>
                 <option>Children's birthday</option>
@@ -503,18 +507,18 @@
               </select>
             </div>
             <div class="booking-field">
-              <label>Date</label>
+              <label for="desiredDateTime">Date</label>
               <input id="desiredDateTime" type="text" placeholder="e.g. 20 April" maxlength="80" required />
             </div>
             <div class="booking-field">
-              <label>Time</label>
+              <label for="startTimeDesktop">Time</label>
               <div class="booking-time-row">
                 <input type="text" id="startTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Start time" placeholder="From, e.g. 14:00" />
                 <input type="text" id="endTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="End time" placeholder="Until, e.g. 17:00" />
               </div>
             </div>
             <div class="booking-field">
-              <label>Notes</label>
+              <label for="bookingNotes">Notes</label>
               <textarea id="bookingNotes" placeholder="How many guests? Any special requests?" maxlength="500"></textarea>
             </div>
             <div class="booking-submit-wrap">
@@ -554,9 +558,11 @@
     <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
   </div>
   <span class="footer-copy">© 2026 Room Jūrmala. All rights reserved.</span>
+  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
 </footer>
 
-<script src="/services-booking.js?v=20261008-party-pricing"></script>
+<script src="/calendar-events.js?v=20261008-admin-events"></script>
+<script src="/services-booking.js?v=20261008-may-restore"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');

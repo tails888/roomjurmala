@@ -148,10 +148,10 @@
       },
       {
         "@type": "Question",
-        "name": "Vai telpa piemērota bērnu dzimšanas dienām?",
+        "name": "Kur nosvinēt bērna dzimšanas dienu Jūrmalā?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Jā, telpā ir rotaļu zona, mīkstie elementi, vieta aktivitātēm un zona svinību galdam. Tā der bērnu dzimšanas dienām un nelielām ģimenes svinībām Jūrmalā."
+          "text": "ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem."
         }
       },
       {
@@ -231,8 +231,9 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/favicon-512.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&amp;family=Caveat:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Marck+Script&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260524-faq-details" />
+  <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
+  <link rel="stylesheet" href="/styles.css?v=20261008-may-restore" />
 </head>
 <body class="services-page">
 <nav>
@@ -245,7 +246,7 @@
     <a href="#calendar" class="nav-cta nav-cta-mobile">Rezervēt</a>
   </div>
   <a href="/" class="nav-logo">
-    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" />
+    <img src="/assets/images/brand/logo-header.png" alt="ROOM Jūrmala" width="560" height="374" />
   </a>
   <div class="nav-links">
     <a href="/telpa/">Telpa</a>
@@ -398,8 +399,8 @@
             <p class="faq-answer">Jā, telpu var sakārtot ballītei, nodarbībai, darbnīcai, fotosesijai vai nelielam semināram. Pieejami galdi, krēsli, virtuvīte un brīva zona aktivitātēm.</p>
           </details>
           <details class="faq-item">
-            <summary class="faq-question">Vai telpa piemērota bērnu dzimšanas dienām?</summary>
-            <p class="faq-answer">Jā, telpā ir rotaļu zona, mīkstie elementi, vieta aktivitātēm un zona svinību galdam. Tā der bērnu dzimšanas dienām un nelielām ģimenes svinībām Jūrmalā.</p>
+            <summary class="faq-question">Kur nosvinēt bērna dzimšanas dienu Jūrmalā?</summary>
+            <p class="faq-answer">ROOM Jūrmala ir laba vieta bērna dzimšanas dienai Jūrmalā, ja gribas svinības savā lokā. Telpu var iekārtot pēc savas gaumes, atnest ēdienu un mierīgi nosvinēt ar ģimeni un draugiem.</p>
           </details>
           <details class="faq-item">
             <summary class="faq-question">Vai telpa der ģimenes svinībām un privātiem pasākumiem?</summary>
@@ -468,25 +469,28 @@
           <p class="booking-error" id="bookingError" role="alert" aria-live="polite" hidden></p>
           <form onsubmit="handleBooking(event)" novalidate>
             <div class="booking-field">
-              <label>Jūsu vārds</label>
+              <label for="customerName">Jūsu vārds</label>
               <input type="text" id="customerName" placeholder="Vārds, Uzvārds" maxlength="80" autocomplete="name" required />
             </div>
             <div class="booking-field">
-              <label>Tālrunis</label>
+              <label for="customerPhone">Tālrunis</label>
               <input type="tel" id="customerPhone" placeholder="+371 2X XXX XXX" maxlength="20" autocomplete="tel" required />
             </div>
             <div class="booking-field">
-              <label>Nomas veids</label>
+              <label for="bookingPackageSelect">Nomas veids</label>
               <select id="bookingPackageSelect" required>
                 <option value="">Izvēlieties nomas veidu...</option>
                 <option value="hours">Stundas noma</option>
-                <option value="day">Ballīte līdz 15 viesiem</option>
-                <option value="week">Ballīte virs 15 viesiem</option>
-                <option value="month">Individuāls piedāvājums</option>
+                <option value="party-small">Ballīte līdz 15 viesiem</option>
+                <option value="party-large">Ballīte virs 15 viesiem</option>
+                <option value="day">Dienas pakete</option>
+                <option value="week">Nedēļas pakete</option>
+                <option value="month">Mēneša abonements</option>
+                <option value="custom">Individuāls piedāvājums</option>
               </select>
             </div>
             <div class="booking-field">
-              <label>Pasākuma veids</label>
+              <label for="eventTypeSelect">Pasākuma veids</label>
               <select id="eventTypeSelect" required>
                 <option value="">Izvēlieties pasākuma veidu...</option>
                 <option>Bērnu dzimšanas diena</option>
@@ -503,18 +507,18 @@
               </select>
             </div>
             <div class="booking-field">
-              <label>Datums</label>
+              <label for="desiredDateTime">Datums</label>
               <input id="desiredDateTime" type="text" placeholder="piem. 20. aprīlis" maxlength="80" required />
             </div>
             <div class="booking-field">
-              <label>Laiks</label>
+              <label for="startTimeDesktop">Laiks</label>
               <div class="booking-time-row">
                 <input type="text" id="startTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Sākuma laiks" placeholder="No, piem. 14:00" />
                 <input type="text" id="endTimeDesktop" inputmode="tel" maxlength="5" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Beigu laiks" placeholder="Līdz, piem. 17:00" />
               </div>
             </div>
             <div class="booking-field">
-              <label>Piezīmes</label>
+              <label for="bookingNotes">Piezīmes</label>
               <textarea id="bookingNotes" placeholder="Cik cilvēku? Īpašas vēlmes?" maxlength="500"></textarea>
             </div>
             <div class="booking-submit-wrap">
@@ -554,9 +558,11 @@
     <a href="https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/" target="_blank" rel="noopener noreferrer">Facebook</a>
   </div>
   <span class="footer-copy">© 2026 Room Jūrmala. Visas tiesības aizsargātas.</span>
+  <span class="footer-credit">Made by <a href="https://seolatvija.lv/" target="_blank" rel="noopener">SEO Latvija</a></span>
 </footer>
 
-<script src="/services-booking.js?v=20261008-party-pricing"></script>
+<script src="/calendar-events.js?v=20261008-admin-events"></script>
+<script src="/services-booking.js?v=20261008-may-restore"></script>
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const mobileMenu = document.getElementById('mobileMenu');
