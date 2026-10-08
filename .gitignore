@@ -1,7 +1,2 @@
 .DS_Store
 Thumbs.db
-node_modules/
-.qa/
-design-concepts/
-dist/
-*.blend1
