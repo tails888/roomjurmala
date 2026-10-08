@@ -49,47 +49,50 @@ const I18N = {
       cta: 'Pastāsti kā mums izdevās'
     },
     pricing: {
-      tag: 'Paketes',
-      titleHtml: 'Dienas, nedēļas, mēneša',
+      tag: 'Cenas',
+      titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
       cards: {
         hourly: {
-          type: 'Viena diena',
-          amountHtml: '<sup>€</sup>130',
-          lead: 'Dienas pakete',
-          summary: 'Pilna diena vienreizējam pasākumam vai intensīvam darbam.',
-          period: '/ 8 stundas',
+          type: 'Stundas noma',
+          period: 'par stundu',
           features: [
-            'Ietaupi 30€ · 16.25€/h'
+            "20 €/stundā",
+            'Visa telpa iekļauta',
+            'Virtuve iekļauta',
+            'Bezmaksas autostāvvieta'
           ],
-          cta: 'Rezervēt dienu'
+          cta: 'Rezervēt'
         },
         party: {
           popular: 'Populārākais',
-          type: 'Nedēļa · 40h kopā',
-          amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Nedēļas pakete',
-          summary: '5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.',
-          perEvent: '/ 5 dienas',
+          type: 'Ballītes pakete',
+          forUpTo: 'Ballītēm līdz 15 viesiem',
+          perEvent: 'par pasākumu',
           featuresPrimary: [
-            'Ietaupi 250€ · 13.75€/h'
+            '3 stundas 100€',
+            'Katra nākamā stunda 20€',
+            'Visa telpa privātam pasākumam'
           ],
-          moreThan15: 'Laba izvēle',
+          moreThan15: 'Ja viesu skaits pārsniedz 15 cilvēkus',
           featuresSecondary: [
-            'Bērnu nometnēm',
-            'Kursiem un meistarklasēm'
+            '3 stundas 130€',
+            'Katra nākamā stunda 30€'
           ],
-          cta: 'Rezervēt nedēļu'
+          cta: 'Pieprasīt paketi'
         },
         custom: {
-          type: 'Regulāri · mēnesī',
-          amountHtml: '<sup>€</sup>460',
-          lead: 'Abonements',
-          summary: 'Mēneša risinājums nodarbībām un grupām.',
-          period: '/ mēnesī · min. 3 mēneši',
+          type: 'Individuāls piedāvājums',
+          amountHtml: 'Pēc<br/>vienošanās',
+          period: 'semināri, fotosesijas, treneru nodarbības, nometnes',
           features: [
-            'Ietaupi 180€/mēn · 8h nedēļā'
+            'Jogas un fitnesa nodarbības',
+            'Profesionālas fotosesijas',
+            'Bērnu nometnes un attīstības grupas',
+            'Korporatīvie pasākumi',
+            'Regulāri nomas līgumi',
+            'Meistarklases no A–Z'
           ],
-          cta: 'Pieteikties'
+          cta: 'Sazināties'
         }
       }
     },
@@ -105,7 +108,7 @@ const I18N = {
       titleHtml: 'Pirms rezervācijas <em>mazie jautājumi</em>',
       sub: 'Īsi par cenu, stundas nomu, pasākumiem un atrašanās vietu, lai vieglāk saplānot savu dienu.',
       items: [
-        ['Cik maksā telpu noma ROOM Jūrmala?', 'Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.'],
+        ['Cik maksā telpu noma ROOM Jūrmala?', "Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €."],
         ['Vai telpu var nomāt pa stundām?', 'Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija.'],
         ['Kādus pasākumus var rīkot ROOM Jūrmala?', 'ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus.'],
         ['Vai ROOM Jūrmala der bērnu dzimšanas dienām?', 'Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai.'],
@@ -150,18 +153,18 @@ const I18N = {
         '✨ Cits'
       ],
       packageOptions: [
-        'Izvēlieties nomas veidu...',
-        'Stundas noma',
-        'Dienas pakete',
-        'Nedēļas pakete',
-        'Mēneša abonements'
-      ],
+        "Izvēlieties nomas veidu...",
+        "Stundas noma",
+        "Ballīte līdz 15 viesiem",
+        "Ballīte virs 15 viesiem",
+        "Individuāls piedāvājums"
+],
       packageNotes: {
-        hours: 'Interesē telpas noma uz dažām stundām. Vai šajā datumā un laikā ir iespējams rezervēt telpu?',
-        day: 'Interesē dienas pakete par 130 €. Vai šajā datumā ir iespējams rezervēt telpu?',
-        week: 'Interesē nedēļas pakete par 550 €. Vai šajā datumā ir iespējams rezervēt telpu?',
-        month: 'Interesē mēneša abonements par 460 € mēnesī. Vai ir iespējams vienoties par regulāru rezervācijas laiku?'
-      },
+        "hours": "Interesē telpas noma par 20 €/stundā.",
+        "day": "Interesē ballīte līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €.",
+        "week": "Interesē ballīte vairāk nekā 15 viesiem: 3 stundas 130 €, katra nākamā stunda 30 €.",
+        "month": "Vēlos vienoties par individuālu piedāvājumu."
+},
       button: 'Nosūtīt pieprasījumu ✦',
       buttonSent: '✓ Pieprasījums nosūtīts!',
       notePrefix: 'Rakstiet arī WhatsApp:',
@@ -272,47 +275,49 @@ const I18N = {
       cta: 'Tell us how we did'
     },
     pricing: {
-      tag: 'Packages',
-      titleHtml: 'Day, week, month',
+      tag: 'Prices',
+      titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
       cards: {
         hourly: {
-          type: 'One day',
-          amountHtml: '<sup>€</sup>130',
-          lead: 'Day package',
-          summary: 'A full day for a one-off event or focused work.',
-          period: '/ 8 hours',
+          type: 'Hourly room rental',
+          period: 'per hour',
           features: [
-            'Save €30 · €16.25/h'
+            "€20 per hour",
+            'Full room access included',
+            'Kitchen included',
+            'Free parking'
           ],
-          cta: 'Book a day'
+          cta: 'Book now'
         },
         party: {
           popular: 'Most popular',
-          type: 'Week · 40h total',
-          amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Week package',
-          summary: '5 working days in a row. Ideal for summer camps and courses.',
-          perEvent: '/ 5 days',
+          type: 'Party package',
+          forUpTo: 'For parties up to 15 guests',
+          perEvent: 'per event',
           featuresPrimary: [
-            'Save €250 · €13.75/h'
+            '3 hours for €100',
+            'Additional hours €20 each',
+            'The whole room for your private event'
           ],
-          moreThan15: 'Best for',
+          moreThan15: 'If there are more than 15 guests',
           featuresSecondary: [
-            'Children’s camps',
-            'Courses and workshops'
+            '3 hours for €130',
+            'Additional hours €30 each'
           ],
-          cta: 'Book a week'
+          cta: 'Request package'
         },
         custom: {
-          type: 'Regular · monthly',
-          amountHtml: '<sup>€</sup>460',
-          lead: 'Subscription',
-          summary: 'A monthly solution for classes and groups.',
-          period: '/ month · min. 3 months',
+          type: 'Custom offer',
+          amountHtml: 'By<br/>agreement',
+          period: 'seminars, photoshoots, corporate events',
           features: [
-            'Save €180/month · 8h weekly'
+            'Yoga & fitness sessions',
+            'Professional photoshoots',
+            'Corporate events',
+            'Regular room rental agreements',
+            'Workshops of all kinds'
           ],
-          cta: 'Apply'
+          cta: 'Contact us'
         }
       }
     },
@@ -328,7 +333,7 @@ const I18N = {
       titleHtml: 'Small questions <em>before booking</em>',
       sub: 'A quick note on pricing, hourly rental, event types and where to find us.',
       items: [
-        ['How much does ROOM Jūrmala cost to rent?', 'Hourly rental starts from €20. Popular options are 3 hours for €55, 6 hours for €100, the day package at €130, the week package at €550 and the monthly subscription at €460. The best option depends on the length and format of the event.'],
+        ['How much does ROOM Jūrmala cost to rent?', "Hourly rental is €20 per hour. Parties with up to 15 guests cost €100 for 3 hours, then €20 per additional hour. For more than 15 guests: €130 for 3 hours, then €30 per additional hour."],
         ['Can the venue be rented by the hour?', 'Yes, ROOM Jūrmala is available for hourly rental from €20 per hour. It works well for workshops, photoshoots, trainer-led classes, seminars and shorter private events when a full-day booking is not needed.'],
         ['What events can be hosted at ROOM Jūrmala?', 'ROOM Jūrmala is suitable for children’s birthdays, family celebrations, workshops, craft sessions, photoshoots, yoga and fitness classes, seminars, children’s camps, corporate events and private gatherings.'],
         ['Is ROOM Jūrmala suitable for children’s birthdays?', 'Yes, the venue is suitable for children’s birthdays in Kauguri, Jūrmala. There is a play area, room for activities, space for a celebration table and the layout can be adapted to the children’s age, guest count and mood of the event.'],
@@ -373,18 +378,18 @@ const I18N = {
         '✨ Other'
       ],
       packageOptions: [
-        'Choose rental type...',
-        'Hourly rental',
-        'Day package',
-        'Week package',
-        'Monthly subscription'
-      ],
+        "Choose rental type...",
+        "Hourly rental",
+        "Party with up to 15 guests",
+        "Party with more than 15 guests",
+        "Custom offer"
+],
       packageNotes: {
-        hours: 'I am interested in renting the room for a few hours. Is it possible to book the room on this date and time?',
-        day: 'I am interested in the day package for €130. Is it possible to book the room on this date?',
-        week: 'I am interested in the week package for €550. Is it possible to book the room on this date?',
-        month: 'I am interested in the monthly subscription for €460 per month. Is it possible to agree on a regular booking time?'
-      },
+        "hours": "I am interested in hourly rental at €20 per hour.",
+        "day": "I am interested in a party for up to 15 guests: €100 for 3 hours, then €20 per additional hour.",
+        "week": "I am interested in a party for more than 15 guests: €130 for 3 hours, then €30 per additional hour.",
+        "month": "I would like to discuss a custom offer."
+},
       button: 'Send booking request ✦',
       buttonSent: '✓ Request sent!',
       notePrefix: 'Or message us on WhatsApp:',
@@ -495,47 +500,49 @@ const I18N = {
       cta: 'Расскажите как у нас получилось'
     },
     pricing: {
-      tag: 'Пакеты',
-      titleHtml: 'День, неделя, месяц',
+      tag: 'Цены',
+      titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
       cards: {
         hourly: {
-          type: 'Один день',
-          amountHtml: '<sup>€</sup>130',
-          lead: 'Пакет на день',
-          summary: 'Полный день для разового события или интенсивной работы.',
-          period: '/ 8 часов',
+          type: 'Почасовая аренда',
+          period: 'в час',
           features: [
-            'Экономия 30€ · 16.25€/ч'
+            "20 €/час",
+            'Весь зал включён',
+            'Кухня включена',
+            'Бесплатная парковка'
           ],
-          cta: 'Забронировать день'
+          cta: 'Забронировать'
         },
         party: {
           popular: 'Самый популярный',
-          type: 'Неделя · 40ч всего',
-          amountHtml: '<sup>€</sup>550',
-          forUpTo: 'Пакет на неделю',
-          summary: '5 рабочих дней подряд. Идеально для летних лагерей и курсов.',
-          perEvent: '/ 5 дней',
+          type: 'Пакет для праздника',
+          forUpTo: 'Для праздников до 15 гостей',
+          perEvent: 'за мероприятие',
           featuresPrimary: [
-            'Экономия 250€ · 13.75€/ч'
+            '3 часа за 100€',
+            'Каждый следующий час — 20€',
+            'Весь зал для вашего частного мероприятия'
           ],
-          moreThan15: 'Подходит для',
+          moreThan15: 'Если гостей больше 15',
           featuresSecondary: [
-            'Детских лагерей',
-            'Курсов и мастер-классов'
+            '3 часа за 130€',
+            'Каждый следующий час — 30€'
           ],
-          cta: 'Забронировать неделю'
+          cta: 'Запросить пакет'
         },
         custom: {
-          type: 'Регулярно · месяц',
-          amountHtml: '<sup>€</sup>460',
-          lead: 'Абонемент',
-          summary: 'Месячное решение для занятий и групп.',
-          period: '/ месяц · мин. 3 месяца',
+          type: 'Индивидуальное предложение',
+          amountHtml: 'По<br/>договорённости',
+          period: 'семинары, фотосессии, корпоративные мероприятия',
           features: [
-            'Экономия 180€/мес · 8ч в неделю'
+            'Аренда зала для йоги и фитнеса',
+            'Профессиональные фотосессии',
+            'Корпоративные мероприятия',
+            'Регулярная аренда зала',
+            'Мастер-классы от А до Я'
           ],
-          cta: 'Записаться'
+          cta: 'Обсудить условия'
         }
       }
     },
@@ -551,7 +558,7 @@ const I18N = {
       titleHtml: 'Маленькие вопросы <em>перед бронью</em>',
       sub: 'Коротко о ценах, почасовой аренде, форматах мероприятий и о том, где нас найти.',
       items: [
-        ['Сколько стоит аренда ROOM Jūrmala?', 'Почасовая аренда начинается от 20€ в час. Популярные варианты: 3 часа — 55€, 6 часов — 100€, день — 130€, неделя — 550€ и месячный абонемент — 460€. Лучший вариант зависит от длительности и формата мероприятия.'],
+        ['Сколько стоит аренда ROOM Jūrmala?', "Почасовая аренда — 20 €/час. Для праздников до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €. Если гостей больше 15: 3 часа — 130 €, каждый следующий час — 30 €."],
         ['Можно ли арендовать зал по часам?', 'Да, ROOM Jūrmala доступен для почасовой аренды от 20€ в час. Это удобно для мастер-классов, фотосессий, занятий с тренером, семинаров и коротких частных мероприятий, когда не нужна аренда на весь день.'],
         ['Какие мероприятия можно проводить в ROOM Jūrmala?', 'В ROOM Jūrmala можно проводить детские дни рождения, семейные праздники, мастер-классы, творческие занятия, фотосессии, йогу и фитнес, семинары, детские лагеря, корпоративные и частные мероприятия.'],
         ['Подходит ли ROOM Jūrmala для детских дней рождения?', 'Да, зал подходит для детских дней рождения в Каугури, Юрмале. Есть игровая зона, место для активностей, праздничного стола и возможность адаптировать зал под возраст детей, количество гостей и настроение праздника.'],
@@ -596,18 +603,18 @@ const I18N = {
         '✨ Другое'
       ],
       packageOptions: [
-        'Выберите тип аренды...',
-        'Почасовая аренда',
-        'Пакет на день',
-        'Пакет на неделю',
-        'Месячный абонемент'
-      ],
+        "Выберите тип аренды...",
+        "Почасовая аренда",
+        "Праздник до 15 гостей",
+        "Праздник более 15 гостей",
+        "Индивидуальное предложение"
+],
       packageNotes: {
-        hours: 'Интересует аренда зала на несколько часов. Можно ли забронировать зал на выбранную дату и время?',
-        day: 'Интересует пакет на день за 130 €. Можно ли забронировать зал на выбранную дату?',
-        week: 'Интересует пакет на неделю за 550 €. Можно ли забронировать зал на выбранную дату?',
-        month: 'Интересует месячный абонемент за 460 € в месяц. Можно ли согласовать регулярное время для бронирования?'
-      },
+        "hours": "Интересует почасовая аренда за 20 €/час.",
+        "day": "Интересует праздник до 15 гостей: 3 часа — 100 €, каждый следующий час — 20 €.",
+        "week": "Интересует праздник более 15 гостей: 3 часа — 130 €, каждый следующий час — 30 €.",
+        "month": "Хочу обсудить индивидуальное предложение."
+},
       button: 'Отправить заявку ✦',
       buttonSent: '✓ Заявка отправлена!',
       notePrefix: 'Или напишите в WhatsApp:',
@@ -1066,7 +1073,6 @@ function applyLanguage(lang) {
     if (testimonialsCtaText) testimonialsCtaText.textContent = copy.testimonials.cta;
   }
 
-  setText('#pricing .section-tag', copy.pricing.tag);
   setHTML('#pricing .section-title', copy.pricing.titleHtml);
 
   const priceCards = document.querySelectorAll('.price-card');
@@ -1075,25 +1081,18 @@ function applyLanguage(lang) {
   const customCard = priceCards[2];
 
   if (hourlyCard) {
-    const hourlyAmount = hourlyCard.querySelector('.price-amount');
     const pricePeriods = hourlyCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
-    setText('.pricing-grid .price-card:nth-of-type(1) .price-summary', copy.pricing.cards.hourly.summary);
-    if (hourlyAmount) hourlyAmount.innerHTML = copy.pricing.cards.hourly.amountHtml;
-    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.lead;
-    if (pricePeriods[1]) pricePeriods[1].textContent = copy.pricing.cards.hourly.period;
+    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
     setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
     setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
   }
 
   if (partyCard) {
-    const partyAmount = partyCard.querySelector('.price-amount');
     const partyPeriods = partyCard.querySelectorAll('.price-period');
     const partyLists = partyCard.querySelectorAll('.price-features');
     setText('.pricing-grid .price-card:nth-of-type(2) .price-popular', copy.pricing.cards.party.popular);
     setText('.pricing-grid .price-card:nth-of-type(2) .price-type', copy.pricing.cards.party.type);
-    setText('.pricing-grid .price-card:nth-of-type(2) .price-summary', copy.pricing.cards.party.summary);
-    if (partyAmount) partyAmount.innerHTML = copy.pricing.cards.party.amountHtml;
     if (partyPeriods[0]) partyPeriods[0].textContent = copy.pricing.cards.party.forUpTo;
     if (partyPeriods[1]) partyPeriods[1].textContent = copy.pricing.cards.party.perEvent;
     if (partyPeriods[2]) partyPeriods[2].textContent = copy.pricing.cards.party.moreThan15;
@@ -1106,10 +1105,8 @@ function applyLanguage(lang) {
     const customAmount = customCard.querySelector('.price-amount');
     const customPeriods = customCard.querySelectorAll('.price-period');
     setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
-    setText('.pricing-grid .price-card:nth-of-type(3) .price-summary', copy.pricing.cards.custom.summary);
     if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
-    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.lead;
-    if (customPeriods[1]) customPeriods[1].textContent = copy.pricing.cards.custom.period;
+    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.period;
     setNodeListText(customCard.querySelectorAll('.price-features li'), copy.pricing.cards.custom.features);
     setText('.pricing-grid .price-card:nth-of-type(3) .price-cta', copy.pricing.cards.custom.cta);
   }

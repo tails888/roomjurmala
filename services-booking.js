@@ -25,10 +25,10 @@ const SERVICE_BOOKING_COPY = {
     packageOptions: [
       "Izvēlieties nomas veidu...",
       "Stundas noma",
-      "Dienas pakete",
-      "Nedēļas pakete",
-      "Mēneša abonements"
-    ],
+      "Ballīte līdz 15 viesiem",
+      "Ballīte virs 15 viesiem",
+      "Individuāls piedāvājums"
+],
     errors: {
       required: "Lūdzu aizpildiet vārdu, tālruni, rezervācijas veidu, pasākuma veidu, datumu un laiku.",
       invalidTime: "Lūdzu ievadiet laiku formātā 14:00.",
@@ -54,10 +54,10 @@ const SERVICE_BOOKING_COPY = {
     packageOptions: [
       "Choose rental type...",
       "Hourly rental",
-      "Day package",
-      "Week package",
-      "Monthly subscription"
-    ],
+      "Party with up to 15 guests",
+      "Party with more than 15 guests",
+      "Custom offer"
+],
     errors: {
       required: "Please fill in your name, phone, booking type, event type, date and time.",
       invalidTime: "Please enter the time in 14:00 format.",
@@ -83,10 +83,10 @@ const SERVICE_BOOKING_COPY = {
     packageOptions: [
       "Выберите тип аренды...",
       "Почасовая аренда",
-      "Пакет на день",
-      "Пакет на неделю",
-      "Месячный абонемент"
-    ],
+      "Праздник до 15 гостей",
+      "Праздник более 15 гостей",
+      "Индивидуальное предложение"
+],
     errors: {
       required: "Пожалуйста, заполните имя, телефон, тип бронирования, формат мероприятия, дату и время.",
       invalidTime: "Пожалуйста, укажите время в формате 14:00.",

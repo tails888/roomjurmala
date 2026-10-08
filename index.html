@@ -54,198 +54,211 @@
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["EventVenue", "LocalBusiness"],
-    "name": "ROOM Jūrmala",
-    "alternateName": "Room Jurmala",
-    "description": "Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.",
-    "url": "https://roomjurmala.lv",
-    "telephone": "+37127850380",
-    "email": "welcome@roomjurmala.lv",
-    "image": "https://roomjurmala.lv/assets/images/social/og-image.jpg",
-    "logo": "https://roomjurmala.lv/assets/images/brand/logo.png",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Skolas iela 50",
-      "addressLocality": "Jūrmala",
-      "postalCode": "LV-2016",
-      "addressCountry": "LV"
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "EventVenue",
+    "LocalBusiness"
+  ],
+  "name": "ROOM Jūrmala",
+  "alternateName": "Room Jurmala",
+  "description": "Pasākumu un nodarbību telpa Kauguros, Jūrmalā bērnu dzimšanas dienām, ģimenes svinībām, meistarklasēm, fotosesijām, semināriem, treniņiem un bērnu nometnēm. Pieejama stundas noma.",
+  "url": "https://roomjurmala.lv",
+  "telephone": "+37127850380",
+  "email": "welcome@roomjurmala.lv",
+  "image": "https://roomjurmala.lv/assets/images/social/og-image.jpg",
+  "logo": "https://roomjurmala.lv/assets/images/brand/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Skolas iela 50",
+    "addressLocality": "Jūrmala",
+    "postalCode": "LV-2016",
+    "addressCountry": "LV"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 56.9619657,
+    "longitude": 23.6038606
+  },
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "20:00"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 56.9619657,
-      "longitude": 23.6038606
-    },
-    "priceRange": "€€",
-    "currenciesAccepted": "EUR",
-    "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-    "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "10:00",
+      "closes": "21:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/room.jurmala/",
+    "https://www.tiktok.com/@room.jurmala",
+    "https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "ROOM Jūrmala pakalpojumi",
+    "itemListElement": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "10:00",
-        "closes": "20:00"
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bērnu ballītes un dzimšanas dienas",
+          "description": "Mājīga telpa bērnu dzimšanas dienām, ģimenes svinībām un nelielām ballītēm Jūrmalā"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "100",
+          "priceCurrency": "EUR",
+          "description": "3 stundas, līdz 15 viesiem"
+        }
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "10:00",
-        "closes": "21:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/room.jurmala/",
-      "https://www.tiktok.com/@room.jurmala",
-      "https://www.facebook.com/people/Room-J%C5%ABrmala/61583247131495/"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "ROOM Jūrmala pakalpojumi",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Bērnu ballītes un dzimšanas dienas",
-            "description": "Mājīga telpa bērnu dzimšanas dienām, ģimenes svinībām un nelielām ballītēm Jūrmalā"
-          },
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "130",
-            "priceCurrency": "EUR",
-            "description": "Dienas pakete"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Meistarklases un darbnīcas",
-            "description": "Radošas darbnīcas, rokdarbi, gleznošana, bērnu nodarbības un grupu aktivitātes"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Fotosesiju telpa",
-            "description": "Gaiša fotosesiju telpa ar dabisko gaismu, ķieģeļu sienu un mājīgu interjeru"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Privātie pasākumi",
-            "description": "Jogas, vingrošanas, treneru nodarbības, semināri un nelieli korporatīvie pasākumi"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Bērnu nometnes un attīstības nodarbības",
-            "description": "Telpa vasaras bērnu nometnēm, attīstības grupām un radošām aktivitātēm Jūrmalā"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Dienas, nedēļas un mēneša paketes",
-            "description": "Pilnas dienas, nedēļas un regulāri mēneša rezervācijas formāti"
-          },
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "130",
-            "priceCurrency": "EUR",
-            "description": "Dienas pakete no 130€"
-          }
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Meistarklases un darbnīcas",
+          "description": "Radošas darbnīcas, rokdarbi, gleznošana, bērnu nodarbības un grupu aktivitātes"
         }
-      ]
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "6",
-      "bestRating": "5"
-    }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Fotosesiju telpa",
+          "description": "Gaiša fotosesiju telpa ar dabisko gaismu, ķieģeļu sienu un mājīgu interjeru"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Privātie pasākumi",
+          "description": "Jogas, vingrošanas, treneru nodarbības, semināri un nelieli korporatīvie pasākumi"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bērnu nometnes un attīstības nodarbības",
+          "description": "Telpa vasaras bērnu nometnēm, attīstības grupām un radošām aktivitātēm Jūrmalā"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Stundas telpu noma",
+          "description": "Elastīga telpu noma pa stundām"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "20",
+          "priceCurrency": "EUR",
+          "unitText": "stundā",
+          "description": "20 €/stundā"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "6",
+    "bestRating": "5"
   }
+}
   </script>
 
   <!-- FAQ Structured Data for SEO -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Cik maksā telpu noma ROOM Jūrmala?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Vai telpu var nomāt pa stundām?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kādus pasākumus var rīkot ROOM Jūrmala?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Vai ROOM Jūrmala der bērnu dzimšanas dienām?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Cik cilvēkiem telpa ir piemērota?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Vai telpā ir virtuve un vai drīkst atnest ēdienu?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kā rezervēt vai apskatīt telpu pirms pasākuma?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku."
-        }
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cik maksā telpu noma ROOM Jūrmala?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €."
       }
-    ]
-  }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai telpu var nomāt pa stundām?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā, ROOM Jūrmala ir pieejama stundas nomai no 20€ stundā. Tas ir ērti meistarklasēm, fotosesijām, treneru nodarbībām, semināriem un īsākiem privātiem pasākumiem, kad nav nepieciešama pilnas dienas rezervācija."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kādus pasākumus var rīkot ROOM Jūrmala?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ROOM Jūrmala var rīkot bērnu dzimšanas dienas, ģimenes svinības, fotosesijas, meistarklases, rokdarbu nodarbības, jogas un fitnesa nodarbības, seminārus, bērnu nometnes, korporatīvus un privātus pasākumus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai ROOM Jūrmala der bērnu dzimšanas dienām?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā, telpa ir piemērota bērnu dzimšanas dienām Kauguros, Jūrmalā. Ir rotaļu zona, vieta aktivitātēm, svinību galdam un iespēja pielāgot telpu bērnu vecumam, viesu skaitam un pasākuma noskaņai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cik cilvēkiem telpa ir piemērota?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ballītes paketes ir veidotas līdz 15 viesiem un lielākām grupām virs 15 viesiem. Precīzākais formāts atkarīgs no pasākuma veida, galdu izvietojuma un aktivitātēm, tāpēc rezervācijā ieteicams norādīt viesu skaitu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai telpā ir virtuve un vai drīkst atnest ēdienu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Telpā ir virtuvīte un zona ēdienam vai dzērieniem, tāpēc var organizēt bērnu ballīti, ģimenes svinības vai meistarklasi ar pauzi. Par ēdiena detaļām un konkrētu izvietojumu vislabāk vienoties rezervācijas brīdī."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kur atrodas ROOM Jūrmala un vai ir autostāvvieta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ROOM Jūrmala atrodas Skolas ielā 50, Jūrmalā, LV-2016. Pie ēkas ir bezmaksas autostāvvieta, un telpa ir ērti sasniedzama ar automašīnu vai sabiedrisko transportu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā rezervēt vai apskatīt telpu pirms pasākuma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rezervāciju var pieteikt mājaslapas formā, WhatsApp vai pa tālruni +371 27 850 380. Ja vēlaties apskatīt telpu pirms pasākuma, sazinieties iepriekš, lai vienotos par piemērotu laiku."
+      }
+    }
+  ]
+}
   </script>
 
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
@@ -490,45 +503,62 @@
   </span>
   <div class="container">
     <div class="pricing-header reveal">
-      <span class="section-tag">Paketes</span>
-      <h2 class="section-title">Dienas, nedēļas, mēneša</h2>
+      <h2 class="section-title">Cenas Jūsu <em style="color:var(--gold);">pasākumam</em></h2>
     </div>
     <div class="pricing-grid">
-      <!-- Day package -->
+      <!-- Hourly -->
       <div class="price-card reveal">
-        <div class="price-type">Viena diena</div>
-        <div class="price-period">Dienas pakete</div>
-        <p class="price-summary">Pilna diena vienreizējam pasākumam vai intensīvam darbam.</p>
-        <div class="price-amount"><sup>€</sup>130</div>
-        <div class="price-period">/ 8 stundas</div>
+        <span class="price-icon">⏰</span>
+        <div class="price-type">Stundas noma</div>
+        <div class="price-amount"><sup>€</sup>20</div>
+        <div class="price-period">par stundu</div>
+        <hr class="price-divider"/>
         <ul class="price-features">
-          <li>Ietaupi 30€ · 16.25€/h</li>
+          <li>20 €/stundā</li>
+          <li>Visa telpa iekļauta</li>
+          <li>Virtuve iekļauta</li>
+          <li>Bezmaksas autostāvvieta</li>
         </ul>
-        <a href="#calendar" data-booking-package="package-day" class="price-cta outline">Rezervēt dienu</a>
+        <a href="#calendar" data-booking-package="hours" class="price-cta outline">Rezervēt</a>
       </div>
-      <!-- Week package — featured -->
+      <!-- Package — featured -->
       <div class="price-card featured reveal">
-        <div class="price-type">Nedēļa · 40h kopā</div>
-        <div class="price-period">Nedēļas pakete</div>
-        <p class="price-summary">5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.</p>
-        <div class="price-amount"><sup>€</sup>550</div>
-        <div class="price-period">/ 5 dienas</div>
+        <div class="price-popular">Populārākais</div>
+        <span class="price-icon">🎉</span>
+        <div class="price-type">Ballītes pakete</div>
+        <div class="price-period">Ballītēm līdz 15 viesiem</div>
+        <div class="price-amount"><sup>€</sup>100<span style="font-size:1.4rem">–130</span></div>
+        <div class="price-period">par pasākumu</div>
+        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2)"/>
         <ul class="price-features">
-          <li>Ietaupi 250€ · 13.75€/h</li>
+          <li>3 stundas 100€</li>
+          <li>Katra nākamā stunda 20€</li>
+          <li>Pilna telpa privātam pasākumam</li>
         </ul>
-        <a href="#calendar" data-booking-package="package-week" class="price-cta solid">Rezervēt nedēļu</a>
+        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2); margin-top:18px;"/>
+        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">Ja viesu skaits pārsniedz 15 cilvēkus</div>
+        <ul class="price-features" style="margin-bottom:8px;">
+          <li>3 stundas 130€</li>
+          <li>Katra nākamā stunda 30€</li>
+        </ul>
+        <a href="#calendar" data-booking-package="day" class="price-cta solid">Pieprasīt paketi</a>
       </div>
-      <!-- Monthly package -->
+      <!-- Custom -->
       <div class="price-card reveal">
-        <div class="price-type">Regulāri · mēnesī</div>
-        <div class="price-period">Abonements</div>
-        <p class="price-summary">Mēneša risinājums nodarbībām un grupām.</p>
-        <div class="price-amount"><sup>€</sup>460</div>
-        <div class="price-period">/ mēnesī · min. 3 mēneši</div>
+        <span class="price-icon">✨</span>
+        <div class="price-type">Individuāls piedāvājums</div>
+        <div class="price-amount" style="font-size:2rem;">Pēc<br/>vienošanās</div>
+        <div class="price-period">semināri, fotosesijas, treneru nodarbības, nometnes</div>
+        <hr class="price-divider"/>
         <ul class="price-features">
-          <li>Ietaupi 180€/mēn · 8h nedēļā</li>
+          <li>Jogas un fitnesa nodarbības</li>
+          <li>Profesionālas fotosesijas</li>
+          <li>Bērnu nometnes un attīstības grupas</li>
+          <li>Korporatīvie pasākumi</li>
+          <li>Regulāri nomas līgumi</li>
+          <li>Meistarklases no A–Z</li>
         </ul>
-        <a href="#calendar" data-booking-package="package-month" class="price-cta outline">Pieteikties</a>
+        <a href="tel:+37127850380" class="price-cta outline">Sazināties</a>
       </div>
     </div>
   </div>
@@ -578,9 +608,9 @@
             <select id="bookingPackageSelect" required>
               <option value="">Izvēlieties nomas veidu...</option>
               <option value="hours">Stundas noma</option>
-              <option value="day">Dienas pakete</option>
-              <option value="week">Nedēļas pakete</option>
-              <option value="month">Mēneša abonements</option>
+              <option value="day">Ballīte līdz 15 viesiem</option>
+              <option value="week">Ballīte virs 15 viesiem</option>
+              <option value="month">Individuāls piedāvājums</option>
             </select>
           </div>
           <div class="booking-field">
@@ -638,7 +668,7 @@
       <div class="faq-list reveal">
         <details class="faq-item">
           <summary class="faq-question">Cik maksā telpu noma ROOM Jūrmala?</summary>
-          <p class="faq-answer">Stundas noma sākas no 20€. Populārākās paketes ir 3 stundas 55€, 6 stundas 100€, dienas pakete 130€, nedēļas pakete 550€ un mēneša abonements 460€. Precīzākais variants atkarīgs no pasākuma ilguma un formāta.</p>
+          <p class="faq-answer">Stundas noma — 20 €/stundā. Ballītēm līdz 15 viesiem: 3 stundas 100 €, katra nākamā stunda 20 €. Ja viesu ir vairāk par 15: 3 stundas 130 €, katra nākamā stunda 30 €.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-question">Vai telpu var nomāt pa stundām?</summary>
@@ -819,6 +849,6 @@
 
 <!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
 <script>window.ROOM_PAGE_LANG = "lv";</script>
-<script src="script.js?v=20260524-whatsapp-message"></script>
+<script src="script.js?v=20261008-party-pricing"></script>
 </body>
 </html>
