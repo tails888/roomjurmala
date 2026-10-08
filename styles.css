@@ -600,6 +600,7 @@ html[lang="ru"] .review-cta-text {
   border: 2px solid transparent;
 }
 .price-cta.solid:hover { background: rgba(8,7,7,1); }
+.price-note { font-size: 0.82rem; line-height: 1.5; color: rgba(245,239,230,0.6); margin-top: 6px; }
 .pricing-more { text-align: center; margin-top: 30px; }
 .pricing-more a {
   color: var(--cream); font-weight: 600; text-decoration: none;

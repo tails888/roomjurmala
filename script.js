@@ -63,7 +63,8 @@ const I18N = {
             'Virtuve iekļauta',
             'Bezmaksas autostāvvieta'
           ],
-          cta: 'Rezervēt'
+          cta: 'Rezervēt',
+          note: "Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete."
         },
         party: {
           popular: 'Populārākais',
@@ -73,7 +74,10 @@ const I18N = {
           featuresPrimary: [
             '3 stundas 100€',
             'Katra nākamā stunda 20€',
-            'Visa telpa privātam pasākumam'
+            'Visa telpa privātam pasākumam',
+            "Sagatavošanās un uzkopšana",
+            "Galdi un trauki",
+            "Virtuve"
           ],
           moreThan15: 'Ja viesu skaits pārsniedz 15 cilvēkus',
           featuresSecondary: [
@@ -297,7 +301,8 @@ const I18N = {
             'Kitchen included',
             'Free parking'
           ],
-          cta: 'Book now'
+          cta: 'Book now',
+          note: "For classes, workshops, photoshoots and seminars. For celebrations, choose the party package."
         },
         party: {
           popular: 'Most popular',
@@ -307,7 +312,10 @@ const I18N = {
           featuresPrimary: [
             '3 hours for €100',
             'Additional hours €20 each',
-            'The whole room for your private event'
+            'The whole room for your private event',
+            "Setup and cleaning",
+            "Tables and tableware",
+            "Kitchen"
           ],
           moreThan15: 'If there are more than 15 guests',
           featuresSecondary: [
@@ -531,7 +539,8 @@ const I18N = {
             'Кухня включена',
             'Бесплатная парковка'
           ],
-          cta: 'Забронировать'
+          cta: 'Забронировать',
+          note: "Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника."
         },
         party: {
           popular: 'Самый популярный',
@@ -541,7 +550,10 @@ const I18N = {
           featuresPrimary: [
             '3 часа за 100€',
             'Каждый следующий час — 20€',
-            'Весь зал для вашего частного мероприятия'
+            'Весь зал для вашего частного мероприятия',
+            "Подготовка и уборка",
+            "Столы и посуда",
+            "Кухня"
           ],
           moreThan15: 'Если гостей больше 15',
           featuresSecondary: [
@@ -1125,6 +1137,8 @@ function applyLanguage(lang) {
     setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
     if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
     setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
+    const hourlyNote = hourlyCard.querySelector('.price-note');
+    if (hourlyNote) hourlyNote.textContent = copy.pricing.cards.hourly.note;
     setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
   }
 

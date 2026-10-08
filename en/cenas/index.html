@@ -1053,6 +1053,7 @@
     }
       .calc-tab { min-width: 92px; }
     .party-section { padding-bottom: 72px; }
+    .calc-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; text-align: center; color: var(--muted, #888); }
     .party-grid { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto; }
     .party-grid .pkg-card { min-height: 0; }
     .party-grid .pkg-kicker { margin-bottom: 36px; }
@@ -1062,7 +1063,7 @@
 </style>
   <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
-  <link rel="stylesheet" href="/pricing-page.css?v=20261008-may-restore" />
+  <link rel="stylesheet" href="/pricing-page.css?v=20261008-party-includes" />
 </head>
 <body>
 
@@ -1104,7 +1105,7 @@
     <div class="pkg-card party-card featured">
       <div class="pkg-kicker">Ballītēm līdz 15 viesiem</div>
       <div class="pkg-name">Ballītes pakete</div>
-      <div class="pkg-sub">Pilna telpa privātam pasākumam.</div>
+      <div class="pkg-sub">Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.</div>
       <div class="pkg-price-row">
         <span class="pkg-currency">€</span>
         <span class="pkg-amount">100</span>
@@ -1116,7 +1117,7 @@
     <div class="pkg-card party-card">
       <div class="pkg-kicker">Ja viesu skaits pārsniedz 15 cilvēkus</div>
       <div class="pkg-name">Ballītes pakete</div>
-      <div class="pkg-sub">Pilna telpa privātam pasākumam.</div>
+      <div class="pkg-sub">Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.</div>
       <div class="pkg-price-row">
         <span class="pkg-currency">€</span>
         <span class="pkg-amount">130</span>
@@ -1132,7 +1133,7 @@
 <div class="section-header">
   <div class="section-label">Stundas noma</div>
   <h2>Maksā tikai par laiku</h2>
-  <p>Izvēlies laiku, kas tev der vislabāk.</p>
+  <p>Izvēlies laiku, kas tev der vislabāk. Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete.</p>
 </div>
 
 <section class="hourly-section">
@@ -1275,6 +1276,7 @@
           </div>
         </div>
         <a class="calc-cta" id="hours-wa" href="#calendar" data-booking-package="hours">Rezervēt — 55 €</a>
+        <p class="calc-note" id="hours-note">Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete.</p>
       </div>
     </div>
 
@@ -1683,7 +1685,7 @@ const I18N = {
         {
           "kicker": "Ballītēm līdz 15 viesiem",
           "name": "Ballītes pakete",
-          "sub": "Pilna telpa privātam pasākumam.",
+          "sub": "Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.",
           "per": "/ 3 stundas",
           "saving": "Katra nākamā stunda 20 €",
           "button": "Pieprasīt paketi"
@@ -1691,7 +1693,7 @@ const I18N = {
         {
           "kicker": "Ja viesu skaits pārsniedz 15 cilvēkus",
           "name": "Ballītes pakete",
-          "sub": "Pilna telpa privātam pasākumam.",
+          "sub": "Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.",
           "per": "/ 3 stundas",
           "saving": "Katra nākamā stunda 30 €",
           "button": "Pieprasīt paketi"
@@ -1701,7 +1703,7 @@ const I18N = {
     hourly: {
       label: "Stundas noma",
       title: "Maksā tikai par laiku",
-      text: "Izvēlies laiku, kas tev der vislabāk.",
+      text: "Izvēlies laiku, kas tev der vislabāk. Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete.",
       cards: ["1 stunda", "2 stundas", "3 stundas", "4 stundas", "6 stundas", "Visa diena"],
       popular: "Populārākais"
     },
@@ -1725,6 +1727,7 @@ const I18N = {
         "cta": "Pieprasīt paketi",
         "hoursLabel": "Stundas"
       },
+      hoursNote: "Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete.",
       full: "Pilnā cena",
       save: "Tu ietaupi",
       pricePerHour: "Cena par stundu",
@@ -1862,7 +1865,7 @@ const I18N = {
         {
           "kicker": "For parties up to 15 guests",
           "name": "Party package",
-          "sub": "The whole room for your private event.",
+          "sub": "The whole room for your private event. Setup and cleaning, tables and tableware, and the kitchen are included.",
           "per": "/ 3 hours",
           "saving": "Each additional hour €20",
           "button": "Request package"
@@ -1870,7 +1873,7 @@ const I18N = {
         {
           "kicker": "If there are more than 15 guests",
           "name": "Party package",
-          "sub": "The whole room for your private event.",
+          "sub": "The whole room for your private event. Setup and cleaning, tables and tableware, and the kitchen are included.",
           "per": "/ 3 hours",
           "saving": "Each additional hour €30",
           "button": "Request package"
@@ -1880,7 +1883,7 @@ const I18N = {
     hourly: {
       label: "Hourly rental",
       title: "Pay only for the time",
-      text: "Choose the time that suits you best.",
+      text: "Choose the time that suits you best. For classes, workshops, photoshoots and seminars. For celebrations, choose the party package.",
       cards: ["1 hour", "2 hours", "3 hours", "4 hours", "6 hours", "Full day"],
       popular: "Most popular"
     },
@@ -1904,6 +1907,7 @@ const I18N = {
         "cta": "Request package",
         "hoursLabel": "Hours"
       },
+      hoursNote: "For classes, workshops, photoshoots and seminars. For celebrations, choose the party package.",
       full: "Standard price",
       save: "You save",
       pricePerHour: "Price per hour",
@@ -2041,7 +2045,7 @@ const I18N = {
         {
           "kicker": "Для праздников до 15 гостей",
           "name": "Пакет для праздника",
-          "sub": "Весь зал для частного мероприятия.",
+          "sub": "Весь зал для частного мероприятия. Включены подготовка и уборка, столы и посуда, кухня.",
           "per": "/ 3 часа",
           "saving": "Каждый следующий час 20 €",
           "button": "Запросить пакет"
@@ -2049,7 +2053,7 @@ const I18N = {
         {
           "kicker": "Если гостей больше 15",
           "name": "Пакет для праздника",
-          "sub": "Весь зал для частного мероприятия.",
+          "sub": "Весь зал для частного мероприятия. Включены подготовка и уборка, столы и посуда, кухня.",
           "per": "/ 3 часа",
           "saving": "Каждый следующий час 30 €",
           "button": "Запросить пакет"
@@ -2059,7 +2063,7 @@ const I18N = {
     hourly: {
       label: "Почасовая аренда",
       title: "Платите только за время",
-      text: "Выберите время, которое подходит вам лучше всего.",
+      text: "Выберите время, которое подходит вам лучше всего. Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника.",
       cards: ["1 час", "2 часа", "3 часа", "4 часа", "6 часов", "Весь день"],
       popular: "Популярное"
     },
@@ -2083,6 +2087,7 @@ const I18N = {
         "cta": "Запросить пакет",
         "hoursLabel": "Часы"
       },
+      hoursNote: "Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника.",
       full: "Полная цена",
       save: "Экономия",
       pricePerHour: "Цена за час",
@@ -2756,6 +2761,7 @@ function applyLanguage(lang) {
     if (labelEl) labelEl.textContent = label;
   });
   Object.entries(t.calc.ticks).forEach(([mode, values]) => setTickLabels(mode, values));
+  setText("#hours-note", t.calc.hoursNote);
   const partyHoursLabel = document.querySelectorAll("#mode-party .calc-slider-label span:first-child")[1];
   if (partyHoursLabel) partyHoursLabel.textContent = t.calc.party.hoursLabel;
 
