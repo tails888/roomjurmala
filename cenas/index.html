@@ -1052,14 +1052,7 @@
       color: var(--gray-500);
     }
       .calc-tab { min-width: 92px; }
-    .party-section { padding-bottom: 72px; }
     .calc-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; text-align: center; color: var(--muted, #888); }
-    .party-grid { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto; }
-    .party-grid .pkg-card { min-height: 0; }
-    .party-grid .pkg-kicker { margin-bottom: 36px; }
-    @media (max-width: 768px) {
-      .party-grid { grid-template-columns: 1fr; }
-    }
 </style>
   <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
@@ -1090,42 +1083,6 @@
     <span class="badge">📍 Jūrmala</span>
     <span class="badge">👥 Līdz 25 cilvēkiem</span>
     <span class="badge">🕐 No 1 stundas</span>
-  </div>
-</section>
-
-<!-- PARTY PACKAGES -->
-<div class="section-header" id="party-header">
-  <div class="section-label">Ballītes pakete</div>
-  <h2>Ballītes un dzimšanas dienas</h2>
-  <p>Pilna telpa privātam pasākumam. Cena atkarīga no viesu skaita.</p>
-</div>
-
-<section class="packages-section party-section">
-  <div class="packages-grid party-grid">
-    <div class="pkg-card party-card featured">
-      <div class="pkg-kicker">Ballītēm līdz 15 viesiem</div>
-      <div class="pkg-name">Ballītes pakete</div>
-      <div class="pkg-sub">Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.</div>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">€</span>
-        <span class="pkg-amount">100</span>
-      </div>
-      <div class="pkg-per">/ 3 stundas</div>
-      <div class="pkg-saving">Katra nākamā stunda 20 €</div>
-      <a href="#calendar" data-booking-package="party-small" class="pkg-btn pkg-btn-outline">Pieprasīt paketi</a>
-    </div>
-    <div class="pkg-card party-card">
-      <div class="pkg-kicker">Ja viesu skaits pārsniedz 15 cilvēkus</div>
-      <div class="pkg-name">Ballītes pakete</div>
-      <div class="pkg-sub">Pilna telpa privātam pasākumam. Iekļauta sagatavošanās un uzkopšana, galdi un trauki, virtuve.</div>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">€</span>
-        <span class="pkg-amount">130</span>
-      </div>
-      <div class="pkg-per">/ 3 stundas</div>
-      <div class="pkg-saving">Katra nākamā stunda 30 €</div>
-      <a href="#calendar" data-booking-package="party-large" class="pkg-btn pkg-btn-outline">Pieprasīt paketi</a>
-    </div>
   </div>
 </section>
 
@@ -1390,61 +1347,6 @@
         </div>
         <a class="calc-cta" id="months-wa" href="#calendar" data-booking-package="month">Pieteikties — 460 €</a>
       </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PACKAGES -->
-<div class="section-header">
-  <div class="section-label">Paketes</div>
-  <h2>Dienas, Nedēļas, Mēneša</h2>
-  <p>Plāno uz priekšu. Ideāli pasniedzējiem, nodarbību vadītājiem un organizatoriem.</p>
-</div>
-
-<section class="packages-section">
-  <div class="packages-grid">
-
-    <!-- DIENAS PAKETE -->
-    <div class="pkg-card">
-      <div class="pkg-kicker">Viena diena</div>
-      <div class="pkg-name">Dienas pakete</div>
-      <div class="pkg-sub">Pilna diena vienreizējam pasākumam vai intensīvam darbam.</div>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">€</span>
-        <span class="pkg-amount">130</span>
-      </div>
-      <div class="pkg-per">/ 8 stundas</div>
-      <div class="pkg-saving">Ietaupi 30 € · 16.25 €/h</div>
-      <a href="#calendar" data-booking-package="day" class="pkg-btn pkg-btn-outline">Rezervēt dienu</a>
-    </div>
-
-    <!-- NEDĒĻAS PAKETE (FEATURED) -->
-    <div class="pkg-card featured">
-      <div class="pkg-kicker">Nedēļa · 40h kopā</div>
-      <div class="pkg-name">Nedēļas pakete</div>
-      <div class="pkg-sub">5 darba dienas pēc kārtas. Ideāli vasaras nometnēm un kursiem.</div>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">€</span>
-        <span class="pkg-amount">550</span>
-      </div>
-      <div class="pkg-per">/ 5 dienas</div>
-      <div class="pkg-saving">Ietaupi 250 € · 13.75 €/h</div>
-      <a href="#calendar" data-booking-package="week" class="pkg-btn pkg-btn-outline">Rezervēt nedēļu</a>
-    </div>
-
-    <!-- MĒNEŠA PAKETE -->
-    <div class="pkg-card">
-      <div class="pkg-kicker">Regulāri · Mēnesī</div>
-      <div class="pkg-name">Abonements</div>
-      <div class="pkg-sub">Mēneša risinājums nodarbībām un grupām.</div>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">€</span>
-        <span class="pkg-amount">460</span>
-      </div>
-      <div class="pkg-per">/ mēnesī · min. 3 mēneši</div>
-      <div class="pkg-saving">Ietaupi 180 €/mēn · 8h nedēļā</div>
-      <a href="#calendar" data-booking-package="month" class="pkg-btn pkg-btn-outline">Pieteikties</a>
     </div>
 
   </div>
@@ -2271,7 +2173,7 @@ function setOptionTexts(id, values) {
 }
 
 function setHeader(index, label, title, text) {
-  const header = document.querySelectorAll(".section-header:not(#party-header)")[index];
+  const header = document.querySelectorAll(".section-header")[index];
   if (!header) return;
   const labelEl = header.querySelector(".section-label");
   const titleEl = header.querySelector("h2");
@@ -2733,23 +2635,6 @@ function applyLanguage(lang) {
 
   document.querySelectorAll(".hero-badges .badge").forEach((el, index) => {
     el.textContent = t.badges[index];
-  });
-
-  const partyHeader = document.getElementById("party-header");
-  if (partyHeader) {
-    partyHeader.querySelector(".section-label").textContent = t.party.label;
-    partyHeader.querySelector("h2").textContent = t.party.title;
-    partyHeader.querySelector("p").textContent = t.party.text;
-  }
-  document.querySelectorAll(".party-card").forEach((card, index) => {
-    const data = t.party.cards[index];
-    if (!data) return;
-    card.querySelector(".pkg-kicker").textContent = data.kicker;
-    card.querySelector(".pkg-name").textContent = data.name;
-    card.querySelector(".pkg-sub").textContent = data.sub;
-    card.querySelector(".pkg-per").textContent = data.per;
-    card.querySelector(".pkg-saving").textContent = data.saving;
-    card.querySelector(".pkg-btn").textContent = data.button;
   });
 
   setHeader(0, t.hourly.label, t.hourly.title, t.hourly.text);
