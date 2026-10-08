@@ -1052,6 +1052,8 @@
       color: var(--gray-500);
     }
       .calc-tab { min-width: 92px; }
+    #party-result .calc-r-row { gap: 12px; }
+    .calc-r-price { white-space: nowrap; }
     .calc-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; text-align: center; color: var(--muted, #888); }
 </style>
   <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -1188,10 +1190,6 @@
           <div class="calc-r-row">
             <span id="party-extra-label">Papildu stundas</span>
             <span id="party-extra">0 €</span>
-          </div>
-          <div class="calc-r-row">
-            <span id="party-meta-label">Cena par stundu</span>
-            <span id="party-meta">33.33 €/h</span>
           </div>
         </div>
         <a class="calc-cta" id="party-wa" href="#calendar" data-booking-package="party-small">Pieprasīt paketi — 100 €</a>
@@ -2353,13 +2351,11 @@ function calcParty() {
   document.getElementById("party-extra-label").textContent = `${t.extraRow} · ${extraHours} × ${tier.extra} €`;
   document.getElementById("party-extra").textContent = `${extra} €`;
   document.getElementById("party-extra").closest(".calc-r-row").style.display = extraHours ? "flex" : "none";
-  document.getElementById("party-meta-label").textContent = I18N[currentLang].calc.pricePerHour;
-  document.getElementById("party-meta").textContent = `${formatNumber(price / hours)} €/h`;
 
   const wa = document.getElementById("party-wa");
   wa.dataset.bookingPackage = large ? "party-large" : "party-small";
   wa.dataset.bookingSummary = partyMessage(guests, hours, price);
-  wa.textContent = `${t.cta} — ${price} €`;
+  wa.textContent = `${t.cta} — ${price}\u00a0€`;
   animPop("party-price");
   updateSlider("party-guests-slider", guests, Number(guestsSlider.min), Number(guestsSlider.max));
   updateSlider("party-slider", hours, Number(hoursSlider.min), Number(hoursSlider.max));
@@ -2387,7 +2383,7 @@ function calcMode(mode, value) {
   wa.dataset.bookingSummary = data.message;
   wa.removeAttribute("target");
   wa.removeAttribute("rel");
-  wa.textContent = `${data.ctaPrefix} — ${data.price} €`;
+  wa.textContent = `${data.ctaPrefix} — ${data.price}\u00a0€`;
   animPop(`${mode}-price`);
 
   const slider = document.getElementById(`${mode}-slider`);
