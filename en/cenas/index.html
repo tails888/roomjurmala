@@ -1238,6 +1238,7 @@
           </div>
         </div>
         <a class="calc-cta" id="party-wa" href="#calendar" data-booking-package="party-small">Pieprasīt paketi — 100 €</a>
+        <p class="calc-note" id="party-note">Ilgāk par 8 stundām? Laiku un cenu saskaņosim individuāli.</p>
       </div>
     </div>
 
@@ -1728,6 +1729,7 @@ const I18N = {
         "hoursLabel": "Stundas"
       },
       hoursNote: "Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete.",
+      partyNote: "Ilgāk par 8 stundām? Laiku un cenu saskaņosim individuāli.",
       full: "Pilnā cena",
       save: "Tu ietaupi",
       pricePerHour: "Cena par stundu",
@@ -1908,6 +1910,7 @@ const I18N = {
         "hoursLabel": "Hours"
       },
       hoursNote: "For classes, workshops, photoshoots and seminars. For celebrations, choose the party package.",
+      partyNote: "Need more than 8 hours? We will agree on the time and price individually.",
       full: "Standard price",
       save: "You save",
       pricePerHour: "Price per hour",
@@ -2088,6 +2091,7 @@ const I18N = {
         "hoursLabel": "Часы"
       },
       hoursNote: "Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника.",
+      partyNote: "Нужно больше 8 часов? Время и цену согласуем индивидуально.",
       full: "Полная цена",
       save: "Экономия",
       pricePerHour: "Цена за час",
@@ -2762,6 +2766,7 @@ function applyLanguage(lang) {
   });
   Object.entries(t.calc.ticks).forEach(([mode, values]) => setTickLabels(mode, values));
   setText("#hours-note", t.calc.hoursNote);
+  setText("#party-note", t.calc.partyNote);
   const partyHoursLabel = document.querySelectorAll("#mode-party .calc-slider-label span:first-child")[1];
   if (partyHoursLabel) partyHoursLabel.textContent = t.calc.party.hoursLabel;
 
