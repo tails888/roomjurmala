@@ -51,54 +51,66 @@ const I18N = {
     pricing: {
       tag: 'Cenas',
       titleHtml: 'Cenas Jūsu <em style="color:var(--gold);">pasākumam</em>',
+      more: 'Visas cenas un kalkulators →',
       cards: {
-        hourly: {
-          type: 'Stundas noma',
-          period: 'par stundu',
-          features: [
-            "3 stundas 55 €",
-            "6 stundas 100 €",
-            "Visa diena (8h) 130 €",
-            'Visa telpa iekļauta',
-            'Virtuve iekļauta',
-            'Bezmaksas autostāvvieta'
+        "hourly": {
+          "icon": "⏰",
+          "type": "Stundas noma",
+          "sub": "Nodarbībām, meistarklasēm, fotosesijām un semināriem",
+          "amount": "20",
+          "period": "par stundu",
+          "rows": [
+            [
+              "3 stundas",
+              "55 €"
+            ],
+            [
+              "6 stundas",
+              "100 €"
+            ],
+            [
+              "Visa diena (8h)",
+              "130 €"
+            ]
           ],
-          cta: 'Rezervēt',
-          note: "Nodarbībām, meistarklasēm, fotosesijām un semināriem. Svinībām — ballītes pakete."
+          "includes": "Visa telpa · virtuve · autostāvvieta",
+          "cta": "Rezervēt",
+          "package": "hours"
         },
-        party: {
-          popular: 'Populārākais',
-          type: 'Ballītes pakete',
-          forUpTo: 'Ballītēm līdz 15 viesiem',
-          perEvent: 'par pasākumu',
-          featuresPrimary: [
-            '3 stundas 100€',
-            'Katra nākamā stunda 20€',
-            'Visa telpa privātam pasākumam',
-            "Sagatavošanās un uzkopšana",
-            "Galdi un trauki",
-            "Virtuve"
+        "party": {
+          "icon": "🎉",
+          "popular": "Populārākais",
+          "type": "Ballītes pakete",
+          "sub": "Dzimšanas dienām un svinībām",
+          "amount": "100",
+          "period": "par 3 stundām",
+          "rows": [
+            [
+              "Līdz 15 viesiem",
+              "100 €",
+              "+20 €/h"
+            ],
+            [
+              "16–25 viesi",
+              "130 €",
+              "+30 €/h"
+            ]
           ],
-          moreThan15: 'Ja viesu skaits pārsniedz 15 cilvēkus',
-          featuresSecondary: [
-            '3 stundas 130€',
-            'Katra nākamā stunda 30€'
-          ],
-          cta: 'Pieprasīt paketi'
+          "includes": "Sagatavošanās un uzkopšana · galdi un trauki · virtuve",
+          "cta": "Pieprasīt paketi",
+          "package": "party-small"
         },
-        custom: {
-          type: 'Individuāls piedāvājums',
-          amountHtml: 'Pēc<br/>vienošanās',
-          period: 'semināri, fotosesijas, treneru nodarbības, nometnes',
-          features: [
-            'Jogas un fitnesa nodarbības',
-            'Profesionālas fotosesijas',
-            'Bērnu nometnes un attīstības grupas',
-            'Korporatīvie pasākumi',
-            'Regulāri nomas līgumi',
-            'Meistarklases no A–Z'
+        "custom": {
+          "icon": "✨",
+          "type": "Individuāls piedāvājums",
+          "sub": "Semināri, fotosesijas, treneru nodarbības, nometnes",
+          "amountHtml": "Pēc vienošanās",
+          "features": [
+            "Jogas un fitnesa nodarbības",
+            "Bērnu nometnes un attīstības grupas",
+            "Regulāri nomas līgumi"
           ],
-          cta: 'Sazināties'
+          "cta": "Sazināties"
         }
       }
     },
@@ -289,54 +301,66 @@ const I18N = {
     pricing: {
       tag: 'Prices',
       titleHtml: 'Pricing for <em style="color:var(--gold);">your</em> event',
+      more: 'All prices and calculator →',
       cards: {
-        hourly: {
-          type: 'Hourly room rental',
-          period: 'per hour',
-          features: [
-            "3 hours €55",
-            "6 hours €100",
-            "Full day (8h) €130",
-            'Full room access included',
-            'Kitchen included',
-            'Free parking'
+        "hourly": {
+          "icon": "⏰",
+          "type": "Hourly room rental",
+          "sub": "For classes, workshops, photoshoots and seminars",
+          "amount": "20",
+          "period": "per hour",
+          "rows": [
+            [
+              "3 hours",
+              "€55"
+            ],
+            [
+              "6 hours",
+              "€100"
+            ],
+            [
+              "Full day (8h)",
+              "€130"
+            ]
           ],
-          cta: 'Book now',
-          note: "For classes, workshops, photoshoots and seminars. For celebrations, choose the party package."
+          "includes": "Whole room · kitchen · free parking",
+          "cta": "Book now",
+          "package": "hours"
         },
-        party: {
-          popular: 'Most popular',
-          type: 'Party package',
-          forUpTo: 'For parties up to 15 guests',
-          perEvent: 'per event',
-          featuresPrimary: [
-            '3 hours for €100',
-            'Additional hours €20 each',
-            'The whole room for your private event',
-            "Setup and cleaning",
-            "Tables and tableware",
-            "Kitchen"
+        "party": {
+          "icon": "🎉",
+          "popular": "Most popular",
+          "type": "Party package",
+          "sub": "For birthdays and celebrations",
+          "amount": "100",
+          "period": "for 3 hours",
+          "rows": [
+            [
+              "Up to 15 guests",
+              "€100",
+              "+€20/h"
+            ],
+            [
+              "16–25 guests",
+              "€130",
+              "+€30/h"
+            ]
           ],
-          moreThan15: 'If there are more than 15 guests',
-          featuresSecondary: [
-            '3 hours for €130',
-            'Additional hours €30 each'
-          ],
-          cta: 'Request package'
+          "includes": "Setup and cleaning · tables and tableware · kitchen",
+          "cta": "Request package",
+          "package": "party-small"
         },
-        custom: {
-          type: 'Custom offer',
-          amountHtml: 'By<br/>agreement',
-          period: 'seminars, photoshoots, corporate events',
-          features: [
-            'Yoga & fitness sessions',
-            'Professional photoshoots',
-            'Children’s camps and development groups',
-            'Corporate events',
-            'Regular room rental agreements',
-            'Workshops of all kinds'
+        "custom": {
+          "icon": "✨",
+          "type": "Custom offer",
+          "sub": "Seminars, photoshoots, corporate events",
+          "amountHtml": "By agreement",
+          "features": [
+            "Yoga & fitness sessions",
+            "Children’s camps and development groups",
+            "Regular room rental agreements"
           ],
-          cta: 'Contact us'
+          "cta": "Contact us"
         }
       }
     },
@@ -527,54 +551,66 @@ const I18N = {
     pricing: {
       tag: 'Цены',
       titleHtml: 'Цены для <em style="color:var(--gold);">вашего</em> мероприятия',
+      more: 'Все цены и калькулятор →',
       cards: {
-        hourly: {
-          type: 'Почасовая аренда',
-          period: 'в час',
-          features: [
-            "3 часа 55 €",
-            "6 часов 100 €",
-            "Весь день (8ч) 130 €",
-            'Весь зал включён',
-            'Кухня включена',
-            'Бесплатная парковка'
+        "hourly": {
+          "icon": "⏰",
+          "type": "Почасовая аренда",
+          "sub": "Для занятий, мастер-классов, фотосессий и семинаров",
+          "amount": "20",
+          "period": "в час",
+          "rows": [
+            [
+              "3 часа",
+              "55 €"
+            ],
+            [
+              "6 часов",
+              "100 €"
+            ],
+            [
+              "Весь день (8ч)",
+              "130 €"
+            ]
           ],
-          cta: 'Забронировать',
-          note: "Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника."
+          "includes": "Весь зал · кухня · бесплатная парковка",
+          "cta": "Забронировать",
+          "package": "hours"
         },
-        party: {
-          popular: 'Самый популярный',
-          type: 'Пакет для праздника',
-          forUpTo: 'Для праздников до 15 гостей',
-          perEvent: 'за мероприятие',
-          featuresPrimary: [
-            '3 часа за 100€',
-            'Каждый следующий час — 20€',
-            'Весь зал для вашего частного мероприятия',
-            "Подготовка и уборка",
-            "Столы и посуда",
-            "Кухня"
+        "party": {
+          "icon": "🎉",
+          "popular": "Самый популярный",
+          "type": "Пакет для праздника",
+          "sub": "Для дней рождения и праздников",
+          "amount": "100",
+          "period": "за 3 часа",
+          "rows": [
+            [
+              "До 15 гостей",
+              "100 €",
+              "+20 €/ч"
+            ],
+            [
+              "16–25 гостей",
+              "130 €",
+              "+30 €/ч"
+            ]
           ],
-          moreThan15: 'Если гостей больше 15',
-          featuresSecondary: [
-            '3 часа за 130€',
-            'Каждый следующий час — 30€'
-          ],
-          cta: 'Запросить пакет'
+          "includes": "Подготовка и уборка · столы и посуда · кухня",
+          "cta": "Запросить пакет",
+          "package": "party-small"
         },
-        custom: {
-          type: 'Индивидуальное предложение',
-          amountHtml: 'По<br/>договорённости',
-          period: 'семинары, фотосессии, корпоративные мероприятия',
-          features: [
-            'Аренда зала для йоги и фитнеса',
-            'Профессиональные фотосессии',
-            'Детские лагеря и развивающие группы',
-            'Корпоративные мероприятия',
-            'Регулярная аренда зала',
-            'Мастер-классы от А до Я'
+        "custom": {
+          "icon": "✨",
+          "type": "Индивидуальное предложение",
+          "sub": "Семинары, фотосессии, корпоративные мероприятия",
+          "amountHtml": "По договорённости",
+          "features": [
+            "Аренда зала для йоги и фитнеса",
+            "Детские лагеря и развивающие группы",
+            "Регулярная аренда зала"
           ],
-          cta: 'Обсудить условия'
+          "cta": "Обсудить условия"
         }
       }
     },
@@ -1061,6 +1097,44 @@ function refreshAutoBookingNoteLanguage() {
   lastAutoBookingNote = note;
 }
 
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
+function renderPricingCards(cards) {
+  const rows = (items) => items.map(([label, price, extra]) =>
+    `<li><span>${escapeHTML(label)}</span><span class="price-row-val">${escapeHTML(price)}${extra ? ` <small>${escapeHTML(extra)}</small>` : ''}</span></li>`
+  ).join('');
+  const head = (card) =>
+    `<span class="price-icon">${card.icon}</span><div class="price-type">${escapeHTML(card.type)}</div><div class="price-sub">${escapeHTML(card.sub)}</div>`;
+  const { hourly, party, custom } = cards;
+  return `
+      <div class="price-card reveal">
+        ${head(hourly)}
+        <div class="price-amount"><sup>€</sup>${hourly.amount}</div>
+        <div class="price-period">${escapeHTML(hourly.period)}</div>
+        <ul class="price-rows">${rows(hourly.rows)}</ul>
+        <p class="price-includes">${escapeHTML(hourly.includes)}</p>
+        <a href="#calendar" data-booking-package="${hourly.package}" class="price-cta outline">${escapeHTML(hourly.cta)}</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-popular">${escapeHTML(party.popular)}</div>
+        ${head(party)}
+        <div class="price-amount"><sup>€</sup>${party.amount}</div>
+        <div class="price-period">${escapeHTML(party.period)}</div>
+        <ul class="price-rows">${rows(party.rows)}</ul>
+        <p class="price-includes">${escapeHTML(party.includes)}</p>
+        <a href="#calendar" data-booking-package="${party.package}" class="price-cta solid">${escapeHTML(party.cta)}</a>
+      </div>
+      <div class="price-card reveal">
+        ${head(custom)}
+        <div class="price-amount price-amount-text">${escapeHTML(custom.amountHtml)}</div>
+        <ul class="price-features">${custom.features.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
+        <a href="tel:+37127850380" class="price-cta outline">${escapeHTML(custom.cta)}</a>
+      </div>
+    `;
+}
+
 function applyLanguage(lang) {
   const copy = I18N[lang] || I18N.lv;
   currentLang = I18N[lang] ? lang : 'lv';
@@ -1127,42 +1201,17 @@ function applyLanguage(lang) {
 
   setHTML('#pricing .section-title', copy.pricing.titleHtml);
 
-  const priceCards = document.querySelectorAll('.price-card');
-  const hourlyCard = priceCards[0];
-  const partyCard = priceCards[1];
-  const customCard = priceCards[2];
-
-  if (hourlyCard) {
-    const pricePeriods = hourlyCard.querySelectorAll('.price-period');
-    setText('.pricing-grid .price-card:nth-of-type(1) .price-type', copy.pricing.cards.hourly.type);
-    if (pricePeriods[0]) pricePeriods[0].textContent = copy.pricing.cards.hourly.period;
-    setNodeListText(hourlyCard.querySelectorAll('.price-features li'), copy.pricing.cards.hourly.features);
-    const hourlyNote = hourlyCard.querySelector('.price-note');
-    if (hourlyNote) hourlyNote.textContent = copy.pricing.cards.hourly.note;
-    setText('.pricing-grid .price-card:nth-of-type(1) .price-cta', copy.pricing.cards.hourly.cta);
+  const pricingMore = document.querySelector('#pricing .pricing-more a');
+  if (pricingMore) {
+    pricingMore.textContent = copy.pricing.more;
+    pricingMore.setAttribute('href', PRICING_PATHS[lang] || PRICING_PATHS.lv);
   }
-
-  if (partyCard) {
-    const partyPeriods = partyCard.querySelectorAll('.price-period');
-    const partyLists = partyCard.querySelectorAll('.price-features');
-    setText('.pricing-grid .price-card:nth-of-type(2) .price-popular', copy.pricing.cards.party.popular);
-    setText('.pricing-grid .price-card:nth-of-type(2) .price-type', copy.pricing.cards.party.type);
-    if (partyPeriods[0]) partyPeriods[0].textContent = copy.pricing.cards.party.forUpTo;
-    if (partyPeriods[1]) partyPeriods[1].textContent = copy.pricing.cards.party.perEvent;
-    if (partyPeriods[2]) partyPeriods[2].textContent = copy.pricing.cards.party.moreThan15;
-    if (partyLists[0]) setNodeListText(partyLists[0].querySelectorAll('li'), copy.pricing.cards.party.featuresPrimary);
-    if (partyLists[1]) setNodeListText(partyLists[1].querySelectorAll('li'), copy.pricing.cards.party.featuresSecondary);
-    setText('.pricing-grid .price-card:nth-of-type(2) .price-cta', copy.pricing.cards.party.cta);
-  }
-
-  if (customCard) {
-    const customAmount = customCard.querySelector('.price-amount');
-    const customPeriods = customCard.querySelectorAll('.price-period');
-    setText('.pricing-grid .price-card:nth-of-type(3) .price-type', copy.pricing.cards.custom.type);
-    if (customAmount) customAmount.innerHTML = copy.pricing.cards.custom.amountHtml;
-    if (customPeriods[0]) customPeriods[0].textContent = copy.pricing.cards.custom.period;
-    setNodeListText(customCard.querySelectorAll('.price-features li'), copy.pricing.cards.custom.features);
-    setText('.pricing-grid .price-card:nth-of-type(3) .price-cta', copy.pricing.cards.custom.cta);
+  const pricingGrid = document.querySelector('#pricing .pricing-grid');
+  if (pricingGrid) {
+    pricingGrid.innerHTML = renderPricingCards(copy.pricing.cards);
+    // After the first render the reveal observer has already run, so show re-rendered cards at once.
+    if (pricingGrid.dataset.rendered) pricingGrid.querySelectorAll('.reveal').forEach((card) => card.classList.add('visible'));
+    pricingGrid.dataset.rendered = '1';
   }
 
   setHTML('#calendar .section-title', copy.calendar.titleHtml);
@@ -1421,10 +1470,9 @@ document.querySelectorAll('.mobile-menu-links a, .nav-cta-mobile').forEach((link
   link.addEventListener('click', () => setMobileMenuOpen(false));
 });
 
-document.querySelectorAll('#pricing .price-cta[data-booking-package]').forEach((link) => {
-  link.addEventListener('click', () => {
-    setBookingPackageChoice(link.dataset.bookingPackage, { forceNote: true });
-  });
+document.querySelector('#pricing')?.addEventListener('click', (event) => {
+  const link = event.target.closest('.price-cta[data-booking-package]');
+  if (link) setBookingPackageChoice(link.dataset.bookingPackage, { forceNote: true });
 });
 
 const bookingPackageSelect = document.getElementById('bookingPackageSelect');

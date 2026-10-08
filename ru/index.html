@@ -264,7 +264,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
-  <link rel="stylesheet" href="/styles.css?v=20261008-party-includes" />
+  <link rel="stylesheet" href="/styles.css?v=20261008-simple-cards" />
 </head>
 <body>
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
@@ -499,64 +499,27 @@
       <h2 class="section-title">Цены для <em style="color:var(--gold);">вашего</em> мероприятия</h2>
     </div>
     <div class="pricing-grid">
-      <!-- Hourly -->
       <div class="price-card reveal">
-        <span class="price-icon">⏰</span>
-        <div class="price-type">Почасовая аренда</div>
+        <span class="price-icon">⏰</span><div class="price-type">Почасовая аренда</div><div class="price-sub">Для занятий, мастер-классов, фотосессий и семинаров</div>
         <div class="price-amount"><sup>€</sup>20</div>
         <div class="price-period">в час</div>
-        <hr class="price-divider"/>
-        <ul class="price-features">
-          <li>3 часа 55 €</li>
-          <li>6 часов 100 €</li>
-          <li>Весь день (8ч) 130 €</li>
-          <li>Весь зал включён</li>
-          <li>Кухня включена</li>
-          <li>Бесплатная парковка</li>
-        </ul>
-        <p class="price-note">Для занятий, мастер-классов, фотосессий и семинаров. Для праздников — пакет для праздника.</p>
+        <ul class="price-rows"><li><span>3 часа</span><span class="price-row-val">55 €</span></li><li><span>6 часов</span><span class="price-row-val">100 €</span></li><li><span>Весь день (8ч)</span><span class="price-row-val">130 €</span></li></ul>
+        <p class="price-includes">Весь зал · кухня · бесплатная парковка</p>
         <a href="#calendar" data-booking-package="hours" class="price-cta outline">Забронировать</a>
       </div>
-      <!-- Package — featured -->
       <div class="price-card featured reveal">
         <div class="price-popular">Самый популярный</div>
-        <span class="price-icon">🎉</span>
-        <div class="price-type">Пакет для праздника</div>
-        <div class="price-period">Для праздников до 15 гостей</div>
-        <div class="price-amount"><sup>€</sup>100<span style="font-size:1.4rem">–130</span></div>
-        <div class="price-period">за мероприятие</div>
-        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2)"/>
-        <ul class="price-features">
-          <li>3 часа за 100€</li>
-          <li>Каждый следующий час — 20€</li>
-          <li>Pilna telpa privātam pasākumam</li>
-          <li>Подготовка и уборка</li>
-          <li>Столы и посуда</li>
-          <li>Кухня</li>
-        </ul>
-        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2); margin-top:18px;"/>
-        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">Если гостей больше 15</div>
-        <ul class="price-features" style="margin-bottom:8px;">
-          <li>3 часа за 130€</li>
-          <li>Каждый следующий час — 30€</li>
-        </ul>
+        <span class="price-icon">🎉</span><div class="price-type">Пакет для праздника</div><div class="price-sub">Для дней рождения и праздников</div>
+        <div class="price-amount"><sup>€</sup>100</div>
+        <div class="price-period">за 3 часа</div>
+        <ul class="price-rows"><li><span>До 15 гостей</span><span class="price-row-val">100 € <small>+20 €/ч</small></span></li><li><span>16–25 гостей</span><span class="price-row-val">130 € <small>+30 €/ч</small></span></li></ul>
+        <p class="price-includes">Подготовка и уборка · столы и посуда · кухня</p>
         <a href="#calendar" data-booking-package="party-small" class="price-cta solid">Запросить пакет</a>
       </div>
-      <!-- Custom -->
       <div class="price-card reveal">
-        <span class="price-icon">✨</span>
-        <div class="price-type">Индивидуальное предложение</div>
-        <div class="price-amount" style="font-size:2rem;">По<br/>договорённости</div>
-        <div class="price-period">семинары, фотосессии, корпоративные мероприятия</div>
-        <hr class="price-divider"/>
-        <ul class="price-features">
-          <li>Аренда зала для йоги и фитнеса</li>
-          <li>Профессиональные фотосессии</li>
-          <li>Детские лагеря и развивающие группы</li>
-          <li>Корпоративные мероприятия</li>
-          <li>Регулярная аренда зала</li>
-          <li>Мастер-классы от А до Я</li>
-        </ul>
+        <span class="price-icon">✨</span><div class="price-type">Индивидуальное предложение</div><div class="price-sub">Семинары, фотосессии, корпоративные мероприятия</div>
+        <div class="price-amount price-amount-text">По договорённости</div>
+        <ul class="price-features"><li>Аренда зала для йоги и фитнеса</li><li>Детские лагеря и развивающие группы</li><li>Регулярная аренда зала</li></ul>
         <a href="tel:+37127850380" class="price-cta outline">Обсудить условия</a>
       </div>
     </div>
@@ -854,6 +817,6 @@
 <!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
 <script>window.ROOM_PAGE_LANG = "ru";</script>
 <script src="/calendar-events.js?v=20261008-admin-events"></script>
-<script src="/script.js?v=20261008-capacity-25"></script>
+<script src="/script.js?v=20261008-simple-cards"></script>
 </body>
 </html>

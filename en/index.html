@@ -264,7 +264,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/fonts.css?v=20260623-local-fonts" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260623-local-fonts" /></noscript>
-  <link rel="stylesheet" href="/styles.css?v=20261008-party-includes" />
+  <link rel="stylesheet" href="/styles.css?v=20261008-simple-cards" />
 </head>
 <body>
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
@@ -499,64 +499,27 @@
       <h2 class="section-title">Pricing for <em style="color:var(--gold);">your</em> event</h2>
     </div>
     <div class="pricing-grid">
-      <!-- Hourly -->
       <div class="price-card reveal">
-        <span class="price-icon">⏰</span>
-        <div class="price-type">Hourly room rental</div>
+        <span class="price-icon">⏰</span><div class="price-type">Hourly room rental</div><div class="price-sub">For classes, workshops, photoshoots and seminars</div>
         <div class="price-amount"><sup>€</sup>20</div>
         <div class="price-period">per hour</div>
-        <hr class="price-divider"/>
-        <ul class="price-features">
-          <li>3 hours €55</li>
-          <li>6 hours €100</li>
-          <li>Full day (8h) €130</li>
-          <li>Full room access included</li>
-          <li>Kitchen included</li>
-          <li>Free parking</li>
-        </ul>
-        <p class="price-note">For classes, workshops, photoshoots and seminars. For celebrations, choose the party package.</p>
-        <a href="#calendar" data-booking-package="hours" class="price-cta outline">Book</a>
+        <ul class="price-rows"><li><span>3 hours</span><span class="price-row-val">€55</span></li><li><span>6 hours</span><span class="price-row-val">€100</span></li><li><span>Full day (8h)</span><span class="price-row-val">€130</span></li></ul>
+        <p class="price-includes">Whole room · kitchen · free parking</p>
+        <a href="#calendar" data-booking-package="hours" class="price-cta outline">Book now</a>
       </div>
-      <!-- Package — featured -->
       <div class="price-card featured reveal">
         <div class="price-popular">Most popular</div>
-        <span class="price-icon">🎉</span>
-        <div class="price-type">Party package</div>
-        <div class="price-period">For parties up to 15 guests</div>
-        <div class="price-amount"><sup>€</sup>100<span style="font-size:1.4rem">–130</span></div>
-        <div class="price-period">per event</div>
-        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2)"/>
-        <ul class="price-features">
-          <li>3 hours for €100</li>
-          <li>Additional hours €20 each</li>
-          <li>Pilna telpa privātam pasākumam</li>
-          <li>Setup and cleaning</li>
-          <li>Tables and tableware</li>
-          <li>Kitchen</li>
-        </ul>
-        <hr class="price-divider" style="border-color:rgba(255,255,255,0.2); margin-top:18px;"/>
-        <div class="price-period" style="margin-bottom:10px; color:rgba(255,255,255,0.9);">If there are more than 15 guests</div>
-        <ul class="price-features" style="margin-bottom:8px;">
-          <li>3 hours for €130</li>
-          <li>Additional hours €30 each</li>
-        </ul>
+        <span class="price-icon">🎉</span><div class="price-type">Party package</div><div class="price-sub">For birthdays and celebrations</div>
+        <div class="price-amount"><sup>€</sup>100</div>
+        <div class="price-period">for 3 hours</div>
+        <ul class="price-rows"><li><span>Up to 15 guests</span><span class="price-row-val">€100 <small>+€20/h</small></span></li><li><span>16–25 guests</span><span class="price-row-val">€130 <small>+€30/h</small></span></li></ul>
+        <p class="price-includes">Setup and cleaning · tables and tableware · kitchen</p>
         <a href="#calendar" data-booking-package="party-small" class="price-cta solid">Request package</a>
       </div>
-      <!-- Custom -->
       <div class="price-card reveal">
-        <span class="price-icon">✨</span>
-        <div class="price-type">Custom offer</div>
-        <div class="price-amount" style="font-size:2rem;">By<br/>agreement</div>
-        <div class="price-period">seminars, photoshoots, corporate events</div>
-        <hr class="price-divider"/>
-        <ul class="price-features">
-          <li>Yoga & fitness sessions</li>
-          <li>Professional photoshoots</li>
-          <li>Children’s camps and development groups</li>
-          <li>Corporate events</li>
-          <li>Regular room rental agreements</li>
-          <li>Workshops of all kinds</li>
-        </ul>
+        <span class="price-icon">✨</span><div class="price-type">Custom offer</div><div class="price-sub">Seminars, photoshoots, corporate events</div>
+        <div class="price-amount price-amount-text">By agreement</div>
+        <ul class="price-features"><li>Yoga &amp; fitness sessions</li><li>Children’s camps and development groups</li><li>Regular room rental agreements</li></ul>
         <a href="tel:+37127850380" class="price-cta outline">Contact us</a>
       </div>
     </div>
@@ -854,6 +817,6 @@
 <!-- ══════════════════════ SCRIPTS ════════════════════════════ -->
 <script>window.ROOM_PAGE_LANG = "en";</script>
 <script src="/calendar-events.js?v=20261008-admin-events"></script>
-<script src="/script.js?v=20261008-capacity-25"></script>
+<script src="/script.js?v=20261008-simple-cards"></script>
 </body>
 </html>
